@@ -8,6 +8,18 @@
 
 #import "MapControlView.h"
 
-@implementation MapControlView
+@implementation MapControlView {
+    id <MapWallDisplayProtocal> target;
+}
+
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController
+{
+    if (target == nil) {
+        target = mapWallDisplayController;
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 @end

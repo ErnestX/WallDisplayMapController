@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "MapControlView.h"
+#import "MapWallDisplayController.h"
 
 @interface ViewController ()
 
@@ -16,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [(MapControlView*)self.view setTarget:[MapWallDisplayController alloc]];
 }
 
 - (void)didReceiveMemoryWarning {
