@@ -45,6 +45,7 @@
 		CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallDisplayMapControllerTests.m; sourceTree = "<group>"; };
 		CA16396A1B0E546300E4FC81 /* MapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControl.h; sourceTree = "<group>"; };
 		CA16396B1B0E546300E4FC81 /* MapControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControl.m; sourceTree = "<group>"; };
+		CA16396D1B0E742200E4FC81 /* MapControlProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlProtocal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 				CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */,
 				CA16394B1B0E4FBC00E4FC81 /* ViewController.h */,
 				CA16394C1B0E4FBC00E4FC81 /* ViewController.m */,
+				CA16396D1B0E742200E4FC81 /* MapControlProtocal.h */,
 				CA16396A1B0E546300E4FC81 /* MapControl.h */,
 				CA16396B1B0E546300E4FC81 /* MapControl.m */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FE21973B-4891-4959-BD1A-B1B9663BD199</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WallDisplayMapController</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>84905E0C00131093FD792DA2793432039F9A9A6E</key>
+		<string>https://github.com/ErnestX/WallDisplayMapController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WallDisplayMapController.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>84905E0C00131093FD792DA2793432039F9A9A6E</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ErnestX/WallDisplayMapController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>84905E0C00131093FD792DA2793432039F9A9A6E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>84905E0C00131093FD792DA2793432039F9A9A6E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WallDisplayMapController</string>
+		</dict>
+	</array>
+</dict>
+</plist>
