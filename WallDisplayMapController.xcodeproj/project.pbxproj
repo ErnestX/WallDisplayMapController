@@ -12,8 +12,9 @@
 		CA16394D1B0E4FBC00E4FC81 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* ViewController.m */; };
 		CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */; };
 		CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1639511B0E4FBC00E4FC81 /* Images.xcassets */; };
-		CA1639551B0E4FBC00E4FC81 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1639531B0E4FBC00E4FC81 /* LaunchScreen.xib */; };
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
+		CA16396C1B0E546300E4FC81 /* MapControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControl.m */; };
+		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3BAAEAC59C5CBA45D8961EE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639461B0E4FBC00E4FC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -36,10 +40,11 @@
 		CA16394C1B0E4FBC00E4FC81 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CA16394F1B0E4FBC00E4FC81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA1639511B0E4FBC00E4FC81 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CA1639541B0E4FBC00E4FC81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CA16395A1B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallDisplayMapControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16395F1B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallDisplayMapControllerTests.m; sourceTree = "<group>"; };
+		CA16396A1B0E546300E4FC81 /* MapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControl.h; sourceTree = "<group>"; };
+		CA16396B1B0E546300E4FC81 /* MapControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7ECAF858BC858A513877273 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +66,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F14949BC8714AEB94B49ED5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B3211977183155B24E27D81 /* Pods.debug.xcconfig */,
+				01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CA1639381B0E4FBC00E4FC81 = {
 			isa = PBXGroup;
 			children = (
 				CA1639431B0E4FBC00E4FC81 /* WallDisplayMapController */,
 				CA16395D1B0E4FBC00E4FC81 /* WallDisplayMapControllerTests */,
 				CA1639421B0E4FBC00E4FC81 /* Products */,
+				0F14949BC8714AEB94B49ED5 /* Pods */,
+				FEF783D47782776F3F6477CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,9 +102,10 @@
 				CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */,
 				CA16394B1B0E4FBC00E4FC81 /* ViewController.h */,
 				CA16394C1B0E4FBC00E4FC81 /* ViewController.m */,
+				CA16396A1B0E546300E4FC81 /* MapControl.h */,
+				CA16396B1B0E546300E4FC81 /* MapControl.m */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
-				CA1639531B0E4FBC00E4FC81 /* LaunchScreen.xib */,
 				CA1639441B0E4FBC00E4FC81 /* Supporting Files */,
 			);
 			path = WallDisplayMapController;
@@ -119,6 +137,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FEF783D47782776F3F6477CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BAAEAC59C5CBA45D8961EE5 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +152,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA1639641B0E4FBC00E4FC81 /* Build configuration list for PBXNativeTarget "WallDisplayMapController" */;
 			buildPhases = (
+				C08DDDC87319EFE3246661A7 /* Check Pods Manifest.lock */,
 				CA16393D1B0E4FBC00E4FC81 /* Sources */,
 				CA16393E1B0E4FBC00E4FC81 /* Frameworks */,
 				CA16393F1B0E4FBC00E4FC81 /* Resources */,
+				CF6AB2C940A1B98362D5C559 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
-				CA1639551B0E4FBC00E4FC81 /* LaunchScreen.xib in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +241,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C08DDDC87319EFE3246661A7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CF6AB2C940A1B98362D5C559 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CA16393D1B0E4FBC00E4FC81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -221,6 +281,7 @@
 			files = (
 				CA16394D1B0E4FBC00E4FC81 /* ViewController.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
+				CA16396C1B0E546300E4FC81 /* MapControl.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,14 +311,6 @@
 				CA16394F1B0E4FBC00E4FC81 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CA1639531B0E4FBC00E4FC81 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA1639541B0E4FBC00E4FC81 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -347,21 +400,25 @@
 		};
 		CA1639651B0E4FBC00E4FC81 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B3211977183155B24E27D81 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		CA1639661B0E4FBC00E4FC81 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -418,6 +475,7 @@
 				CA1639661B0E4FBC00E4FC81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA1639671B0E4FBC00E4FC81 /* Build configuration list for PBXNativeTarget "WallDisplayMapControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +484,7 @@
 				CA1639691B0E4FBC00E4FC81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
