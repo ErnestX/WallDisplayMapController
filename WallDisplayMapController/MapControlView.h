@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MapWallDisplayProtocal.h"
 
-@interface MapControl : UIView
+@interface MapControlView : UIView
 
 /*
- please refer to MapWallDisplayProtocal.h for documentations for the properties
+ please refer to MapWallDisplayProtocal.h for documentations of the properties
  */
 
 @property float facingDirection;
@@ -22,5 +23,10 @@
 
 @property double lat;
 @property double lon;
+
+/*
+ @return NO if target already exist
+ */
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController;
 
 @end

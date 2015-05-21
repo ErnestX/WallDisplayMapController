@@ -13,7 +13,8 @@
 		CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */; };
 		CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1639511B0E4FBC00E4FC81 /* Images.xcassets */; };
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
-		CA16396C1B0E546300E4FC81 /* MapControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControl.m */; };
+		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
+		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
 		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -43,9 +44,11 @@
 		CA16395A1B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallDisplayMapControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16395F1B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallDisplayMapControllerTests.m; sourceTree = "<group>"; };
-		CA16396A1B0E546300E4FC81 /* MapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControl.h; sourceTree = "<group>"; };
-		CA16396B1B0E546300E4FC81 /* MapControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControl.m; sourceTree = "<group>"; };
-		CA16396D1B0E742200E4FC81 /* MapControlProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlProtocal.h; sourceTree = "<group>"; };
+		CA16396A1B0E546300E4FC81 /* MapControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapControlView.h; sourceTree = "<group>"; };
+		CA16396B1B0E546300E4FC81 /* MapControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapControlView.m; sourceTree = "<group>"; };
+		CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayProtocal.h; sourceTree = "<group>"; };
+		CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayController.h; sourceTree = "<group>"; };
+		CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapWallDisplayController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +106,11 @@
 				CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */,
 				CA16394B1B0E4FBC00E4FC81 /* ViewController.h */,
 				CA16394C1B0E4FBC00E4FC81 /* ViewController.m */,
-				CA16396D1B0E742200E4FC81 /* MapControlProtocal.h */,
-				CA16396A1B0E546300E4FC81 /* MapControl.h */,
-				CA16396B1B0E546300E4FC81 /* MapControl.m */,
+				CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */,
+				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
+				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
+				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
+				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
 				CA1639441B0E4FBC00E4FC81 /* Supporting Files */,
@@ -282,8 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA16394D1B0E4FBC00E4FC81 /* ViewController.m in Sources */,
+				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
-				CA16396C1B0E546300E4FC81 /* MapControl.m in Sources */,
+				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
