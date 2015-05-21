@@ -18,13 +18,13 @@
 - (BOOL) setMapFacingDirection: (float) faceingDirection;
 
 /*
- @param pitch current pitch. Greater or equal to 0 and smaller or equal to 2/pi. 0 means viewing parallel to the ground, 2/pi means viewing directly from above
+ @param pitch current pitch. Greater or equal to 0 and smaller or equal to pi/2. 0 means viewing parallel to the ground, pi/2 means viewing directly from above perpendicular to the ground
  @return YES if success, NO otherwise
  */
 - (BOOL) setMapPitch: (float) pitch;
 
 /*
- @param zoomFactor current zoom factor. Greater than 0 1 means the original size, smaller than 1 means zooming out (less detail), greater than 1 means zooming in (more detail)
+ @param zoomFactor current zoom factor. Greater than 0. 1 means the original size, smaller than 1 means zooming out (less detail), greater than 1 means zooming in (more detail)
  @return YES if success, NO otherwise
  */
 - (BOOL) setMapZoom: (float) zoomFactor;

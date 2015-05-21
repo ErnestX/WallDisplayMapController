@@ -109,8 +109,7 @@
 				CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */,
 				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
-				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
-				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
+				CA1639711B0E80E500E4FC81 /* MapControlView */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
 				CA1639441B0E4FBC00E4FC81 /* Supporting Files */,
@@ -142,6 +141,15 @@
 				CA16395F1B0E4FBC00E4FC81 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA1639711B0E80E500E4FC81 /* MapControlView */ = {
+			isa = PBXGroup;
+			children = (
+				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
+				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
+			);
+			name = MapControlView;
 			sourceTree = "<group>";
 		};
 		FEF783D47782776F3F6477CC /* Frameworks */ = {
