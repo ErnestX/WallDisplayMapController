@@ -47,7 +47,7 @@ pinch to zoom</string>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
-                            <outlet property="labLonLabel" destination="FSr-jY-nhH" id="md8-zY-Cbf"/>
+                            <outlet property="latLonLabel" destination="FSr-jY-nhH" id="NiB-EX-Tgn"/>
                             <outlet property="pitchLabel" destination="1bU-DC-QeX" id="qDV-5H-NIT"/>
                             <outlet property="zoomLabel" destination="I2a-mc-uvD" id="8Y3-i6-Yoe"/>
                         </connections>

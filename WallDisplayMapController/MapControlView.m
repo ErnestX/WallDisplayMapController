@@ -12,7 +12,13 @@
     id <MapWallDisplayProtocal> target;
     __weak IBOutlet UILabel *zoomLabel;
     __weak IBOutlet UILabel *pitchLabel;
-    __weak IBOutlet UILabel *labLonLabel;
+    __weak IBOutlet UILabel *latLonLabel;
+    
+    float facingDirection;
+    float pitch;
+    float zoomFactor;
+    double lat;
+    double lon;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -48,49 +54,56 @@
     
 }
 
-- (void) setFacingDirection:(float)facingDirection
+- (void) setFacingDirection:(float)fd
 {
+    // TODO: update UI
     
+    facingDirection = fd;
 }
 
 - (float) getFacingDirection
 {
-    return 0;
+    return facingDirection;
 }
 
-- (void) setPitch:(float)pitch
+- (void) setPitch:(float)p
 {
+    pitchLabel.text = [NSString stringWithFormat:@"Pitch %.02f°", p];
+    pitch = p;
     
 }
 
 - (float) getPitch
 {
-    return M_PI / 2;
+    return pitch;
 }
 
-- (void) setZoomFactor:(float)zoomFactor
+- (void) setZoomFactor:(float)zf
 {
-    
+    zoomLabel.text = [NSString stringWithFormat:@"Zoom %.02fx", zf];
+    zoomFactor = zf;
 }
 
-- (float) getZoomFactor:(float)zoomFactor
+- (float) getZoomFactor
 {
-    return 1.0;
+    return zoomFactor;
 }
 
-- (void) setLat:(double)lat Lon:(double)lon
+- (void) setLat:(double)la Lon:(double)lo
 {
-    
+    latLonLabel.text = [NSString stringWithFormat:@"%.04f°, %.04f°", la, lo];
+    lat = la;
+    lon = lo;
 }
 
 - (double) getLat
 {
-    return 0.0;
+    return lat;
 }
 
 - (double) getLon
 {
-    return 0.0;
+    return lon;
 }
 
 @end

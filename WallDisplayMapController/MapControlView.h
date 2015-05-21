@@ -20,16 +20,16 @@
  please refer to MapWallDisplayProtocal.h for documentations of the parameters below
  */
 
-- (void) setFacingDirection:(float)facingDirection;
+- (void) setFacingDirection:(float)fd;
 - (float) getFacingDirection;
 
-- (void) setPitch:(float)pitch;
+- (void) setPitch:(float)p;
 - (float) getPitch;
 
-- (void) setZoomFactor:(float)zoomFactor;
-- (float) getZoomFactor:(float)zoomFactor;
+- (void) setZoomFactor:(float)zf;
+- (float) getZoomFactor;
 
-- (void) setLat:(double)lat Lon:(double)lon;
+- (void) setLat:(double)la Lon:(double)lo;
 - (double) getLat;
 - (double) getLon;
 
