@@ -7,407 +7,585 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10AC80A74879B8CA8D77B172 /* amqp_hostcheck.h in Headers */ = {isa = PBXBuildFile; fileRef = DE09AA6B4F98AF2183C59967 /* amqp_hostcheck.h */; };
-		13156F02B0D1C28790EA238C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F94DAC1B0043E8756E0582 /* Foundation.framework */; };
-		17551F827165038B98D1BEE6 /* amqp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF4BDCF65719DB53C0A9A37 /* amqp.h */; };
-		238823181581C3100E5AFB7C /* Pods-OLRabbitMQ-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB91390FA19FB54EDC2DBA /* Pods-OLRabbitMQ-dummy.m */; };
-		24E3A52AD06B3EA005CD5C0A /* amqp_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = BFE6108F99144637C844E6AB /* amqp_socket.h */; };
-		2C0D2C3EF9F751BE1D57F447 /* amqp_table.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A0BB15E380FD32D20460913 /* amqp_table.h */; };
-		2DAE656A53320E27A8B9E5BE /* OLRabbitMQOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = EDCD707487D33B2A53F53A8D /* OLRabbitMQOperation.h */; };
-		2E4ABF5122597785F9620A06 /* amqp_private.h in Headers */ = {isa = PBXBuildFile; fileRef = B5CD3694C8D24B3594037A08 /* amqp_private.h */; };
-		3CDE4B4C1D6A90B262A1C96F /* OLRabbitMQError.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D642CF19A50CBF701B6C1F /* OLRabbitMQError.h */; };
-		4499E2E1FF5037FBF7E20BE2 /* OLRabbitMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = BBA6D7931BB4515CE02C07AD /* OLRabbitMQSocket.h */; };
-		4DA5394C052FA5F727C197D3 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3792BB7DA47EA602FD74E7EA /* Pods-dummy.m */; };
-		567954F502B301392B41F524 /* OLRabbitMQError.m in Sources */ = {isa = PBXBuildFile; fileRef = DF224307422A5143D6DA1686 /* OLRabbitMQError.m */; };
-		6A1F1BF840175619CFA23959 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9593C9CC3E28C05177F77C /* UICountingLabel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		75FAF26203E0FA617BFACD8B /* OLRabbitMQOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A22ABC8EF8F655C28D29B878 /* OLRabbitMQOperation.m */; };
-		8648D2C5269B93B954B001C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F94DAC1B0043E8756E0582 /* Foundation.framework */; };
-		8B38BCED930E1F99977278F0 /* amqp_ssl_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 430B897F36BAED10FAB4F93C /* amqp_ssl_socket.h */; };
-		8D28C804D04CBF7767520C5A /* UICountingLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DB4D26DAB796AFA492C9D65 /* UICountingLabel.h */; };
-		947B90D27A0789859C53CC60 /* Pods-rabbitmqc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B325F1CA3F138A9D4AB935 /* Pods-rabbitmqc-dummy.m */; };
-		96429D6647506CF73AC26E30 /* amqp_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = E476DCCB8F2F7C4382CB7F29 /* amqp_timer.h */; };
-		97D41FDCDA4D165F71F13B00 /* amqp_framing.h in Headers */ = {isa = PBXBuildFile; fileRef = D6B20C349C522E66F7FCC8C7 /* amqp_framing.h */; };
-		AA32FDD0F1E659D52D4F6E69 /* OLRabbitMQExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = AC92AD29250711ADBCBDB718 /* OLRabbitMQExchange.m */; };
-		B00B5AD0AC2EB0489330B461 /* OLRabbitMQManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA16D67AE52A5D438AF8E96 /* OLRabbitMQManager.h */; };
-		BC2FE7DB61CD55B2E8977E8D /* amqp_time.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FB2000AD1AAFC1178FF329D /* amqp_time.h */; };
-		C1A954A3B12DB2BA7BF3BE06 /* OLRabbitMQ.h in Headers */ = {isa = PBXBuildFile; fileRef = 37B53A67A39B61E16B33F4D2 /* OLRabbitMQ.h */; };
-		CAE3926CA6606398E4D9A0F5 /* amqp_tcp_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C62539C48BF0C527E7C4035 /* amqp_tcp_socket.h */; };
-		CE597E19806F6B8C44C6FB2A /* OLRabbitMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A4261C42BAADB0228132F4 /* OLRabbitMQSocket.m */; };
-		CEB52E16B0C1FF8EC7F32846 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F94DAC1B0043E8756E0582 /* Foundation.framework */; };
-		D1F81109E136C4CCA392498A /* OLRabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41908701AECC24D1887D6FDF /* OLRabbitMQManager.m */; };
-		E4B8EC8BC1CBEA1CEC0F4803 /* Pods-UICountingLabel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 460FBA01DC387C2B867F163E /* Pods-UICountingLabel-dummy.m */; };
-		E9CA6F86D986E6BE2F8B0C90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F94DAC1B0043E8756E0582 /* Foundation.framework */; };
-		F447BF14A16C22DF98CB729C /* OLRabbitMQExchange.h in Headers */ = {isa = PBXBuildFile; fileRef = 98973C994AF87ED68E528BC4 /* OLRabbitMQExchange.h */; };
+		11A8165EC4599B2842F1C814 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D737D20EF5D474FB13DC8 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		134E5F518C20E9CF3662D125 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E7C19E1665F1462D505BBA /* DDAssertMacros.h */; };
+		14A41DC3E57E6F5C50FF7616 /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = B69B8853965D8B0D0BC81D53 /* DDLogMacros.h */; };
+		17CBC6ECB670309B164DD632 /* Pods-OLRabbitMQ-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F6621F007342919DF00F16 /* Pods-OLRabbitMQ-dummy.m */; };
+		1901F4F55D9D0E6B77BF287B /* OLRabbitMQOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A18439A219122BA0280AB7DA /* OLRabbitMQOperation.m */; };
+		1C2AABE25BF7CC422D6DCA05 /* OLRabbitMQError.h in Headers */ = {isa = PBXBuildFile; fileRef = 458A04BE05F2D7FA262A3FC6 /* OLRabbitMQError.h */; };
+		1C6F3166FA6C18659498562D /* UICountingLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B29AD0A8CA034679FB83E043 /* UICountingLabel.h */; };
+		230B82ACC6BE0B2097D6253D /* amqp_table.h in Headers */ = {isa = PBXBuildFile; fileRef = B91975327F6053E7BBBB7ECB /* amqp_table.h */; };
+		2C538C78E1B54062A93A9679 /* OLRabbitMQOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = E17C9476EF97132B175836C6 /* OLRabbitMQOperation.h */; };
+		2D61F98476672206368FED5B /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9C527218C38286A0F877E4 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		301C1625E8135B4CD701A7A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C499656BFB1F77D466319CA /* Foundation.framework */; };
+		30699D8378007B2D3F270A4A /* Pods-CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CD5947966F31C97C9F8693 /* Pods-CocoaLumberjack-dummy.m */; };
+		310EF143B60D7572FE7CEF7B /* amqp_time.h in Headers */ = {isa = PBXBuildFile; fileRef = A82D4C23BE24784D43D6657E /* amqp_time.h */; };
+		34D6F4BE965B08FB7652CFBA /* OLRabbitMQSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BF6AC6CC8E18E52B67D960E /* OLRabbitMQSocket.h */; };
+		3D8E72E463FC320D30AE0BFB /* OLRabbitMQManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BCC967C35FBBF12B722EAC /* OLRabbitMQManager.h */; };
+		4892C3C5891193987C368778 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7769330B89E2C49A6E71E737 /* UICountingLabel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		490B2EDF9653EE4A37089A89 /* amqp_framing.h in Headers */ = {isa = PBXBuildFile; fileRef = F33E5A5E0E2A967F0035A863 /* amqp_framing.h */; };
+		4971E4B8BAF1CFD7657BF896 /* OLRabbitMQExchange.h in Headers */ = {isa = PBXBuildFile; fileRef = C2BF8ADFF7661B9FA5578F11 /* OLRabbitMQExchange.h */; };
+		4BF6F371CEA78F2C3675B66B /* OLRabbitMQExchange.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8BB3C49A40C4A569908195 /* OLRabbitMQExchange.m */; };
+		527DD1A6D2EEFB243F595E52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C499656BFB1F77D466319CA /* Foundation.framework */; };
+		64EB56766846889DACB953FB /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9387EEE9FC7A5DA908B19F84 /* Pods-dummy.m */; };
+		694126F9CE22EB0F0A765646 /* amqp.h in Headers */ = {isa = PBXBuildFile; fileRef = 7641493A3C98033DD2EA9E3D /* amqp.h */; };
+		694E805E1608D3C4D8ADD592 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 336CD73588C062D873D4F7AD /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6B9C780E80223FA9789228A6 /* Pods-UICountingLabel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BDF8DA54D2E093AB97AC1 /* Pods-UICountingLabel-dummy.m */; };
+		6CA3DB400A19DB53CB72BAD2 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = CE253BFDBD79975B8868691D /* DDLog.h */; };
+		6D210BC57C9D109D184EDF1C /* amqp_hostcheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 68C6B615E3BA9AE890A2FB09 /* amqp_hostcheck.h */; };
+		70CD2C5E781AEE16925D55BA /* amqp_tcp_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CE8C186F29E40D9B66DADB6 /* amqp_tcp_socket.h */; };
+		755D39109E0B778C1354EFEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C499656BFB1F77D466319CA /* Foundation.framework */; };
+		78657F8260032FC8AEA70812 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = E96A1AA8FAEFDE9BB385F598 /* DDLegacyMacros.h */; };
+		7D38C22347EA7456D2DD6796 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = A0D277B123286E9427C90202 /* CocoaLumberjack.h */; };
+		7F93D5D9873918E057F88539 /* amqp_private.h in Headers */ = {isa = PBXBuildFile; fileRef = A5A750082025BEDB393BEABE /* amqp_private.h */; };
+		85A402807A3C10A0798291DC /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 992993E6A09D2259161BDC60 /* DDASLLogCapture.h */; };
+		8AAD4040D596E6EE7045C989 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48D21A077018074A8882AD /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8AF55BFEF621B72FD0C8CA3B /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB9C2E03CA293A05ADD7A1 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8C754B23C4E6DF0B6BE4BB1C /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E31BC21A1212F6519725CC /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8EDBDB05E73F0459734196E8 /* amqp_ssl_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 01286B7CB03FF8C8F5E006EB /* amqp_ssl_socket.h */; };
+		9279A0848144DA11B2DD6F12 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A3520FB59F2C84254869A21 /* DDDispatchQueueLogFormatter.h */; };
+		92A591DF290660535A66D250 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 94AF85D3F32F537832297D7E /* DDASLLogger.h */; };
+		95507B8A08AABCB0D17B111F /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DEF4C2DA853ABA6FBBAD7522 /* DDFileLogger.h */; };
+		9DC7D74586D537F6BC7F90AD /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BD4D64FED5361934D185B0A /* DDLog+LOGV.h */; };
+		9ED0568C69BF2CCB12CE85A5 /* amqp_socket.h in Headers */ = {isa = PBXBuildFile; fileRef = A7EE271061284D90F33F55A9 /* amqp_socket.h */; };
+		A2A0DE6EEAF54E0B2C330D2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C499656BFB1F77D466319CA /* Foundation.framework */; };
+		A4B581B56AB04F9EB0E9FE7F /* Pods-rabbitmqc-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B6BAFDA614F085F12829C9 /* Pods-rabbitmqc-dummy.m */; };
+		A666CA3A2BADFF35A4C68CD7 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 88B8F231CDBC09E096E32870 /* DDTTYLogger.h */; };
+		ADB081038BEDF31BF556AF4B /* OLRabbitMQ.h in Headers */ = {isa = PBXBuildFile; fileRef = 9540F19221D3079FF5221CDD /* OLRabbitMQ.h */; };
+		B3F4BA07FBB71C123565B3A5 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 192BD63BC622F725FDB0C682 /* DDContextFilterLogFormatter.h */; };
+		B47579B008878821AF65CF24 /* OLRabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 618B7531CFCF890E0872F66E /* OLRabbitMQManager.m */; };
+		B548A7F0B83F3BD84C1E520E /* OLRabbitMQError.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A7E4DB306213484E263902 /* OLRabbitMQError.m */; };
+		B63325D852368B8C111E35C6 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 811DB330ED494BB62A112F77 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D3F0BBF81F5B090BD9ACC5E9 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E13A60534E356D3A6DDF433 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D8C42B3A40E219A158D60154 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1E993E42D931CA6C8A0103 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DF3F4310A0543CE09D618AD2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C499656BFB1F77D466319CA /* Foundation.framework */; };
+		F1367D66145A631835897203 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F81507606AD438C4CA36A98 /* DDAbstractDatabaseLogger.h */; };
+		F3438E1284EA13E2956424E5 /* amqp_timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CF02EBEE90D9F774439A582 /* amqp_timer.h */; };
+		F5D074BCD84C0996A3DAE65E /* OLRabbitMQSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 015C845E926C1725C0C88014 /* OLRabbitMQSocket.m */; };
+		FB69E6F23193415BA0ED155C /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5818BEFA98E712C5E181301D /* DDMultiFormatter.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2E8690A9D13163537E58D0DD /* PBXContainerItemProxy */ = {
+		23A4EE286E41429C2464C343 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4CD32B0CCB760B1D09A7C5CA /* Project object */;
+			containerPortal = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1911E2B174F19E008017DADA;
-			remoteInfo = "Pods-OLRabbitMQ";
-		};
-		30C78A0DFE52C5F1F6AA72B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4CD32B0CCB760B1D09A7C5CA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6C2FB7515DE06878B9FCC6AF;
+			remoteGlobalIDString = D8AE53A92B53AB6B330AE68D;
 			remoteInfo = "Pods-rabbitmqc";
 		};
-		89A4F1F43E588E648D8B16D6 /* PBXContainerItemProxy */ = {
+		38CE5D21BDC47F35507CD6CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4CD32B0CCB760B1D09A7C5CA /* Project object */;
+			containerPortal = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C309A045290AB4C87E7BF311;
+			remoteGlobalIDString = B6AB5B60EEDD5BF65A178BE3;
 			remoteInfo = "Pods-UICountingLabel";
 		};
-		BEC6A377F2151CE058449D56 /* PBXContainerItemProxy */ = {
+		A22D3F224137C29AEF6DCBEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4CD32B0CCB760B1D09A7C5CA /* Project object */;
+			containerPortal = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6C2FB7515DE06878B9FCC6AF;
+			remoteGlobalIDString = D8AE53A92B53AB6B330AE68D;
 			remoteInfo = "Pods-rabbitmqc";
+		};
+		ABE5EA0526DA4D3444BE039B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AEA9FE7023F9481D08B3F29E;
+			remoteInfo = "Pods-OLRabbitMQ";
+		};
+		DB3C128720842BD6EFC5AC0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 911032BA0D40E4D6620BE3AE;
+			remoteInfo = "Pods-CocoaLumberjack";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00FC2C8C79A6775F0385185D /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
-		11A145F9EE91F5F03A216704 /* Pods-UICountingLabel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UICountingLabel.xcconfig"; sourceTree = "<group>"; };
-		133092BD410BA4C6C0CFB3F0 /* Pods-UICountingLabel-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UICountingLabel-Private.xcconfig"; sourceTree = "<group>"; };
-		2A0BB15E380FD32D20460913 /* amqp_table.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_table.h; path = "include-ios/rabbitmqc/amqp_table.h"; sourceTree = "<group>"; };
-		3090A28A96474AE623B8996C /* librabbitmqc.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = librabbitmqc.a; path = "lib-ios/librabbitmqc.a"; sourceTree = "<group>"; };
-		31B325F1CA3F138A9D4AB935 /* Pods-rabbitmqc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-rabbitmqc-dummy.m"; sourceTree = "<group>"; };
-		3792BB7DA47EA602FD74E7EA /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		37B53A67A39B61E16B33F4D2 /* OLRabbitMQ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQ.h; path = OLRabbitMQ/OLRabbitMQ.h; sourceTree = "<group>"; };
-		3AF4BDCF65719DB53C0A9A37 /* amqp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp.h; path = "include-ios/rabbitmqc/amqp.h"; sourceTree = "<group>"; };
-		3AF5345F8D3A71E8FD4069ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		3E39B0720E80867A9F7A0F06 /* Pods-OLRabbitMQ-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OLRabbitMQ-Private.xcconfig"; sourceTree = "<group>"; };
-		3FDDBE68348A7B0E3F39934C /* libPods-rabbitmqc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rabbitmqc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		41908701AECC24D1887D6FDF /* OLRabbitMQManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQManager.m; path = OLRabbitMQ/OLRabbitMQManager.m; sourceTree = "<group>"; };
-		41DE51F1EA351E9CF877F813 /* Pods-rabbitmqc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-rabbitmqc-prefix.pch"; sourceTree = "<group>"; };
-		430B897F36BAED10FAB4F93C /* amqp_ssl_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_ssl_socket.h; path = "include-ios/rabbitmqc/amqp_ssl_socket.h"; sourceTree = "<group>"; };
-		460FBA01DC387C2B867F163E /* Pods-UICountingLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-UICountingLabel-dummy.m"; sourceTree = "<group>"; };
-		48D642CF19A50CBF701B6C1F /* OLRabbitMQError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQError.h; path = OLRabbitMQ/OLRabbitMQError.h; sourceTree = "<group>"; };
-		4DB4D26DAB796AFA492C9D65 /* UICountingLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
-		4FB2000AD1AAFC1178FF329D /* amqp_time.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_time.h; path = "include-ios/rabbitmqc/amqp_time.h"; sourceTree = "<group>"; };
-		51AE2E8A60564E07748E9DC0 /* libPods-OLRabbitMQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OLRabbitMQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		627C1DC7242B6A4A8E03AF5D /* Pods-UICountingLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-UICountingLabel-prefix.pch"; sourceTree = "<group>"; };
-		62A4261C42BAADB0228132F4 /* OLRabbitMQSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQSocket.m; path = OLRabbitMQ/OLRabbitMQSocket.m; sourceTree = "<group>"; };
-		719D57D0D14E6E53545B14DC /* Pods-OLRabbitMQ-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OLRabbitMQ-prefix.pch"; sourceTree = "<group>"; };
-		78D5AC198F8ACC89D3452BCF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		7DA16D67AE52A5D438AF8E96 /* OLRabbitMQManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQManager.h; path = OLRabbitMQ/OLRabbitMQManager.h; sourceTree = "<group>"; };
-		8C62539C48BF0C527E7C4035 /* amqp_tcp_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_tcp_socket.h; path = "include-ios/rabbitmqc/amqp_tcp_socket.h"; sourceTree = "<group>"; };
-		9870506B46D28975253E8615 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		98973C994AF87ED68E528BC4 /* OLRabbitMQExchange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQExchange.h; path = OLRabbitMQ/OLRabbitMQExchange.h; sourceTree = "<group>"; };
-		A22ABC8EF8F655C28D29B878 /* OLRabbitMQOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQOperation.m; path = OLRabbitMQ/OLRabbitMQOperation.m; sourceTree = "<group>"; };
-		AC92AD29250711ADBCBDB718 /* OLRabbitMQExchange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQExchange.m; path = OLRabbitMQ/OLRabbitMQExchange.m; sourceTree = "<group>"; };
-		ACA76CA22CAA8E3DB9DAB248 /* Pods-rabbitmqc-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-rabbitmqc-Private.xcconfig"; sourceTree = "<group>"; };
-		AD9593C9CC3E28C05177F77C /* UICountingLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
-		B201D95EFF2AB139D70D6551 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5CD3694C8D24B3594037A08 /* amqp_private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_private.h; path = "include-ios/rabbitmqc/amqp_private.h"; sourceTree = "<group>"; };
-		BBA6D7931BB4515CE02C07AD /* OLRabbitMQSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQSocket.h; path = OLRabbitMQ/OLRabbitMQSocket.h; sourceTree = "<group>"; };
-		BCD9392F9AA5587A168DC43D /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BFE6108F99144637C844E6AB /* amqp_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_socket.h; path = "include-ios/rabbitmqc/amqp_socket.h"; sourceTree = "<group>"; };
-		C9C428FF20A7E347659AFC00 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		D158D2C943278D525F1DD681 /* libPods-UICountingLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UICountingLabel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3CC66826E932ED7A45DBF84 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		D6B20C349C522E66F7FCC8C7 /* amqp_framing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_framing.h; path = "include-ios/rabbitmqc/amqp_framing.h"; sourceTree = "<group>"; };
-		DE09AA6B4F98AF2183C59967 /* amqp_hostcheck.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_hostcheck.h; path = "include-ios/rabbitmqc/amqp_hostcheck.h"; sourceTree = "<group>"; };
-		DF224307422A5143D6DA1686 /* OLRabbitMQError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQError.m; path = OLRabbitMQ/OLRabbitMQError.m; sourceTree = "<group>"; };
-		E476DCCB8F2F7C4382CB7F29 /* amqp_timer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_timer.h; path = "include-ios/rabbitmqc/amqp_timer.h"; sourceTree = "<group>"; };
-		E7F94DAC1B0043E8756E0582 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		ECEB91390FA19FB54EDC2DBA /* Pods-OLRabbitMQ-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OLRabbitMQ-dummy.m"; sourceTree = "<group>"; };
-		EDCD707487D33B2A53F53A8D /* OLRabbitMQOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQOperation.h; path = OLRabbitMQ/OLRabbitMQOperation.h; sourceTree = "<group>"; };
-		EF3E7E04BF2C24C9B6F40682 /* Pods-rabbitmqc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-rabbitmqc.xcconfig"; sourceTree = "<group>"; };
-		F44BC44A3E46DE90EAE166C3 /* Pods-OLRabbitMQ.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OLRabbitMQ.xcconfig"; sourceTree = "<group>"; };
+		01286B7CB03FF8C8F5E006EB /* amqp_ssl_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_ssl_socket.h; path = "include-ios/rabbitmqc/amqp_ssl_socket.h"; sourceTree = "<group>"; };
+		015C845E926C1725C0C88014 /* OLRabbitMQSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQSocket.m; path = OLRabbitMQ/OLRabbitMQSocket.m; sourceTree = "<group>"; };
+		03AD6D5862333BC85E88D7C1 /* libPods-CocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaLumberjack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05397A6D8183300D4E0B66E8 /* Pods-UICountingLabel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-UICountingLabel-prefix.pch"; sourceTree = "<group>"; };
+		09B6BAFDA614F085F12829C9 /* Pods-rabbitmqc-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-rabbitmqc-dummy.m"; sourceTree = "<group>"; };
+		0B45A98DAEA4295213B08DF6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		0CB69C49F3B859A2EAD109B6 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		0F81507606AD438C4CA36A98 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		133BDF8DA54D2E093AB97AC1 /* Pods-UICountingLabel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-UICountingLabel-dummy.m"; sourceTree = "<group>"; };
+		192BD63BC622F725FDB0C682 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		1BFD2575D04525F352444B24 /* Pods-rabbitmqc-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-rabbitmqc-prefix.pch"; sourceTree = "<group>"; };
+		2C499656BFB1F77D466319CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		31CD5947966F31C97C9F8693 /* Pods-CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		336CD73588C062D873D4F7AD /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		3A1E993E42D931CA6C8A0103 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		3BD4D64FED5361934D185B0A /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		3E3DA119206B759A8DE24E7D /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		458A04BE05F2D7FA262A3FC6 /* OLRabbitMQError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQError.h; path = OLRabbitMQ/OLRabbitMQError.h; sourceTree = "<group>"; };
+		4D1D737D20EF5D474FB13DC8 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		5818BEFA98E712C5E181301D /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		58CF32AEC77E9C47CD2D621F /* Pods-CocoaLumberjack-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack-Private.xcconfig"; sourceTree = "<group>"; };
+		5BCAB4601F7A444334F8D822 /* Pods-OLRabbitMQ.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OLRabbitMQ.xcconfig"; sourceTree = "<group>"; };
+		5BDB9C2E03CA293A05ADD7A1 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		5BF6AC6CC8E18E52B67D960E /* OLRabbitMQSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQSocket.h; path = OLRabbitMQ/OLRabbitMQSocket.h; sourceTree = "<group>"; };
+		5CE8C186F29E40D9B66DADB6 /* amqp_tcp_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_tcp_socket.h; path = "include-ios/rabbitmqc/amqp_tcp_socket.h"; sourceTree = "<group>"; };
+		5D97A58B4B29B2B1A2F32F03 /* Pods-CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CocoaLumberjack.xcconfig"; sourceTree = "<group>"; };
+		5E13A60534E356D3A6DDF433 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		618B7531CFCF890E0872F66E /* OLRabbitMQManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQManager.m; path = OLRabbitMQ/OLRabbitMQManager.m; sourceTree = "<group>"; };
+		68C6B615E3BA9AE890A2FB09 /* amqp_hostcheck.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_hostcheck.h; path = "include-ios/rabbitmqc/amqp_hostcheck.h"; sourceTree = "<group>"; };
+		7641493A3C98033DD2EA9E3D /* amqp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp.h; path = "include-ios/rabbitmqc/amqp.h"; sourceTree = "<group>"; };
+		7769330B89E2C49A6E71E737 /* UICountingLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		78F6621F007342919DF00F16 /* Pods-OLRabbitMQ-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OLRabbitMQ-dummy.m"; sourceTree = "<group>"; };
+		7A24887036FF59295A345D08 /* Pods-CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
+		7BC43CD446794C357FBB4939 /* libPods-OLRabbitMQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OLRabbitMQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CF02EBEE90D9F774439A582 /* amqp_timer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_timer.h; path = "include-ios/rabbitmqc/amqp_timer.h"; sourceTree = "<group>"; };
+		811DB330ED494BB62A112F77 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		8681FBDF631D9CC495BEC8CD /* Pods-OLRabbitMQ-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OLRabbitMQ-Private.xcconfig"; sourceTree = "<group>"; };
+		88B8F231CDBC09E096E32870 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
+		89E7C19E1665F1462D505BBA /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
+		8A3520FB59F2C84254869A21 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		921561267FD1197245DD4937 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9387EEE9FC7A5DA908B19F84 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		93FB2DCDDC60B74E5B189DFF /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94AF85D3F32F537832297D7E /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		9540F19221D3079FF5221CDD /* OLRabbitMQ.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQ.h; path = OLRabbitMQ/OLRabbitMQ.h; sourceTree = "<group>"; };
+		96A7E4DB306213484E263902 /* OLRabbitMQError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQError.m; path = OLRabbitMQ/OLRabbitMQError.m; sourceTree = "<group>"; };
+		992993E6A09D2259161BDC60 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		A0D277B123286E9427C90202 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		A18439A219122BA0280AB7DA /* OLRabbitMQOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQOperation.m; path = OLRabbitMQ/OLRabbitMQOperation.m; sourceTree = "<group>"; };
+		A5A750082025BEDB393BEABE /* amqp_private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_private.h; path = "include-ios/rabbitmqc/amqp_private.h"; sourceTree = "<group>"; };
+		A72662E58FF1CCFF83D6F141 /* Pods-UICountingLabel-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UICountingLabel-Private.xcconfig"; sourceTree = "<group>"; };
+		A7EE271061284D90F33F55A9 /* amqp_socket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_socket.h; path = "include-ios/rabbitmqc/amqp_socket.h"; sourceTree = "<group>"; };
+		A82D4C23BE24784D43D6657E /* amqp_time.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_time.h; path = "include-ios/rabbitmqc/amqp_time.h"; sourceTree = "<group>"; };
+		A96372FCABDBE142F6F72D75 /* libPods-rabbitmqc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rabbitmqc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E31BC21A1212F6519725CC /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		B1CE387917DD2065613ECD56 /* libPods-UICountingLabel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UICountingLabel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29AD0A8CA034679FB83E043 /* UICountingLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		B69B8853965D8B0D0BC81D53 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		B6C5479D773CA98CF1038CB7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		B91975327F6053E7BBBB7ECB /* amqp_table.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_table.h; path = "include-ios/rabbitmqc/amqp_table.h"; sourceTree = "<group>"; };
+		B9C1CA498CAD84C5D130F5E3 /* Pods-rabbitmqc-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-rabbitmqc-Private.xcconfig"; sourceTree = "<group>"; };
+		BB3F39D524A4420375766778 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		C2BF8ADFF7661B9FA5578F11 /* OLRabbitMQExchange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQExchange.h; path = OLRabbitMQ/OLRabbitMQExchange.h; sourceTree = "<group>"; };
+		CC9B20DCB46FF470A964A828 /* librabbitmqc.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = librabbitmqc.a; path = "lib-ios/librabbitmqc.a"; sourceTree = "<group>"; };
+		CE253BFDBD79975B8868691D /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
+		CF5A6E202D57E4769A81FCFC /* Pods-OLRabbitMQ-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OLRabbitMQ-prefix.pch"; sourceTree = "<group>"; };
+		D168AF3E05DDBA059C6161E8 /* Pods-UICountingLabel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-UICountingLabel.xcconfig"; sourceTree = "<group>"; };
+		DA8BB3C49A40C4A569908195 /* OLRabbitMQExchange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OLRabbitMQExchange.m; path = OLRabbitMQ/OLRabbitMQExchange.m; sourceTree = "<group>"; };
+		DEF4C2DA853ABA6FBBAD7522 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		E17C9476EF97132B175836C6 /* OLRabbitMQOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQOperation.h; path = OLRabbitMQ/OLRabbitMQOperation.h; sourceTree = "<group>"; };
+		E4BCC967C35FBBF12B722EAC /* OLRabbitMQManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OLRabbitMQManager.h; path = OLRabbitMQ/OLRabbitMQManager.h; sourceTree = "<group>"; };
+		E96A1AA8FAEFDE9BB385F598 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		EB9C527218C38286A0F877E4 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		F21B80D23D9F7AEC0D56EFB8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2A6DE7C37789DCD837F3844 /* Pods-rabbitmqc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-rabbitmqc.xcconfig"; sourceTree = "<group>"; };
+		F33E5A5E0E2A967F0035A863 /* amqp_framing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amqp_framing.h; path = "include-ios/rabbitmqc/amqp_framing.h"; sourceTree = "<group>"; };
+		FE48D21A077018074A8882AD /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		05CCD2552F4D0DBEFD625D81 /* Frameworks */ = {
+		7F7DC6C5327A1232C422570A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13156F02B0D1C28790EA238C /* Foundation.framework in Frameworks */,
+				527DD1A6D2EEFB243F595E52 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4FEFF09F72427EC120B77AF0 /* Frameworks */ = {
+		D4D996CFC2AD344F29EEBE1E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9CA6F86D986E6BE2F8B0C90 /* Foundation.framework in Frameworks */,
+				DF3F4310A0543CE09D618AD2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E59FEAF878E700C892235D05 /* Frameworks */ = {
+		ECC01E7474DAED8943FC55AA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8648D2C5269B93B954B001C2 /* Foundation.framework in Frameworks */,
+				A2A0DE6EEAF54E0B2C330D2D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6C46895BBED68DD284F54C2 /* Frameworks */ = {
+		F150286A4CF3B5C7BCA03E43 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB52E16B0C1FF8EC7F32846 /* Foundation.framework in Frameworks */,
+				301C1625E8135B4CD701A7A3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F818454D9664CE163160A54C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				755D39109E0B778C1354EFEB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		039133FD1CCE8CB369F909A2 /* Pods */ = {
+		00F7BBE94580CF2862D60AF9 /* UICountingLabel */ = {
 			isa = PBXGroup;
 			children = (
-				9870506B46D28975253E8615 /* Pods-acknowledgements.markdown */,
-				C9C428FF20A7E347659AFC00 /* Pods-acknowledgements.plist */,
-				3792BB7DA47EA602FD74E7EA /* Pods-dummy.m */,
-				00FC2C8C79A6775F0385185D /* Pods-environment.h */,
-				D3CC66826E932ED7A45DBF84 /* Pods-resources.sh */,
-				3AF5345F8D3A71E8FD4069ED /* Pods.debug.xcconfig */,
-				78D5AC198F8ACC89D3452BCF /* Pods.release.xcconfig */,
+				B29AD0A8CA034679FB83E043 /* UICountingLabel.h */,
+				7769330B89E2C49A6E71E737 /* UICountingLabel.m */,
+				396EDFA2A2E65167FD8306E0 /* Support Files */,
 			);
-			name = Pods;
-			path = "Target Support Files/Pods";
+			path = UICountingLabel;
 			sourceTree = "<group>";
 		};
-		0410D16BC8C78EF969678155 /* Support Files */ = {
+		048C7593572E9762A0FA158D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF3E7E04BF2C24C9B6F40682 /* Pods-rabbitmqc.xcconfig */,
-				ACA76CA22CAA8E3DB9DAB248 /* Pods-rabbitmqc-Private.xcconfig */,
-				31B325F1CA3F138A9D4AB935 /* Pods-rabbitmqc-dummy.m */,
-				41DE51F1EA351E9CF877F813 /* Pods-rabbitmqc-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Pods-rabbitmqc";
-			sourceTree = "<group>";
-		};
-		3717A025D3D20F39C48A6632 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B201D95EFF2AB139D70D6551 /* libPods.a */,
-				51AE2E8A60564E07748E9DC0 /* libPods-OLRabbitMQ.a */,
-				D158D2C943278D525F1DD681 /* libPods-UICountingLabel.a */,
-				3FDDBE68348A7B0E3F39934C /* libPods-rabbitmqc.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		65EB461E610429FAEB1CC2B0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F44BC44A3E46DE90EAE166C3 /* Pods-OLRabbitMQ.xcconfig */,
-				3E39B0720E80867A9F7A0F06 /* Pods-OLRabbitMQ-Private.xcconfig */,
-				ECEB91390FA19FB54EDC2DBA /* Pods-OLRabbitMQ-dummy.m */,
-				719D57D0D14E6E53545B14DC /* Pods-OLRabbitMQ-prefix.pch */,
+				5BCAB4601F7A444334F8D822 /* Pods-OLRabbitMQ.xcconfig */,
+				8681FBDF631D9CC495BEC8CD /* Pods-OLRabbitMQ-Private.xcconfig */,
+				78F6621F007342919DF00F16 /* Pods-OLRabbitMQ-dummy.m */,
+				CF5A6E202D57E4769A81FCFC /* Pods-OLRabbitMQ-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-OLRabbitMQ";
 			sourceTree = "<group>";
 		};
-		776F0E5BD31638FC5E630499 /* OLRabbitMQ */ = {
+		2ADB82A03CDDDA3D718602CE /* rabbitmqc */ = {
 			isa = PBXGroup;
 			children = (
-				37B53A67A39B61E16B33F4D2 /* OLRabbitMQ.h */,
-				48D642CF19A50CBF701B6C1F /* OLRabbitMQError.h */,
-				DF224307422A5143D6DA1686 /* OLRabbitMQError.m */,
-				98973C994AF87ED68E528BC4 /* OLRabbitMQExchange.h */,
-				AC92AD29250711ADBCBDB718 /* OLRabbitMQExchange.m */,
-				7DA16D67AE52A5D438AF8E96 /* OLRabbitMQManager.h */,
-				41908701AECC24D1887D6FDF /* OLRabbitMQManager.m */,
-				EDCD707487D33B2A53F53A8D /* OLRabbitMQOperation.h */,
-				A22ABC8EF8F655C28D29B878 /* OLRabbitMQOperation.m */,
-				BBA6D7931BB4515CE02C07AD /* OLRabbitMQSocket.h */,
-				62A4261C42BAADB0228132F4 /* OLRabbitMQSocket.m */,
-				65EB461E610429FAEB1CC2B0 /* Support Files */,
-			);
-			path = OLRabbitMQ;
-			sourceTree = "<group>";
-		};
-		9A336CBFBD0FB6D2EC50B474 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				776F0E5BD31638FC5E630499 /* OLRabbitMQ */,
-				9CD4B14926D8FAF3F277E1F2 /* UICountingLabel */,
-				9BC7785FD176067BD3FE4680 /* rabbitmqc */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		9BC7785FD176067BD3FE4680 /* rabbitmqc */ = {
-			isa = PBXGroup;
-			children = (
-				3AF4BDCF65719DB53C0A9A37 /* amqp.h */,
-				D6B20C349C522E66F7FCC8C7 /* amqp_framing.h */,
-				DE09AA6B4F98AF2183C59967 /* amqp_hostcheck.h */,
-				B5CD3694C8D24B3594037A08 /* amqp_private.h */,
-				BFE6108F99144637C844E6AB /* amqp_socket.h */,
-				430B897F36BAED10FAB4F93C /* amqp_ssl_socket.h */,
-				2A0BB15E380FD32D20460913 /* amqp_table.h */,
-				8C62539C48BF0C527E7C4035 /* amqp_tcp_socket.h */,
-				4FB2000AD1AAFC1178FF329D /* amqp_time.h */,
-				E476DCCB8F2F7C4382CB7F29 /* amqp_timer.h */,
-				C85D067A908C7A4643CA33BF /* Frameworks */,
-				0410D16BC8C78EF969678155 /* Support Files */,
+				7641493A3C98033DD2EA9E3D /* amqp.h */,
+				F33E5A5E0E2A967F0035A863 /* amqp_framing.h */,
+				68C6B615E3BA9AE890A2FB09 /* amqp_hostcheck.h */,
+				A5A750082025BEDB393BEABE /* amqp_private.h */,
+				A7EE271061284D90F33F55A9 /* amqp_socket.h */,
+				01286B7CB03FF8C8F5E006EB /* amqp_ssl_socket.h */,
+				B91975327F6053E7BBBB7ECB /* amqp_table.h */,
+				5CE8C186F29E40D9B66DADB6 /* amqp_tcp_socket.h */,
+				A82D4C23BE24784D43D6657E /* amqp_time.h */,
+				7CF02EBEE90D9F774439A582 /* amqp_timer.h */,
+				BB0E3FCD56E2F62A27DEA24E /* Frameworks */,
+				D4557604E0CA02418B9C0B77 /* Support Files */,
 			);
 			path = rabbitmqc;
 			sourceTree = "<group>";
 		};
-		9CD4B14926D8FAF3F277E1F2 /* UICountingLabel */ = {
+		396EDFA2A2E65167FD8306E0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4DB4D26DAB796AFA492C9D65 /* UICountingLabel.h */,
-				AD9593C9CC3E28C05177F77C /* UICountingLabel.m */,
-				EF68323705630E5865900D5F /* Support Files */,
-			);
-			path = UICountingLabel;
-			sourceTree = "<group>";
-		};
-		C08FB619F2B63C3F63A399D9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C0D76BECBC028EAED5A6752D /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C0D76BECBC028EAED5A6752D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				E7F94DAC1B0043E8756E0582 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		C85D067A908C7A4643CA33BF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3090A28A96474AE623B8996C /* librabbitmqc.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D301FA9215D3001B981290EE = {
-			isa = PBXGroup;
-			children = (
-				BCD9392F9AA5587A168DC43D /* Podfile */,
-				C08FB619F2B63C3F63A399D9 /* Frameworks */,
-				9A336CBFBD0FB6D2EC50B474 /* Pods */,
-				3717A025D3D20F39C48A6632 /* Products */,
-				E13FA7CEDF8D008A71A1AE8B /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		E13FA7CEDF8D008A71A1AE8B /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				039133FD1CCE8CB369F909A2 /* Pods */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		EF68323705630E5865900D5F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				11A145F9EE91F5F03A216704 /* Pods-UICountingLabel.xcconfig */,
-				133092BD410BA4C6C0CFB3F0 /* Pods-UICountingLabel-Private.xcconfig */,
-				460FBA01DC387C2B867F163E /* Pods-UICountingLabel-dummy.m */,
-				627C1DC7242B6A4A8E03AF5D /* Pods-UICountingLabel-prefix.pch */,
+				D168AF3E05DDBA059C6161E8 /* Pods-UICountingLabel.xcconfig */,
+				A72662E58FF1CCFF83D6F141 /* Pods-UICountingLabel-Private.xcconfig */,
+				133BDF8DA54D2E093AB97AC1 /* Pods-UICountingLabel-dummy.m */,
+				05397A6D8183300D4E0B66E8 /* Pods-UICountingLabel-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-UICountingLabel";
 			sourceTree = "<group>";
 		};
+		6436FDC9BBEB51CF75B29A2E /* OLRabbitMQ */ = {
+			isa = PBXGroup;
+			children = (
+				9540F19221D3079FF5221CDD /* OLRabbitMQ.h */,
+				458A04BE05F2D7FA262A3FC6 /* OLRabbitMQError.h */,
+				96A7E4DB306213484E263902 /* OLRabbitMQError.m */,
+				C2BF8ADFF7661B9FA5578F11 /* OLRabbitMQExchange.h */,
+				DA8BB3C49A40C4A569908195 /* OLRabbitMQExchange.m */,
+				E4BCC967C35FBBF12B722EAC /* OLRabbitMQManager.h */,
+				618B7531CFCF890E0872F66E /* OLRabbitMQManager.m */,
+				E17C9476EF97132B175836C6 /* OLRabbitMQOperation.h */,
+				A18439A219122BA0280AB7DA /* OLRabbitMQOperation.m */,
+				5BF6AC6CC8E18E52B67D960E /* OLRabbitMQSocket.h */,
+				015C845E926C1725C0C88014 /* OLRabbitMQSocket.m */,
+				048C7593572E9762A0FA158D /* Support Files */,
+			);
+			path = OLRabbitMQ;
+			sourceTree = "<group>";
+		};
+		6A82BB7217B86FB2B548C8EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				921561267FD1197245DD4937 /* Pods-acknowledgements.markdown */,
+				BB3F39D524A4420375766778 /* Pods-acknowledgements.plist */,
+				9387EEE9FC7A5DA908B19F84 /* Pods-dummy.m */,
+				3E3DA119206B759A8DE24E7D /* Pods-environment.h */,
+				0CB69C49F3B859A2EAD109B6 /* Pods-resources.sh */,
+				0B45A98DAEA4295213B08DF6 /* Pods.debug.xcconfig */,
+				B6C5479D773CA98CF1038CB7 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		73C48DBA6BE8785E9E8F9484 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2C499656BFB1F77D466319CA /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7E89F067A0848E67FCB2EDDC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				992993E6A09D2259161BDC60 /* DDASLLogCapture.h */,
+				EB9C527218C38286A0F877E4 /* DDASLLogCapture.m */,
+				94AF85D3F32F537832297D7E /* DDASLLogger.h */,
+				4D1D737D20EF5D474FB13DC8 /* DDASLLogger.m */,
+				0F81507606AD438C4CA36A98 /* DDAbstractDatabaseLogger.h */,
+				336CD73588C062D873D4F7AD /* DDAbstractDatabaseLogger.m */,
+				89E7C19E1665F1462D505BBA /* DDAssertMacros.h */,
+				DEF4C2DA853ABA6FBBAD7522 /* DDFileLogger.h */,
+				3A1E993E42D931CA6C8A0103 /* DDFileLogger.m */,
+				E96A1AA8FAEFDE9BB385F598 /* DDLegacyMacros.h */,
+				CE253BFDBD79975B8868691D /* DDLog.h */,
+				A9E31BC21A1212F6519725CC /* DDLog.m */,
+				3BD4D64FED5361934D185B0A /* DDLog+LOGV.h */,
+				B69B8853965D8B0D0BC81D53 /* DDLogMacros.h */,
+				88B8F231CDBC09E096E32870 /* DDTTYLogger.h */,
+				5E13A60534E356D3A6DDF433 /* DDTTYLogger.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		941BCE61CF4E1DE6386954A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F21B80D23D9F7AEC0D56EFB8 /* libPods.a */,
+				03AD6D5862333BC85E88D7C1 /* libPods-CocoaLumberjack.a */,
+				7BC43CD446794C357FBB4939 /* libPods-OLRabbitMQ.a */,
+				B1CE387917DD2065613ECD56 /* libPods-UICountingLabel.a */,
+				A96372FCABDBE142F6F72D75 /* libPods-rabbitmqc.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B1D5812B03F52B9A1988EFAE /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				A0D277B123286E9427C90202 /* CocoaLumberjack.h */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		B2EE22686A5B8C2449AA9141 = {
+			isa = PBXGroup;
+			children = (
+				93FB2DCDDC60B74E5B189DFF /* Podfile */,
+				D8E158851C5A59962F19B8A8 /* Frameworks */,
+				EE4C7518FAD02F9B1600C5EF /* Pods */,
+				941BCE61CF4E1DE6386954A7 /* Products */,
+				B9B4F8CA0E36F25CB7E1C0DD /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		B528E30D316BD8ABBB310735 /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				7E89F067A0848E67FCB2EDDC /* Core */,
+				B1D5812B03F52B9A1988EFAE /* Default */,
+				CD67CBD49D0116FD4542C288 /* Extensions */,
+				D947A145F755BF0562EA63A9 /* Support Files */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		B9B4F8CA0E36F25CB7E1C0DD /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6A82BB7217B86FB2B548C8EE /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BB0E3FCD56E2F62A27DEA24E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC9B20DCB46FF470A964A828 /* librabbitmqc.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD67CBD49D0116FD4542C288 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				192BD63BC622F725FDB0C682 /* DDContextFilterLogFormatter.h */,
+				5BDB9C2E03CA293A05ADD7A1 /* DDContextFilterLogFormatter.m */,
+				8A3520FB59F2C84254869A21 /* DDDispatchQueueLogFormatter.h */,
+				FE48D21A077018074A8882AD /* DDDispatchQueueLogFormatter.m */,
+				5818BEFA98E712C5E181301D /* DDMultiFormatter.h */,
+				811DB330ED494BB62A112F77 /* DDMultiFormatter.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		D4557604E0CA02418B9C0B77 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2A6DE7C37789DCD837F3844 /* Pods-rabbitmqc.xcconfig */,
+				B9C1CA498CAD84C5D130F5E3 /* Pods-rabbitmqc-Private.xcconfig */,
+				09B6BAFDA614F085F12829C9 /* Pods-rabbitmqc-dummy.m */,
+				1BFD2575D04525F352444B24 /* Pods-rabbitmqc-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-rabbitmqc";
+			sourceTree = "<group>";
+		};
+		D8E158851C5A59962F19B8A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73C48DBA6BE8785E9E8F9484 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D947A145F755BF0562EA63A9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D97A58B4B29B2B1A2F32F03 /* Pods-CocoaLumberjack.xcconfig */,
+				58CF32AEC77E9C47CD2D621F /* Pods-CocoaLumberjack-Private.xcconfig */,
+				31CD5947966F31C97C9F8693 /* Pods-CocoaLumberjack-dummy.m */,
+				7A24887036FF59295A345D08 /* Pods-CocoaLumberjack-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-CocoaLumberjack";
+			sourceTree = "<group>";
+		};
+		EE4C7518FAD02F9B1600C5EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B528E30D316BD8ABBB310735 /* CocoaLumberjack */,
+				6436FDC9BBEB51CF75B29A2E /* OLRabbitMQ */,
+				00F7BBE94580CF2862D60AF9 /* UICountingLabel */,
+				2ADB82A03CDDDA3D718602CE /* rabbitmqc */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1C2A9903953C445410D46EB2 /* Headers */ = {
+		0DF21C645199BD6DFB97D864 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D28C804D04CBF7767520C5A /* UICountingLabel.h in Headers */,
+				7D38C22347EA7456D2DD6796 /* CocoaLumberjack.h in Headers */,
+				85A402807A3C10A0798291DC /* DDASLLogCapture.h in Headers */,
+				92A591DF290660535A66D250 /* DDASLLogger.h in Headers */,
+				F1367D66145A631835897203 /* DDAbstractDatabaseLogger.h in Headers */,
+				134E5F518C20E9CF3662D125 /* DDAssertMacros.h in Headers */,
+				B3F4BA07FBB71C123565B3A5 /* DDContextFilterLogFormatter.h in Headers */,
+				9279A0848144DA11B2DD6F12 /* DDDispatchQueueLogFormatter.h in Headers */,
+				95507B8A08AABCB0D17B111F /* DDFileLogger.h in Headers */,
+				78657F8260032FC8AEA70812 /* DDLegacyMacros.h in Headers */,
+				9DC7D74586D537F6BC7F90AD /* DDLog+LOGV.h in Headers */,
+				6CA3DB400A19DB53CB72BAD2 /* DDLog.h in Headers */,
+				14A41DC3E57E6F5C50FF7616 /* DDLogMacros.h in Headers */,
+				FB69E6F23193415BA0ED155C /* DDMultiFormatter.h in Headers */,
+				A666CA3A2BADFF35A4C68CD7 /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		32863178E211E8D4F738E018 /* Headers */ = {
+		659CA75BEC610586B23D76C3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17551F827165038B98D1BEE6 /* amqp.h in Headers */,
-				97D41FDCDA4D165F71F13B00 /* amqp_framing.h in Headers */,
-				10AC80A74879B8CA8D77B172 /* amqp_hostcheck.h in Headers */,
-				2E4ABF5122597785F9620A06 /* amqp_private.h in Headers */,
-				24E3A52AD06B3EA005CD5C0A /* amqp_socket.h in Headers */,
-				8B38BCED930E1F99977278F0 /* amqp_ssl_socket.h in Headers */,
-				2C0D2C3EF9F751BE1D57F447 /* amqp_table.h in Headers */,
-				CAE3926CA6606398E4D9A0F5 /* amqp_tcp_socket.h in Headers */,
-				BC2FE7DB61CD55B2E8977E8D /* amqp_time.h in Headers */,
-				96429D6647506CF73AC26E30 /* amqp_timer.h in Headers */,
+				ADB081038BEDF31BF556AF4B /* OLRabbitMQ.h in Headers */,
+				1C2AABE25BF7CC422D6DCA05 /* OLRabbitMQError.h in Headers */,
+				4971E4B8BAF1CFD7657BF896 /* OLRabbitMQExchange.h in Headers */,
+				3D8E72E463FC320D30AE0BFB /* OLRabbitMQManager.h in Headers */,
+				2C538C78E1B54062A93A9679 /* OLRabbitMQOperation.h in Headers */,
+				34D6F4BE965B08FB7652CFBA /* OLRabbitMQSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		34F8F7A7474D3400D15D39DB /* Headers */ = {
+		8D0BAA1D209253796C91BAC6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1A954A3B12DB2BA7BF3BE06 /* OLRabbitMQ.h in Headers */,
-				3CDE4B4C1D6A90B262A1C96F /* OLRabbitMQError.h in Headers */,
-				F447BF14A16C22DF98CB729C /* OLRabbitMQExchange.h in Headers */,
-				B00B5AD0AC2EB0489330B461 /* OLRabbitMQManager.h in Headers */,
-				2DAE656A53320E27A8B9E5BE /* OLRabbitMQOperation.h in Headers */,
-				4499E2E1FF5037FBF7E20BE2 /* OLRabbitMQSocket.h in Headers */,
+				1C6F3166FA6C18659498562D /* UICountingLabel.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA9648324C8D842874DFB432 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				694126F9CE22EB0F0A765646 /* amqp.h in Headers */,
+				490B2EDF9653EE4A37089A89 /* amqp_framing.h in Headers */,
+				6D210BC57C9D109D184EDF1C /* amqp_hostcheck.h in Headers */,
+				7F93D5D9873918E057F88539 /* amqp_private.h in Headers */,
+				9ED0568C69BF2CCB12CE85A5 /* amqp_socket.h in Headers */,
+				8EDBDB05E73F0459734196E8 /* amqp_ssl_socket.h in Headers */,
+				230B82ACC6BE0B2097D6253D /* amqp_table.h in Headers */,
+				70CD2C5E781AEE16925D55BA /* amqp_tcp_socket.h in Headers */,
+				310EF143B60D7572FE7CEF7B /* amqp_time.h in Headers */,
+				F3438E1284EA13E2956424E5 /* amqp_timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1911E2B174F19E008017DADA /* Pods-OLRabbitMQ */ = {
+		24C411451B250D08390DADC9 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 092FB5A94665A4ADFFE85F03 /* Build configuration list for PBXNativeTarget "Pods-OLRabbitMQ" */;
+			buildConfigurationList = B70F9FC6E551E9BF27E72705 /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				99D9789C5258CB97DCB0957B /* Sources */,
-				05CCD2552F4D0DBEFD625D81 /* Frameworks */,
-				34F8F7A7474D3400D15D39DB /* Headers */,
+				F08030E64D2E1017494D4059 /* Sources */,
+				D4D996CFC2AD344F29EEBE1E /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				834AE9FB6B1C6DEB30F29C77 /* PBXTargetDependency */,
+				746C2A68A0274AE14B3DE93D /* PBXTargetDependency */,
+				E6515EA2125FA523F7C6D001 /* PBXTargetDependency */,
+				8D2DF6B677B81FD61C2BF0FD /* PBXTargetDependency */,
+				5C8EBE93CE5DFB23902CDDF0 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = F21B80D23D9F7AEC0D56EFB8 /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		911032BA0D40E4D6620BE3AE /* Pods-CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00B4F89E2CF59ECF17F3A394 /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */;
+			buildPhases = (
+				2EC1A0373846D2A2FBFF31A0 /* Sources */,
+				F818454D9664CE163160A54C /* Frameworks */,
+				0DF21C645199BD6DFB97D864 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-CocoaLumberjack";
+			productName = "Pods-CocoaLumberjack";
+			productReference = 03AD6D5862333BC85E88D7C1 /* libPods-CocoaLumberjack.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AEA9FE7023F9481D08B3F29E /* Pods-OLRabbitMQ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3972CD0FBC32543E3F908B0 /* Build configuration list for PBXNativeTarget "Pods-OLRabbitMQ" */;
+			buildPhases = (
+				0759A5F71FF10E2A3D78CB0F /* Sources */,
+				ECC01E7474DAED8943FC55AA /* Frameworks */,
+				659CA75BEC610586B23D76C3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2E08E8326AA224107E587B74 /* PBXTargetDependency */,
 			);
 			name = "Pods-OLRabbitMQ";
 			productName = "Pods-OLRabbitMQ";
-			productReference = 51AE2E8A60564E07748E9DC0 /* libPods-OLRabbitMQ.a */;
+			productReference = 7BC43CD446794C357FBB4939 /* libPods-OLRabbitMQ.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		6C2FB7515DE06878B9FCC6AF /* Pods-rabbitmqc */ = {
+		B6AB5B60EEDD5BF65A178BE3 /* Pods-UICountingLabel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C5268FB44D923EE78763F62 /* Build configuration list for PBXNativeTarget "Pods-rabbitmqc" */;
+			buildConfigurationList = AACF3B55751CF2399ACD8FB4 /* Build configuration list for PBXNativeTarget "Pods-UICountingLabel" */;
 			buildPhases = (
-				4FD13380303BDB7B9962FFF8 /* Sources */,
-				E59FEAF878E700C892235D05 /* Frameworks */,
-				32863178E211E8D4F738E018 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-rabbitmqc";
-			productName = "Pods-rabbitmqc";
-			productReference = 3FDDBE68348A7B0E3F39934C /* libPods-rabbitmqc.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		C309A045290AB4C87E7BF311 /* Pods-UICountingLabel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B1C8076978A96746E63FEFB0 /* Build configuration list for PBXNativeTarget "Pods-UICountingLabel" */;
-			buildPhases = (
-				BDD4BDB5EEFAFF6F9005D35B /* Sources */,
-				F6C46895BBED68DD284F54C2 /* Frameworks */,
-				1C2A9903953C445410D46EB2 /* Headers */,
+				E495DBCBEAFF3A89B069FE12 /* Sources */,
+				F150286A4CF3B5C7BCA03E43 /* Frameworks */,
+				8D0BAA1D209253796C91BAC6 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -415,174 +593,196 @@
 			);
 			name = "Pods-UICountingLabel";
 			productName = "Pods-UICountingLabel";
-			productReference = D158D2C943278D525F1DD681 /* libPods-UICountingLabel.a */;
+			productReference = B1CE387917DD2065613ECD56 /* libPods-UICountingLabel.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D0399757EF8674F94783A82C /* Pods */ = {
+		D8AE53A92B53AB6B330AE68D /* Pods-rabbitmqc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 316CF3B55ABF37D992141E08 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = AA3A9E7BA876F562504CA2EE /* Build configuration list for PBXNativeTarget "Pods-rabbitmqc" */;
 			buildPhases = (
-				7B1630EFF920F712C0320857 /* Sources */,
-				4FEFF09F72427EC120B77AF0 /* Frameworks */,
+				F60120C219A02A93731EBF43 /* Sources */,
+				7F7DC6C5327A1232C422570A /* Frameworks */,
+				EA9648324C8D842874DFB432 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DF97490AE3FA2C7826FD2C3B /* PBXTargetDependency */,
-				C32BFE842F53C063FC73F105 /* PBXTargetDependency */,
-				EBC059374B8A76DAB33C15A6 /* PBXTargetDependency */,
 			);
-			name = Pods;
-			productName = Pods;
-			productReference = B201D95EFF2AB139D70D6551 /* libPods.a */;
+			name = "Pods-rabbitmqc";
+			productName = "Pods-rabbitmqc";
+			productReference = A96372FCABDBE142F6F72D75 /* libPods-rabbitmqc.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4CD32B0CCB760B1D09A7C5CA /* Project object */ = {
+		AC0CF06DEBC5CF8BFB797E1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
 			};
-			buildConfigurationList = 5278B8EADD5E03CA0E9B138D /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 73160416B58E922532BAB9E5 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = D301FA9215D3001B981290EE;
-			productRefGroup = 3717A025D3D20F39C48A6632 /* Products */;
+			mainGroup = B2EE22686A5B8C2449AA9141;
+			productRefGroup = 941BCE61CF4E1DE6386954A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D0399757EF8674F94783A82C /* Pods */,
-				1911E2B174F19E008017DADA /* Pods-OLRabbitMQ */,
-				C309A045290AB4C87E7BF311 /* Pods-UICountingLabel */,
-				6C2FB7515DE06878B9FCC6AF /* Pods-rabbitmqc */,
+				24C411451B250D08390DADC9 /* Pods */,
+				911032BA0D40E4D6620BE3AE /* Pods-CocoaLumberjack */,
+				AEA9FE7023F9481D08B3F29E /* Pods-OLRabbitMQ */,
+				B6AB5B60EEDD5BF65A178BE3 /* Pods-UICountingLabel */,
+				D8AE53A92B53AB6B330AE68D /* Pods-rabbitmqc */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4FD13380303BDB7B9962FFF8 /* Sources */ = {
+		0759A5F71FF10E2A3D78CB0F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				947B90D27A0789859C53CC60 /* Pods-rabbitmqc-dummy.m in Sources */,
+				B548A7F0B83F3BD84C1E520E /* OLRabbitMQError.m in Sources */,
+				4BF6F371CEA78F2C3675B66B /* OLRabbitMQExchange.m in Sources */,
+				B47579B008878821AF65CF24 /* OLRabbitMQManager.m in Sources */,
+				1901F4F55D9D0E6B77BF287B /* OLRabbitMQOperation.m in Sources */,
+				F5D074BCD84C0996A3DAE65E /* OLRabbitMQSocket.m in Sources */,
+				17CBC6ECB670309B164DD632 /* Pods-OLRabbitMQ-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7B1630EFF920F712C0320857 /* Sources */ = {
+		2EC1A0373846D2A2FBFF31A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DA5394C052FA5F727C197D3 /* Pods-dummy.m in Sources */,
+				2D61F98476672206368FED5B /* DDASLLogCapture.m in Sources */,
+				11A8165EC4599B2842F1C814 /* DDASLLogger.m in Sources */,
+				694E805E1608D3C4D8ADD592 /* DDAbstractDatabaseLogger.m in Sources */,
+				8AF55BFEF621B72FD0C8CA3B /* DDContextFilterLogFormatter.m in Sources */,
+				8AAD4040D596E6EE7045C989 /* DDDispatchQueueLogFormatter.m in Sources */,
+				D8C42B3A40E219A158D60154 /* DDFileLogger.m in Sources */,
+				8C754B23C4E6DF0B6BE4BB1C /* DDLog.m in Sources */,
+				B63325D852368B8C111E35C6 /* DDMultiFormatter.m in Sources */,
+				D3F0BBF81F5B090BD9ACC5E9 /* DDTTYLogger.m in Sources */,
+				30699D8378007B2D3F270A4A /* Pods-CocoaLumberjack-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99D9789C5258CB97DCB0957B /* Sources */ = {
+		E495DBCBEAFF3A89B069FE12 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				567954F502B301392B41F524 /* OLRabbitMQError.m in Sources */,
-				AA32FDD0F1E659D52D4F6E69 /* OLRabbitMQExchange.m in Sources */,
-				D1F81109E136C4CCA392498A /* OLRabbitMQManager.m in Sources */,
-				75FAF26203E0FA617BFACD8B /* OLRabbitMQOperation.m in Sources */,
-				CE597E19806F6B8C44C6FB2A /* OLRabbitMQSocket.m in Sources */,
-				238823181581C3100E5AFB7C /* Pods-OLRabbitMQ-dummy.m in Sources */,
+				6B9C780E80223FA9789228A6 /* Pods-UICountingLabel-dummy.m in Sources */,
+				4892C3C5891193987C368778 /* UICountingLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDD4BDB5EEFAFF6F9005D35B /* Sources */ = {
+		F08030E64D2E1017494D4059 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B8EC8BC1CBEA1CEC0F4803 /* Pods-UICountingLabel-dummy.m in Sources */,
-				6A1F1BF840175619CFA23959 /* UICountingLabel.m in Sources */,
+				64EB56766846889DACB953FB /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F60120C219A02A93731EBF43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4B581B56AB04F9EB0E9FE7F /* Pods-rabbitmqc-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		834AE9FB6B1C6DEB30F29C77 /* PBXTargetDependency */ = {
+		2E08E8326AA224107E587B74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-rabbitmqc";
-			target = 6C2FB7515DE06878B9FCC6AF /* Pods-rabbitmqc */;
-			targetProxy = 30C78A0DFE52C5F1F6AA72B1 /* PBXContainerItemProxy */;
+			target = D8AE53A92B53AB6B330AE68D /* Pods-rabbitmqc */;
+			targetProxy = A22D3F224137C29AEF6DCBEB /* PBXContainerItemProxy */;
 		};
-		C32BFE842F53C063FC73F105 /* PBXTargetDependency */ = {
+		5C8EBE93CE5DFB23902CDDF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-rabbitmqc";
+			target = D8AE53A92B53AB6B330AE68D /* Pods-rabbitmqc */;
+			targetProxy = 23A4EE286E41429C2464C343 /* PBXContainerItemProxy */;
+		};
+		746C2A68A0274AE14B3DE93D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-CocoaLumberjack";
+			target = 911032BA0D40E4D6620BE3AE /* Pods-CocoaLumberjack */;
+			targetProxy = DB3C128720842BD6EFC5AC0A /* PBXContainerItemProxy */;
+		};
+		8D2DF6B677B81FD61C2BF0FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-UICountingLabel";
-			target = C309A045290AB4C87E7BF311 /* Pods-UICountingLabel */;
-			targetProxy = 89A4F1F43E588E648D8B16D6 /* PBXContainerItemProxy */;
+			target = B6AB5B60EEDD5BF65A178BE3 /* Pods-UICountingLabel */;
+			targetProxy = 38CE5D21BDC47F35507CD6CB /* PBXContainerItemProxy */;
 		};
-		DF97490AE3FA2C7826FD2C3B /* PBXTargetDependency */ = {
+		E6515EA2125FA523F7C6D001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-OLRabbitMQ";
-			target = 1911E2B174F19E008017DADA /* Pods-OLRabbitMQ */;
-			targetProxy = 2E8690A9D13163537E58D0DD /* PBXContainerItemProxy */;
-		};
-		EBC059374B8A76DAB33C15A6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-rabbitmqc";
-			target = 6C2FB7515DE06878B9FCC6AF /* Pods-rabbitmqc */;
-			targetProxy = BEC6A377F2151CE058449D56 /* PBXContainerItemProxy */;
+			target = AEA9FE7023F9481D08B3F29E /* Pods-OLRabbitMQ */;
+			targetProxy = ABE5EA0526DA4D3444BE039B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0062CB4B3FAED549D654786F /* Release */ = {
+		38D41E083274BC820192928E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACA76CA22CAA8E3DB9DAB248 /* Pods-rabbitmqc-Private.xcconfig */;
+			baseConfigurationReference = B9C1CA498CAD84C5D130F5E3 /* Pods-rabbitmqc-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-rabbitmqc/Pods-rabbitmqc-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
-		04DAF98BDE92BB4A38C74E6B /* Release */ = {
+		416C70CDF86E0AA4497D07F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E39B0720E80867A9F7A0F06 /* Pods-OLRabbitMQ-Private.xcconfig */;
+			baseConfigurationReference = 58CF32AEC77E9C47CD2D621F /* Pods-CocoaLumberjack-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-CocoaLumberjack/Pods-CocoaLumberjack-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4B65C8392D5C3BAB030599DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8681FBDF631D9CC495BEC8CD /* Pods-OLRabbitMQ-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-OLRabbitMQ/Pods-OLRabbitMQ-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
-		05BBFD5BF34160B644671745 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78D5AC198F8ACC89D3452BCF /* Pods.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		07D0733E706FBA6D2CC71761 /* Debug */ = {
+		6DE4A52FDEF213B7D3C05B0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -621,28 +821,12 @@
 			};
 			name = Debug;
 		};
-		317953AA9CD61794803D4845 /* Debug */ = {
+		825C88EEE0B25CD5FA8D1505 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 133092BD410BA4C6C0CFB3F0 /* Pods-UICountingLabel-Private.xcconfig */;
+			baseConfigurationReference = 8681FBDF631D9CC495BEC8CD /* Pods-OLRabbitMQ-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-UICountingLabel/Pods-UICountingLabel-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		66390F1944D0EAF9AE272653 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 133092BD410BA4C6C0CFB3F0 /* Pods-UICountingLabel-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-UICountingLabel/Pods-UICountingLabel-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-OLRabbitMQ/Pods-OLRabbitMQ-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -653,13 +837,13 @@
 			};
 			name = Release;
 		};
-		997B9C6EC3E27B02972639BC /* Debug */ = {
+		884B2428CFD7AA98515E190F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3AF5345F8D3A71E8FD4069ED /* Pods.debug.xcconfig */;
+			baseConfigurationReference = B6C5479D773CA98CF1038CB7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -667,9 +851,25 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		99D08464431096F13361455D /* Release */ = {
+		9067FC15C411DA777BA0D3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58CF32AEC77E9C47CD2D621F /* Pods-CocoaLumberjack-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-CocoaLumberjack/Pods-CocoaLumberjack-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9EE308E2CEE1231A05021D19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -703,12 +903,44 @@
 			};
 			name = Release;
 		};
-		9C1CD4AA99380C7929151973 /* Debug */ = {
+		A5337AC26125A74FCC553A25 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E39B0720E80867A9F7A0F06 /* Pods-OLRabbitMQ-Private.xcconfig */;
+			baseConfigurationReference = A72662E58FF1CCFF83D6F141 /* Pods-UICountingLabel-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-OLRabbitMQ/Pods-OLRabbitMQ-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-UICountingLabel/Pods-UICountingLabel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		B1ECF505DB717D029D19CD6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9C1CA498CAD84C5D130F5E3 /* Pods-rabbitmqc-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-rabbitmqc/Pods-rabbitmqc-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F57E9D932551BA2372C97CEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A72662E58FF1CCFF83D6F141 /* Pods-UICountingLabel-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-UICountingLabel/Pods-UICountingLabel-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -719,16 +951,16 @@
 			};
 			name = Debug;
 		};
-		C0546064420DFDA635965F5E /* Debug */ = {
+		FBBC65FA2E5187B6A9995007 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACA76CA22CAA8E3DB9DAB248 /* Pods-rabbitmqc-Private.xcconfig */;
+			baseConfigurationReference = 0B45A98DAEA4295213B08DF6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-rabbitmqc/Pods-rabbitmqc-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -738,52 +970,61 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		092FB5A94665A4ADFFE85F03 /* Build configuration list for PBXNativeTarget "Pods-OLRabbitMQ" */ = {
+		00B4F89E2CF59ECF17F3A394 /* Build configuration list for PBXNativeTarget "Pods-CocoaLumberjack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C1CD4AA99380C7929151973 /* Debug */,
-				04DAF98BDE92BB4A38C74E6B /* Release */,
+				416C70CDF86E0AA4497D07F9 /* Debug */,
+				9067FC15C411DA777BA0D3A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C5268FB44D923EE78763F62 /* Build configuration list for PBXNativeTarget "Pods-rabbitmqc" */ = {
+		73160416B58E922532BAB9E5 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0546064420DFDA635965F5E /* Debug */,
-				0062CB4B3FAED549D654786F /* Release */,
+				6DE4A52FDEF213B7D3C05B0E /* Debug */,
+				9EE308E2CEE1231A05021D19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		316CF3B55ABF37D992141E08 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		AA3A9E7BA876F562504CA2EE /* Build configuration list for PBXNativeTarget "Pods-rabbitmqc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				997B9C6EC3E27B02972639BC /* Debug */,
-				05BBFD5BF34160B644671745 /* Release */,
+				38D41E083274BC820192928E /* Debug */,
+				B1ECF505DB717D029D19CD6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5278B8EADD5E03CA0E9B138D /* Build configuration list for PBXProject "Pods" */ = {
+		AACF3B55751CF2399ACD8FB4 /* Build configuration list for PBXNativeTarget "Pods-UICountingLabel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				07D0733E706FBA6D2CC71761 /* Debug */,
-				99D08464431096F13361455D /* Release */,
+				F57E9D932551BA2372C97CEE /* Debug */,
+				A5337AC26125A74FCC553A25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B1C8076978A96746E63FEFB0 /* Build configuration list for PBXNativeTarget "Pods-UICountingLabel" */ = {
+		B70F9FC6E551E9BF27E72705 /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				317953AA9CD61794803D4845 /* Debug */,
-				66390F1944D0EAF9AE272653 /* Release */,
+				FBBC65FA2E5187B6A9995007 /* Debug */,
+				884B2428CFD7AA98515E190F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3972CD0FBC32543E3F908B0 /* Build configuration list for PBXNativeTarget "Pods-OLRabbitMQ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B65C8392D5C3BAB030599DD /* Debug */,
+				825C88EEE0B25CD5FA8D1505 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4CD32B0CCB760B1D09A7C5CA /* Project object */;
+	rootObject = AC0CF06DEBC5CF8BFB797E1A /* Project object */;
 }
