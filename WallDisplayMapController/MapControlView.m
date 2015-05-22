@@ -54,31 +54,14 @@
     [self initUI];
 }
 
+#pragma mark - Gesture Recognition
+
 - (void) initGestureRecgonizers
 {
     UIPanGestureRecognizer* oneFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneFingerPan:)];
     oneFingerPanRecognizer.maximumNumberOfTouches = 1;
     oneFingerPanRecognizer.minimumNumberOfTouches = 1;
     [self addGestureRecognizer:oneFingerPanRecognizer];
-}
-
-- (void) initUI
-{
-//    facingLabel = [[UILabel alloc]initWithFrame: CGRectMake(self.frame.size.width/2, self.frame.size.height/2, 43, 50)];
-//    CGPoint center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-//    [facingLabel.layer setAnchorPoint:CGPointMake(0.5, 0.5)];
-//    facingLabel.layer.position = center;
-//    facingLabel.textColor = [UIColor whiteColor];
-//    facingLabel.backgroundColor = [UIColor blueColor];
-//    facingLabel.text = @"00.0°";
-//    
-//    UILabel* northLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 20, 20)];
-//    //northLabel.backgroundColor = [UIColor redColor];
-//    northLabel.textColor = [UIColor whiteColor];
-//    northLabel.text = @"N";
-//    [facingLabel addSubview:northLabel];
-//    
-//    [self addSubview:facingLabel];
 }
 
 - (void) handleOneFingerPan: (UIPanGestureRecognizer*) uigr
@@ -90,37 +73,42 @@
             break;
         }
         case UIGestureRecognizerStateChanged: {
-            CGPoint translation = [uigr translationInView:self];
-            CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y);
-            //float newDistance = sqrtf(powf(newTranslation.x, 2) + powf(newTranslation.y, 2));
-            //float angle = [self calcRotationAngleFromDistance:newDistance];
+            CGPoint translation = [uigr translationInView:self];  // the new accumlated translation
+            CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
-            //[dotBallDrawer rotateBallNotAnimatedBySurfaceDistance:newDistance AxisX:(newTranslation.y * -1) AxisY:newTranslation.x]; // swapped x and y and negate one of them to make it perpendicular to the translation
+            [self moveByLat:[self screenXTranslationToLat:newTranslation.x] Lon:[self screenYTranslationToLon:newTranslation.y]];
             
-            prevTranslation = translation;
+            prevTranslation = translation; // update accumulated translation
             
             break;
         }
         case UIGestureRecognizerStateEnded: {
             prevTranslation = CGPointZero; // don't forget to reset!
-            
-            // decay animation
-//            CGPoint v = [uigr velocityInView:self];
-//            v = CGPointMake(v.x / 30, v.y / 30); // divide by constant in order to translate distance per time unit to distance per frame.
-            // play momentum animation
-//            while (true) {
-//
-//            }
             break;
         }
         default:
             break;
     }
-    
+}
+
+- (double) screenXTranslationToLat:(float) transX
+{
+    return (double)transX * 0.000001;
+}
+
+- (double) screenYTranslationToLon:(float) transY
+{
+    return (double)transY * 0.000001;
+}
+
+#pragma mark - User Interface
+
+- (void) initUI
+{
     
 }
 
-#pragma mark - getting and setting properties
+#pragma mark - Getters and Setters
 
 - (void) increaseFacingDirectionBy:(float)angle
 {
