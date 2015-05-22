@@ -17,7 +17,8 @@
     double lon;
 }
 
-float const twoFingerPitchingDetectionThresholdRatio = 0.3;
+float const twoFingerPitchingDetectionThresholdYXRatio = 0.3;
+float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
@@ -106,9 +107,9 @@ float const twoFingerPitchingDetectionThresholdRatio = 0.3;
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
             
-            // if the translation is roughfuly horizontal, move lat
+            // if the translation is roughfuly horizontal or the y translation is too small, move lat
             // else, pitch
-            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdRatio) {
+            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdYXRatio || fabsf(newTranslation.y) < twoFingerPitchingDetectionThresholdYTranslation) {
                 [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:0];
             } else {
                 [self increasePitchBy:[self convertScreenTranslationToPitch:newTranslation.y]];
