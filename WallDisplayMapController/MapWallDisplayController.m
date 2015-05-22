@@ -8,7 +8,6 @@
 
 #import "MapWallDisplayController.h"
 
-
 #define HOST_NAME "192.168.0.105"
 #define PORT_NUMBER 5672
 #define QUEUE_NAME "ios"
@@ -62,7 +61,6 @@
     
     // binding queue with exchange
     amqp_queue_bind(_conn, 10, queuename, amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(QUEUE_NAME), AMQP_EMPTY_TABLE);
-
     
 }
 
@@ -79,7 +77,6 @@
     // close and destroy connection
     amqp_connection_close(_conn, AMQP_REPLY_SUCCESS);
     amqp_destroy_connection(_conn);
-    
 }
 
 - (BOOL) setMapFacingDirection:(float)faceingDirection
