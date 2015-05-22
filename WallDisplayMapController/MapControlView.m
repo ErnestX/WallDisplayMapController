@@ -10,14 +10,14 @@
 
 @implementation MapControlView {
     id <MapWallDisplayProtocal> target;
-    UILabel *facingLabel;
-    
     float facingDirection;
     float pitch;
     float zoomFactor;
     double lat;
     double lon;
 }
+
+float const twoFingerPitchingDetectionThresholdRatio = 0.3;
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
@@ -29,10 +29,16 @@
     return self;
 }
 
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController AndInitializeWithFacingDirection: (float) fd Pitch: (float) p ZoomFactor:(float) zf Latitude: (double)la Longitude: (double)lo
 {
     if (target == nil) {
         target = mapWallDisplayController;
+        
+        [self setFacingDirection:fd];
+        [self setPitch:p];
+        [self setZoomFactor:zf];
+        [self setLat:la Lon:lo];
+        
         return YES;
     } else {
         return NO;
@@ -41,12 +47,6 @@
 
 - (void) customInit
 {
-    // init iVar
-    [self setFacingDirection:0];
-    [self setPitch:2.5];
-    [self setZoomFactor:1.0];
-    [self setLat:50.0 Lon:50.0];
-    
     // init gesture recognizers
     [self initGestureRecgonizers];
     
@@ -60,8 +60,11 @@
 {
     UIPanGestureRecognizer* oneFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneFingerPan:)];
     oneFingerPanRecognizer.maximumNumberOfTouches = 1;
-    oneFingerPanRecognizer.minimumNumberOfTouches = 1;
     [self addGestureRecognizer:oneFingerPanRecognizer];
+    
+    UIPanGestureRecognizer* twoFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
+    twoFingerPanRecognizer.minimumNumberOfTouches = 2;
+    [self addGestureRecognizer:twoFingerPanRecognizer];
 }
 
 - (void) handleOneFingerPan: (UIPanGestureRecognizer*) uigr
@@ -76,7 +79,40 @@
             CGPoint translation = [uigr translationInView:self];  // the new accumlated translation
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
-            [self moveByLat:[self screenXTranslationToLat:newTranslation.x] Lon:[self screenYTranslationToLon:newTranslation.y]];
+            [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:[self convertScreenTranslationToLon:newTranslation.y]];
+            
+            prevTranslation = translation; // update accumulated translation
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            prevTranslation = CGPointZero; // don't forget to reset!
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void) handleTwoFingerPan: (UIPanGestureRecognizer*) uigr
+{
+    static CGPoint prevTranslation;
+    
+    switch (uigr.state) {
+        case UIGestureRecognizerStateBegan: {
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            CGPoint translation = [uigr translationInView:self];  // the new accumlated translation
+            CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
+            
+            
+            // if the translation is roughfuly horizontal, move lat
+            // else, pitch
+            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdRatio) {
+                [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:0];
+            } else {
+                [self increasePitchBy:[self convertScreenTranslationToPitch:newTranslation.y]];
+            }
             
             prevTranslation = translation; // update accumulated translation
             
@@ -91,14 +127,21 @@
     }
 }
 
-- (double) screenXTranslationToLat:(float) transX
+- (float) convertScreenTranslationToPitch:(float) t
 {
-    return (double)transX * 0.000001;
+    // move from top of the screen to the button goes from M_PI/2 to 0
+    float screenHeight = [UIScreen mainScreen].bounds.size.height;
+    return t/screenHeight*(M_PI/2);
 }
 
-- (double) screenYTranslationToLon:(float) transY
+- (double) convertScreenTranslationToLat:(float) t
 {
-    return (double)transY * 0.000001;
+    return (double)t * 0.000001;
+}
+
+- (double) convertScreenTranslationToLon:(float) t
+{
+    return (double)t * 0.000001;
 }
 
 #pragma mark - User Interface
@@ -129,7 +172,22 @@
 
 - (void) increasePitchBy:(float)angle
 {
+    float newPitch = pitch + angle;
     
+    // check validity
+    if (newPitch < 0) {
+        newPitch = 0;
+    } else if (newPitch > M_PI/2) {
+        newPitch = M_PI/2;
+    }
+    
+    // set the value on map and update iVar if necessary
+    if (pitch != newPitch) {
+        BOOL flag = [target setMapPitch:newPitch];
+        if (flag) {
+            pitch = newPitch;
+        }
+    }
 }
 
 - (void) setPitch:(float)p
@@ -175,13 +233,13 @@
         newLon = 180;
     }
     
-    // set new value on map
-    BOOL flag = [target setMapLat:newLat Lon:newLon];
-    
-    // if success, update iVar
-    if (flag) {
-        lat = newLat;
-        lon = newLon;
+    // set new value on map and update iVars if necessary
+    if (lat != newLat || lon != newLon) {
+        BOOL flag = [target setMapLat:newLat Lon:newLon];
+        if (flag) {
+            lat = newLat;
+            lon = newLon;
+        }
     }
 }
 

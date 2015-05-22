@@ -12,9 +12,9 @@
 @interface MapControlView : UIView
 
 /*
- @return NO if target already exist
+ @return NO and ignore the init parameters if target already exist
  */
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController;
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController AndInitializeWithFacingDirection: (float) fd Pitch: (float) p ZoomFactor:(float) zf Latitude: (double)la Longitude: (double)lo;
 
 /*
  please refer to MapWallDisplayProtocal.h for documentations of the parameters below
