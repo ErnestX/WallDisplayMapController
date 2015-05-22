@@ -8,7 +8,61 @@
 
 #import "MapWallDisplayController.h"
 
+
+#define HOST_NAME "192.168.0.105"
+#define PORT_NUMBER 5672
+#define QUEUE_NAME "ios"
+#define EXCHANGE_NAME "DefaultExchange"
+#define VHOST_NAME "/"
+#define USER_NAME "guest"
+#define PASSWORD "guest"
+#define EXCHANGE_TYPE "direct"
+
 @implementation MapWallDisplayController
+
+- (void) openRMQConnection {
+    // open connection
+    amqp_connection_state_t conn = amqp_new_connection();
+    amqp_socket_t *socket = amqp_tcp_socket_new(conn);
+    
+    // open socket
+    int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
+    if (socketopen == AMQP_STATUS_OK) {
+        NSLog(@"SOCKET OPENED");
+    } else {
+        NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
+    }
+    
+    sleep(3);
+    
+    // login to remote broker
+    amqp_rpc_reply_t arrt = amqp_login(conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
+    if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
+        NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
+    } else {
+        NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
+    }
+
+    // open channel
+    amqp_channel_open(conn, 10);
+    amqp_get_rpc_reply(conn);
+    
+    // declare exchange
+    amqp_exchange_declare(conn, 10, amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(EXCHANGE_TYPE), 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+    
+    // declare queue
+    amqp_queue_declare_ok_t *q = amqp_queue_declare(conn, 10, amqp_cstring_bytes(QUEUE_NAME), 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
+    
+    // binding queue with exchange
+    amqp_queue_bind(conn, 10, queuename, amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(QUEUE_NAME), AMQP_EMPTY_TABLE);
+
+    
+}
+
+- (void) closeRMQConnection {
+    
+}
 
 - (BOOL) setMapFacingDirection:(float)faceingDirection
 {
