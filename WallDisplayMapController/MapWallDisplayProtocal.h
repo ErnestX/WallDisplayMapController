@@ -18,7 +18,7 @@
 - (BOOL) setMapFacingDirection: (float) faceingDirection;
 
 /*
- @param pitch current pitch. Greater or equal to 0 and smaller or equal to pi/2. 0 means viewing parallel to the ground, pi/2 means viewing directly from above perpendicular to the ground
+ @param pitch current pitch from 0 to pi/2. 0 means viewing parallel to the ground, pi/2 means viewing directly from above perpendicular to the ground
  @return YES if success, NO otherwise
  */
 - (BOOL) setMapPitch: (float) pitch;
