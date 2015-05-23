@@ -10,7 +10,8 @@
 
 #define HOST_NAME "192.168.0.105"
 #define PORT_NUMBER 5672
-#define QUEUE_NAME amqp_cstring_bytes("ios")
+#define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
+#define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
 #define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"
 #define USER_NAME "guest"
@@ -24,6 +25,14 @@
 @end
 
 @implementation MapWallDisplayController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self openRMQConnection];
+    }
+    return self;
+}
 
 - (void) openRMQConnection {
     // open connection
@@ -60,7 +69,7 @@
     amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
     
     // binding queue with exchange
-    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, QUEUE_NAME, AMQP_EMPTY_TABLE);
+    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
     
 }
 
@@ -69,7 +78,7 @@
     amqp_maybe_release_buffers(_conn);
     
     // unbind queue with exchange
-    amqp_queue_unbind(_conn, 10, QUEUE_NAME, EXCHANGE_NAME, QUEUE_NAME, AMQP_EMPTY_TABLE);
+    amqp_queue_unbind(_conn, 10, QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
     
     // close channel
     amqp_channel_close(_conn, 10, AMQP_REPLY_SUCCESS);
@@ -81,7 +90,7 @@
 
 - (void) sendRequest:(EarthControlRequest *)request {
     // publish request to rmqp server
-    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, QUEUE_NAME, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
+    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
     
     if (statuscode == AMQP_STATUS_OK) {
         NSLog(@"publish successful");
@@ -115,14 +124,12 @@
 {
     NSLog(@"setMapLat %f, Lon %f", lat, lon);
     
-    [self openRMQConnection];
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
     [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
     
     [self sendRequest:request];
     
-    [self closeRMQConnection];
     return YES;
 
 }
