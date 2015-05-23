@@ -18,7 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [(MapControlView*)self.view setTarget:[MapWallDisplayController alloc]];
+    
+    // connect the UI with network component and init the UI
+    [(MapControlView*)self.view setTarget:[MapWallDisplayController alloc] AndInitializeWithFacingDirection:0 Pitch:2.5 ZoomFactor:1.0 Latitude:0 Longitude:0];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -94,21 +94,21 @@
 {
     NSLog(@"setMapFacingDireciton %f", faceingDirection);
     
-    return NO; //stub
+    return YES; //stub
 }
 
 - (BOOL) setMapPitch:(float)pitch
 {
     NSLog(@"setMapPitch %f", pitch);
     
-    return NO; //stub
+    return YES; //stub
 }
 
 - (BOOL) setMapZoom:(float)zoomFactor
 {
     NSLog(@"setMapZoom %f", zoomFactor);
     
-    return NO; //stub
+    return YES; //stub
 }
 
 - (BOOL) setMapLat:(double)lat Lon:(double)lon
@@ -124,6 +124,7 @@
     
     [self closeRMQConnection];
     return YES;
+
 }
 
 @end
