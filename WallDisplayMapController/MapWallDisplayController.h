@@ -10,7 +10,7 @@
 #import "MapWallDisplayProtocal.h"
 #import <amqp.h>
 #import "amqp_tcp_socket.h"
-#import "XMLDictionary.h"
+#import "EarthControlRequest.h"
 
 @interface MapWallDisplayController : NSObject <MapWallDisplayProtocal>
 
