@@ -110,7 +110,12 @@
 {
     NSLog(@"setMapPitch %f", pitch);
     
-    return YES; //stub
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
+    
+    [self sendRequest:request];
+    
+    return YES; 
 }
 
 - (BOOL) setMapZoom:(float)zoomFactor
