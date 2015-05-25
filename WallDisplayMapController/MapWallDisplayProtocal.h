@@ -10,7 +10,6 @@
 
 @protocol MapWallDisplayProtocal <NSObject>
 
-
 /*
  @param facingDirection the direction currently facing from 0 to 2pi. 0 and 2pi means facing north
  @return YES if success, NO otherwise
@@ -24,7 +23,7 @@
 - (BOOL) setMapPitch: (float) pitch;
 
 /*
- @param zoomFactor current zoom factor. Greater than 0. 1 means the original size, smaller than 1 means zooming out (less detail), greater than 1 means zooming in (more detail)
+ @param zoomFactor current zoom factor. Greater or equal to 0. 1 means the original size, smaller than 1 means zooming out (less detail), greater than 1 means zooming in (more detail)
  @return YES if success, NO otherwise
  */
 - (BOOL) setMapZoom: (float) zoomFactor;

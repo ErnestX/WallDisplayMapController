@@ -80,6 +80,10 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
     rotationRecognizer.delegate = self;
     [self addGestureRecognizer:rotationRecognizer];
+    
+    UIPinchGestureRecognizer* pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    pinchRecognizer.delegate = self;
+    [self addGestureRecognizer:pinchRecognizer];
 }
 
 - (void) handleOneFingerPan: (UIPanGestureRecognizer*) uigr
@@ -88,6 +92,7 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
+            prevTranslation = CGPointZero; // don't forget to init!
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -100,7 +105,6 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            prevTranslation = CGPointZero; // don't forget to reset!
             break;
         }
         default:
@@ -114,6 +118,7 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
+            prevTranslation = CGPointZero;
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -134,7 +139,6 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            prevTranslation = CGPointZero; // don't forget to reset!
             break;
         }
         default:
@@ -149,13 +153,14 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
             rotatingGestureOngoing = YES;
+            prevRotation = 0.0;
             break;
         }
         case UIGestureRecognizerStateChanged: {
             CGFloat rotation = [uigr rotation];
             CGFloat newRotation = rotation - prevRotation;
             
-            [self increaseFacingDirectionBy:newRotation]; // no need to convert?
+            [self increaseFacingDirectionBy:[self convertScreenRotationToFacingDirection:newRotation]];
             
             prevRotation = rotation;
             
@@ -163,7 +168,6 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
         }
         case UIGestureRecognizerStateEnded: {
             rotatingGestureOngoing = NO;
-            prevRotation = 0.0;
             break;
         }
         default:
@@ -171,12 +175,51 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     }
 }
 
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if ((gestureRecognizer == rotationRecognizer && otherGestureRecognizer == twoFingerPanRecognizer) || (gestureRecognizer == twoFingerPanRecognizer && otherGestureRecognizer == rotationRecognizer)) {
-        return YES;
-    } else {
-        return NO;
+- (void) handlePinch: (UIPinchGestureRecognizer*) uigr
+{
+    static CGFloat prevScale;
+    
+    switch (uigr.state) {
+        case UIGestureRecognizerStateBegan: {
+            prevScale = 1.0;
+            break;
+        }
+        case UIGestureRecognizerStateChanged: {
+            CGFloat scale = [uigr scale];
+            CGFloat newScale = scale / prevScale;
+            //NSLog(@"scale = %f", scale);
+            [self increaseZoomFactorBy:[self convertScreenScaleToZoomFactor:newScale]];
+            
+            prevScale = scale;
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            break;
+        }
+        default:
+            break;
     }
+    
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    if ((gestureRecognizer == rotationRecognizer && otherGestureRecognizer == twoFingerPanRecognizer) || (gestureRecognizer == twoFingerPanRecognizer && otherGestureRecognizer == rotationRecognizer)) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+    
+    return YES;
+}
+
+- (float) convertScreenScaleToZoomFactor:(float) s
+{
+    return s;
+}
+
+- (float) convertScreenRotationToFacingDirection:(float) r
+{
+    return r;
 }
 
 - (float) convertScreenTranslationToPitch:(float) t
@@ -269,7 +312,20 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 
 - (void) increaseZoomFactorBy:(float)factor
 {
+    float newZoomFactor = zoomFactor * factor;
     
+    // check validity
+    if (newZoomFactor < 0) {
+        newZoomFactor = 0;
+    }
+    
+    // set the value on map and update iVar if necessary
+    if (zoomFactor != newZoomFactor) {
+        BOOL flag = [target setMapZoom:newZoomFactor];
+        if (flag) {
+            zoomFactor = newZoomFactor;
+        }
+    }
 }
 
 - (void) setZoomFactor:(float)zf
