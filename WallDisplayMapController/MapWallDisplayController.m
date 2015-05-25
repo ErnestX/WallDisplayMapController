@@ -32,7 +32,7 @@
         /*
          UNCOMMENT BEFORE PUSH
          */
-//        [self openRMQConnection];
+        [self openRMQConnection];
     }
     return self;
 }
@@ -119,7 +119,7 @@
     /*
      UNCOMMENT BEFORE PUSH
      */
-//    [self sendRequest:request];
+    [self sendRequest:request];
     
     return YES; 
 }
@@ -143,7 +143,7 @@
     /*
      UNCOMMENT BEFORE PUSH
      */
-//    [self sendRequest:request];
+    [self sendRequest:request];
     
     return YES;
 

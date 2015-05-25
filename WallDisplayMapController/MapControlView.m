@@ -16,14 +16,9 @@
     double lat;
     double lon;
     
-//    BOOL rotatingGestureOngoing;
-    
     UIPanGestureRecognizer* twoOrMoreFingerPanRecognizer;
     UIRotationGestureRecognizer* rotationRecognizer;
 }
-
-//float const twoFingerPitchingDetectionThresholdYXRatio = 0.3;
-//float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
@@ -54,7 +49,6 @@
 - (void) customInit
 {
     // init iVars
-//    rotatingGestureOngoing = NO;
     
     // init gesture recognizers
     [self initGestureRecgonizers];
@@ -71,7 +65,6 @@
     oneFingerPanRecognizer.maximumNumberOfTouches = 1;
     [self addGestureRecognizer:oneFingerPanRecognizer];
     
-    // TODO: replace this with a custom recognizer
     twoOrMoreFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoOrMoreFingerPan:)];
     twoOrMoreFingerPanRecognizer.minimumNumberOfTouches = 2;
     twoOrMoreFingerPanRecognizer.delegate = self;
@@ -140,10 +133,6 @@
             CGPoint translation = [uigr translationInView:self];  // the new accumlated translation
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
-            
-//            // if the translation is roughfuly horizontal or the y translation is too small or the rotation is ongoing, move lat lon
-//            // else, pitch
-//            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdYXRatio || fabsf(newTranslation.y) < twoFingerPitchingDetectionThresholdYTranslation || rotatingGestureOngoing) {
             if (!isInPitchMode) {
                 [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:[self convertScreenTranslationToLon:newTranslation.y]];
             } else {
@@ -168,7 +157,6 @@
     
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
-//            rotatingGestureOngoing = YES;
             prevRotation = 0.0;
             break;
         }
@@ -183,7 +171,6 @@
             break;
         }
         case UIGestureRecognizerStateEnded: {
-//            rotatingGestureOngoing = NO;
             break;
         }
         default:
@@ -203,7 +190,6 @@
         case UIGestureRecognizerStateChanged: {
             CGFloat scale = [uigr scale];
             CGFloat newScale = scale / prevScale;
-            //NSLog(@"scale = %f", scale);
             [self increaseZoomFactorBy:[self convertScreenScaleToZoomFactor:newScale]];
             
             prevScale = scale;
