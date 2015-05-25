@@ -10,12 +10,13 @@
 
 #define HOST_NAME "192.168.0.105"
 #define PORT_NUMBER 5672
-#define QUEUE_NAME "ios"
-#define EXCHANGE_NAME "DefaultExchange"
+#define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
+#define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
+#define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"
 #define USER_NAME "guest"
 #define PASSWORD "guest"
-#define EXCHANGE_TYPE "direct"
+#define EXCHANGE_TYPE amqp_cstring_bytes("direct")
 
 @interface MapWallDisplayController()
 
@@ -24,6 +25,14 @@
 @end
 
 @implementation MapWallDisplayController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self openRMQConnection];
+    }
+    return self;
+}
 
 - (void) openRMQConnection {
     // open connection
@@ -53,14 +62,14 @@
     amqp_get_rpc_reply(_conn);
     
     // declare exchange
-    amqp_exchange_declare(_conn, 10, amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(EXCHANGE_TYPE), 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+    amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
     
     // declare queue
-    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, amqp_cstring_bytes(QUEUE_NAME), 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
     amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
     
     // binding queue with exchange
-    amqp_queue_bind(_conn, 10, queuename, amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(QUEUE_NAME), AMQP_EMPTY_TABLE);
+    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
     
 }
 
@@ -69,7 +78,7 @@
     amqp_maybe_release_buffers(_conn);
     
     // unbind queue with exchange
-    amqp_queue_unbind(_conn, 10, amqp_cstring_bytes(QUEUE_NAME), amqp_cstring_bytes(EXCHANGE_NAME), amqp_cstring_bytes(QUEUE_NAME), AMQP_EMPTY_TABLE);
+    amqp_queue_unbind(_conn, 10, QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
     
     // close channel
     amqp_channel_close(_conn, 10, AMQP_REPLY_SUCCESS);
@@ -77,6 +86,17 @@
     // close and destroy connection
     amqp_connection_close(_conn, AMQP_REPLY_SUCCESS);
     amqp_destroy_connection(_conn);
+}
+
+- (void) sendRequest:(EarthControlRequest *)request {
+    // publish request to rmqp server
+    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
+    
+    if (statuscode == AMQP_STATUS_OK) {
+        NSLog(@"publish successful");
+    } else {
+        NSLog(@"publish failed: %d", statuscode);
+    }
 }
 
 - (BOOL) setMapFacingDirection:(float)faceingDirection
@@ -90,7 +110,12 @@
 {
     NSLog(@"setMapPitch %f", pitch);
     
-    return YES; //stub
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
+    
+    [self sendRequest:request];
+    
+    return YES; 
 }
 
 - (BOOL) setMapZoom:(float)zoomFactor
@@ -104,7 +129,14 @@
 {
     NSLog(@"setMapLat %f, Lon %f", lat, lon);
     
-    return YES; //stub
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
+    [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
+    
+    [self sendRequest:request];
+    
+    return YES;
+
 }
 
 @end

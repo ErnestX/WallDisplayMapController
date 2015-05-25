@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "XMLDictionary.h"
 
+// To use this class, create an object using init, then
+// add the key-value pairs using the public methods
+// use toString to get the NSString representation of
+// the request
+
 @interface EarthControlRequest : NSObject
 
 - (NSString *) toString;

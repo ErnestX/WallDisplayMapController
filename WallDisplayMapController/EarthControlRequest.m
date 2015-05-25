@@ -39,6 +39,7 @@
 // converts the XMLDictionary to an NSString object
 - (NSString *)toString {
     NSString *strHead = @"<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+    [self addKey:@"origin" withValue:@"ios"];
     NSString *strXML = [NSString stringWithFormat:@"%@%@", strHead, self.dictBody.XMLString];
     return strXML;
 }
