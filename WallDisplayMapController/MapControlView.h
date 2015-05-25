@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MapWallDisplayProtocal.h"
 
-@interface MapControlView : UIView
+@interface MapControlView : UIView <UIGestureRecognizerDelegate>
 
 /*
  @return NO and ignore the init parameters if target already exist
