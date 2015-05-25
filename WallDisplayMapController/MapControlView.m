@@ -16,14 +16,14 @@
     double lat;
     double lon;
     
-    BOOL rotatingGestureOngoing;
+//    BOOL rotatingGestureOngoing;
     
-    UIPanGestureRecognizer* twoFingerPanRecognizer;
+    UIPanGestureRecognizer* twoOrMoreFingerPanRecognizer;
     UIRotationGestureRecognizer* rotationRecognizer;
 }
 
-float const twoFingerPitchingDetectionThresholdYXRatio = 0.3;
-float const twoFingerPitchingDetectionThresholdYTranslation = 1;
+//float const twoFingerPitchingDetectionThresholdYXRatio = 0.3;
+//float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
@@ -54,7 +54,7 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 - (void) customInit
 {
     // init iVars
-    rotatingGestureOngoing = NO;
+//    rotatingGestureOngoing = NO;
     
     // init gesture recognizers
     [self initGestureRecgonizers];
@@ -72,10 +72,10 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     [self addGestureRecognizer:oneFingerPanRecognizer];
     
     // TODO: replace this with a custom recognizer
-    twoFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
-    twoFingerPanRecognizer.minimumNumberOfTouches = 2;
-    twoFingerPanRecognizer.delegate = self;
-    [self addGestureRecognizer:twoFingerPanRecognizer];
+    twoOrMoreFingerPanRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoOrMoreFingerPan:)];
+    twoOrMoreFingerPanRecognizer.minimumNumberOfTouches = 2;
+    twoOrMoreFingerPanRecognizer.delegate = self;
+    [self addGestureRecognizer:twoOrMoreFingerPanRecognizer];
     
     rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
     rotationRecognizer.delegate = self;
@@ -112,13 +112,28 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     }
 }
 
-- (void) handleTwoFingerPan: (UIPanGestureRecognizer*) uigr
+- (void) handleTwoOrMoreFingerPan: (UIPanGestureRecognizer*) uigr
 {
     static CGPoint prevTranslation;
+    static BOOL isInPitchMode;
     
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
             prevTranslation = CGPointZero;
+            isInPitchMode = NO;
+            
+            // determine if only two fingers
+            if (uigr.numberOfTouches == 2) {
+                // if YES, determine if the two fingers are horizontal
+                CGPoint touchNumOneLoc = [uigr locationOfTouch:0 inView:self];
+                CGPoint touchNumTwoLoc = [uigr locationOfTouch:1 inView:self];
+                
+                if (fabsf(touchNumOneLoc.y - touchNumTwoLoc.y) < 100.0) {
+                    // if YES, pitch mode
+                    isInPitchMode = YES;
+                }
+            }
+            // else, move mode. Don't change isInPitchMode.
             break;
         }
         case UIGestureRecognizerStateChanged: {
@@ -126,9 +141,10 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
             
-            // if the translation is roughfuly horizontal or the y translation is too small or the rotation is ongoing, move lat lon
-            // else, pitch
-            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdYXRatio || fabsf(newTranslation.y) < twoFingerPitchingDetectionThresholdYTranslation || rotatingGestureOngoing) {
+//            // if the translation is roughfuly horizontal or the y translation is too small or the rotation is ongoing, move lat lon
+//            // else, pitch
+//            if (fabsf(newTranslation.y / newTranslation.x) < twoFingerPitchingDetectionThresholdYXRatio || fabsf(newTranslation.y) < twoFingerPitchingDetectionThresholdYTranslation || rotatingGestureOngoing) {
+            if (!isInPitchMode) {
                 [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:[self convertScreenTranslationToLon:newTranslation.y]];
             } else {
                 [self increasePitchBy:[self convertScreenTranslationToPitch:newTranslation.y]];
@@ -152,7 +168,7 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
     
     switch (uigr.state) {
         case UIGestureRecognizerStateBegan: {
-            rotatingGestureOngoing = YES;
+//            rotatingGestureOngoing = YES;
             prevRotation = 0.0;
             break;
         }
@@ -167,7 +183,7 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
             break;
         }
         case UIGestureRecognizerStateEnded: {
-            rotatingGestureOngoing = NO;
+//            rotatingGestureOngoing = NO;
             break;
         }
         default:
@@ -203,12 +219,6 @@ float const twoFingerPitchingDetectionThresholdYTranslation = 1;
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-//    if ((gestureRecognizer == rotationRecognizer && otherGestureRecognizer == twoFingerPanRecognizer) || (gestureRecognizer == twoFingerPanRecognizer && otherGestureRecognizer == rotationRecognizer)) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-    
     return YES;
 }
 

@@ -29,7 +29,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self openRMQConnection];
+        /*
+         UNCOMMENT BEFORE PUSH
+         */
+//        [self openRMQConnection];
     }
     return self;
 }
@@ -113,7 +116,10 @@
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
     
-    [self sendRequest:request];
+    /*
+     UNCOMMENT BEFORE PUSH
+     */
+//    [self sendRequest:request];
     
     return YES; 
 }
@@ -132,8 +138,12 @@
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
     [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
+
     
-    [self sendRequest:request];
+    /*
+     UNCOMMENT BEFORE PUSH
+     */
+//    [self sendRequest:request];
     
     return YES;
 
