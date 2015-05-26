@@ -18,6 +18,9 @@
 #define PASSWORD "guest"
 #define EXCHANGE_TYPE amqp_cstring_bytes("direct")
 
+/* turn off this macro if testing UI only */
+#define TEST_REQUEST
+
 @interface MapWallDisplayController()
 
 @property amqp_connection_state_t conn;
@@ -29,10 +32,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        /*
-         UNCOMMENT BEFORE PUSH
-         */
+#ifdef TEST_REQUEST
         [self openRMQConnection];
+#endif
     }
     return self;
 }
@@ -116,10 +118,9 @@
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
     
-    /*
-     UNCOMMENT BEFORE PUSH
-     */
+#ifdef TEST_REQUEST
     [self sendRequest:request];
+#endif
     
     return YES; 
 }
@@ -140,10 +141,9 @@
     [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
 
     
-    /*
-     UNCOMMENT BEFORE PUSH
-     */
+#ifdef TEST_REQUEST
     [self sendRequest:request];
+#endif
     
     return YES;
 
