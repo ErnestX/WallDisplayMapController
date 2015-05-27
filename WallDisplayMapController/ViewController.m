@@ -21,7 +21,7 @@
     
     // connect the UI with network component and init the UI
     MapWallDisplayController *controller = [[MapWallDisplayController alloc] init];
-    [(MapControlView*)self.view setTarget:controller AndInitializeWithFacingDirection:0 Pitch:2.5 ZoomFactor:1.0 Latitude:0 Longitude:0];
+    [(MapControlView*)self.view setTarget:controller];
 }
 
 - (void)didReceiveMemoryWarning {
