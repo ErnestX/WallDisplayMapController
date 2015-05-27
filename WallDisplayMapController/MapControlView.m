@@ -227,12 +227,12 @@
 
 - (double) convertScreenTranslationToLat:(float) t
 {
-    return ((double)t) * 0.000001;
+    return ((double)t) * 0.0001;
 }
 
 - (double) convertScreenTranslationToLon:(float) t
 {
-    return ((double)t) * 0.000001;
+    return ((double)t) * 0.0001;
 }
 
 #pragma mark - User Interface

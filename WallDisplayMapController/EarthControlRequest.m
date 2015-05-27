@@ -40,6 +40,7 @@
 - (NSString *)toString {
     NSString *strHead = @"<?xml version=\"1.0\" encoding=\"utf-8\"?>";
     [self addKey:@"origin" withValue:@"ios"];
+    [self addKey:@"command" withValue:@"look-at"];
     NSString *strXML = [NSString stringWithFormat:@"%@%@", strHead, self.dictBody.XMLString];
     return strXML;
 }
