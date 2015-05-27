@@ -256,6 +256,8 @@
 
 - (void) increaseFacingDirectionBy:(float)angle
 {
+    [target increaseMapFacingDirectionBy:angle];
+    
     CGFloat newFacingDirection = facingDirection + angle;
     
     // check validity
@@ -267,10 +269,10 @@
     
     // set the value on map and update iVar if necessary
     if (facingDirection != newFacingDirection) {
-        BOOL flag = [target setMapFacingDirection:newFacingDirection];
-        if (flag) {
+        //BOOL flag = [target setMapFacingDirection:newFacingDirection];
+        //if (flag) {
             facingDirection = newFacingDirection;
-        }
+        //}
     }
 }
 
