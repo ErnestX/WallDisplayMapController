@@ -111,6 +111,11 @@
     return YES; //stub
 }
 
+- (void) increaseMapFacingDirectionBy: (float) angle
+{
+    
+}
+
 - (BOOL) setMapPitch:(float)pitch
 {
     NSLog(@"setMapPitch %f", pitch);
@@ -125,11 +130,21 @@
     return YES; 
 }
 
+- (void) increaseMapPitchBy:(float)angle
+{
+    
+}
+
 - (BOOL) setMapZoom:(float)zoomFactor
 {
     NSLog(@"setMapZoom %f", zoomFactor);
     
     return YES; //stub
+}
+
+- (void) increaseMapZoomBy:(float)zoomFactor
+{
+    
 }
 
 - (BOOL) setMapLat:(double)lat Lon:(double)lon
@@ -147,6 +162,11 @@
     
     return YES;
 
+}
+
+- (void) increaseMapLatBy:(double)lat LonBy:(double)lon
+{
+    
 }
 
 @end
