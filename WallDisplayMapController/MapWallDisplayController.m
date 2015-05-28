@@ -18,8 +18,10 @@
 #define PASSWORD "guest"
 #define EXCHANGE_TYPE amqp_cstring_bytes("direct")
 
-/* turn off this macro if testing UI only */
-#define TEST_REQUEST
+//#define TEST_LATLON
+//#define TEST_ZOOM
+#define TEST_HEADING
+//#define TEST_TILT
 
 @interface MapWallDisplayController()
 
@@ -32,9 +34,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-#ifdef TEST_REQUEST
         [self openRMQConnection];
-#endif
     }
     return self;
 }
@@ -106,12 +106,26 @@
 
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
-//    NSLog(@"increaseFacingDirectionBy: %f", angle);
+    NSLog(@"increaseFacingDirectionBy: %f", angle);
+    
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"tilt" withValue:@"xx"];
+    [request addKey:@"lat" withValue:@"xx"];
+    [request addKey:@"lon" withValue:@"xx"];
+    [request addKey:@"range" withValue:@"xx"];
+    [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
+    
+    [request addKey:@"method" withValue:@"heading"];
+    
+    
+#ifdef TEST_HEADING
+    [self sendRequest:request];
+#endif
 }
 
 - (void) increaseMapPitchBy:(float)angle
 {
-    NSLog(@"increaseMapPitchBy: %f", angle);
+//    NSLog(@"increaseMapPitchBy: %f", angle);
     
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
@@ -124,14 +138,14 @@
     [request addKey:@"method" withValue:@"tilt"];
     
     
-#ifdef TEST_REQUEST
+#ifdef TEST_TILT
     [self sendRequest:request];
 #endif
 }
 
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
-    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
+//    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
     
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"tilt" withValue:@"xx"];
@@ -144,7 +158,7 @@
     [request addKey:@"method" withValue:@"zoom"];
     
     
-#ifdef TEST_REQUEST
+#ifdef TEST_ZOOM
     [self sendRequest:request];
 #endif
     
@@ -164,7 +178,7 @@
     [request addKey:@"method" withValue:@"latlon"];
     
     
-#ifdef TEST_REQUEST
+#ifdef TEST_LATLON
     [self sendRequest:request];
 #endif
     
