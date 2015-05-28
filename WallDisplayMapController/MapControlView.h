@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapWallDisplayProtocal.h"
-#import "MethodIntervalBlocker.h"
+#import "MethodIntervalCaller.h"
 
 @interface MapControlView : UIView <UIGestureRecognizerDelegate>
 
@@ -16,7 +16,7 @@
  @return NO and ignore the init parameters if target already exist
  */
 - (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController AndInitializeWithFacingDirection: (float) fd Pitch: (float) p ZoomFactor:(float) zf Latitude: (double)la Longitude: (double)lo;
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController;
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController WithCallBackIntervalInSec:(float) sec;
 
 ///*
 // please refer to MapWallDisplayProtocal.h for documentations of the parameters below

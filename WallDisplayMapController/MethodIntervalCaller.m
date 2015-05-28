@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Jialiang. All rights reserved.
 //
 
-#import "MethodIntervalBlocker.h"
+#import "MethodIntervalCaller.h"
 
-@implementation MethodIntervalBlocker {
+@implementation MethodIntervalCaller {
     float interval;
     CFTimeInterval lastStamp;
 }
