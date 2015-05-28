@@ -129,19 +129,27 @@
 #endif
 }
 
-- (BOOL) setMapZoom:(float)zoomFactor
-{
-//    NSLog(@"setMapZoom %f", zoomFactor);
-    
-    return YES; //stub
-}
-
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
     NSLog(@"increaseMapZoomBy: %f", zoomFactor);
+    
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"tilt" withValue:@"xx"];
+    
+    [request addKey:@"lat" withValue:@"xx"];
+    [request addKey:@"lon" withValue:@"xx"];
+    [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", zoomFactor]];
+    [request addKey:@"heading" withValue:@"xx"];
+    
+    [request addKey:@"method" withValue:@"zoom"];
+    
+    
+#ifdef TEST_REQUEST
+    [self sendRequest:request];
+#endif
+    
 }
 
-// values are in delta
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
     NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
@@ -157,7 +165,7 @@
     
     
 #ifdef TEST_REQUEST
-//    [self sendRequest:request];
+    [self sendRequest:request];
 #endif
     
     
