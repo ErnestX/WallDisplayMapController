@@ -52,7 +52,7 @@
         NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
     }
     
-    sleep(3);
+    sleep(2);
     
     // login to remote broker
     amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
@@ -116,23 +116,38 @@
     NSLog(@"increaseFacingDirectionBy: %f", angle);
 }
 
-- (BOOL) setMapPitch:(float)pitch
-{
-    NSLog(@"setMapPitch %f", pitch);
-    
-    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-    [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
-    
-#ifdef TEST_REQUEST
-    [self sendRequest:request];
-#endif
-    
-    return YES; 
-}
+//- (BOOL) setMapPitch:(float)pitch
+//{
+//    NSLog(@"setMapPitch %f", pitch);
+//    
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"pitch" withValue:[NSString stringWithFormat:@"%f", pitch]];
+//    
+//#ifdef TEST_REQUEST
+//    [self sendRequest:request];
+//#endif
+//    
+//    return YES; 
+//}
 
 - (void) increaseMapPitchBy:(float)angle
 {
     NSLog(@"increaseMapPitchBy: %f", angle);
+    
+    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+    [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle/100.0]];
+    
+    [request addKey:@"lat" withValue:@"xx"];
+    [request addKey:@"lon" withValue:@"xx"];
+    [request addKey:@"range" withValue:@"xx"];
+    [request addKey:@"heading" withValue:@"xx"];
+    
+    [request addKey:@"method" withValue:@"tilt"];
+    
+    
+#ifdef TEST_REQUEST
+//    [self sendRequest:request];
+#endif
 }
 
 - (BOOL) setMapZoom:(float)zoomFactor
@@ -147,26 +162,43 @@
     NSLog(@"increaseMapZoomBy: %f", zoomFactor);
 }
 
-- (BOOL) setMapLat:(double)lat Lon:(double)lon
+//- (BOOL) setMapLat:(double)lat Lon:(double)lon
+//{
+//    NSLog(@"setMapLat %f, Lon %f", lat, lon);
+//    
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
+//    [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
+//
+//    
+//#ifdef TEST_REQUEST
+//    [self sendRequest:request];
+//#endif
+//    
+//    return YES;
+//
+//}
+
+// values are in delta
+- (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
-    NSLog(@"setMapLat %f, Lon %f", lat, lon);
-    
+    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
+     
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
     [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
-
+    [request addKey:@"range" withValue:@"xx"];
+    [request addKey:@"tilt" withValue:@"xx"];
+    [request addKey:@"heading" withValue:@"xx"];
+    
+    [request addKey:@"method" withValue:@"latlon"];
+    
     
 #ifdef TEST_REQUEST
     [self sendRequest:request];
 #endif
     
-    return YES;
-
-}
-
-- (void) increaseMapLatBy:(double)lat LonBy:(double)lon
-{
-    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
+    
 }
 
 @end
