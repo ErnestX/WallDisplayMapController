@@ -17,6 +17,7 @@
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
 		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
 		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
+		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
 		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayProtocal.h; sourceTree = "<group>"; };
 		CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayController.h; sourceTree = "<group>"; };
 		CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapWallDisplayController.m; sourceTree = "<group>"; };
+		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
+		CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodIntervalCaller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,8 @@
 			children = (
 				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
+				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
+				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
 			);
 			name = MapControlView;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 			files = (
 				CA16394D1B0E4FBC00E4FC81 /* ViewController.m in Sources */,
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
+				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,

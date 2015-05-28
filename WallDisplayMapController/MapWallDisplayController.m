@@ -18,10 +18,10 @@
 #define PASSWORD "guest"
 #define EXCHANGE_TYPE amqp_cstring_bytes("direct")
 
-//#define TEST_LATLON
-//#define TEST_ZOOM
-#define TEST_HEADING
-//#define TEST_TILT
+#define TEST_LATLON
+#define TEST_ZOOM
+//#define TEST_HEADING
+#define TEST_TILT
 
 @interface MapWallDisplayController()
 
@@ -121,6 +121,7 @@
 #ifdef TEST_HEADING
     [self sendRequest:request];
 #endif
+
 }
 
 - (void) increaseMapPitchBy:(float)angle
@@ -166,7 +167,7 @@
 
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
-//    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
+    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
     
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];

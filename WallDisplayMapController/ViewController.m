@@ -21,7 +21,7 @@
     
     // connect the UI with network component and init the UI
     MapWallDisplayController *controller = [[MapWallDisplayController alloc] init];
-    [(MapControlView*)self.view setTarget:controller];
+    [(MapControlView*)self.view setTarget:controller WithCallBackIntervalInSec:0.5];
 }
 
 - (void)didReceiveMemoryWarning {
