@@ -106,7 +106,7 @@
 
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
-//    NSLog(@"increaseFacingDirectionBy: %f", angle);
+    NSLog(@"increaseFacingDirectionBy: %f", angle);
 }
 
 - (void) increaseMapPitchBy:(float)angle
@@ -138,13 +138,13 @@
 
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
-//    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
+    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
 }
 
 // values are in delta
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
-//    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
+    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
     
     EarthControlRequest *request = [[EarthControlRequest alloc] init];
     [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MapWallDisplayProtocal.h"
+#import "MethodIntervalBlocker.h"
 
 @interface MapControlView : UIView <UIGestureRecognizerDelegate>
 
