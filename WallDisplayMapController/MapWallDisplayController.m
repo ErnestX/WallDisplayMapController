@@ -26,6 +26,13 @@
 @interface MapWallDisplayController()
 
 @property amqp_connection_state_t conn;
+@property NSTimer* intervalTimer;
+
+@property float facingDirectionIncrement;
+@property float pitchIncrement;
+@property float zoomFactorIncrement;
+@property double latIncrement;
+@property double lonIncrement;
 
 @end
 
@@ -34,6 +41,12 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        // init timer
+        self.intervalTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(sendRequestAtInterval) userInfo:nil repeats:YES];
+        
+        // init increments
+        [self initIncrements];
+        
         [self openRMQConnection];
     }
     return self;
@@ -104,86 +117,129 @@
     }
 }
 
+- (void) sendRequestAtInterval
+{
+    if ([self incrementsUpdated]) {
+        EarthControlRequest *request = [[EarthControlRequest alloc] init];
+        [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", self.pitchIncrement]];
+        [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", self.latIncrement]];
+        [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", self.lonIncrement]];
+        [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", self.zoomFactorIncrement]];
+        [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", self.facingDirectionIncrement*360.0/(2*M_PI)]];
+        
+        [request addKey:@"method" withValue:@"xx"];
+        
+        
+        #ifdef TEST_HEADING
+            [self sendRequest:request];
+        #endif
+    }
+}
+
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
     NSLog(@"increaseFacingDirectionBy: %f", angle);
     
-    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-    [request addKey:@"tilt" withValue:@"xx"];
-    [request addKey:@"lat" withValue:@"xx"];
-    [request addKey:@"lon" withValue:@"xx"];
-    [request addKey:@"range" withValue:@"xx"];
-    [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
-    
-    [request addKey:@"method" withValue:@"heading"];
-    
-    
-#ifdef TEST_HEADING
-    [self sendRequest:request];
-#endif
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"tilt" withValue:@"xx"];
+//    [request addKey:@"lat" withValue:@"xx"];
+//    [request addKey:@"lon" withValue:@"xx"];
+//    [request addKey:@"range" withValue:@"xx"];
+//    [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
+//    
+//    [request addKey:@"method" withValue:@"heading"];
+//    
+//    
+//#ifdef TEST_HEADING
+//    [self sendRequest:request];
+//#endif
+//    
+    self.facingDirectionIncrement = angle;
 
 }
 
 - (void) increaseMapPitchBy:(float)angle
 {
-//    NSLog(@"increaseMapPitchBy: %f", angle);
+    NSLog(@"increaseMapPitchBy: %f", angle);
     
-    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-    [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
-    
-    [request addKey:@"lat" withValue:@"xx"];
-    [request addKey:@"lon" withValue:@"xx"];
-    [request addKey:@"range" withValue:@"xx"];
-    [request addKey:@"heading" withValue:@"xx"];
-    
-    [request addKey:@"method" withValue:@"tilt"];
-    
-    
-#ifdef TEST_TILT
-    [self sendRequest:request];
-#endif
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
+//    
+//    [request addKey:@"lat" withValue:@"xx"];
+//    [request addKey:@"lon" withValue:@"xx"];
+//    [request addKey:@"range" withValue:@"xx"];
+//    [request addKey:@"heading" withValue:@"xx"];
+//    
+//    [request addKey:@"method" withValue:@"tilt"];
+//    
+//    
+//#ifdef TEST_TILT
+//    [self sendRequest:request];
+//#endif
+//    
+    self.pitchIncrement = angle;
 }
 
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
-//    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
+    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
     
-    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-    [request addKey:@"tilt" withValue:@"xx"];
-    
-    [request addKey:@"lat" withValue:@"xx"];
-    [request addKey:@"lon" withValue:@"xx"];
-    [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", zoomFactor]];
-    [request addKey:@"heading" withValue:@"xx"];
-    
-    [request addKey:@"method" withValue:@"zoom"];
-    
-    
-#ifdef TEST_ZOOM
-    [self sendRequest:request];
-#endif
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"tilt" withValue:@"xx"];
+//    
+//    [request addKey:@"lat" withValue:@"xx"];
+//    [request addKey:@"lon" withValue:@"xx"];
+//    [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", zoomFactor]];
+//    [request addKey:@"heading" withValue:@"xx"];
+//    
+//    [request addKey:@"method" withValue:@"zoom"];
+//    
+//    
+//#ifdef TEST_ZOOM
+//    [self sendRequest:request];
+//#endif
+    self.zoomFactorIncrement = zoomFactor;
     
 }
 
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
     NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
-    
-    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
-    [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
-    [request addKey:@"range" withValue:@"xx"];
-    [request addKey:@"tilt" withValue:@"xx"];
-    [request addKey:@"heading" withValue:@"xx"];
-    
-    [request addKey:@"method" withValue:@"latlon"];
-    
-    
-#ifdef TEST_LATLON
-    [self sendRequest:request];
-#endif
-    
-    
+//    
+//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
+//    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
+//    [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
+//    [request addKey:@"range" withValue:@"xx"];
+//    [request addKey:@"tilt" withValue:@"xx"];
+//    [request addKey:@"heading" withValue:@"xx"];
+//    
+//    [request addKey:@"method" withValue:@"latlon"];
+//    
+//    
+//#ifdef TEST_LATLON
+//    [self sendRequest:request];
+//#endif
+//    
+    self.latIncrement = lat;
+    self.lonIncrement = lon;
+}
+
+- (void) initIncrements
+{
+    self.facingDirectionIncrement = 0;
+    self.pitchIncrement = 0;
+    self.zoomFactorIncrement = 0;
+    self.latIncrement = 0;
+    self.lonIncrement = 0;
+}
+
+- (BOOL) incrementsUpdated
+{
+    return (self.facingDirectionIncrement != 0 ||
+            self.pitchIncrement != 0 ||
+            self.zoomFactorIncrement != 0 ||
+            self.latIncrement != 0 ||
+            self.lonIncrement != 0);
 }
 
 @end
