@@ -11,6 +11,7 @@
 #import <amqp.h>
 #import "amqp_tcp_socket.h"
 #import "EarthControlRequest.h"
+#import "MethodIntervalCaller.h"
 
 @interface MapWallDisplayController : NSObject <MapWallDisplayProtocal>
 

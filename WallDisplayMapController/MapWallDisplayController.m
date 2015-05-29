@@ -26,7 +26,8 @@
 @interface MapWallDisplayController()
 
 @property amqp_connection_state_t conn;
-@property NSTimer* intervalTimer;
+//@property NSTimer* intervalTimer;
+@property MethodIntervalCaller* intervalCaller;
 
 @property float facingDirectionIncrement;
 @property float pitchIncrement;
@@ -41,8 +42,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        // init timer
-        self.intervalTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(sendRequestAtInterval) userInfo:nil repeats:YES];
+        // init caller
+        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.1];
         
         // init increments
         [self initIncrements];
@@ -144,89 +145,46 @@
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
     //NSLog(@"increaseFacingDirectionBy: %f", angle);
-    
-//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-//    [request addKey:@"tilt" withValue:@"xx"];
-//    [request addKey:@"lat" withValue:@"xx"];
-//    [request addKey:@"lon" withValue:@"xx"];
-//    [request addKey:@"range" withValue:@"xx"];
-//    [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
-//    
-//    [request addKey:@"method" withValue:@"heading"];
-//    
-//    
-//#ifdef TEST_HEADING
-//    [self sendRequest:request];
-//#endif
-//    
     self.facingDirectionIncrement = angle;
-
+    
+     __weak typeof(self) weakSelf = self;
+    [self.intervalCaller addToCaller:^(void){
+        [weakSelf sendRequestAtInterval];
+    }];
 }
 
 - (void) increaseMapPitchBy:(float)angle
 {
     //NSLog(@"increaseMapPitchBy: %f", angle);
-    
-//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-//    [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
-//    
-//    [request addKey:@"lat" withValue:@"xx"];
-//    [request addKey:@"lon" withValue:@"xx"];
-//    [request addKey:@"range" withValue:@"xx"];
-//    [request addKey:@"heading" withValue:@"xx"];
-//    
-//    [request addKey:@"method" withValue:@"tilt"];
-//    
-//    
-//#ifdef TEST_TILT
-//    [self sendRequest:request];
-//#endif
-//    
     self.pitchIncrement = angle;
+    
+    __weak typeof(self) weakSelf = self;
+    [self.intervalCaller addToCaller:^(void){
+        [weakSelf sendRequestAtInterval];
+    }];
 }
 
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
     //NSLog(@"increaseMapZoomBy: %f", zoomFactor);
-    
-//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-//    [request addKey:@"tilt" withValue:@"xx"];
-//    
-//    [request addKey:@"lat" withValue:@"xx"];
-//    [request addKey:@"lon" withValue:@"xx"];
-//    [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", zoomFactor]];
-//    [request addKey:@"heading" withValue:@"xx"];
-//    
-//    [request addKey:@"method" withValue:@"zoom"];
-//    
-//    
-//#ifdef TEST_ZOOM
-//    [self sendRequest:request];
-//#endif
     self.zoomFactorIncrement = zoomFactor;
     
+    __weak typeof(self) weakSelf = self;
+    [self.intervalCaller addToCaller:^(void){
+        [weakSelf sendRequestAtInterval];
+    }];
 }
 
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
     //NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
-//    
-//    EarthControlRequest *request = [[EarthControlRequest alloc] init];
-//    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
-//    [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", lon]];
-//    [request addKey:@"range" withValue:@"xx"];
-//    [request addKey:@"tilt" withValue:@"xx"];
-//    [request addKey:@"heading" withValue:@"xx"];
-//    
-//    [request addKey:@"method" withValue:@"latlon"];
-//    
-//    
-//#ifdef TEST_LATLON
-//    [self sendRequest:request];
-//#endif
-//    
     self.latIncrement = lat;
     self.lonIncrement = lon;
+    
+    __weak typeof(self) weakSelf = self;
+    [self.intervalCaller addToCaller:^(void){
+        [weakSelf sendRequestAtInterval];
+    }];
 }
 
 - (void) initIncrements

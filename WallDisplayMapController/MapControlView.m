@@ -10,11 +10,6 @@
 
 @implementation MapControlView {
     id <MapWallDisplayProtocal> target;
-    float facingDirection;
-    float pitch;
-    float zoomFactor;
-    double lat;
-    double lon;
     
     MethodIntervalCaller* intervalCaller;
     
@@ -30,22 +25,6 @@
     }
     
     return self;
-}
-
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController AndInitializeWithFacingDirection: (float) fd Pitch: (float) p ZoomFactor:(float) zf Latitude: (double)la Longitude: (double)lo
-{
-    if (target == nil) {
-        target = mapWallDisplayController;
-        
-        [self setFacingDirection:fd];
-        [self setPitch:p];
-        [self setZoomFactor:zf];
-        [self setLat:la Lon:lo];
-        
-        return YES;
-    } else {
-        return NO;
-    }
 }
 
 - (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController WithCallBackIntervalInSec:(float) sec
@@ -280,143 +259,21 @@
 - (void) increaseFacingDirectionBy:(float)angle
 {
     [target increaseMapFacingDirectionBy:angle];
-    
-    CGFloat newFacingDirection = facingDirection + angle;
-    
-    // check validity
-    if (newFacingDirection < 0) {
-        newFacingDirection = M_PI * 2 + fmod(newFacingDirection, (M_PI * 2.0));
-    } else if (newFacingDirection > M_PI * 2) {
-        newFacingDirection = fmod(newFacingDirection, (M_PI * 2.0));
-    }
-    
-    // set the value on map and update iVar if necessary
-    if (facingDirection != newFacingDirection) {
-        //BOOL flag = [target setMapFacingDirection:newFacingDirection];
-        //if (flag) {
-            facingDirection = newFacingDirection;
-        //}
-    }
-}
-
-- (void) setFacingDirection:(float)fd
-{
-    // TODO: update UI
-    
-    facingDirection = fd;
-}
-
-- (float) getFacingDirection
-{
-    return facingDirection;
 }
 
 - (void) increasePitchBy:(float)angle
 {
     [target increaseMapPitchBy:angle];
-    
-    float newPitch = pitch + angle;
-    
-    // check validity
-    if (newPitch < 0) {
-        newPitch = 0;
-    } else if (newPitch > M_PI/2) {
-        newPitch = M_PI/2;
-    }
-    
-    // set the value on map and update iVar if necessary
-    if (pitch != newPitch) {
-        //BOOL flag = [target setMapPitch:newPitch];
-        //if (flag) {
-            pitch = newPitch;
-        //}
-    }
-}
-
-- (void) setPitch:(float)p
-{
-    pitch = p;
-}
-
-- (float) getPitch
-{
-    return pitch;
 }
 
 - (void) increaseZoomFactorBy:(float)factor
 {
     [target increaseMapZoomBy:factor];
-    
-    float newZoomFactor = zoomFactor * factor;
-    
-    // check validity
-    if (newZoomFactor < 0) {
-        newZoomFactor = 0;
-    }
-    
-    // set the value on map and update iVar if necessary
-    if (zoomFactor != newZoomFactor) {
-        //BOOL flag = [target setMapZoom:newZoomFactor];
-        //if (flag) {
-            zoomFactor = newZoomFactor;
-        //}
-    }
-}
-
-- (void) setZoomFactor:(float)zf
-{
-    zoomFactor = zf;
-}
-
-- (float) getZoomFactor
-{
-    return zoomFactor;
 }
 
 - (void) moveByLat:(double)la Lon:(double)lo
 {
     [target increaseMapLatBy:la LonBy:lo];
-    
-    double newLat = lat + la;
-    double newLon = lon + lo;
-    
-    // check validity
-    if (newLat < -90) {
-        newLat = -90;
-    } else if (newLat > 90){
-        newLat = 90;
-    }
-    
-    if (newLon < -180) {
-        newLon = -180;
-    } else if (newLon > 180) {
-        newLon = 180;
-    }
-    
-    // set new value on map and update iVars if necessary
-    if (lat != newLat || lon != newLon) {
-        //BOOL flag = [target setMapLat:newLat Lon:newLon];
-        //if (flag) {
-            lat = newLat;
-            lon = newLon;
-        //}
-    }
-}
-
-- (void) setLat:(double)la Lon:(double)lo
-{
-    lat = la;
-    lon = lo;
-}
-
-- (double) getLat
-{
-    return lat;
-}
-
-- (double) getLon
-{
-    return lon;
 }
 
 @end

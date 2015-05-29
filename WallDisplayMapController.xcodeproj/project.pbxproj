@@ -120,6 +120,8 @@
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE869D401B0FEB07000900FF /* EarthControlRequest.h */,
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
+				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
+				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
 				CA1639711B0E80E500E4FC81 /* MapControlView */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
@@ -159,8 +161,6 @@
 			children = (
 				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
-				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
-				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
 			);
 			name = MapControlView;
 			sourceTree = "<group>";
