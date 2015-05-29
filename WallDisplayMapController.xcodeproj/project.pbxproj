@@ -17,7 +17,6 @@
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
 		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
 		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
-		CA2D53E61B19061000B975B6 /* RequestSender.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53E51B19061000B975B6 /* RequestSender.m */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
 		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -57,8 +56,6 @@
 		CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayProtocal.h; sourceTree = "<group>"; };
 		CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayController.h; sourceTree = "<group>"; };
 		CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapWallDisplayController.m; sourceTree = "<group>"; };
-		CA2D53E41B19061000B975B6 /* RequestSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestSender.h; sourceTree = "<group>"; };
-		CA2D53E51B19061000B975B6 /* RequestSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestSender.m; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
 		CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodIntervalCaller.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,8 +120,6 @@
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE869D401B0FEB07000900FF /* EarthControlRequest.h */,
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
-				CA2D53E41B19061000B975B6 /* RequestSender.h */,
-				CA2D53E51B19061000B975B6 /* RequestSender.m */,
 				CA1639711B0E80E500E4FC81 /* MapControlView */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
@@ -320,7 +315,6 @@
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
-				CA2D53E61B19061000B975B6 /* RequestSender.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 			);

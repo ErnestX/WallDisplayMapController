@@ -42,7 +42,7 @@
     self = [super init];
     if (self) {
         // init timer
-        self.intervalTimer = [NSTimer timerWithTimeInterval:0.5 target:self selector:@selector(sendRequestAtInterval) userInfo:nil repeats:YES];
+        self.intervalTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(sendRequestAtInterval) userInfo:nil repeats:YES];
         
         // init increments
         [self initIncrements];
@@ -119,7 +119,9 @@
 
 - (void) sendRequestAtInterval
 {
+    //NSLog(@"timer fires");
     if ([self incrementsUpdated]) {
+        NSLog(@"increments update confirmed");
         EarthControlRequest *request = [[EarthControlRequest alloc] init];
         [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", self.pitchIncrement]];
         [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", self.latIncrement]];
@@ -133,12 +135,15 @@
         #ifdef TEST_HEADING
             [self sendRequest:request];
         #endif
+        
+        // reset after each sending
+        [self initIncrements];
     }
 }
 
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
-    NSLog(@"increaseFacingDirectionBy: %f", angle);
+    //NSLog(@"increaseFacingDirectionBy: %f", angle);
     
 //    EarthControlRequest *request = [[EarthControlRequest alloc] init];
 //    [request addKey:@"tilt" withValue:@"xx"];
@@ -160,7 +165,7 @@
 
 - (void) increaseMapPitchBy:(float)angle
 {
-    NSLog(@"increaseMapPitchBy: %f", angle);
+    //NSLog(@"increaseMapPitchBy: %f", angle);
     
 //    EarthControlRequest *request = [[EarthControlRequest alloc] init];
 //    [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", angle*360.0/(2*M_PI)]];
@@ -182,7 +187,7 @@
 
 - (void) increaseMapZoomBy:(float)zoomFactor
 {
-    NSLog(@"increaseMapZoomBy: %f", zoomFactor);
+    //NSLog(@"increaseMapZoomBy: %f", zoomFactor);
     
 //    EarthControlRequest *request = [[EarthControlRequest alloc] init];
 //    [request addKey:@"tilt" withValue:@"xx"];
@@ -204,7 +209,7 @@
 
 - (void) increaseMapLatBy:(double)lat LonBy:(double)lon
 {
-    NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
+    //NSLog(@"increaseLatBy: %f LonBy: %f", lat, lon);
 //    
 //    EarthControlRequest *request = [[EarthControlRequest alloc] init];
 //    [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", lat]];
@@ -228,7 +233,7 @@
 {
     self.facingDirectionIncrement = 0;
     self.pitchIncrement = 0;
-    self.zoomFactorIncrement = 0;
+    self.zoomFactorIncrement = 1;
     self.latIncrement = 0;
     self.lonIncrement = 0;
 }
@@ -237,7 +242,7 @@
 {
     return (self.facingDirectionIncrement != 0 ||
             self.pitchIncrement != 0 ||
-            self.zoomFactorIncrement != 0 ||
+            self.zoomFactorIncrement != 1 ||
             self.latIncrement != 0 ||
             self.lonIncrement != 0);
 }
