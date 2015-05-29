@@ -8,7 +8,7 @@
 
 #import "MapWallDisplayController.h"
 
-#define HOST_NAME "192.168.0.105"
+#define HOST_NAME "192.168.0.101"
 #define PORT_NUMBER 5672
 #define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
 #define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
@@ -43,7 +43,7 @@
     self = [super init];
     if (self) {
         // init caller
-        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.1];
+        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.03];
         
         // init increments
         [self initIncrements];
@@ -122,7 +122,6 @@
 {
     //NSLog(@"timer fires");
     if ([self incrementsUpdated]) {
-        NSLog(@"increments update confirmed");
         EarthControlRequest *request = [[EarthControlRequest alloc] init];
         [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", self.pitchIncrement]];
         [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", self.latIncrement]];
@@ -144,7 +143,7 @@
 
 - (void) increaseMapFacingDirectionBy: (float) angle
 {
-    //NSLog(@"increaseFacingDirectionBy: %f", angle);
+    NSLog(@"increaseFacingDirectionBy: %f", angle);
     self.facingDirectionIncrement = angle;
     
      __weak typeof(self) weakSelf = self;

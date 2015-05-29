@@ -11,7 +11,7 @@
 @implementation MapControlView {
     id <MapWallDisplayProtocal> target;
     
-    MethodIntervalCaller* intervalCaller;
+    //MethodIntervalCaller* intervalCaller;
     
     UIPanGestureRecognizer* twoOrMoreFingerPanRecognizer;
     UIRotationGestureRecognizer* rotationRecognizer;
@@ -27,11 +27,11 @@
     return self;
 }
 
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController WithCallBackIntervalInSec:(float) sec
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController
 {
     if (target == nil) {
         target = mapWallDisplayController;
-        intervalCaller = [[MethodIntervalCaller alloc]initWithInterval:sec];
+//        intervalCaller = [[MethodIntervalCaller alloc]initWithInterval:sec];
         return YES;
     } else {
         return NO;
@@ -84,10 +84,7 @@
             CGPoint translation = [uigr translationInView:self];  // the new accumlated translation
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
-            __weak typeof(self) weakSelf = self;
-            [intervalCaller addToCaller:^(void){
-                [weakSelf moveByLat:[weakSelf convertScreenTranslationToLat:newTranslation.x] Lon:[weakSelf convertScreenTranslationToLon:newTranslation.y]];
-            }];
+                [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:[self convertScreenTranslationToLon:newTranslation.y]];
             
             prevTranslation = translation; // update accumulated translation
             break;
@@ -129,18 +126,10 @@
             CGPoint newTranslation = CGPointMake(translation.x - prevTranslation.x, translation.y - prevTranslation.y); // the new net translation to report
             
             if (!isInPitchMode) {
-                
-                __weak typeof(self) weakSelf = self;
-                [intervalCaller addToCaller:^(void){
-                    [weakSelf moveByLat:[weakSelf convertScreenTranslationToLat:newTranslation.x] Lon:[weakSelf convertScreenTranslationToLon:newTranslation.y]];
-                }];
+                [self moveByLat:[self convertScreenTranslationToLat:newTranslation.x] Lon:[self convertScreenTranslationToLon:newTranslation.y]];
                 
             } else {
-                
-                __weak typeof(self) weakSelf = self;
-                [intervalCaller addToCaller:^(void){
-                    [weakSelf increasePitchBy:[weakSelf convertScreenTranslationToPitch:newTranslation.y]];
-                }];
+                [self increasePitchBy:[self convertScreenTranslationToPitch:newTranslation.y]];
             }
             
             prevTranslation = translation; // update accumulated translation
@@ -168,10 +157,7 @@
             CGFloat rotation = [uigr rotation];
             CGFloat newRotation = rotation - prevRotation;
             
-            __weak typeof(self) weakSelf = self;
-            [intervalCaller addToCaller:^(void){
-                [weakSelf increaseFacingDirectionBy:[weakSelf convertScreenRotationToFacingDirection:newRotation]];
-            }];
+            [self increaseFacingDirectionBy:[self convertScreenRotationToFacingDirection:newRotation]];
             
             prevRotation = rotation;
             
@@ -198,10 +184,7 @@
             CGFloat scale = [uigr scale];
             CGFloat newScale = scale / prevScale;
             
-            __weak typeof(self) weakSelf = self;
-            [intervalCaller addToCaller:^(void){
-                [weakSelf increaseZoomFactorBy:[weakSelf convertScreenScaleToZoomFactor:newScale]];
-            }];
+            [self increaseZoomFactorBy:[self convertScreenScaleToZoomFactor:newScale]];
             
             prevScale = scale;
             break;

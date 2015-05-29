@@ -15,6 +15,6 @@
 /*
  @return NO and ignore the init parameters if target already exist
  */
-- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController WithCallBackIntervalInSec:(float) sec;
+- (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController;
 
 @end
