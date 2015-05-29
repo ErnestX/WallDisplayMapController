@@ -237,7 +237,8 @@
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+    //return YES;
+    return NO;
 }
 
 - (float) convertScreenScaleToZoomFactor:(float) s

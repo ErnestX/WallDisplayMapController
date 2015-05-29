@@ -20,7 +20,7 @@
 
 #define TEST_LATLON
 #define TEST_ZOOM
-//#define TEST_HEADING
+#define TEST_HEADING
 #define TEST_TILT
 
 @interface MapWallDisplayController()
