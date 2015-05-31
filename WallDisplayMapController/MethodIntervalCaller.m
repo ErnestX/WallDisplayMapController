@@ -32,7 +32,7 @@
         lastStamp = stamp;
         b();
     } else {
-        //ignore block
+        //ignore the block
         return;
     }
 }

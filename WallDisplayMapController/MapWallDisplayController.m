@@ -26,9 +26,8 @@
 @interface MapWallDisplayController()
 
 @property amqp_connection_state_t conn;
-//@property NSTimer* intervalTimer;
-@property MethodIntervalCaller* intervalCaller;
 
+@property MethodIntervalCaller* intervalCaller;
 @property float facingDirectionIncrement;
 @property float pitchIncrement;
 @property float zoomFactorIncrement;
@@ -43,7 +42,7 @@
     self = [super init];
     if (self) {
         // init caller
-        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.03];
+        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.05];
         
         // init increments
         [self initIncrements];
@@ -120,14 +119,13 @@
 
 - (void) sendRequestAtInterval
 {
-    //NSLog(@"timer fires");
     if ([self incrementsUpdated]) {
         EarthControlRequest *request = [[EarthControlRequest alloc] init];
-        [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", self.pitchIncrement]];
+        [request addKey:@"tilt" withValue:[NSString stringWithFormat:@"%f", self.pitchIncrement/(2*M_PI)*360]];
         [request addKey:@"lat" withValue:[NSString stringWithFormat:@"%f", self.latIncrement]];
         [request addKey:@"lon" withValue:[NSString stringWithFormat:@"%f", self.lonIncrement]];
         [request addKey:@"range" withValue:[NSString stringWithFormat:@"%f", self.zoomFactorIncrement]];
-        [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", self.facingDirectionIncrement*360.0/(2*M_PI)]];
+        [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", self.facingDirectionIncrement/(2*M_PI)*360]];
         
         [request addKey:@"method" withValue:@"xx"];
         

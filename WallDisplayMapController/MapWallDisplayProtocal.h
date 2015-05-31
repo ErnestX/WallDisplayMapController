@@ -12,35 +12,23 @@
 
 /*
  @param facingDirection the direction currently facing from 0 to 2pi. 0 and 2pi means facing north
- @return YES if success, NO otherwise
  */
-- (BOOL) setMapFacingDirection: (float) faceingDirection;
-
 - (void) increaseMapFacingDirectionBy: (float) angle;
 
 /*
  @param pitch current pitch from 0 to pi/2. 0 means viewing parallel to the ground, pi/2 means viewing directly from above perpendicular to the ground
- @return YES if success, NO otherwise
  */
-- (BOOL) setMapPitch: (float) pitch;
-
 - (void) increaseMapPitchBy: (float) angle;
 
 /*
  @param zoomFactor current zoom factor. Greater or equal to 0. 1 means the original size, smaller than 1 means zooming out (less detail), greater than 1 means zooming in (more detail)
- @return YES if success, NO otherwise
  */
-- (BOOL) setMapZoom: (float) zoomFactor;
-
 - (void) increaseMapZoomBy: (float) zoomFactor;
 
 /*
  @param lat current latitude from -90 to 90
  @param lon current longtitude from -180 to 180
- @return YES if success, NO otherwise
  */
-- (BOOL) setMapLat: (double) lat Lon:(double) lon;
-
 - (void) increaseMapLatBy: (double) lat LonBy:(double) lon;
 
 @end
