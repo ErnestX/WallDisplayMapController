@@ -11,8 +11,6 @@
 @implementation MapControlView {
     id <MapWallDisplayProtocal> target;
     
-    //MethodIntervalCaller* intervalCaller;
-    
     UIPanGestureRecognizer* twoOrMoreFingerPanRecognizer;
     UIRotationGestureRecognizer* rotationRecognizer;
 }
@@ -31,7 +29,6 @@
 {
     if (target == nil) {
         target = mapWallDisplayController;
-//        intervalCaller = [[MethodIntervalCaller alloc]initWithInterval:sec];
         return YES;
     } else {
         return NO;
@@ -200,7 +197,6 @@
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
-    //return NO;
 }
 
 - (float) convertScreenScaleToZoomFactor:(float) s

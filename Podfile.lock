@@ -10,17 +10,14 @@ PODS:
   - OLRabbitMQ (0.0.3):
     - rabbitmqc
   - rabbitmqc (0.6.7)
-  - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
   - CocoaLumberjack
   - OLRabbitMQ (~> 0.0.2)
-  - UICountingLabel
 
 SPEC CHECKSUMS:
   CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
   OLRabbitMQ: 46e505cce5556e75ccbff7319c424f521ecdb2f8
   rabbitmqc: cd6d0063c4ea6dfb13976a553a8a3451140d94f8
-  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.2
