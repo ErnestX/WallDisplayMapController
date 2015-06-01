@@ -10,4 +10,6 @@
 
 @interface TutorialViewController : UIViewController
 
+- (void) exitTutorial;
+
 @end

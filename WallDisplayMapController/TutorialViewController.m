@@ -7,6 +7,7 @@
 //
 
 #import "TutorialViewController.h"
+#import "TutorialView.h"
 
 @interface TutorialViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [(TutorialView*)self.view setController:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,7 +28,7 @@
 
 #pragma mark - Navigation
 
-- (IBAction)touchedScreen:(id)sender {
+- (void)exitTutorial {
     [self performSegueWithIdentifier:@"BackSegue" sender:self];
 }
 

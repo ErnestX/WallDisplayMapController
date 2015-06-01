@@ -110,7 +110,7 @@
                 CGPoint touchNumOneLoc = [uigr locationOfTouch:0 inView:self];
                 CGPoint touchNumTwoLoc = [uigr locationOfTouch:1 inView:self];
                 
-                if (fabsf(touchNumOneLoc.y - touchNumTwoLoc.y) < 100.0) {
+                if (fabs(touchNumOneLoc.y - touchNumTwoLoc.y) < 100.0) {
                     // if YES, pitch mode
                     isInPitchMode = YES;
                 }

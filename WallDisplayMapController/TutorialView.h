@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TutorialViewController.h"
 
 @interface TutorialView : UIView
+
+- (void) setController: (TutorialViewController*) tvc;
 
 @end
