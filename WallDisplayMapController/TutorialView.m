@@ -18,7 +18,6 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         // init label
-        
         UILabel *lblPlaceholder = [[UILabel alloc] initWithFrame:self.frame];
         lblPlaceholder.text = @"loading...";
         lblPlaceholder.textAlignment = NSTextAlignmentCenter;

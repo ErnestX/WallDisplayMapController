@@ -230,7 +230,14 @@
 
 - (void) initUI
 {
-    
+    UILabel* instructionLabel = [[UILabel alloc]init];
+    instructionLabel.textColor = [UIColor lightGrayColor];
+    instructionLabel.numberOfLines = 0;
+    instructionLabel.text = @"drag to move\ntwo-finger rotate to turn\ntwo-finger vertical pan to pitch\npinch to zoom";
+    instructionLabel.textAlignment = NSTextAlignmentCenter;
+    [instructionLabel sizeToFit];
+    instructionLabel.center = CGPointMake(self.center.x, self.center.y - 150);
+    [self addSubview:instructionLabel];
 }
 
 #pragma mark - Getters and Setters
