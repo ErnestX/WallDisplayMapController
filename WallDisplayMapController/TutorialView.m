@@ -19,19 +19,16 @@
     if (self) {
         // init label
         
-        UILabel *lblPlaceholder = [[UILabel alloc] init];
-//        [lblPlaceholder sizeToFit];
-//        lblPlaceholder.center = self.center;
-        lblPlaceholder.frame = self.frame;
+        UILabel *lblPlaceholder = [[UILabel alloc] initWithFrame:self.frame];
         lblPlaceholder.text = @"loading...";
         lblPlaceholder.textAlignment = NSTextAlignmentCenter;
         [self addSubview:lblPlaceholder];
         
         // init player layers
-        [self initTutorialPlayerForResource:@"IMG_0011" withExtension:@"m4v" withFrame:CGRectMake(0, 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
-        [self initTutorialPlayerForResource:@"IMG_0012" withExtension:@"m4v" withFrame:CGRectMake(CGRectGetMidX(self.frame), 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
-        [self initTutorialPlayerForResource:@"IMG_0012" withExtension:@"m4v" withFrame:CGRectMake(0, CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
-        [self initTutorialPlayerForResource:@"IMG_0011" withExtension:@"m4v" withFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+        [self initTutorialPlayerForResource:@"dragGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(0, 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+        [self initTutorialPlayerForResource:@"rotateGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(CGRectGetMidX(self.frame), 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+        [self initTutorialPlayerForResource:@"tiltGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(0, CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+        [self initTutorialPlayerForResource:@"zoomGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     }
     return self;
 }

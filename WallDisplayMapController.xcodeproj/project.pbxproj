@@ -21,8 +21,10 @@
 		CA2D53EC1B1C035A00B975B6 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */; };
 		CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
-		CA461A2B1B1E25C600534070 /* IMG_0011.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA461A291B1E25C600534070 /* IMG_0011.m4v */; };
-		CA461A2C1B1E25C600534070 /* IMG_0012.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2A1B1E25C600534070 /* IMG_0012.m4v */; };
+		CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */; };
+		CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */; };
+		CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */; };
+		CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */; };
 		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +70,10 @@
 		CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
 		CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodIntervalCaller.m; sourceTree = "<group>"; };
-		CA461A291B1E25C600534070 /* IMG_0011.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0011.m4v; sourceTree = "<group>"; };
-		CA461A2A1B1E25C600534070 /* IMG_0012.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0012.m4v; sourceTree = "<group>"; };
+		CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = dragGestureMovie.mp4; sourceTree = "<group>"; };
+		CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rotateGestureMovie.mp4; sourceTree = "<group>"; };
+		CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiltGestureMovie.mp4; sourceTree = "<group>"; };
+		CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = zoomGestureMovie.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +190,10 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				CA461A291B1E25C600534070 /* IMG_0011.m4v */,
-				CA461A2A1B1E25C600534070 /* IMG_0012.m4v */,
+				CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */,
+				CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */,
+				CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */,
+				CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -284,9 +290,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA461A2C1B1E25C600534070 /* IMG_0012.m4v in Resources */,
+				CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */,
+				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
+				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
-				CA461A2B1B1E25C600534070 /* IMG_0011.m4v in Resources */,
+				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
 			);

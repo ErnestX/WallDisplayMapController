@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:zoomGestureMovie.mp4">
+   </FileRef>
+   <FileRef
       location = "group:WallDisplayMapController.xcodeproj">
    </FileRef>
    <FileRef
