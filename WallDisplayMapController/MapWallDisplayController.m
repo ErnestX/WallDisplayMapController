@@ -23,6 +23,9 @@
 #define TEST_HEADING
 #define TEST_TILT
 
+#define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
+#define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
+
 @interface MapWallDisplayController()
 
 @property amqp_connection_state_t conn;
@@ -73,8 +76,10 @@
         int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
         if (socketopen == AMQP_STATUS_OK) {
             NSLog(@"SOCKET OPENED");
+            
         } else {
             NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
+            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
         }
         
         sleep(2);
@@ -83,8 +88,10 @@
         amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
         if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
             NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
+            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_OK object:nil];
         } else {
             NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
+            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
         }
         
         // open channel
