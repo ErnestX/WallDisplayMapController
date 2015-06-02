@@ -13,6 +13,8 @@
     
     UIPanGestureRecognizer* twoOrMoreFingerPanRecognizer;
     UIRotationGestureRecognizer* rotationRecognizer;
+    
+    UILabel* instructionLabel;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -43,7 +45,7 @@
     [self initGestureRecgonizers];
     
     // init UI
-    [self initUI];
+    [self initAndShowInstructions];
 }
 
 #pragma mark - Gesture Recognition
@@ -228,9 +230,9 @@
 
 #pragma mark - User Interface
 
-- (void) initUI
+- (void) initAndShowInstructions
 {
-    UILabel* instructionLabel = [[UILabel alloc]init];
+    instructionLabel = [[UILabel alloc]init];
     instructionLabel.textColor = [UIColor lightGrayColor];
     instructionLabel.numberOfLines = 0;
     instructionLabel.text = @"drag to move\ntwo-finger rotate to turn\ntwo-finger vertical pan to pitch\npinch to zoom";
@@ -238,6 +240,16 @@
     [instructionLabel sizeToFit];
     instructionLabel.center = CGPointMake(self.center.x, self.center.y - 150);
     [self addSubview:instructionLabel];
+}
+
+- (void) showInstructions
+{
+    instructionLabel.hidden = NO;
+}
+
+- (void) showLoadingMessage
+{
+    instructionLabel.hidden = YES;
 }
 
 #pragma mark - Getters and Setters

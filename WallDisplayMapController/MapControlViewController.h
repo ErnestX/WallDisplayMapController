@@ -10,6 +10,7 @@
 
 @interface MapControlViewController : UIViewController
 
+- (void) exitTutorial;
 
 @end
 

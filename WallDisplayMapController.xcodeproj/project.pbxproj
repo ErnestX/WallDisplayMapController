@@ -18,7 +18,6 @@
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
 		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
 		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
-		CA2D53EC1B1C035A00B975B6 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */; };
 		CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
 		CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */; };
@@ -64,8 +63,6 @@
 		CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayProtocal.h; sourceTree = "<group>"; };
 		CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayController.h; sourceTree = "<group>"; };
 		CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapWallDisplayController.m; sourceTree = "<group>"; };
-		CA2D53EA1B1C035A00B975B6 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
-		CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
@@ -179,8 +176,6 @@
 			children = (
 				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
-				CA2D53EA1B1C035A00B975B6 /* TutorialViewController.h */,
-				CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */,
 				CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */,
 				CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */,
 			);
@@ -349,7 +344,6 @@
 			files = (
 				CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */,
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
-				CA2D53EC1B1C035A00B975B6 /* TutorialViewController.m in Sources */,
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,

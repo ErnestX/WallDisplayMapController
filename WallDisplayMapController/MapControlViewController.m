@@ -9,12 +9,15 @@
 #import "MapControlViewController.h"
 #import "MapControlView.h"
 #import "MapWallDisplayController.h"
+#import "TutorialView.h"
 
 @interface MapControlViewController ()
 
 @end
 
-@implementation MapControlViewController
+@implementation MapControlViewController {
+    TutorialView* tutorialView;
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -24,7 +27,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showInstructions) name:@"rmq_open_connection_ok" object:nil];
     }
     
-    return self;
+    return self; 
 }
 
 - (void)viewDidLoad {
@@ -34,9 +37,21 @@
     [(MapControlView*)self.view setTarget:[MapWallDisplayController sharedInstance]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)helpButtonPressed:(id)sender {
+    [self showTutorial];
+}
+
+- (void) showTutorial
+{
+    tutorialView = [[TutorialView alloc] initWithFrame:self.view.frame];
+    [tutorialView setController:self];
+    tutorialView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:tutorialView];
+}
+
+- (void) exitTutorial
+{
+    [tutorialView removeFromSuperview];
 }
 
 - (void)showConnectingMessage

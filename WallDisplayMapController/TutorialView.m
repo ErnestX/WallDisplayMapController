@@ -10,12 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 
 @implementation TutorialView {
-    TutorialViewController* controller;
+    MapControlViewController* controller;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithFrame:frame];
     if (self) {
         // init label
         UILabel *lblPlaceholder = [[UILabel alloc] initWithFrame:self.frame];
@@ -32,7 +32,7 @@
     return self;
 }
 
-- (void) setController: (TutorialViewController*) tvc
+- (void) setController: (MapControlViewController*) tvc
 {
     controller = tvc;
 }

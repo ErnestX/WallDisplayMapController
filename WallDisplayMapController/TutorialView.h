@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TutorialViewController.h"
+#import "MapControlViewController.h"
 
 @interface TutorialView : UIView
 
-- (void) setController: (TutorialViewController*) tvc;
+- (void) setController: (MapControlViewController*) tvc;
 
 @end
