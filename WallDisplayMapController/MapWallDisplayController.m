@@ -8,7 +8,7 @@
 
 #import "MapWallDisplayController.h"
 
-#define HOST_NAME "192.168.0.101"
+#define HOST_NAME "192.168.0.105"
 #define PORT_NUMBER 5672
 #define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
 #define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
@@ -38,6 +38,16 @@
 
 @implementation MapWallDisplayController
 
++(MapWallDisplayController *)sharedInstance
+{
+    static MapWallDisplayController *instance;
+    static dispatch_once_t done;
+    dispatch_once(&done,^{
+        instance = [[MapWallDisplayController alloc] init];
+    });
+    return instance;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -47,7 +57,6 @@
         // init increments
         [self initIncrements];
         
-        [self openRMQConnection];
     }
     return self;
 }

@@ -15,4 +15,8 @@
 
 @interface MapWallDisplayController : NSObject <MapWallDisplayProtocal>
 
++ (MapWallDisplayController *)sharedInstance;
+- (void) openRMQConnection;
+- (void) closeRMQConnection;
+
 @end
