@@ -19,9 +19,9 @@
 		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
 		CA2D53EC1B1C035A00B975B6 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */; };
 		CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */; };
-		CA42E0E61B1CF8C10011726E /* IMG_0011.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA42E0E41B1CF8C10011726E /* IMG_0011.m4v */; };
-		CA42E0E71B1CF8C10011726E /* IMG_0012.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA42E0E51B1CF8C10011726E /* IMG_0012.m4v */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
+		CA461A2B1B1E25C600534070 /* IMG_0011.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA461A291B1E25C600534070 /* IMG_0011.m4v */; };
+		CA461A2C1B1E25C600534070 /* IMG_0012.m4v in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2A1B1E25C600534070 /* IMG_0012.m4v */; };
 		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -64,10 +64,10 @@
 		CA2D53EB1B1C035A00B975B6 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
-		CA42E0E41B1CF8C10011726E /* IMG_0011.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = IMG_0011.m4v; path = ../../../../../Desktop/IMG_0011.m4v; sourceTree = "<group>"; };
-		CA42E0E51B1CF8C10011726E /* IMG_0012.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = IMG_0012.m4v; path = ../../../../../Desktop/IMG_0012.m4v; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
 		CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodIntervalCaller.m; sourceTree = "<group>"; };
+		CA461A291B1E25C600534070 /* IMG_0011.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0011.m4v; sourceTree = "<group>"; };
+		CA461A2A1B1E25C600534070 /* IMG_0012.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0012.m4v; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +183,8 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				CA42E0E41B1CF8C10011726E /* IMG_0011.m4v */,
-				CA42E0E51B1CF8C10011726E /* IMG_0012.m4v */,
+				CA461A291B1E25C600534070 /* IMG_0011.m4v */,
+				CA461A2A1B1E25C600534070 /* IMG_0012.m4v */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -281,9 +281,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA42E0E71B1CF8C10011726E /* IMG_0012.m4v in Resources */,
+				CA461A2C1B1E25C600534070 /* IMG_0012.m4v in Resources */,
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
-				CA42E0E61B1CF8C10011726E /* IMG_0011.m4v in Resources */,
+				CA461A2B1B1E25C600534070 /* IMG_0011.m4v in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

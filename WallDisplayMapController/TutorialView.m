@@ -37,9 +37,10 @@
     AVPlayer* dragPlayer = [AVPlayer playerWithURL:dragURL];
     AVPlayerLayer* dragTutorialLayer = [AVPlayerLayer playerLayerWithPlayer:dragPlayer];
     dragTutorialLayer.frame = f;
+    dragTutorialLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.layer addSublayer:dragTutorialLayer];
-    dragPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     
+    dragPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[dragPlayer currentItem]];
     
     dragPlayer.muted = YES;
