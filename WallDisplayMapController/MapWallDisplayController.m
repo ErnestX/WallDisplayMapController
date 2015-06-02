@@ -25,6 +25,7 @@
 
 #define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
 #define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
+#define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
 
 @interface MapWallDisplayController()
 
@@ -65,6 +66,8 @@
 }
 
 - (void) openRMQConnection {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONN_WILL_OPEN object:nil];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
