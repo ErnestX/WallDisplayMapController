@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
 		AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */; };
 		AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D411B0FEB07000900FF /* EarthControlRequest.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
@@ -39,6 +40,7 @@
 		01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3BAAEAC59C5CBA45D8961EE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AE1203091B1E2A2D0058A43A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		AE869D401B0FEB07000900FF /* EarthControlRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthControlRequest.h; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
 				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
 				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
+				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
 				CA2D53F01B1C205600B975B6 /* FrontEnd */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
@@ -183,7 +186,6 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
-
 				CA461A291B1E25C600534070 /* IMG_0011.m4v */,
 				CA461A2A1B1E25C600534070 /* IMG_0012.m4v */,
 			);
@@ -282,11 +284,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				CA461A2C1B1E25C600534070 /* IMG_0012.m4v in Resources */,
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
 				CA461A2B1B1E25C600534070 /* IMG_0011.m4v in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
+				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

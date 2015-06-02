@@ -17,6 +17,16 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        // init label
+        
+        UILabel *lblPlaceholder = [[UILabel alloc] init];
+//        [lblPlaceholder sizeToFit];
+//        lblPlaceholder.center = self.center;
+        lblPlaceholder.frame = self.frame;
+        lblPlaceholder.text = @"loading...";
+        lblPlaceholder.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:lblPlaceholder];
+        
         // init player layers
         [self initTutorialPlayerForResource:@"IMG_0011" withExtension:@"m4v" withFrame:CGRectMake(0, 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
         [self initTutorialPlayerForResource:@"IMG_0012" withExtension:@"m4v" withFrame:CGRectMake(CGRectGetMidX(self.frame), 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];

@@ -62,41 +62,45 @@
 }
 
 - (void) openRMQConnection {
-    // open connection
-    _conn = amqp_new_connection();
-    amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
     
-    // open socket
-    int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
-    if (socketopen == AMQP_STATUS_OK) {
-        NSLog(@"SOCKET OPENED");
-    } else {
-        NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
-    }
-    
-    sleep(2);
-    
-    // login to remote broker
-    amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
-    if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
-        NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
-    } else {
-        NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
-    }
-
-    // open channel
-    amqp_channel_open(_conn, 10);
-    amqp_get_rpc_reply(_conn);
-    
-    // declare exchange
-    amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
-    
-    // declare queue
-    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-    amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
-    
-    // binding queue with exchange
-    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        // open connection
+        _conn = amqp_new_connection();
+        amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
+        
+        // open socket
+        int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
+        if (socketopen == AMQP_STATUS_OK) {
+            NSLog(@"SOCKET OPENED");
+        } else {
+            NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
+        }
+        
+        sleep(2);
+        
+        // login to remote broker
+        amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
+        if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
+            NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
+        } else {
+            NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
+        }
+        
+        // open channel
+        amqp_channel_open(_conn, 10);
+        amqp_get_rpc_reply(_conn);
+        
+        // declare exchange
+        amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+        
+        // declare queue
+        amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+        amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
+        
+        // binding queue with exchange
+        amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+    });
     
 }
 
@@ -112,7 +116,12 @@
     
     // close and destroy connection
     amqp_connection_close(_conn, AMQP_REPLY_SUCCESS);
-    amqp_destroy_connection(_conn);
+    amqp_status_enum code =  amqp_destroy_connection(_conn);
+    if (code == AMQP_STATUS_OK) {
+        NSLog(@"CLOSE CONNECTION SUCCESS");
+    } else {
+        NSLog(@"CLOSE CONNECTION FAILED, error code is: %d", code);
+    }
 }
 
 - (void) sendRequest:(EarthControlRequest *)request {
