@@ -19,6 +19,6 @@
 
 - (void) showInstructions;
 
-- (void) showLoadingMessage;
+- (void) showConnectingMessage;
 
 @end

@@ -15,6 +15,7 @@
     UIRotationGestureRecognizer* rotationRecognizer;
     
     UILabel* instructionLabel;
+    UILabel* connectingLabel;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -39,8 +40,6 @@
 
 - (void) customInit
 {
-    // init iVars
-    
     // init gesture recognizers
     [self initGestureRecgonizers];
     
@@ -240,16 +239,38 @@
     [instructionLabel sizeToFit];
     instructionLabel.center = CGPointMake(self.center.x, self.center.y - 150);
     [self addSubview:instructionLabel];
+    [self sendSubviewToBack:instructionLabel];
+    
+    [self showInstructions];
 }
 
 - (void) showInstructions
 {
+    if (connectingLabel != nil) {
+        [connectingLabel removeFromSuperview];
+    }
+    
     instructionLabel.hidden = NO;
 }
 
-- (void) showLoadingMessage
+- (void) showConnectingMessage
 {
     instructionLabel.hidden = YES;
+
+    connectingLabel = [[UILabel alloc]init];
+    connectingLabel.textColor = [UIColor whiteColor];
+    connectingLabel.text = @"connecting";
+    connectingLabel.textAlignment = NSTextAlignmentCenter;
+    [connectingLabel sizeToFit];
+    connectingLabel.center = CGPointMake(self.center.x, self.center.y - 150);
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center  = CGPointMake(connectingLabel.frame.size.width/2, connectingLabel.frame.size.height/2 + 40);
+    [connectingLabel addSubview:spinner];
+    [spinner startAnimating];
+    
+    [self addSubview:connectingLabel];
+    [self sendSubviewToBack:connectingLabel];
 }
 
 #pragma mark - Getters and Setters

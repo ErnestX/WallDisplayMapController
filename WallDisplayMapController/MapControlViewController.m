@@ -26,15 +26,14 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConnectingMessage) name:@"rmq_connection_about_to_open" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showInstructions) name:@"rmq_open_connection_ok" object:nil];
     }
-    
     return self; 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // connect the UI with network component and init the UI
     [(MapControlView*)self.view setTarget:[MapWallDisplayController sharedInstance]];
+    [self showTutorial];
 }
 
 - (IBAction)helpButtonPressed:(id)sender {
@@ -56,12 +55,12 @@
 
 - (void)showConnectingMessage
 {
-    
+    [(MapControlView*)self.view showConnectingMessage];
 }
 
 - (void)showInstructions
 {
-    
+    [(MapControlView*)self.view showInstructions];
 }
 
 @end
