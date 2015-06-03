@@ -45,12 +45,21 @@
     tutorialView = [[TutorialView alloc] initWithFrame:self.view.frame];
     [tutorialView setController:self];
     tutorialView.backgroundColor = [UIColor whiteColor];
+    
+    CATransition* transition = [CATransition new];
+    transition.type = kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromBottom;
     [self.view addSubview:tutorialView];
+    [self.view.layer addAnimation:transition forKey:@"transitionIn"];
 }
 
 - (void) exitTutorial
 {
+    CATransition* transition = [CATransition new];
+    transition.type = kCATransitionReveal;
+    transition.subtype = kCATransitionFromTop;
     [tutorialView removeFromSuperview];
+    [self.view.layer addAnimation:transition forKey:@"transitionOut"];
 }
 
 - (void)showConnectingMessage
