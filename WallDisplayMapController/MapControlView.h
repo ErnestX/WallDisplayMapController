@@ -17,7 +17,9 @@
  */
 - (BOOL) setTarget: (id <MapWallDisplayProtocal>) mapWallDisplayController;
 
-- (void) showInstructions;
+- (void) hideConnectingMessageAndShowInstructions;
+
+- (void) hideConnectingMessage;
 
 - (void) showConnectingMessage;
 

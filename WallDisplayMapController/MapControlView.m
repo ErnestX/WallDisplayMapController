@@ -44,7 +44,7 @@
     [self initGestureRecgonizers];
     
     // init UI
-    [self initAndShowInstructions];
+    //[self initAndShowInstructions];
 }
 
 #pragma mark - Gesture Recognition
@@ -241,21 +241,37 @@
     [self addSubview:instructionLabel];
     [self sendSubviewToBack:instructionLabel];
     
-    [self showInstructions];
+    [self hideConnectingMessageAndShowInstructions];
 }
 
-- (void) showInstructions
+- (void) hideConnectingMessageAndShowInstructions
 {
+    [CATransaction begin];
     if (connectingLabel != nil) {
         [connectingLabel removeFromSuperview];
     }
-    
+
     instructionLabel.hidden = NO;
+    [CATransaction commit];
+}
+
+- (void) hideConnectingMessage
+{
+    NSLog(@"hiding label");
+    [CATransaction begin];
+    if (connectingLabel != nil) {
+        [connectingLabel removeFromSuperview];
+    }
+    [CATransaction commit];
 }
 
 - (void) showConnectingMessage
 {
-    instructionLabel.hidden = YES;
+    NSLog(@"showing label");
+    [CATransaction begin];
+    if (instructionLabel != nil) {
+        instructionLabel.hidden = YES;
+    }
 
     connectingLabel = [[UILabel alloc]init];
     connectingLabel.textColor = [UIColor whiteColor];
@@ -271,6 +287,7 @@
     
     [self addSubview:connectingLabel];
     [self sendSubviewToBack:connectingLabel];
+    [CATransaction commit];
 }
 
 #pragma mark - Getters and Setters

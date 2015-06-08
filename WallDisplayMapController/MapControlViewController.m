@@ -24,7 +24,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConnectingMessage) name:@"rmq_connection_about_to_open" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showInstructions) name:@"rmq_open_connection_ok" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideConnectingMessage) name:@"rmq_open_connection_ok" object:nil];
     }
     return self; 
 }
@@ -48,7 +48,7 @@
     
     CATransition* transition = [CATransition new];
     transition.type = kCATransitionMoveIn;
-    transition.subtype = kCATransitionFromBottom;
+    transition.subtype = kCATransitionFromTop;
     [self.view addSubview:tutorialView];
     [self.view.layer addAnimation:transition forKey:@"transitionIn"];
 }
@@ -57,9 +57,10 @@
 {
     CATransition* transition = [CATransition new];
     transition.type = kCATransitionReveal;
-    transition.subtype = kCATransitionFromTop;
+    transition.subtype = kCATransitionFromBottom;
     [tutorialView removeFromSuperview];
     [self.view.layer addAnimation:transition forKey:@"transitionOut"];
+    [self.view setNeedsDisplay];
 }
 
 - (void)showConnectingMessage
@@ -67,9 +68,10 @@
     [(MapControlView*)self.view showConnectingMessage];
 }
 
-- (void)showInstructions
+- (void)hideConnectingMessage
 {
-    [(MapControlView*)self.view showInstructions];
+    //[(MapControlView*)self.view hideConnectingMessageAndshowInstructions];
+    [(MapControlView*)self.view hideConnectingMessage];
 }
 
 @end

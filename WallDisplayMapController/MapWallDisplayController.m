@@ -8,7 +8,7 @@
 
 #import "MapWallDisplayController.h"
 
-#define HOST_NAME "192.168.0.105"
+#define HOST_NAME "192.168.0.104"
 #define PORT_NUMBER 5672
 #define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
 #define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
