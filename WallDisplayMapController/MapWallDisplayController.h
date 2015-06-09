@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MapWallDisplayProtocal.h"
 #import <amqp.h>
+#import <amqp_framing.h>
 #import "amqp_tcp_socket.h"
 #import "EarthControlRequest.h"
 #import "MethodIntervalCaller.h"

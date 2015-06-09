@@ -8,6 +8,10 @@
 
 #import "MapWallDisplayController.h"
 
+#include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
+
 #define HOST_NAME "192.168.0.104"
 #define PORT_NUMBER 5672
 #define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
@@ -26,6 +30,12 @@
 #define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
 #define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
 #define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
+
+
+#define QUEUE_NAME_WIDGET amqp_cstring_bytes("/widget/test/queue")
+#define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
+
+#define SUMMARY_EVERY_US 1000000
 
 @interface MapWallDisplayController()
 
@@ -69,49 +79,159 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONN_WILL_OPEN object:nil];
     
+    __weak typeof(self) weakSelf = self;
+    // open connection
+    _conn = amqp_new_connection();
+    amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
+    
+    // open socket
+    int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
+    if (socketopen == AMQP_STATUS_OK) {
+        NSLog(@"SOCKET OPENED");
+        
+    } else {
+        NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
+        [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
+    }
+    
+    sleep(2);
+    
+    // login to remote broker
+    amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
+    if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
+        NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
+        [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_OK object:nil];
+    } else {
+        NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
+        [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
+    }
+    
+    // open channel
+    amqp_channel_open(_conn, 10);
+    amqp_get_rpc_reply(_conn);
+    
+    // declare exchange
+    amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+    
+    // declare queue
+    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
+    amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
+    
+    // binding queue with exchange
+    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+    amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
+    
+    amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
+    die_on_amqp_error(amqp_get_rpc_reply(_conn), "Consuming");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        // open connection
-        _conn = amqp_new_connection();
-        amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
-        
-        // open socket
-        int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
-        if (socketopen == AMQP_STATUS_OK) {
-            NSLog(@"SOCKET OPENED");
-            
-        } else {
-            NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
-            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
-        }
-        
-        sleep(2);
-        
-        // login to remote broker
-        amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
-        if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
-            NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
-            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_OK object:nil];
-        } else {
-            NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
-            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
-        }
-        
-        // open channel
-        amqp_channel_open(_conn, 10);
-        amqp_get_rpc_reply(_conn);
-        
-        // declare exchange
-        amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
-        
-        // declare queue
-        amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-        amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
-        
-        // binding queue with exchange
-        amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+
+        run(_conn);
+
+
     });
     
+}
+
+static void run(amqp_connection_state_t conn)
+{
+    uint64_t start_time = now_microseconds();
+    int received = 0;
+    int previous_received = 0;
+    uint64_t previous_report_time = start_time;
+    uint64_t next_summary_time = start_time + SUMMARY_EVERY_US;
+    
+    amqp_frame_t frame;
+    
+    uint64_t now;
+    
+    while (1) {
+        amqp_rpc_reply_t ret;
+        amqp_envelope_t envelope;
+        
+        now = now_microseconds();
+        if (now > next_summary_time) {
+            int countOverInterval = received - previous_received;
+            double intervalRate = countOverInterval / ((now - previous_report_time) / 1000000.0);
+//            printf("%d ms: Received %d - %d since last report (%d Hz)\n",
+//                   (int)(now - start_time) / 1000, received, countOverInterval, (int) intervalRate);
+            
+            previous_received = received;
+            previous_report_time = now;
+            next_summary_time += SUMMARY_EVERY_US;
+        }
+        
+        amqp_maybe_release_buffers(conn);
+        ret = amqp_consume_message(conn, &envelope, NULL, 0);
+        
+        if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
+            if (AMQP_RESPONSE_LIBRARY_EXCEPTION == ret.reply_type &&
+                AMQP_STATUS_UNEXPECTED_STATE == ret.library_error) {
+                if (AMQP_STATUS_OK != amqp_simple_wait_frame(conn, &frame)) {
+                    return;
+                }
+                
+                if (AMQP_FRAME_METHOD == frame.frame_type) {
+                    switch (frame.payload.method.id) {
+                        case AMQP_BASIC_ACK_METHOD:
+                            /* if we've turned publisher confirms on, and we've published a message
+                             * here is a message being confirmed
+                             */
+                            
+                            break;
+                        case AMQP_BASIC_RETURN_METHOD:
+                            /* if a published message couldn't be routed and the mandatory flag was set
+                             * this is what would be returned. The message then needs to be read.
+                             */
+                        {
+                            amqp_message_t message;
+                            ret = amqp_read_message(conn, frame.channel, &message, 0);
+                            if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
+                                return;
+                            }
+                            
+                            amqp_destroy_message(&message);
+                        }
+                            
+                            break;
+                            
+                        case AMQP_CHANNEL_CLOSE_METHOD:
+                            /* a channel.close method happens when a channel exception occurs, this
+                             * can happen by publishing to an exchange that doesn't exist for example
+                             *
+                             * In this case you would need to open another channel redeclare any queues
+                             * that were declared auto-delete, and restart any consumers that were attached
+                             * to the previous channel
+                             */
+                            return;
+                            
+                        case AMQP_CONNECTION_CLOSE_METHOD:
+                            /* a connection.close method happens when a connection exception occurs,
+                             * this can happen by trying to use a channel that isn't open for example.
+                             *
+                             * In this case the whole connection must be restarted.
+                             */
+                            return;
+                            
+                        default:
+                            fprintf(stderr ,"An unexpected method was received %d\n", frame.payload.method.id);
+                            return;
+                    }
+                }
+            }
+            
+        } else {
+            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope.message.body.bytes
+                                                           length:envelope.message.body.len
+                                                         encoding:NSUTF8StringEncoding
+                                                     freeWhenDone:YES];
+            NSLog(@"message: %@", msg);
+//            amqp_destroy_envelope(&envelope);
+        }
+        
+        received++;
+    }
 }
 
 - (void) closeRMQConnection {
@@ -228,6 +348,73 @@
             self.zoomFactorIncrement != 1 ||
             self.latIncrement != 0 ||
             self.lonIncrement != 0);
+}
+
+void die(const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(stderr, fmt, ap);
+    va_end(ap);
+    fprintf(stderr, "\n");
+    exit(1);
+}
+
+void die_on_error(int x, char const *context)
+{
+    if (x < 0) {
+        fprintf(stderr, "%s: %s\n", context, amqp_error_string2(x));
+        exit(1);
+    }
+}
+
+void die_on_amqp_error(amqp_rpc_reply_t x, char const *context)
+{
+    switch (x.reply_type) {
+        case AMQP_RESPONSE_NORMAL:
+            return;
+            
+        case AMQP_RESPONSE_NONE:
+            fprintf(stderr, "%s: missing RPC reply type!\n", context);
+            break;
+            
+        case AMQP_RESPONSE_LIBRARY_EXCEPTION:
+            fprintf(stderr, "%s: %s\n", context, amqp_error_string2(x.library_error));
+            break;
+            
+        case AMQP_RESPONSE_SERVER_EXCEPTION:
+            switch (x.reply.id) {
+                case AMQP_CONNECTION_CLOSE_METHOD: {
+                    amqp_connection_close_t *m = (amqp_connection_close_t *) x.reply.decoded;
+                    fprintf(stderr, "%s: server connection error %d, message: %.*s\n",
+                            context,
+                            m->reply_code,
+                            (int) m->reply_text.len, (char *) m->reply_text.bytes);
+                    break;
+                }
+                case AMQP_CHANNEL_CLOSE_METHOD: {
+                    amqp_channel_close_t *m = (amqp_channel_close_t *) x.reply.decoded;
+                    fprintf(stderr, "%s: server channel error %d, message: %.*s\n",
+                            context,
+                            m->reply_code,
+                            (int) m->reply_text.len, (char *) m->reply_text.bytes);
+                    break;
+                }
+                default:
+                    fprintf(stderr, "%s: unknown server error, method id 0x%08X\n", context, x.reply.id);
+                    break;
+            }
+            break;
+    }
+    
+    exit(1);
+}
+
+uint64_t now_microseconds(void)
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (uint64_t) tv.tv_sec * 1000000 + (uint64_t) tv.tv_usec;
 }
 
 @end
