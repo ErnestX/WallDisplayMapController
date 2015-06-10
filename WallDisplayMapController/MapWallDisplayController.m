@@ -72,7 +72,7 @@
     self = [super init];
     if (self) {
         // init caller
-        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.05];
+        self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.08];
         
         // init increments
         [self initIncrements];
