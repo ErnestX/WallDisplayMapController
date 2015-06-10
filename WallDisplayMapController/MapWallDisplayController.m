@@ -12,10 +12,17 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-#define HOST_NAME "192.168.0.104"
+// queue names
+#define QUEUE_NAME_EARTH amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
+#define QUEUE_NAME_WIDGET amqp_cstring_bytes("/widget/test/queue")
+
+
+// routing keys
+#define ROUTING_KEY_EARTH amqp_cstring_bytes("/tableplus/controls/earth")
+#define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
+
+#define HOST_NAME "192.168.0.101"
 #define PORT_NUMBER 5672
-#define QUEUE_NAME amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
-#define ROUTING_KEY amqp_cstring_bytes("/tableplus/controls/earth")
 #define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"
 #define USER_NAME "guest"
@@ -32,8 +39,7 @@
 #define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
 
 
-#define QUEUE_NAME_WIDGET amqp_cstring_bytes("/widget/test/queue")
-#define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
+
 
 #define SUMMARY_EVERY_US 1000000
 
@@ -114,13 +120,13 @@
     amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
     
     // declare queue
-    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
     amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
     amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
     amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
     
     // binding queue with exchange
-    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
     amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
     
     amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
@@ -239,7 +245,8 @@ static void run(amqp_connection_state_t conn)
     amqp_maybe_release_buffers(_conn);
     
     // unbind queue with exchange
-    amqp_queue_unbind(_conn, 10, QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY, AMQP_EMPTY_TABLE);
+    amqp_queue_unbind(_conn, 10, QUEUE_NAME_EARTH, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
+    amqp_queue_unbind(_conn, 10, QUEUE_NAME_WIDGET, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
     
     // close channel
     amqp_channel_close(_conn, 10, AMQP_REPLY_SUCCESS);
@@ -256,7 +263,7 @@ static void run(amqp_connection_state_t conn)
 
 - (void) sendRequest:(EarthControlRequest *)request {
     // publish request to rmqp server
-    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
+    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY_EARTH, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
     
     if (statuscode == AMQP_STATUS_OK) {
         NSLog(@"publish successful");
