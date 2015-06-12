@@ -16,7 +16,6 @@
 #define QUEUE_NAME_EARTH amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
 #define QUEUE_NAME_WIDGET amqp_cstring_bytes("/widget/test/queue")
 
-
 // routing keys
 #define ROUTING_KEY_EARTH amqp_cstring_bytes("/tableplus/controls/earth")
 #define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
@@ -85,7 +84,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONN_WILL_OPEN object:nil];
     
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     // open connection
     _conn = amqp_new_connection();
     amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
@@ -142,34 +141,19 @@
 
 static void run(amqp_connection_state_t conn)
 {
-    uint64_t start_time = now_microseconds();
     int received = 0;
-    int previous_received = 0;
-    uint64_t previous_report_time = start_time;
-    uint64_t next_summary_time = start_time + SUMMARY_EVERY_US;
-    
     amqp_frame_t frame;
-    
-    uint64_t now;
     
     while (1) {
         amqp_rpc_reply_t ret;
-        amqp_envelope_t envelope;
-        
-        now = now_microseconds();
-        if (now > next_summary_time) {
-            int countOverInterval = received - previous_received;
-            double intervalRate = countOverInterval / ((now - previous_report_time) / 1000000.0);
-//            printf("%d ms: Received %d - %d since last report (%d Hz)\n",
-//                   (int)(now - start_time) / 1000, received, countOverInterval, (int) intervalRate);
-            
-            previous_received = received;
-            previous_report_time = now;
-            next_summary_time += SUMMARY_EVERY_US;
-        }
+        amqp_envelope_t *envelope;
         
         amqp_maybe_release_buffers(conn);
-        ret = amqp_consume_message(conn, &envelope, NULL, 0);
+        
+        // amqp_consume_message is a blocking function
+        // it's okay to use here since the enclosing function is
+        // being called in a background thread
+        ret = amqp_consume_message(conn, envelope, NULL, 0);
         
         if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
             if (AMQP_RESPONSE_LIBRARY_EXCEPTION == ret.reply_type &&
@@ -228,12 +212,12 @@ static void run(amqp_connection_state_t conn)
             }
             
         } else {
-            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope.message.body.bytes
-                                                           length:envelope.message.body.len
+            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope->message.body.bytes
+                                                           length:envelope->message.body.len
                                                          encoding:NSUTF8StringEncoding
                                                      freeWhenDone:YES];
+            
             NSLog(@"message: %@", msg);
-//            amqp_destroy_envelope(&envelope);
         }
         
         received++;
@@ -417,11 +401,5 @@ void die_on_amqp_error(amqp_rpc_reply_t x, char const *context)
     exit(1);
 }
 
-uint64_t now_microseconds(void)
-{
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (uint64_t) tv.tv_sec * 1000000 + (uint64_t) tv.tv_usec;
-}
 
 @end
