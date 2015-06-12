@@ -146,14 +146,14 @@ static void run(amqp_connection_state_t conn)
     
     while (1) {
         amqp_rpc_reply_t ret;
-        amqp_envelope_t *envelope;
+        amqp_envelope_t envelope;
         
         amqp_maybe_release_buffers(conn);
         
         // amqp_consume_message is a blocking function
         // it's okay to use here since the enclosing function is
         // being called in a background thread
-        ret = amqp_consume_message(conn, envelope, NULL, 0);
+        ret = amqp_consume_message(conn, &envelope, NULL, 0);
         
         if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
             if (AMQP_RESPONSE_LIBRARY_EXCEPTION == ret.reply_type &&
@@ -212,8 +212,8 @@ static void run(amqp_connection_state_t conn)
             }
             
         } else {
-            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope->message.body.bytes
-                                                           length:envelope->message.body.len
+            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope.message.body.bytes
+                                                           length:envelope.message.body.len
                                                          encoding:NSUTF8StringEncoding
                                                      freeWhenDone:YES];
             
