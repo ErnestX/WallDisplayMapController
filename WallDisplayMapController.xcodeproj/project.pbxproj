@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
+		AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477471B2BA32D006E8925 /* DensityModel.m */; };
+		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
+		AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774D1B2BA347006E8925 /* BuildingsModel.m */; };
 		AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */; };
 		AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D411B0FEB07000900FF /* EarthControlRequest.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
@@ -42,6 +45,12 @@
 		3BAAEAC59C5CBA45D8961EE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AE1203091B1E2A2D0058A43A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		AE6477461B2BA32D006E8925 /* DensityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DensityModel.h; sourceTree = "<group>"; };
+		AE6477471B2BA32D006E8925 /* DensityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DensityModel.m; sourceTree = "<group>"; };
+		AE6477491B2BA33B006E8925 /* EnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyModel.h; sourceTree = "<group>"; };
+		AE64774A1B2BA33B006E8925 /* EnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyModel.m; sourceTree = "<group>"; };
+		AE64774C1B2BA347006E8925 /* BuildingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsModel.h; sourceTree = "<group>"; };
+		AE64774D1B2BA347006E8925 /* BuildingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsModel.m; sourceTree = "<group>"; };
 		AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		AE869D401B0FEB07000900FF /* EarthControlRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthControlRequest.h; sourceTree = "<group>"; };
@@ -101,6 +110,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AE6477441B2BA2A5006E8925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AE6477461B2BA32D006E8925 /* DensityModel.h */,
+				AE6477471B2BA32D006E8925 /* DensityModel.m */,
+				AE6477491B2BA33B006E8925 /* EnergyModel.h */,
+				AE64774A1B2BA33B006E8925 /* EnergyModel.m */,
+				AE64774C1B2BA347006E8925 /* BuildingsModel.h */,
+				AE64774D1B2BA347006E8925 /* BuildingsModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		AE6477451B2BA2AC006E8925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CA16394B1B0E4FBC00E4FC81 /* MapControlViewController.h */,
+				CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */,
+				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
+				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		CA1639381B0E4FBC00E4FC81 = {
 			isa = PBXGroup;
 			children = (
@@ -126,18 +159,16 @@
 			children = (
 				CA1639481B0E4FBC00E4FC81 /* AppDelegate.h */,
 				CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */,
-				CA16394B1B0E4FBC00E4FC81 /* MapControlViewController.h */,
-				CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */,
 				CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */,
-				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
-				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE869D401B0FEB07000900FF /* EarthControlRequest.h */,
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
 				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
 				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
-				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
-				CA2D53F01B1C205600B975B6 /* FrontEnd */,
+				AE6477451B2BA2AC006E8925 /* Controller */,
+				AE6477441B2BA2A5006E8925 /* Model */,
+				CA2D53F01B1C205600B975B6 /* View */,
 				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
+				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
 				CA42E0E31B1CF55F0011726E /* resources */,
 				CA1639441B0E4FBC00E4FC81 /* Supporting Files */,
@@ -171,7 +202,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CA2D53F01B1C205600B975B6 /* FrontEnd */ = {
+		CA2D53F01B1C205600B975B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
@@ -179,7 +210,7 @@
 				CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */,
 				CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */,
 			);
-			name = FrontEnd;
+			name = View;
 			sourceTree = "<group>";
 		};
 		CA42E0E31B1CF55F0011726E /* resources */ = {
@@ -342,9 +373,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */,
 				CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */,
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
+				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
+				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,

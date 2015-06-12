@@ -217,6 +217,9 @@ static void run(amqp_connection_state_t conn)
                                                          encoding:NSUTF8StringEncoding
                                                      freeWhenDone:YES];
             
+            // TODO: parse xml into a dictionary??
+            NSDictionary *dict = [NSDictionary dictionaryWithXMLString:msg];
+            
             NSLog(@"message: %@", msg);
         }
         
