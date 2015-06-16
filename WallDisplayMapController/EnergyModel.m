@@ -10,4 +10,12 @@
 
 @implementation EnergyModel
 
+- (EnergyModel *)initWithDictionary:(NSDictionary *)dict {
+    self = [super initWithDictionary:dict];
+    if (self) {
+        // map dictionary kv pairs to properties
+    }
+    return self;
+}
+
 @end

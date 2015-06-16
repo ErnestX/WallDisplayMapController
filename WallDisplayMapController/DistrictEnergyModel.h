@@ -20,4 +20,6 @@
 
 @property NSNumber *energyHouseholdIncome;
 
+- (DistrictEnergyModel *)initWithDictionary:(NSDictionary *)dict;
+
 @end

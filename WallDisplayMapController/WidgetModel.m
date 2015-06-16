@@ -14,7 +14,6 @@
     self = [super init];
     if (self) {
         self.dictModel = dict;
-        
     }
     return self;
 }

@@ -32,4 +32,6 @@
 @property NSNumber *dieselOut;
 @property NSNumber *gasolineOut;
 
+- (EnergyModel *)initWithDictionary:(NSDictionary *)dict;
+
 @end

@@ -20,7 +20,8 @@
 #define ROUTING_KEY_EARTH amqp_cstring_bytes("/tableplus/controls/earth")
 #define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
 
-#define HOST_NAME "192.168.0.101"
+// configuration parameters
+#define HOST_NAME "192.168.0.106"
 #define PORT_NUMBER 5672
 #define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"
@@ -28,19 +29,22 @@
 #define PASSWORD "guest"
 #define EXCHANGE_TYPE amqp_cstring_bytes("direct")
 
+// for debugging purposes
 #define TEST_LATLON
 #define TEST_ZOOM
 #define TEST_HEADING
 #define TEST_TILT
 
+// notification identifiers
 #define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
 #define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
 #define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
 
-
-
-
-#define SUMMARY_EVERY_US 1000000
+// widget keys
+#define WIDGET_DENSITY @"density"
+#define WIDGET_ENERGY @"energy"
+#define WIDGET_DISTRICTENERGY @"districtenergy"
+#define WIDGET_BUILDINGS @"buildings"
 
 @interface MapWallDisplayController()
 
@@ -217,8 +221,29 @@ static void run(amqp_connection_state_t conn)
                                                          encoding:NSUTF8StringEncoding
                                                      freeWhenDone:YES];
             
-            // TODO: parse xml into a dictionary??
-            NSDictionary *dict = [NSDictionary dictionaryWithXMLString:msg];
+            // parse xml into a dictionary
+            NSDictionary *dictTemp = [NSDictionary dictionaryWithXMLString:[msg stringByReplacingOccurrencesOfString:@"d2p1:" withString:@""]];
+            NSArray *attributes = dictTemp[@"ResultDict"][@"KeyValueOfstringstring"];
+            
+            NSMutableDictionary *dictModel = [NSMutableDictionary dictionary];
+            [attributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                NSDictionary *temp = obj;
+                dictModel[temp[@"Key"]] = temp[@"Value"];
+            }];
+            
+            NSString *urlBase = dictModel[@"_url_base"];
+            
+            if ([urlBase containsString:WIDGET_DENSITY]){
+                
+            } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
+                
+            } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
+                
+            } else if ([urlBase containsString:WIDGET_ENERGY]) {
+                
+            } else {
+                // error pop up? widget type undefined?
+            }
             
             NSLog(@"message: %@", msg);
         }
