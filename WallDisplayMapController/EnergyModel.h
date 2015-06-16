@@ -7,7 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WidgetModel.h"
 
-@interface EnergyModel : NSObject
+@interface EnergyModel : WidgetModel
+
+// Percent share of MJ in Services
+@property NSNumber *mobilityPercent;
+@property NSNumber *heatingAndHotWaterPercent;
+@property NSNumber *lightsAndAppliancesPercent;
+
+// Energy in
+@property NSNumber *propaneIn;
+@property NSNumber *heatingoilIn;
+@property NSNumber *woodIn;
+@property NSNumber *electricityIn;
+@property NSNumber *dieselIn;
+@property NSNumber *gasolineIn;
+
+// Waste out
+@property NSNumber *propaneOut;
+@property NSNumber *heatingoilOut;
+@property NSNumber *woodOut;
+@property NSNumber *electricityOut;
+@property NSNumber *dieselOut;
+@property NSNumber *gasolineOut;
 
 @end

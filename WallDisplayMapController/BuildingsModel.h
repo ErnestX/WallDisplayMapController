@@ -7,7 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WidgetModel.h"
 
-@interface BuildingsModel : NSObject
+@interface BuildingsModel : WidgetModel
+
+@property NSNumber *people;
+@property NSNumber *dwellings;
+
+// Unit types
+@property NSNumber *detachedPercent;    // Single Detached
+@property NSNumber *attachedPercent;    // Rowhouse
+@property NSNumber *stackedPercent;     // Apartment
+
+// Percent of floor area
+@property NSNumber *rezPercent;
+@property NSNumber *commPercent;
+@property NSNumber *civicPercent;
+@property NSNumber *indPercent;
+
+@property NSNumber *far;    // floor-area ratio
 
 @end

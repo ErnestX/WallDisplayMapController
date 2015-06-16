@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
+		AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */; };
 		AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477471B2BA32D006E8925 /* DensityModel.m */; };
 		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
 		AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774D1B2BA347006E8925 /* BuildingsModel.m */; };
+		AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477501B2BA43C006E8925 /* WidgetModel.m */; };
 		AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */; };
 		AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D411B0FEB07000900FF /* EarthControlRequest.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
@@ -45,12 +47,16 @@
 		3BAAEAC59C5CBA45D8961EE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AE1203091B1E2A2D0058A43A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictEnergyModel.h; sourceTree = "<group>"; };
+		AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictEnergyModel.m; sourceTree = "<group>"; };
 		AE6477461B2BA32D006E8925 /* DensityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DensityModel.h; sourceTree = "<group>"; };
 		AE6477471B2BA32D006E8925 /* DensityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DensityModel.m; sourceTree = "<group>"; };
 		AE6477491B2BA33B006E8925 /* EnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyModel.h; sourceTree = "<group>"; };
 		AE64774A1B2BA33B006E8925 /* EnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyModel.m; sourceTree = "<group>"; };
 		AE64774C1B2BA347006E8925 /* BuildingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsModel.h; sourceTree = "<group>"; };
 		AE64774D1B2BA347006E8925 /* BuildingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsModel.m; sourceTree = "<group>"; };
+		AE64774F1B2BA43C006E8925 /* WidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetModel.h; sourceTree = "<group>"; };
+		AE6477501B2BA43C006E8925 /* WidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetModel.m; sourceTree = "<group>"; };
 		AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		AE869D401B0FEB07000900FF /* EarthControlRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthControlRequest.h; sourceTree = "<group>"; };
@@ -119,6 +125,10 @@
 				AE64774A1B2BA33B006E8925 /* EnergyModel.m */,
 				AE64774C1B2BA347006E8925 /* BuildingsModel.h */,
 				AE64774D1B2BA347006E8925 /* BuildingsModel.m */,
+				AE64774F1B2BA43C006E8925 /* WidgetModel.h */,
+				AE6477501B2BA43C006E8925 /* WidgetModel.m */,
+				AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */,
+				AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -380,11 +390,13 @@
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
+				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
+				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
