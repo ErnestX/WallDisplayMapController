@@ -238,8 +238,10 @@ static void run(amqp_connection_state_t conn)
             } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
                 
             } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
+                // not considering energy for now
                 
             } else if ([urlBase containsString:WIDGET_ENERGY]) {
+                // not considering energy for now
                 
             } else {
                 // error pop up? widget type undefined?

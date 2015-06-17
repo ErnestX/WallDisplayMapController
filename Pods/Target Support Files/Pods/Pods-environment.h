@@ -6,6 +6,12 @@
 // project.
 
 
+// ChameleonFramework
+#define COCOAPODS_POD_AVAILABLE_ChameleonFramework
+#define COCOAPODS_VERSION_MAJOR_ChameleonFramework 1
+#define COCOAPODS_VERSION_MINOR_ChameleonFramework 2
+#define COCOAPODS_VERSION_PATCH_ChameleonFramework 0
+
 // CocoaLumberjack
 #define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
 #define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 2
@@ -30,11 +36,29 @@
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack_Extensions 0
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack_Extensions 0
 
+// Masonry
+#define COCOAPODS_POD_AVAILABLE_Masonry
+#define COCOAPODS_VERSION_MAJOR_Masonry 0
+#define COCOAPODS_VERSION_MINOR_Masonry 6
+#define COCOAPODS_VERSION_PATCH_Masonry 1
+
 // OLRabbitMQ
 #define COCOAPODS_POD_AVAILABLE_OLRabbitMQ
 #define COCOAPODS_VERSION_MAJOR_OLRabbitMQ 0
 #define COCOAPODS_VERSION_MINOR_OLRabbitMQ 0
 #define COCOAPODS_VERSION_PATCH_OLRabbitMQ 3
+
+// PNChart
+#define COCOAPODS_POD_AVAILABLE_PNChart
+#define COCOAPODS_VERSION_MAJOR_PNChart 0
+#define COCOAPODS_VERSION_MINOR_PNChart 8
+#define COCOAPODS_VERSION_PATCH_PNChart 3
+
+// UICountingLabel
+#define COCOAPODS_POD_AVAILABLE_UICountingLabel
+#define COCOAPODS_VERSION_MAJOR_UICountingLabel 1
+#define COCOAPODS_VERSION_MINOR_UICountingLabel 2
+#define COCOAPODS_VERSION_PATCH_UICountingLabel 0
 
 // rabbitmqc
 #define COCOAPODS_POD_AVAILABLE_rabbitmqc

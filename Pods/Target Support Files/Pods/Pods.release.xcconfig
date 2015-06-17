@@ -1,7 +1,7 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/OLRabbitMQ" "${PODS_ROOT}/Headers/Public/rabbitmqc" "${PODS_ROOT}/Headers/Public/rabbitmqc/rabbitmqc"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ChameleonFramework" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/OLRabbitMQ" "${PODS_ROOT}/Headers/Public/PNChart" "${PODS_ROOT}/Headers/Public/UICountingLabel" "${PODS_ROOT}/Headers/Public/rabbitmqc" "${PODS_ROOT}/Headers/Public/rabbitmqc/rabbitmqc"
 LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/rabbitmqc/lib-ios"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/OLRabbitMQ" -isystem "${PODS_ROOT}/Headers/Public/rabbitmqc" -isystem "${PODS_ROOT}/Headers/Public/rabbitmqc/rabbitmqc"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-CocoaLumberjack" -l"Pods-OLRabbitMQ" -l"rabbitmqc"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ChameleonFramework" -isystem "${PODS_ROOT}/Headers/Public/CocoaLumberjack" -isystem "${PODS_ROOT}/Headers/Public/Masonry" -isystem "${PODS_ROOT}/Headers/Public/OLRabbitMQ" -isystem "${PODS_ROOT}/Headers/Public/PNChart" -isystem "${PODS_ROOT}/Headers/Public/UICountingLabel" -isystem "${PODS_ROOT}/Headers/Public/rabbitmqc" -isystem "${PODS_ROOT}/Headers/Public/rabbitmqc/rabbitmqc"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-ChameleonFramework" -l"Pods-CocoaLumberjack" -l"Pods-Masonry" -l"Pods-OLRabbitMQ" -l"Pods-PNChart" -l"Pods-UICountingLabel" -l"Pods-rabbitmqc" -l"rabbitmqc" -framework "CoreGraphics" -framework "Foundation" -framework "QuartzCore" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods
