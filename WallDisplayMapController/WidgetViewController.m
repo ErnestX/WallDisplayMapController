@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+    
     self.arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
     
     [self initUI];
@@ -36,7 +38,7 @@
 
 - (void)initUI {
     self.vTimeline = [[UIView alloc] init];
-    self.vTimeline.backgroundColor = [UIColor flatGrayColorDark];
+    self.vTimeline.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
     [self.view addSubview:self.vTimeline];
     
     self.vCategory = [[UIView alloc] init];
@@ -47,7 +49,7 @@
     self.tableCategory.dataSource = self;
     self.tableCategory.showsHorizontalScrollIndicator = NO;
     self.tableCategory.showsVerticalScrollIndicator = NO;
-    self.tableCategory.backgroundColor = [UIColor flatGrayColor];
+    self.tableCategory.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor lightGrayColor]];
     [self.vCategory addSubview:self.tableCategory];
     
     // AutoLayout
@@ -75,6 +77,8 @@
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // TODO: Refresh content view
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,11 +97,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.backgroundColor = [UIColor flatGrayColor];
+    cell.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor lightGrayColor]];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.textColor = [UIColor flatWhiteColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Neue" size:14.0];
     cell.textLabel.text = self.arrCategories[indexPath.row];
     return cell;
