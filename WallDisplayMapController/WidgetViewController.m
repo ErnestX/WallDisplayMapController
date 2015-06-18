@@ -9,6 +9,8 @@
 #import "WidgetViewController.h"
 #import "Masonry.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "MobilityView.h"
+#import "UnavailableView.h"
 #import "PNChart.h"
 
 @interface WidgetViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -27,8 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.view.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
     
     self.arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
     
@@ -52,8 +52,13 @@
     self.tableCategory.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor lightGrayColor]];
     [self.vCategory addSubview:self.tableCategory];
     
+    self.vContent = [[UIView alloc] init];
+    self.vContent.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+    [self.view addSubview:self.vContent];
+    
     // AutoLayout
     __weak typeof(self) weakSelf = self;
+
     [self.vTimeline mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(weakSelf.view);
         make.bottom.equalTo(weakSelf.view.mas_bottom);
@@ -70,14 +75,23 @@
     [self.tableCategory mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.leading.and.trailing.equalTo(weakSelf.vCategory);
     }];
-
     
+    [self.vContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.leading.equalTo(weakSelf.view);
+        make.trailing.equalTo(weakSelf.vCategory.mas_leading);
+        make.bottom.equalTo(weakSelf.vTimeline.mas_top);
+    }];
+    
+    
+    [self.tableCategory selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self showContentWithIndex:0];
+
 }
 
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // TODO: Refresh content view
+    [self showContentWithIndex:indexPath.row];
     
 }
 
@@ -109,6 +123,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrCategories.count;
+}
+
+#pragma mark helpers
+
+- (void)showContentWithIndex:(NSInteger) index {
+    [[self.vContent subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    __weak typeof(self) weakSelf = self;
+    if (index == 0) {
+        // Show Mobility View
+        MobilityView *vMob = [[MobilityView alloc] init];
+        vMob.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+        [self.vContent addSubview:vMob];
+        
+        [vMob mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+        }];
+        
+        [vMob updateWithModelDict:@{@"plan_value" : @10185,
+                                    @"existing_value" : @12842}];
+        
+    } else {
+        // Show Data Unavailable
+        UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
+        vUnav.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+        [self.vContent addSubview:vUnav];
+        
+        [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+            
+        }];
+        
+        [vUnav show];
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
