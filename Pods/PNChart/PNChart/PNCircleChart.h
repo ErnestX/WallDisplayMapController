@@ -68,5 +68,6 @@ displayCountingLabel:(BOOL)displayCountingLabel
 @property (nonatomic) CAShapeLayer *circleBackground;
 
 @property (nonatomic) BOOL displayCountingLabel;
+@property (nonatomic) CGFloat countingLabelFontSize;
 
 @end

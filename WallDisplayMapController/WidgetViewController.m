@@ -116,7 +116,7 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Neue" size:14.0];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
     cell.textLabel.text = self.arrCategories[indexPath.row];
     return cell;
 }

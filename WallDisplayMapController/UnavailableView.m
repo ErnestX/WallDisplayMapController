@@ -33,7 +33,7 @@
     lblMessage.textAlignment = NSTextAlignmentCenter;
     lblMessage.numberOfLines = 0;
     lblMessage.lineBreakMode = NSLineBreakByWordWrapping;
-    lblMessage.font = [UIFont fontWithName:@"Helvetica-Neue" size:18.0];
+    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
     lblMessage.textColor = [UIColor darkTextColor];
     
     [self addSubview:lblMessage];
