@@ -104,7 +104,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
 
         _countingLabel = [[UICountingLabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 50.0)];
         [_countingLabel setTextAlignment:NSTextAlignmentCenter];
-        [_countingLabel setTextColor:[UIColor grayColor]];
+        [_countingLabel setTextColor:[UIColor lightGrayColor]];
         [_countingLabel setBackgroundColor:[UIColor clearColor]];
         [_countingLabel setCenter:CGPointMake(self.frame.size.width/2.0f, self.frame.size.height/2.0f)];
         _countingLabel.method = UILabelCountingMethodEaseInOut;
@@ -122,7 +122,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
     // Add counting label
 
     if (_displayCountingLabel) {
-        [_countingLabel setFont:[UIFont boldSystemFontOfSize:_countingLabelFontSize]];
+        [_countingLabel setFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:_countingLabelFontSize]];
 
         NSString *format;
         switch (self.chartType) {

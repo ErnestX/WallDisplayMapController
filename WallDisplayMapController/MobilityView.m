@@ -48,6 +48,7 @@
     // init circle charts
         
     self.arrModeInfo = @[@0.86, @0.27, @0.47];
+    NSArray *arrModes = @[@"Active", @"Transit", @"Vehicle"];
     self.arrCircleCharts = [NSMutableArray array];
     for (int i=0; i<[self.arrModeInfo count]; i++) {
         PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 300.0, 150.0, 150.0)
@@ -61,7 +62,20 @@
         [circleChart setStrokeColor:COLOR_LIGHT_BLUE];
         circleChart.countingLabelFontSize = 20.0;
         [self.arrCircleCharts addObject:circleChart];
+        
+        UILabel *lblMode = [[UILabel alloc] init];
+        lblMode.text = arrModes[i];
+        lblMode.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:18.0];
+        lblMode.textAlignment = NSTextAlignmentCenter;
+        lblMode.textColor = [UIColor lightGrayColor];
+        [self addSubview:lblMode];
+        
         [self addSubview:circleChart];
+        
+        [lblMode mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(circleChart);
+            make.bottom.equalTo(circleChart.mas_top).with.offset(-15.0f);
+        }];
     }
         
     }
@@ -85,7 +99,7 @@
     
     self.barChart.transform = CGAffineTransformMakeRotation(0.5*M_PI);
     
-    // Todo: update label
+    // update label
     NSNumber *temp = dict[@"plan_value"];
     NSString *strPlan = [NSString stringWithFormat:@"%@ km/person in a year", temp];
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:strPlan];
