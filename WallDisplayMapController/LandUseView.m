@@ -7,12 +7,10 @@
 //
 
 #import "LandUseView.h"
-#import "PNChart.h"
-#import "Masonry.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "Masonry.h"
+#import "PNChart.h"
 
-#define COLOR_WATERMELON [UIColor flatWatermelonColor]
-#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 
 @interface LandUseView()
 
@@ -20,8 +18,9 @@
 @property UILabel *lblPeople;
 @property UILabel *lblDwellings;
 
+@property NSArray *arrTypeKeys;
 @property NSMutableArray *arrCircleCharts;
-@property NSArray *arrUnitTypeData;
+@property NSMutableArray *arrLabelTypes;
 
 @end
 
@@ -32,7 +31,7 @@
     if (self) {
         
         self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(120.0, -90.0, 200.0, 400.0)];
-        self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0];
+        self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:17.0];
         self.barChart.labelTextColor = [UIColor lightGrayColor];
         self.barChart.backgroundColor = COLOR_BG_WHITE;
         [self addSubview:self.barChart];
@@ -51,14 +50,14 @@
         [self addSubview:self.lblDwellings];
         
         // init circle charts
-        self.arrUnitTypeData = @[@0, @37, @63];
-        NSArray *arrTypes = @[@"Single detached", @"Rowhouse", @"Apartment"];
+        self.arrTypeKeys = @[@"Single detached", @"Rowhouse", @"Apartment"];
         NSArray *arrIcons = @[@"houseIcon.png", @"rowHouseIcon.png", @"apartmentIcon.png"];
         self.arrCircleCharts = [NSMutableArray array];
-        for (int i=0; i<[self.arrUnitTypeData count]; i++) {
+        self.arrLabelTypes = [NSMutableArray array];
+        for (int i=0; i<[self.arrTypeKeys count]; i++) {
             PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 350.0, 150.0, 150.0)
                                                                         total:@100
-                                                                      current:self.arrUnitTypeData[i]
+                                                                      current:@0
                                                                     clockwise:YES
                                                                        shadow:YES
                                                                   shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
@@ -68,10 +67,10 @@
             [self.arrCircleCharts addObject:circleChart];
             
             UILabel *lblMode = [[UILabel alloc] init];
-            lblMode.text = [NSString stringWithFormat:@"%@: %@%%", arrTypes[i], [self.arrUnitTypeData[i] stringValue]];
             lblMode.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:25.0];
             lblMode.textAlignment = NSTextAlignmentCenter;
             lblMode.textColor = [UIColor lightGrayColor];
+            [self.arrLabelTypes addObject:lblMode];
             [self addSubview:lblMode];
             
             [self addSubview:circleChart];
@@ -137,7 +136,7 @@
     };
     self.barChart.barBackgroundColor = COLOR_BG_WHITE;
     self.barChart.barWidth = 50.0;
-    self.barChart.strokeColors = @[COLOR_WATERMELON, [UIColor lightGrayColor]];
+    self.barChart.strokeColor = COLOR_WATERMELON;
     [self.barChart setXLabels:@[@"People", @"Dwellings"]];
     self.barChart.showLabel = NO;
     [self.barChart setYValues:@[dict[@"people_value"], dict[@"dwelling_value"]]];
@@ -185,7 +184,11 @@
     // circle charts
     [self.arrCircleCharts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PNCircleChart *circleChart = obj;
+        circleChart.current = dict[weakSelf.arrTypeKeys[idx]];
         [circleChart strokeChart];
+        
+        UILabel *lblType = weakSelf.arrLabelTypes[idx];
+        lblType.text = [NSString stringWithFormat:@"%@: %@%%", weakSelf.arrTypeKeys[idx], [circleChart.current stringValue]];
         
     }];
 }

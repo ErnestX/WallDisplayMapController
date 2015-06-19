@@ -7,14 +7,13 @@
 //
 
 #import "WidgetViewController.h"
-#import "Masonry.h"
-#import <ChameleonFramework/Chameleon.h>
 #import "MobilityView.h"
 #import "UnavailableView.h"
-#import "PNChart.h"
 #import "LandUseView.h"
+#import <ChameleonFramework/Chameleon.h>
+#import "Masonry.h"
+#import "PNChart.h"
 
-#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 
 @interface WidgetViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -93,7 +92,7 @@
 
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     [self showContentWithIndex:indexPath.row];
     
 }
@@ -119,7 +118,7 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:19.0];
     cell.textLabel.text = self.arrCategories[indexPath.row];
     return cell;
 }
@@ -145,7 +144,10 @@
         }];
         
         [vMob updateWithModelDict:@{@"plan_value" : @10185,
-                                    @"existing_value" : @12842}];
+                                    @"existing_value" : @12842,
+                                    @"Active" : @86,
+                                    @"Transit" : @27,
+                                    @"Vehicle" : @47}];
         
     } else if (index == 1) {
         // Show Land use view
@@ -158,7 +160,10 @@
         }];
         
         [vLU updateWithModelDict:@{@"people_value" : @208,
-                                   @"dwelling_value" : @107}];
+                                   @"dwelling_value" : @107,
+                                   @"Single detached" : @0,
+                                   @"Rowhouse" : @37,
+                                   @"Apartment" : @63}];
         
     } else {
         // Show Data Unavailable

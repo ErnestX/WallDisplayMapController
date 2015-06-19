@@ -7,9 +7,10 @@
 //
 
 #import "MobilityView.h"
-#import "PNChart.h"
-#import "Masonry.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "Masonry.h"
+#import "PNChart.h"
+
 
 @interface MobilityView()
 
@@ -18,12 +19,10 @@
 @property UILabel *lblExisting;
 
 @property NSMutableArray *arrCircleCharts;
-@property NSArray *arrModeInfo;
+@property NSMutableArray *arrLabelModes;
+@property NSArray *arrModeKeys;
 
 @end
-
-#define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
-#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 
 @implementation MobilityView
 
@@ -31,7 +30,7 @@
     self = [super initWithFrame:frame];
     if (self) {
     self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(120.0, -90.0, 200.0, 400.0)];
-    self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0];
+    self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:17.0];
     self.barChart.labelTextColor = [UIColor lightGrayColor];
     self.barChart.backgroundColor = COLOR_BG_WHITE;
     [self addSubview:self.barChart];
@@ -48,14 +47,14 @@
         
     // init circle charts
         
-    self.arrModeInfo = @[@86, @27, @47];
-    NSArray *arrModes = @[@"Active", @"Transit", @"Vehicle"];
+    self.arrModeKeys = @[@"Active", @"Transit", @"Vehicle"];
     NSArray *arrIcons = @[@"walkingPersonIcon.png", @"busIcon.png", @"carIcon.png"];
     self.arrCircleCharts = [NSMutableArray array];
-    for (int i=0; i<[self.arrModeInfo count]; i++) {
+    self.arrLabelModes = [NSMutableArray array];
+    for (int i=0; i<[self.arrModeKeys count]; i++) {
         PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 350.0, 150.0, 150.0)
                                                                     total:@100
-                                                                  current:self.arrModeInfo[i]
+                                                                  current:@0
                                                                 clockwise:YES
                                                                    shadow:YES
                                                               shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
@@ -65,10 +64,10 @@
         [self.arrCircleCharts addObject:circleChart];
         
         UILabel *lblMode = [[UILabel alloc] init];
-        lblMode.text = [NSString stringWithFormat:@"%@: %@%%", arrModes[i], [self.arrModeInfo[i] stringValue]];
         lblMode.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:25.0];
         lblMode.textAlignment = NSTextAlignmentCenter;
         lblMode.textColor = [UIColor lightGrayColor];
+        [self.arrLabelModes addObject:lblMode];
         [self addSubview:lblMode];
         
         [self addSubview:circleChart];
@@ -124,8 +123,6 @@
             make.bottom.equalTo(((UIView *)weakSelf.arrCircleCharts[1]).mas_top).with.offset(-20.0f);
         }];
 
-        
-        
     }
     return self;
 }
@@ -192,7 +189,11 @@
     // circle charts
     [self.arrCircleCharts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         PNCircleChart *circleChart = obj;
+        circleChart.current = dict[weakSelf.arrModeKeys[idx]];
         [circleChart strokeChart];
+        
+        UILabel *lblMode = weakSelf.arrLabelModes[idx];
+        lblMode.text = [NSString stringWithFormat:@"%@: %@%%", weakSelf.arrModeKeys[idx], [circleChart.current stringValue]];
         
     }];
 

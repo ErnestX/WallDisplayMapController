@@ -7,7 +7,10 @@
 //
 
 #import "UnavailableView.h"
+#import <ChameleonFramework/Chameleon.h>
 #import "Masonry.h"
+#import "PNChart.h"
+
 
 @interface UnavailableView()
 

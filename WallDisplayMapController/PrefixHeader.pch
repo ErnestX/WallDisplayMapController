@@ -1,0 +1,24 @@
+//
+//  PrefixHeader.pch
+//  WallDisplayMapController
+//
+//  Created by Siyi Meng on 2015-06-19.
+//  Copyright (c) 2015 Jialiang. All rights reserved.
+//
+
+#ifndef WallDisplayMapController_PrefixHeader_pch
+#define WallDisplayMapController_PrefixHeader_pch
+
+// Colors
+#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
+#define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
+#define COLOR_WATERMELON [UIColor flatWatermelonColor]
+
+// Headers
+//#import <ChameleonFramework/Chameleon.h>
+//#import "Masonry.h"
+//#import "PNChart.h"
+
+// Fonts
+
+#endif
