@@ -16,6 +16,7 @@
 		AE23B94E1B34B3FE009B0E2E /* houseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94B1B34B3FE009B0E2E /* houseIcon.png */; };
 		AE23B94F1B34B3FE009B0E2E /* rowHouseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94C1B34B3FE009B0E2E /* rowHouseIcon.png */; };
 		AE23B9501B34B3FE009B0E2E /* apartmentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94D1B34B3FE009B0E2E /* apartmentIcon.png */; };
+		AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */; };
 		AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */; };
 		AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477471B2BA32D006E8925 /* DensityModel.m */; };
 		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
@@ -68,6 +69,8 @@
 		AE23B94C1B34B3FE009B0E2E /* rowHouseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowHouseIcon.png; sourceTree = "<group>"; };
 		AE23B94D1B34B3FE009B0E2E /* apartmentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apartmentIcon.png; sourceTree = "<group>"; };
 		AE23B9531B34C3BB009B0E2E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RabbitMQManager.h; sourceTree = "<group>"; };
+		AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RabbitMQManager.m; sourceTree = "<group>"; };
 		AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictEnergyModel.h; sourceTree = "<group>"; };
 		AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictEnergyModel.m; sourceTree = "<group>"; };
 		AE6477461B2BA32D006E8925 /* DensityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DensityModel.h; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
 				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
+				AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */,
+				AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				CA2D53F01B1C205600B975B6 /* View */,
@@ -443,6 +448,7 @@
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
 				AE9E40361B320AE00085000D /* UnavailableView.m in Sources */,
+				AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,

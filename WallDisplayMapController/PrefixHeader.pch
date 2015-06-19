@@ -9,16 +9,43 @@
 #ifndef WallDisplayMapController_PrefixHeader_pch
 #define WallDisplayMapController_PrefixHeader_pch
 
-// Colors
+/*** Colors ***/
+
 #define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 #define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
 #define COLOR_WATERMELON [UIColor flatWatermelonColor]
 
-// Headers
-//#import <ChameleonFramework/Chameleon.h>
-//#import "Masonry.h"
-//#import "PNChart.h"
+/*** Fonts ***/
 
-// Fonts
+/*** RabbitMQ ***/
+
+// queue names
+#define QUEUE_NAME_EARTH amqp_cstring_bytes("/tableplus/controls/earth/TableDesigner [884535663]/56c5d2dc-cb33-480f-a6fd-69a402073de2")
+#define QUEUE_NAME_WIDGET amqp_cstring_bytes("/widget/test/queue")
+
+// routing keys
+#define ROUTING_KEY_EARTH amqp_cstring_bytes("/tableplus/controls/earth")
+#define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
+
+// configuration parameters
+#define HOST_NAME "192.168.0.106"
+#define PORT_NUMBER 5672
+#define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
+#define VHOST_NAME "/"
+#define USER_NAME "guest"
+#define PASSWORD "guest"
+#define EXCHANGE_TYPE amqp_cstring_bytes("direct")
+
+// widget keys
+#define WIDGET_DENSITY @"density"
+#define WIDGET_ENERGY @"energy"
+#define WIDGET_DISTRICTENERGY @"districtenergy"
+#define WIDGET_BUILDINGS @"buildings"
+
+/*** Notifications ***/
+// notification identifiers
+#define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
+#define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
+#define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
 
 #endif
