@@ -23,6 +23,7 @@
 @end
 
 #define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
+#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 
 @implementation MobilityView
 
@@ -32,7 +33,7 @@
     self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(120.0, -90.0, 200.0, 400.0)];
     self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0];
     self.barChart.labelTextColor = [UIColor lightGrayColor];
-    self.barChart.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+    self.barChart.backgroundColor = COLOR_BG_WHITE;
     [self addSubview:self.barChart];
         
 
@@ -135,7 +136,7 @@
     self.barChart.yLabelFormatter = ^NSString *(CGFloat yLabelValue) {
         return [NSString stringWithFormat:@"%d", (int)yLabelValue];
     };
-    self.barChart.barBackgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+    self.barChart.barBackgroundColor = COLOR_BG_WHITE;
     self.barChart.barWidth = 50.0;
     self.barChart.strokeColors = @[COLOR_LIGHT_BLUE, [UIColor lightGrayColor]];
     [self.barChart setXLabels:@[@"plan", @"existing"]];

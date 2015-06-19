@@ -12,6 +12,9 @@
 #import "MobilityView.h"
 #import "UnavailableView.h"
 #import "PNChart.h"
+#import "LandUseView.h"
+
+#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
 
 @interface WidgetViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -53,7 +56,7 @@
     [self.vCategory addSubview:self.tableCategory];
     
     self.vContent = [[UIView alloc] init];
-    self.vContent.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+    self.vContent.backgroundColor = COLOR_BG_WHITE;
     [self.view addSubview:self.vContent];
     
     // AutoLayout
@@ -134,7 +137,7 @@
     if (index == 0) {
         // Show Mobility View
         MobilityView *vMob = [[MobilityView alloc] init];
-        vMob.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+        vMob.backgroundColor = COLOR_BG_WHITE;
         [self.vContent addSubview:vMob];
         
         [vMob mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -144,10 +147,23 @@
         [vMob updateWithModelDict:@{@"plan_value" : @10185,
                                     @"existing_value" : @12842}];
         
+    } else if (index == 1) {
+        // Show Land use view
+        LandUseView *vLU = [[LandUseView alloc] init];
+        vLU.backgroundColor = COLOR_BG_WHITE;
+        [self.vContent addSubview:vLU];
+        
+        [vLU mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+        }];
+        
+        [vLU updateWithModelDict:@{@"people_value" : @208,
+                                   @"dwelling_value" : @107}];
+        
     } else {
         // Show Data Unavailable
         UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
-        vUnav.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
+        vUnav.backgroundColor = COLOR_BG_WHITE;
         [self.vContent addSubview:vUnav];
         
         [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -156,7 +172,6 @@
         }];
         
         [vUnav show];
-        
     }
     
 }
