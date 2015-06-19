@@ -52,7 +52,7 @@
     NSArray *arrIcons = @[@"walkingPersonIcon.png", @"busIcon.png", @"carIcon.png"];
     self.arrCircleCharts = [NSMutableArray array];
     for (int i=0; i<[self.arrModeInfo count]; i++) {
-        PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 300.0, 150.0, 150.0)
+        PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 350.0, 150.0, 150.0)
                                                                     total:@100
                                                                   current:self.arrModeInfo[i]
                                                                 clockwise:YES
@@ -74,7 +74,7 @@
         
         [lblMode mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(circleChart);
-            make.bottom.equalTo(circleChart.mas_top).with.offset(-15.0f);
+            make.bottom.equalTo(circleChart.mas_bottom).with.offset(40.0f);
         }];
         
         // Adding Icons
@@ -99,6 +99,31 @@
         }];
     
     }
+        
+        UILabel *lblForCircleCharts = [[UILabel alloc] init];
+        lblForCircleCharts.textColor = [UIColor lightGrayColor];
+        lblForCircleCharts.textAlignment = NSTextAlignmentCenter;
+        lblForCircleCharts.numberOfLines = 0;
+        lblForCircleCharts.lineBreakMode = NSLineBreakByWordWrapping;
+        NSMutableAttributedString *strAtt = [[NSMutableAttributedString alloc] initWithString:@"Mode \n(% of annual trips by travel mode)"];
+        [strAtt addAttribute:NSFontAttributeName
+                       value:[UIFont fontWithName:@"HelveticaNeue-CondensedBold"
+                                             size:50.0]
+                       range:NSMakeRange(0, 4)];
+        [strAtt addAttribute:NSFontAttributeName
+                       value:[UIFont fontWithName:@"HelveticaNeue-CondensedBold"
+                                             size:17.0]
+                       range:NSMakeRange(4, strAtt.length-5)];
+        lblForCircleCharts.attributedText = strAtt;
+        
+        [self addSubview:lblForCircleCharts];
+        __weak typeof(self) weakSelf = self;
+        [lblForCircleCharts mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(weakSelf.arrCircleCharts[1]);
+            make.bottom.equalTo(((UIView *)weakSelf.arrCircleCharts[1]).mas_top).with.offset(-20.0f);
+        }];
+
+        
         
     }
     return self;

@@ -33,8 +33,8 @@
     lblMessage.textAlignment = NSTextAlignmentCenter;
     lblMessage.numberOfLines = 0;
     lblMessage.lineBreakMode = NSLineBreakByWordWrapping;
-    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
-    lblMessage.textColor = [UIColor darkTextColor];
+    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:25.0];
+    lblMessage.textColor = [UIColor lightGrayColor];
     
     [self addSubview:lblMessage];
     
@@ -43,13 +43,5 @@
         make.centerX.and.centerY.equalTo(weakSelf);
     }];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
