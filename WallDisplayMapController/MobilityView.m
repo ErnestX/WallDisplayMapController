@@ -30,8 +30,8 @@
     self = [super initWithFrame:frame];
     if (self) {
     self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(120.0, -90.0, 200.0, 400.0)];
-    self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
-
+    self.barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0];
+    self.barChart.labelTextColor = [UIColor lightGrayColor];
     self.barChart.backgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
     [self addSubview:self.barChart];
         
@@ -47,25 +47,25 @@
         
     // init circle charts
         
-    self.arrModeInfo = @[@0.86, @0.27, @0.47];
+    self.arrModeInfo = @[@86, @27, @47];
     NSArray *arrModes = @[@"Active", @"Transit", @"Vehicle"];
+    NSArray *arrIcons = @[@"walkingPersonIcon.png", @"busIcon.png", @"carIcon.png"];
     self.arrCircleCharts = [NSMutableArray array];
     for (int i=0; i<[self.arrModeInfo count]; i++) {
         PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(50+i*215.0, 300.0, 150.0, 150.0)
-                                                                    total:@1.0
+                                                                    total:@100
                                                                   current:self.arrModeInfo[i]
                                                                 clockwise:YES
                                                                    shadow:YES
                                                               shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
-                                                     displayCountingLabel:YES
+                                                     displayCountingLabel:NO
                                                         overrideLineWidth:@25];
         [circleChart setStrokeColor:COLOR_LIGHT_BLUE];
-        circleChart.countingLabelFontSize = 20.0;
         [self.arrCircleCharts addObject:circleChart];
         
         UILabel *lblMode = [[UILabel alloc] init];
-        lblMode.text = arrModes[i];
-        lblMode.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:18.0];
+        lblMode.text = [NSString stringWithFormat:@"%@: %@%%", arrModes[i], [self.arrModeInfo[i] stringValue]];
+        lblMode.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:25.0];
         lblMode.textAlignment = NSTextAlignmentCenter;
         lblMode.textColor = [UIColor lightGrayColor];
         [self addSubview:lblMode];
@@ -76,6 +76,28 @@
             make.centerX.equalTo(circleChart);
             make.bottom.equalTo(circleChart.mas_top).with.offset(-15.0f);
         }];
+        
+        // Adding Icons
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.layer.cornerRadius = 37.0;
+        bg.layer.masksToBounds = YES;
+        bg.backgroundColor = COLOR_LIGHT_BLUE;
+        UIImageView *ivIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:arrIcons[i]]];
+        [self addSubview:bg];
+        [bg addSubview:ivIcon];
+        
+        [bg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.and.centerY.equalTo(circleChart);
+            make.width.equalTo(@74);
+            make.height.equalTo(@74);
+        }];
+        
+        [ivIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(bg);
+            make.width.height.equalTo(@52);
+        }];
+    
     }
         
     }
@@ -90,7 +112,7 @@
     };
     self.barChart.barBackgroundColor = [UIColor colorWithWhite:0.988 alpha:1.0];
     self.barChart.barWidth = 50.0;
-    self.barChart.strokeColors = @[COLOR_LIGHT_BLUE, [UIColor grayColor]];
+    self.barChart.strokeColors = @[COLOR_LIGHT_BLUE, [UIColor lightGrayColor]];
     [self.barChart setXLabels:@[@"plan", @"existing"]];
     self.barChart.showLabel = NO;
     [self.barChart setYValues:@[dict[@"plan_value"], dict[@"existing_value"]]];

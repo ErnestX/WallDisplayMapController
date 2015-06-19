@@ -85,7 +85,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
 
         _circle               = [CAShapeLayer layer];
         _circle.path          = circlePath.CGPath;
-        _circle.lineCap       = kCALineCapRound;
+        _circle.lineCap       = kCALineCapButt;
         _circle.fillColor     = [UIColor clearColor].CGColor;
         _circle.lineWidth     = [_lineWidth floatValue];
         _circle.zPosition     = 1;
