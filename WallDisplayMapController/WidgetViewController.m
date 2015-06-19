@@ -14,78 +14,86 @@
 #import "Masonry.h"
 #import "PNChart.h"
 
+#import "DensityModel.h"
+#import "BuildingsModel.h"
+#import "EnergyModel.h"
+#import "DistrictEnergyModel.h"
+
 
 @interface WidgetViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property UIView *vTimeline;
-@property UIView *vCategory;
-@property UIView *vContent;
-
-@property UITableView *tableCategory;
-
-@property NSArray *arrCategories;
+@property DensityModel *modelDensity;
+@property BuildingsModel *modelBuildings;
+@property EnergyModel *modelEnergy;
+@property DistrictEnergyModel *modelDistrictEnergy;
 
 @end
 
-@implementation WidgetViewController
+@implementation WidgetViewController {
+    NSArray *arrCategories;
+    UIView *vTimeline;
+    UIView *vCategory;
+    UIView *vContent;
+    UITableView *tableCategory;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
+    arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
     
     [self initUI];
     
 }
 
 - (void)initUI {
-    self.vTimeline = [[UIView alloc] init];
-    self.vTimeline.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
-    [self.view addSubview:self.vTimeline];
+    vTimeline = [[UIView alloc] init];
+    vTimeline.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
+    [self.view addSubview:vTimeline];
     
-    self.vCategory = [[UIView alloc] init];
-    [self.view addSubview:self.vCategory];
+    vCategory = [[UIView alloc] init];
+    [self.view addSubview:vCategory];
     
-    self.tableCategory = [[UITableView alloc] init];
-    self.tableCategory.delegate = self;
-    self.tableCategory.dataSource = self;
-    self.tableCategory.showsHorizontalScrollIndicator = NO;
-    self.tableCategory.showsVerticalScrollIndicator = NO;
-    self.tableCategory.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor lightGrayColor]];
-    [self.vCategory addSubview:self.tableCategory];
+    tableCategory = [[UITableView alloc] init];
+    tableCategory.delegate = self;
+    tableCategory.dataSource = self;
+    tableCategory.showsHorizontalScrollIndicator = NO;
+    tableCategory.showsVerticalScrollIndicator = NO;
+    tableCategory.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor lightGrayColor]];
+    [vCategory addSubview:tableCategory];
     
-    self.vContent = [[UIView alloc] init];
-    self.vContent.backgroundColor = COLOR_BG_WHITE;
-    [self.view addSubview:self.vContent];
+    vContent = [[UIView alloc] init];
+    vContent.backgroundColor = COLOR_BG_WHITE;
+    [self.view addSubview:vContent];
     
     // AutoLayout
     __weak typeof(self) weakSelf = self;
 
-    [self.vTimeline mas_makeConstraints:^(MASConstraintMaker *make) {
+    [vTimeline mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(weakSelf.view);
         make.bottom.equalTo(weakSelf.view.mas_bottom);
         make.height.equalTo(@100);
         
     }];
     
-    [self.vCategory mas_makeConstraints:^(MASConstraintMaker *make) {
+    [vCategory mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.trailing.equalTo(weakSelf.view);
-        make.bottom.equalTo(weakSelf.vTimeline.mas_top);
+        make.bottom.equalTo(vTimeline.mas_top);
         make.width.equalTo(@120);
     }];
     
-    [self.tableCategory mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.leading.and.trailing.equalTo(weakSelf.vCategory);
+    [tableCategory mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.leading.and.trailing.equalTo(vCategory);
     }];
     
-    [self.vContent mas_makeConstraints:^(MASConstraintMaker *make) {
+    [vContent mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.leading.equalTo(weakSelf.view);
-        make.trailing.equalTo(weakSelf.vCategory.mas_leading);
-        make.bottom.equalTo(weakSelf.vTimeline.mas_top);
+        make.trailing.equalTo(vCategory.mas_leading);
+        make.bottom.equalTo(vTimeline.mas_top);
     }];
     
     
-    [self.tableCategory selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [tableCategory selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
     [self showContentWithIndex:0];
 
 }
@@ -119,28 +127,27 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:19.0];
-    cell.textLabel.text = self.arrCategories[indexPath.row];
+    cell.textLabel.text = arrCategories[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrCategories.count;
+    return arrCategories.count;
 }
 
 #pragma mark helpers
 
 - (void)showContentWithIndex:(NSInteger) index {
-    [[self.vContent subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [[vContent subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    __weak typeof(self) weakSelf = self;
     if (index == 0) {
         // Show Mobility View
         MobilityView *vMob = [[MobilityView alloc] init];
         vMob.backgroundColor = COLOR_BG_WHITE;
-        [self.vContent addSubview:vMob];
+        [vContent addSubview:vMob];
         
         [vMob mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+            make.leading.trailing.top.and.bottom.equalTo(vContent);
         }];
         
         [vMob updateWithModelDict:@{@"plan_value" : @10185,
@@ -153,10 +160,10 @@
         // Show Land use view
         LandUseView *vLU = [[LandUseView alloc] init];
         vLU.backgroundColor = COLOR_BG_WHITE;
-        [self.vContent addSubview:vLU];
+        [vContent addSubview:vLU];
         
         [vLU mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+            make.leading.trailing.top.and.bottom.equalTo(vContent);
         }];
         
         [vLU updateWithModelDict:@{@"people_value" : @208,
@@ -169,10 +176,10 @@
         // Show Data Unavailable
         UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
         vUnav.backgroundColor = COLOR_BG_WHITE;
-        [self.vContent addSubview:vUnav];
+        [vContent addSubview:vUnav];
         
         [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(weakSelf.vContent);
+            make.leading.trailing.top.and.bottom.equalTo(vContent);
             
         }];
         

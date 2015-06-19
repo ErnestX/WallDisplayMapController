@@ -163,8 +163,6 @@
 			children = (
 				CA16394B1B0E4FBC00E4FC81 /* MapControlViewController.h */,
 				CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */,
-				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
-				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE15E8721B30E28E00E9A47A /* WidgetViewController.h */,
 				AE15E8731B30E28E00E9A47A /* WidgetViewController.m */,
 			);
@@ -214,6 +212,8 @@
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
 				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
 				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
+				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
+				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				CA2D53F01B1C205600B975B6 /* View */,
