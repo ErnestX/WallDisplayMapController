@@ -7,6 +7,7 @@
 //
 
 #import "MapWallDisplayController.h"
+#import "RabbitMQManager.h"
 
 #include <time.h>
 #include <sys/time.h>
@@ -19,8 +20,6 @@
 #define TEST_TILT
 
 @interface MapWallDisplayController()
-
-@property amqp_connection_state_t conn;
 
 @property MethodIntervalCaller* intervalCaller;
 @property float facingDirectionIncrement;
@@ -58,13 +57,8 @@
 
 - (void) sendRequest:(EarthControlRequest *)request {
     // publish request to rmqp server
-    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY_EARTH, 0, 0, NULL, amqp_cstring_bytes(request.toString.UTF8String));
     
-    if (statuscode == AMQP_STATUS_OK) {
-        NSLog(@"publish successful");
-    } else {
-        NSLog(@"publish failed: %d", statuscode);
-    }
+    [[RabbitMQManager sharedInstance] publishEarthControlWithBody:request.toString];
 }
 
 - (void) sendRequestAtInterval

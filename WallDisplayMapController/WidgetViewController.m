@@ -152,55 +152,70 @@
     [[vContent subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     if (index == 0) {
-        // Show Mobility View
-        MobilityView *vMob = [[MobilityView alloc] init];
-        vMob.backgroundColor = COLOR_BG_WHITE;
-        [vContent addSubview:vMob];
-        
-        [vMob mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(vContent);
-        }];
-        
-        [vMob updateWithModelDict:@{@"plan_value" : @10185,
-                                    @"existing_value" : @12842,
-                                    @"Active" : @86,
-                                    @"Transit" : @27,
-                                    @"Vehicle" : @47}];
+        if (self.modelDensity == nil) {
+            [self showUnavailable];
+            
+        } else {
+            // Show Mobility View
+            MobilityView *vMob = [[MobilityView alloc] init];
+            vMob.backgroundColor = COLOR_BG_WHITE;
+            [vContent addSubview:vMob];
+            
+            [vMob mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.trailing.top.and.bottom.equalTo(vContent);
+            }];
+            
+            [vMob updateWithModelDict:@{@"plan_value" : @10185,
+                                        @"existing_value" : @12842,
+                                        @"Active" : @86,
+                                        @"Transit" : @27,
+                                        @"Vehicle" : @47}];
+        }
         
     } else if (index == 1) {
-        // Show Land use view
-        LandUseView *vLU = [[LandUseView alloc] init];
-        vLU.backgroundColor = COLOR_BG_WHITE;
-        [vContent addSubview:vLU];
-        
-        [vLU mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(vContent);
-        }];
-        
-        [vLU updateWithModelDict:@{@"people_value" : @208,
-                                   @"dwelling_value" : @107,
-                                   @"Single detached" : @0,
-                                   @"Rowhouse" : @37,
-                                   @"Apartment" : @63}];
+        if (self.modelBuildings == nil) {
+            [self showUnavailable];
+        } else {
+            // Show Land use view
+            LandUseView *vLU = [[LandUseView alloc] init];
+            vLU.backgroundColor = COLOR_BG_WHITE;
+            [vContent addSubview:vLU];
+            
+            [vLU mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.trailing.top.and.bottom.equalTo(vContent);
+            }];
+            
+            [vLU updateWithModelDict:@{@"people_value" : @208,
+                                       @"dwelling_value" : @107,
+                                       @"Single detached" : @0,
+                                       @"Rowhouse" : @37,
+                                       @"Apartment" : @63}];
+        }
         
     } else {
         // Show Data Unavailable
-        UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
-        vUnav.backgroundColor = COLOR_BG_WHITE;
-        [vContent addSubview:vUnav];
-        
-        [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.and.bottom.equalTo(vContent);
-            
-        }];
-        
-        [vUnav show];
+        [self showUnavailable];
     }
     
 }
 
+- (void) showUnavailable {
+    UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
+    vUnav.backgroundColor = COLOR_BG_WHITE;
+    [vContent addSubview:vUnav];
+    
+    [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.and.bottom.equalTo(vContent);
+        
+    }];
+    
+    [vUnav show];
+}
+
 - (void) consumerThreadBegin {
-    [[RabbitMQManager sharedInstance] beginConsumingWidgetsWithCallbackBlock:^(NSString *msg) {        
+    __weak typeof(self) weakSelf = self;
+    
+    [[RabbitMQManager sharedInstance] beginConsumingWidgetsWithCallbackBlock:^(NSString *msg) {
         // parse xml into a dictionary
         NSDictionary *dictTemp = [NSDictionary dictionaryWithXMLString:[msg stringByReplacingOccurrencesOfString:@"d2p1:" withString:@""]];
         NSArray *attributes = dictTemp[@"ResultDict"][@"KeyValueOfstringstring"];
@@ -211,20 +226,43 @@
             dictModel[temp[@"Key"]] = temp[@"Value"];
         }];
 
+        
         NSString *urlBase = dictModel[@"_url_base"];
-
+        // Map the dictModel to corresponding model objects
         if ([urlBase containsString:WIDGET_DENSITY]){
-
+            if (_modelDensity == nil)
+                _modelDensity = [[DensityModel alloc] init];
+            [_modelDensity updateModelWithDictionary:dictModel];
+            
         } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
+            if (_modelBuildings == nil)
+                _modelBuildings = [[BuildingsModel alloc] init];
+            [_modelBuildings updateModelWithDictionary:dictModel];
 
         } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
-            // not considering energy for now
+            if (_modelDistrictEnergy == nil)
+                _modelDistrictEnergy = [[DistrictEnergyModel alloc] init];
+            [_modelDistrictEnergy updateModelWithDictionary:dictModel];
 
         } else if ([urlBase containsString:WIDGET_ENERGY]) {
-            // not considering energy for now
+            if (_modelEnergy == nil)
+                _modelEnergy = [[EnergyModel alloc] init];
+            [_modelEnergy updateModelWithDictionary:dictModel];
 
         } else {
-            // error pop up? widget type undefined?
+            // model received is unrecognized/undefined
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Touch+"
+                                                                               message:@"Sorry, the widget model data received is unrecognized."
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                       style:UIAlertActionStyleDefault
+                                                                     handler:nil];
+                
+                [alert addAction:cancelAction];
+                [weakSelf presentViewController:alert animated:YES completion:nil];
+            });
+            
         }
         
         NSLog(@"message: %@", msg);

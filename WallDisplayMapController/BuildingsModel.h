@@ -27,7 +27,4 @@
 
 @property NSNumber *far;    // floor-area ratio
 
-- (BuildingsModel *)initWithDictionary:(NSDictionary *)dict;
-
-
 @end

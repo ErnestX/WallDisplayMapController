@@ -12,6 +12,6 @@
 
 @property NSDictionary *dictModel;
 
-- (WidgetModel *)initWithDictionary:(NSDictionary *)dict;
+- (void) updateModelWithDictionary:(NSDictionary *)dict;
 
 @end

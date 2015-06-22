@@ -179,6 +179,16 @@
     
 }
 
+- (void)publishEarthControlWithBody:(NSString *)body {
+    int statuscode = amqp_basic_publish(_conn, 10, EXCHANGE_NAME, ROUTING_KEY_EARTH, 0, 0, NULL, amqp_cstring_bytes(body.UTF8String));
+    
+    if (statuscode == AMQP_STATUS_OK) {
+        NSLog(@"publish successful");
+    } else {
+        NSLog(@"publish failed: %d", statuscode);
+    }
+}
+
 - (void) closeRMQConnection {
     // release memory owned by the connection
     amqp_maybe_release_buffers(_conn);

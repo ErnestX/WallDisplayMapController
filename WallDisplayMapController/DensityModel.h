@@ -25,6 +25,4 @@
 @property NSNumber *modelTransitTripsPercent;
 @property NSNumber *modelVehicleTripsPercent;
 
-- (DensityModel *)initWithDictionary:(NSDictionary *)dict;
-
 @end

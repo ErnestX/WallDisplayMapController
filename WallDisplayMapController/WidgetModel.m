@@ -10,12 +10,8 @@
 
 @implementation WidgetModel
 
-- (WidgetModel *)initWithDictionary:(NSDictionary *)dict {
-    self = [super init];
-    if (self) {
-        self.dictModel = dict;
-    }
-    return self;
+- (void)updateModelWithDictionary:(NSDictionary *)dict {
+    self.dictModel = dict;
 }
 
 @end
