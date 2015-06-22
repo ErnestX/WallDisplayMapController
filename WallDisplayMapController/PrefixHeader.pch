@@ -28,7 +28,7 @@
 #define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
 
 // configuration parameters
-#define HOST_NAME "192.168.0.106"
+#define HOST_NAME "192.168.0.102"
 #define PORT_NUMBER 5672
 #define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"
@@ -47,5 +47,6 @@
 #define RMQ_OPEN_CONN_FAILED @"rmq_open_connection_fail"
 #define RMQ_OPEN_CONN_OK @"rmq_open_connection_ok"
 #define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
+#define RMQ_CONSUMER_THREAD_STARTED @"rmq_consumer_thread_started"
 
 #endif

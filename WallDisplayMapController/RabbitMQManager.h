@@ -11,7 +11,9 @@
 @interface RabbitMQManager : NSObject
 
 + (RabbitMQManager *)sharedInstance;
-- (void) openRMQConnection;
-- (void) closeRMQConnection;
+- (void)openRMQConnection;
+- (void)closeRMQConnection;
+
+- (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock;
 
 @end

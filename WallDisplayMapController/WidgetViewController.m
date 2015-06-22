@@ -13,11 +13,13 @@
 #import <ChameleonFramework/Chameleon.h>
 #import "Masonry.h"
 #import "PNChart.h"
+#import "XMLDictionary.h"
 
 #import "DensityModel.h"
 #import "BuildingsModel.h"
 #import "EnergyModel.h"
 #import "DistrictEnergyModel.h"
+#import "RabbitMQManager.h"
 
 
 @interface WidgetViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -37,12 +39,21 @@
     UITableView *tableCategory;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(consumerThreadBegin) name:RMQ_CONSUMER_THREAD_STARTED object:nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
     
     [self initUI];
+
     
 }
 
@@ -186,6 +197,43 @@
         [vUnav show];
     }
     
+}
+
+- (void) consumerThreadBegin {
+    [[RabbitMQManager sharedInstance] beginConsumingWidgetsWithCallbackBlock:^(NSString *msg) {        
+        // parse xml into a dictionary
+        NSDictionary *dictTemp = [NSDictionary dictionaryWithXMLString:[msg stringByReplacingOccurrencesOfString:@"d2p1:" withString:@""]];
+        NSArray *attributes = dictTemp[@"ResultDict"][@"KeyValueOfstringstring"];
+
+        NSMutableDictionary *dictModel = [NSMutableDictionary dictionary];
+        [attributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *temp = obj;
+            dictModel[temp[@"Key"]] = temp[@"Value"];
+        }];
+
+        NSString *urlBase = dictModel[@"_url_base"];
+
+        if ([urlBase containsString:WIDGET_DENSITY]){
+
+        } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
+
+        } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
+            // not considering energy for now
+
+        } else if ([urlBase containsString:WIDGET_ENERGY]) {
+            // not considering energy for now
+
+        } else {
+            // error pop up? widget type undefined?
+        }
+        
+        NSLog(@"message: %@", msg);
+        
+    }];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -71,133 +71,112 @@
     amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
     
     // declare queue
-    amqp_queue_declare_ok_t *q = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+    amqp_queue_declare_ok_t *qEarth = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
     amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-    amqp_bytes_t queuename = amqp_bytes_malloc_dup(q->queue);
+    amqp_bytes_t queuenameEarth = amqp_bytes_malloc_dup(qEarth->queue);
     amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
     
     // binding queue with exchange
-    amqp_queue_bind(_conn, 10, queuename, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
+    amqp_queue_bind(_conn, 10, queuenameEarth, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
     amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
     
     amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        run(_conn);
-        
-    });
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONSUMER_THREAD_STARTED object:nil];
     
 }
 
-static void run(amqp_connection_state_t conn)
-{
-    int received = 0;
-    amqp_frame_t frame;
+- (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock {
     
-    while (1) {
-        amqp_rpc_reply_t ret;
-        amqp_envelope_t envelope;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        amqp_maybe_release_buffers(conn);
+        int received = 0;
+        amqp_frame_t frame;
         
-        // amqp_consume_message is a blocking function
-        // it's okay to use here since the enclosing function is
-        // being called in a background thread
-        ret = amqp_consume_message(conn, &envelope, NULL, 0);
-        
-        if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
-            if (AMQP_RESPONSE_LIBRARY_EXCEPTION == ret.reply_type &&
-                AMQP_STATUS_UNEXPECTED_STATE == ret.library_error) {
-                if (AMQP_STATUS_OK != amqp_simple_wait_frame(conn, &frame)) {
-                    return;
-                }
-                
-                if (AMQP_FRAME_METHOD == frame.frame_type) {
-                    switch (frame.payload.method.id) {
-                        case AMQP_BASIC_ACK_METHOD:
-                            /* if we've turned publisher confirms on, and we've published a message
-                             * here is a message being confirmed
-                             */
-                            
-                            break;
-                        case AMQP_BASIC_RETURN_METHOD:
-                            /* if a published message couldn't be routed and the mandatory flag was set
-                             * this is what would be returned. The message then needs to be read.
-                             */
-                        {
-                            amqp_message_t message;
-                            ret = amqp_read_message(conn, frame.channel, &message, 0);
-                            if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
-                                return;
+        while (1) {
+            amqp_rpc_reply_t ret;
+            amqp_envelope_t envelope;
+            
+            amqp_maybe_release_buffers(_conn);
+            
+            // amqp_consume_message is a blocking function
+            // it's okay to use here since the enclosing function is
+            // being called in a background thread
+            ret = amqp_consume_message(_conn, &envelope, NULL, 0);
+            
+            if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
+                if (AMQP_RESPONSE_LIBRARY_EXCEPTION == ret.reply_type &&
+                    AMQP_STATUS_UNEXPECTED_STATE == ret.library_error) {
+                    if (AMQP_STATUS_OK != amqp_simple_wait_frame(_conn, &frame)) {
+                        return;
+                    }
+                    
+                    if (AMQP_FRAME_METHOD == frame.frame_type) {
+                        switch (frame.payload.method.id) {
+                            case AMQP_BASIC_ACK_METHOD:
+                                /* if we've turned publisher confirms on, and we've published a message
+                                 * here is a message being confirmed
+                                 */
+                                
+                                break;
+                            case AMQP_BASIC_RETURN_METHOD:
+                                /* if a published message couldn't be routed and the mandatory flag was set
+                                 * this is what would be returned. The message then needs to be read.
+                                 */
+                            {
+                                amqp_message_t message;
+                                ret = amqp_read_message(_conn, frame.channel, &message, 0);
+                                if (AMQP_RESPONSE_NORMAL != ret.reply_type) {
+                                    return;
+                                }
+                                
+                                amqp_destroy_message(&message);
                             }
-                            
-                            amqp_destroy_message(&message);
+                                
+                                break;
+                                
+                            case AMQP_CHANNEL_CLOSE_METHOD:
+                                /* a channel.close method happens when a channel exception occurs, this
+                                 * can happen by publishing to an exchange that doesn't exist for example
+                                 *
+                                 * In this case you would need to open another channel redeclare any queues
+                                 * that were declared auto-delete, and restart any consumers that were attached
+                                 * to the previous channel
+                                 */
+                                return;
+                                
+                            case AMQP_CONNECTION_CLOSE_METHOD:
+                                /* a connection.close method happens when a connection exception occurs,
+                                 * this can happen by trying to use a channel that isn't open for example.
+                                 *
+                                 * In this case the whole connection must be restarted.
+                                 */
+                                return;
+                                
+                            default:
+                                fprintf(stderr ,"An unexpected method was received %d\n", frame.payload.method.id);
+                                return;
                         }
-                            
-                            break;
-                            
-                        case AMQP_CHANNEL_CLOSE_METHOD:
-                            /* a channel.close method happens when a channel exception occurs, this
-                             * can happen by publishing to an exchange that doesn't exist for example
-                             *
-                             * In this case you would need to open another channel redeclare any queues
-                             * that were declared auto-delete, and restart any consumers that were attached
-                             * to the previous channel
-                             */
-                            return;
-                            
-                        case AMQP_CONNECTION_CLOSE_METHOD:
-                            /* a connection.close method happens when a connection exception occurs,
-                             * this can happen by trying to use a channel that isn't open for example.
-                             *
-                             * In this case the whole connection must be restarted.
-                             */
-                            return;
-                            
-                        default:
-                            fprintf(stderr ,"An unexpected method was received %d\n", frame.payload.method.id);
-                            return;
                     }
                 }
-            }
-            
-        } else {
-            NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope.message.body.bytes
-                                                           length:envelope.message.body.len
-                                                         encoding:NSUTF8StringEncoding
-                                                     freeWhenDone:YES];
-            
-            // parse xml into a dictionary
-            NSDictionary *dictTemp = [NSDictionary dictionaryWithXMLString:[msg stringByReplacingOccurrencesOfString:@"d2p1:" withString:@""]];
-            NSArray *attributes = dictTemp[@"ResultDict"][@"KeyValueOfstringstring"];
-            
-            NSMutableDictionary *dictModel = [NSMutableDictionary dictionary];
-            [attributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                NSDictionary *temp = obj;
-                dictModel[temp[@"Key"]] = temp[@"Value"];
-            }];
-            
-            NSString *urlBase = dictModel[@"_url_base"];
-            
-            if ([urlBase containsString:WIDGET_DENSITY]){
-                
-            } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
-                
-            } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
-                // not considering energy for now
-                
-            } else if ([urlBase containsString:WIDGET_ENERGY]) {
-                // not considering energy for now
                 
             } else {
-                // error pop up? widget type undefined?
+                
+                
+                NSString *msg = [[NSString alloc] initWithBytesNoCopy:envelope.message.body.bytes
+                                                               length:envelope.message.body.len
+                                                             encoding:NSUTF8StringEncoding
+                                                         freeWhenDone:YES];
+                if (callbackBlock) {
+                    callbackBlock(msg);
+                }
+
             }
             
-            NSLog(@"message: %@", msg);
+            received++;
         }
-        
-        received++;
-    }
+    });
+    
 }
 
 - (void) closeRMQConnection {
