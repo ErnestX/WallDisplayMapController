@@ -165,11 +165,11 @@
                 make.leading.trailing.top.and.bottom.equalTo(vContent);
             }];
             
-            [vMob updateWithModelDict:@{@"plan_value" : @10185,
-                                        @"existing_value" : @12842,
-                                        @"Active" : @86,
-                                        @"Transit" : @27,
-                                        @"Vehicle" : @47}];
+            [vMob updateWithModelDict:@{@"plan_value" : self.modelDensity.CEEIKVT,
+                                        @"existing_value" : self.modelDensity.modelVKT,
+                                        @"Active" : self.modelDensity.modelActiveTripsPercent,
+                                        @"Transit" : self.modelDensity.modelTransitTripsPercent,
+                                        @"Vehicle" : self.modelDensity.modelVehicleTripsPercent}];
         }
         
     } else if (index == 1) {
@@ -234,6 +234,10 @@
                 _modelDensity = [[DensityModel alloc] init];
             [_modelDensity updateModelWithDictionary:dictModel];
             
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [weakSelf showContentWithIndex:0];
+            });
+            
         } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
             if (_modelBuildings == nil)
                 _modelBuildings = [[BuildingsModel alloc] init];
@@ -243,7 +247,7 @@
             if (_modelDistrictEnergy == nil)
                 _modelDistrictEnergy = [[DistrictEnergyModel alloc] init];
             [_modelDistrictEnergy updateModelWithDictionary:dictModel];
-
+            
         } else if ([urlBase containsString:WIDGET_ENERGY]) {
             if (_modelEnergy == nil)
                 _modelEnergy = [[EnergyModel alloc] init];
