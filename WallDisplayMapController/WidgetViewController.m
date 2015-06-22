@@ -242,6 +242,10 @@
             if (_modelBuildings == nil)
                 _modelBuildings = [[BuildingsModel alloc] init];
             [_modelBuildings updateModelWithDictionary:dictModel];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf showContentWithIndex:1];
+            });
 
         } else if ([urlBase containsString:WIDGET_DISTRICTENERGY]) {
             if (_modelDistrictEnergy == nil)
