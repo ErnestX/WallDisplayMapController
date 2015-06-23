@@ -11,6 +11,8 @@
 @implementation EnergyModel
 
 - (void)updateModelWithDictionary:(NSDictionary *)dict {
+    [super updateModelWithDictionary:dict];
+
     self.mobilityPercent = [NSNumber numberWithInt:(int)roundl([dict[@"mobility_percent"] doubleValue] * 100.0)];
     self.heatingAndHotWaterPercent = [NSNumber numberWithInt:(int)roundl([dict[@"heating_percent"] doubleValue] * 100.0)];
     self.lightsAndAppliancesPercent = [NSNumber numberWithInt:(int)roundl([dict[@"lights_percent"] doubleValue] * 100.0)];
@@ -28,7 +30,6 @@
     self.gasolineIn = [NSNumber numberWithInt:(int)roundl([dict[@"gasoline_in"] doubleValue] * 100.0)];
     self.gasolineOut = [NSNumber numberWithInt:(int)roundl([dict[@"gasoline_out"] doubleValue] * 100.0)];
     
-    [super updateModelWithDictionary:dict];
 }
 
 @end

@@ -185,11 +185,11 @@
                 make.leading.trailing.top.and.bottom.equalTo(vContent);
             }];
             
-            [vLU updateWithModelDict:@{@"people_value" : @208,
-                                       @"dwelling_value" : @107,
-                                       @"Single detached" : @0,
-                                       @"Rowhouse" : @37,
-                                       @"Apartment" : @63}];
+            [vLU updateWithModelDict:@{@"people_value" : self.modelBuildings.people,
+                                       @"dwelling_value" : self.modelBuildings.dwellings,
+                                       @"Single detached" : self.modelBuildings.detachedPercent,
+                                       @"Rowhouse" : self.modelBuildings.attachedPercent,
+                                       @"Apartment" : self.modelBuildings.stackedPercent}];
         }
         
     } else {
