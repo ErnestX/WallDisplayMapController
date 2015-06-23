@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "RabbitMQManager.h"
+#import "MasterViewController.h"
+#import "DetailViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +20,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    MasterViewController *masterVC = [[MasterViewController alloc] init];
+    DetailViewController *detailVC = [[DetailViewController alloc] init];
+    
+    UINavigationController *masterNav = [[UINavigationController alloc]
+                                         initWithRootViewController:masterVC];
+    UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:detailVC];
+    
+    UISplitViewController *splitVC = [[UISplitViewController alloc] init];
+    splitVC.viewControllers = @[masterNav, detailNav];
+    
+    self.window.rootViewController = splitVC;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

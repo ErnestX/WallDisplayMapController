@@ -22,6 +22,8 @@
 		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
 		AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774D1B2BA347006E8925 /* BuildingsModel.m */; };
 		AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477501B2BA43C006E8925 /* WidgetModel.m */; };
+		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
+		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */; };
 		AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D411B0FEB07000900FF /* EarthControlRequest.m */; };
 		AE9E40331B3209FC0085000D /* MobilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9E40321B3209FC0085000D /* MobilityView.m */; };
@@ -81,6 +83,10 @@
 		AE64774D1B2BA347006E8925 /* BuildingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsModel.m; sourceTree = "<group>"; };
 		AE64774F1B2BA43C006E8925 /* WidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetModel.h; sourceTree = "<group>"; };
 		AE6477501B2BA43C006E8925 /* WidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetModel.m; sourceTree = "<group>"; };
+		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		AE869D401B0FEB07000900FF /* EarthControlRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthControlRequest.h; sourceTree = "<group>"; };
@@ -168,6 +174,10 @@
 				CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */,
 				AE15E8721B30E28E00E9A47A /* WidgetViewController.h */,
 				AE15E8731B30E28E00E9A47A /* WidgetViewController.m */,
+				AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */,
+				AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */,
+				AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */,
+				AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -454,6 +464,7 @@
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
+				AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
 				AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
@@ -461,6 +472,7 @@
 				AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
+				AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

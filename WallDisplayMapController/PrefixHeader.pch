@@ -11,7 +11,7 @@
 
 /*** Colors ***/
 
-#define COLOR_BG_WHITE [UIColor colorWithWhite:0.988 alpha:1.0]
+#define COLOR_BG_WHITE [UIColor colorWithRed:245.0/255.0 green:255.0/255.0 blue:250.0/255.0 alpha:1.0]
 #define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
 #define COLOR_WATERMELON [UIColor flatWatermelonColor]
 
