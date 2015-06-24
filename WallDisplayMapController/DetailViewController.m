@@ -18,7 +18,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = COLOR_BG_WHITE;
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

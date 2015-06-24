@@ -11,21 +11,101 @@
 #import "Masonry.h"
 #import "PNChart.h"
 #import "XMLDictionary.h"
+#import "UIColor+Extend.h"
+#import "ChooseElementViewController.h"
 
-@interface MasterViewController ()
+@interface MasterViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
-@implementation MasterViewController
+@implementation MasterViewController {
+    NSArray *arrCategories;
+    
+    UITableView *tableCategory;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
+    // Make navigation bar transparent
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorFromHexString:@"#1ABC9C"];
+    
+    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 40.0)];
+    lblTitle.text = @"Select Category";
+    lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+    lblTitle.textColor = COLOR_BG_WHITE;
+    self.navigationItem.titleView = lblTitle;
+
     self.view.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
+     
+    tableCategory = [[UITableView alloc] init];
+    tableCategory.delegate = self;
+    tableCategory.dataSource = self;
+    tableCategory.showsHorizontalScrollIndicator = NO;
+    tableCategory.showsVerticalScrollIndicator = NO;
+    tableCategory.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
+    tableCategory.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableCategory];
+    
+    __weak typeof(self) weakSelf = self;
+    [tableCategory mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
+    }];
+
+    
+}
+
+#pragma mark UITableViewDataSource
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.textColor = COLOR_BG_WHITE;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
+    cell.textLabel.text = arrCategories[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 6;
+}
+
+#pragma mark UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ChooseElementViewController *vc = [[ChooseElementViewController alloc] init];
+    vc.title = arrCategories[indexPath.row];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target: nil action: nil];
+    self.navigationItem.backBarButtonItem = backBarButton;
+    [self.navigationController pushViewController:vc animated: YES];
+    
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.0;
 }
 
 - (void)didReceiveMemoryWarning {
