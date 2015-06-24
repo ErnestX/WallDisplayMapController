@@ -20,6 +20,7 @@
 
 @implementation MasterViewController {
     NSArray *arrCategories;
+    NSMutableDictionary *dictCategoryData;
     
     UITableView *tableCategory;
 }
@@ -28,6 +29,7 @@
     self = [super init];
     if (self) {
         arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
+        dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
     }
     return self;
 }
@@ -66,7 +68,6 @@
         make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
     }];
 
-    
 }
 
 #pragma mark UITableViewDataSource
@@ -99,6 +100,8 @@
     vc.title = arrCategories[indexPath.row];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target: nil action: nil];
     self.navigationItem.backBarButtonItem = backBarButton;
+    vc.dictData = dictCategoryData[arrCategories[indexPath.row]];
+    
     [self.navigationController pushViewController:vc animated: YES];
     
 

@@ -8,12 +8,14 @@
 
 #import "ChooseElementViewController.h"
 #import "UIColor+Extend.h"
+#import "Masonry.h"
+#import "UnavailableView.h"
 
 @interface ChooseElementViewController ()
 
 @end
 
-@implementation ChooseElementViewController
+@implementation ChooseElementViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,8 +32,28 @@
     lblTitle.textColor = COLOR_BG_WHITE;
     self.navigationItem.titleView = lblTitle;
 
+    if (!self.dictData) {
+        // No data, widget elements unavailable
+        [self showDataUnavailable];
+        
+    } else {
+        // Display widget elements in table cells with the data we have
+    }
 
     
+}
+
+- (void)showDataUnavailable {
+    UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
+    [self.view addSubview:vUnav];
+    
+    DEFINE_WEAK_SELF
+    [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.top.and.bottom.equalTo(weakSelf.view);
+        
+    }];
+    
+    [vUnav show];
 }
 
 - (void)didReceiveMemoryWarning {

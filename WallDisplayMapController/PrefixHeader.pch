@@ -9,6 +9,8 @@
 #ifndef WallDisplayMapController_PrefixHeader_pch
 #define WallDisplayMapController_PrefixHeader_pch
 
+#define DEFINE_WEAK_SELF __weak __typeof(&*self) weakSelf = self;
+
 /*** Colors ***/
 
 #define COLOR_BG_WHITE [UIColor colorWithRed:250.0/255.0 green:250.0/255.0 blue:250.0/255.0 alpha:1.0]

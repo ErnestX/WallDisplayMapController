@@ -10,4 +10,6 @@
 
 @interface ChooseElementViewController : UIViewController
 
+@property NSDictionary *dictData;
+
 @end
