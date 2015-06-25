@@ -55,19 +55,19 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
+    self.view.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
+    
     // Make navigation bar transparent
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.backgroundColor = [UIColor colorFromHexString:@"#1ABC9C"];
-    
+    // Customize appearance of navigation bar title
     UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 40.0)];
     lblTitle.text = @"Select Category";
     lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
     lblTitle.textColor = COLOR_BG_WHITE;
     self.navigationItem.titleView = lblTitle;
-
-    self.view.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
-     
+    
     tableCategory = [[UITableView alloc] init];
     tableCategory.delegate = self;
     tableCategory.dataSource = self;

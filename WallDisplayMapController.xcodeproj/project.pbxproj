@@ -30,6 +30,7 @@
 		AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE869D411B0FEB07000900FF /* EarthControlRequest.m */; };
 		AE9E40331B3209FC0085000D /* MobilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9E40321B3209FC0085000D /* MobilityView.m */; };
 		AE9E40361B320AE00085000D /* UnavailableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9E40351B320AE00085000D /* UnavailableView.m */; };
+		AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
 		CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */; };
 		CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */; };
@@ -101,6 +102,8 @@
 		AE9E40321B3209FC0085000D /* MobilityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilityView.m; sourceTree = "<group>"; };
 		AE9E40341B320AE00085000D /* UnavailableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnavailableView.h; sourceTree = "<group>"; };
 		AE9E40351B320AE00085000D /* UnavailableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnavailableView.m; sourceTree = "<group>"; };
+		AEA1BF6D1B3C8A030079BD66 /* JDDroppableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDDroppableView.h; sourceTree = "<group>"; };
+		AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDDroppableView.m; sourceTree = "<group>"; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639461B0E4FBC00E4FC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -208,6 +211,15 @@
 				AE23B9491B34AE31009B0E2E /* LandUseView.m */,
 			);
 			name = WidgetViews;
+			sourceTree = "<group>";
+		};
+		AEA1BF6C1B3C8A030079BD66 /* DroppableView */ = {
+			isa = PBXGroup;
+			children = (
+				AEA1BF6D1B3C8A030079BD66 /* JDDroppableView.h */,
+				AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */,
+			);
+			path = DroppableView;
 			sourceTree = "<group>";
 		};
 		CA1639381B0E4FBC00E4FC81 = {
@@ -318,6 +330,7 @@
 		FEF783D47782776F3F6477CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEA1BF6C1B3C8A030079BD66 /* DroppableView */,
 				AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */,
 				AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */,
 				3BAAEAC59C5CBA45D8961EE5 /* libPods.a */,
@@ -476,6 +489,7 @@
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
 				AE9E40361B320AE00085000D /* UnavailableView.m in Sources */,
+				AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */,
 				AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,

@@ -11,13 +11,13 @@
 #import "Masonry.h"
 #import "UnavailableView.h"
 
-@interface ChooseElementViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ChooseElementViewController () //<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation ChooseElementViewController {
     
-    UITableView *tableElements;
+//    UITableView *tableElements;
 }
 
 - (void)viewDidLoad {
@@ -42,46 +42,26 @@
         
     } else {
         // Display widget elements in table cells with the data we have
-        [self showTableWithSelectableElements];
+//        [self showTableWithSelectableElements];
         
     }
     
 }
 
-- (void)showTableWithSelectableElements {
-    tableElements = [[UITableView alloc] init];
-    tableElements.delegate = self;
-    tableElements.dataSource = self;
-    tableElements.showsHorizontalScrollIndicator = NO;
-    tableElements.showsVerticalScrollIndicator = NO;
-    tableElements.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
-    [self.view addSubview:tableElements];
-    
-    DEFINE_WEAK_SELF
-    [tableElements mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
-    }];
-    
-    
-//    UILabel *lblTest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 100.0)];
-//    lblTest.backgroundColor = [UIColor greenColor];
-//    lblTest.text = @"HELLO WORLD";
-//    lblTest.textAlignment = NSTextAlignmentCenter;
-//    lblTest.textColor = [UIColor redColor];
-//    lblTest.userInteractionEnabled = YES;
-//    [self.view addSubview:lblTest];
+//- (void)showTableWithSelectableElements {
+//    tableElements = [[UITableView alloc] init];
+//    tableElements.delegate = self;
+//    tableElements.dataSource = self;
+//    tableElements.showsHorizontalScrollIndicator = NO;
+//    tableElements.showsVerticalScrollIndicator = NO;
+//    tableElements.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
+//    [self.view addSubview:tableElements];
 //    
-//    [lblTest mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.equalTo(@100.0);
-//        make.centerY.equalTo(@200.0);
+//    DEFINE_WEAK_SELF
+//    [tableElements mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
 //    }];
-//    
-//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
-//                                                                          action:@selector(pan:)];
-//    [lblTest addGestureRecognizer:pan];
-
-
-}
+//}
 
 - (void)showDataUnavailable {
     UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
@@ -95,70 +75,70 @@
     
     [vUnav show];
 }
-
-#pragma mark -- UITableViewDataSource
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        UILabel *lblTest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 100.0)];
-        lblTest.center = CGPointMake(cell.contentView.frame.size.width/2, cell.contentView.frame.size.height/2);
-        lblTest.text = @"HELLO WORLD";
-        lblTest.backgroundColor = [UIColor greenColor];
-        lblTest.textColor = [UIColor redColor];
-        lblTest.userInteractionEnabled = YES;
-        lblTest.textAlignment = NSTextAlignmentCenter;
-        
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                              action:@selector(pan:)];
-        [lblTest addGestureRecognizer:pan];
-
-        [cell.contentView addSubview:lblTest];
-        
-        
-        
-    }
-    cell.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
-
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.arrData count];
-}
-
-#pragma mark -- UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 200.0;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableElements deselectRowAtIndexPath:indexPath animated:YES];
-    
-}
-
-- (void)pan:(UIPanGestureRecognizer *)recognizor {
-    UILabel *lblPanned = (UILabel *)[recognizor view];
-    UIView *referenceView = lblPanned.superview;
-
-    if (recognizor.state == UIGestureRecognizerStateEnded) {
-        if (lblPanned.frame.origin.x < (referenceView.frame.origin.x + referenceView.frame.size.width)) {
-            lblPanned.center = referenceView.center;
-        } else {
-            // stick it to DetailViewController's grid
-            
-
-        }
-        
-    } else {
-        NSLog(@"%f", [recognizor locationInView:referenceView].x);
-        lblPanned.center = CGPointMake([recognizor locationInView:referenceView].x, [recognizor locationInView:referenceView].y);
-    }
-    
-}
+//
+//#pragma mark -- UITableViewDataSource
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSString *cellIdentifier = @"Cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        UILabel *lblTest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 100.0)];
+//        lblTest.center = CGPointMake(cell.contentView.frame.size.width/2, cell.contentView.frame.size.height/2);
+//        lblTest.text = @"HELLO WORLD";
+//        lblTest.backgroundColor = [UIColor greenColor];
+//        lblTest.textColor = [UIColor redColor];
+//        lblTest.userInteractionEnabled = YES;
+//        lblTest.textAlignment = NSTextAlignmentCenter;
+//        
+//        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+//                                                                              action:@selector(pan:)];
+//        [lblTest addGestureRecognizer:pan];
+//
+//        [cell.contentView addSubview:lblTest];
+//        
+//        
+//        
+//    }
+//    cell.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
+//
+//    return cell;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return [self.arrData count];
+//}
+//
+//#pragma mark -- UITableViewDelegate
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 200.0;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableElements deselectRowAtIndexPath:indexPath animated:YES];
+//    
+//}
+//
+//- (void)pan:(UIPanGestureRecognizer *)recognizor {
+//    UILabel *lblPanned = (UILabel *)[recognizor view];
+//    UIView *referenceView = lblPanned.superview;
+//
+//    if (recognizor.state == UIGestureRecognizerStateEnded) {
+//        if (lblPanned.frame.origin.x < (referenceView.frame.origin.x + referenceView.frame.size.width)) {
+//            lblPanned.center = referenceView.center;
+//        } else {
+//            // stick it to DetailViewController's grid
+//            
+//
+//        }
+//        
+//    } else {
+//        NSLog(@"%f", [recognizor locationInView:referenceView].x);
+//        lblPanned.center = CGPointMake([recognizor locationInView:referenceView].x, [recognizor locationInView:referenceView].y);
+//    }
+//    
+//}
 
 //- (void)tap:(UITapGestureRecognizer *)recognizor {
 //    
