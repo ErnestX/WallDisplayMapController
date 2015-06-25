@@ -149,6 +149,8 @@
             lblPanned.center = referenceView.center;
         } else {
             // stick it to DetailViewController's grid
+            
+
         }
         
     } else {
