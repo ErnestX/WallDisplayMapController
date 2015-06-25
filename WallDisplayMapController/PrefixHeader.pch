@@ -21,6 +21,15 @@
 
 #define FONT_HELVETICA_NEUE_CONDENSEDBOLD @"HelveticaNeue-CondensedBold"
 
+
+///*** Chart Type ***/
+//
+//#define CHART_TYPE_BAR      @"chart_type_bar"
+//#define CHART_TYPE_CIRCLE   @"chart_type_circle"
+//#define CHART_TYPE_PIE      @"chart_type_pie"
+//#define CHART_TYPE_CUSTOM   @"chart_type_custom"
+
+
 /*** RabbitMQ ***/
 
 // queue names

@@ -30,6 +30,20 @@
     if (self) {
         arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
         dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
+        
+        // TEST DATA
+        NSArray *dataMob = @[@{@"model_vkt" : @12345, @"CEEI_vkt" : @10086},
+                             @{@"active_pct" : @3, @"transit_pct" : @34, @"vehicle_pct" : @78}];
+        
+        NSArray *dataLU = @[@{@"people" : @228, @"dwellings" : @340},
+                            @{@"single" : @12, @"rowhouse" : @34, @"apart" : @98},
+                            @{@"rez_pct" : @30, @"comm_pct" : @25, @"civic_pct" : @2, @"ind_pct" : @43}];
+        
+        NSArray *dataEC = @[@{@"cost" : @4521}];
+        [dictCategoryData addEntriesFromDictionary: @{@"Mobility" : dataMob,
+                                                      @"Land Use" : dataLU,
+                                                      @"Energy & Carbon" : dataEC}];
+        
     }
     return self;
 }
@@ -84,6 +98,7 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.textColor = COLOR_BG_WHITE;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = arrCategories[indexPath.row];
     return cell;
 }
@@ -100,11 +115,10 @@
     vc.title = arrCategories[indexPath.row];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target: nil action: nil];
     self.navigationItem.backBarButtonItem = backBarButton;
-    vc.dictData = dictCategoryData[arrCategories[indexPath.row]];
+    vc.arrData = dictCategoryData[arrCategories[indexPath.row]];
     
     [self.navigationController pushViewController:vc animated: YES];
     
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

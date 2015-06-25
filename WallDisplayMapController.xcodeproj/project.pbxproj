@@ -156,6 +156,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AE20E3F41B3B480F0066BBFE /* WidgetElementViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = WidgetElementViews;
+			sourceTree = "<group>";
+		};
 		AE6477441B2BA2A5006E8925 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +288,7 @@
 		CA2D53F01B1C205600B975B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE20E3F41B3B480F0066BBFE /* WidgetElementViews */,
 				AE9E40301B3209E00085000D /* WidgetViews */,
 				CA16396A1B0E546300E4FC81 /* MapControlView.h */,
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
