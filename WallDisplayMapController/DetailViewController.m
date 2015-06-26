@@ -12,7 +12,7 @@
 #import "JDDroppableView.h"
 #import <ChameleonFramework/Chameleon.h>
 
-const NSInteger ELEMENTS_PER_ROW;
+const NSInteger ELEMENTS_PER_ROW = 3;
 
 @interface DetailViewController ()
 
@@ -37,7 +37,7 @@ const NSInteger ELEMENTS_PER_ROW;
     UIViewController *masterVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:0]).childViewControllers[0];
     CGFloat masterWidth = masterVC.view.frame.size.width;
     visibleWidth = self.view.bounds.size.width-masterWidth;
-    gridSideLength = visibleWidth/3;
+    gridSideLength = visibleWidth/ELEMENTS_PER_ROW;
 
     gridView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0, 10.0, visibleWidth-20.0, self.view.frame.size.height-20.0)];
     gridView.backgroundColor = [UIColor flatSandColor];
@@ -58,7 +58,7 @@ const NSInteger ELEMENTS_PER_ROW;
     [self scrollToBottomAnimated: YES];
     
     // update last position
-    if (((lastX+1) % 3) == 0) {
+    if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
         lastX = 0;
         lastY++;
         
