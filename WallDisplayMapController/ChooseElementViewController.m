@@ -7,6 +7,7 @@
 //
 
 #import "ChooseElementViewController.h"
+#import "DetailViewController.h"
 #import "UIColor+Extend.h"
 #import "Masonry.h"
 #import "UnavailableView.h"
@@ -129,11 +130,12 @@
 }
 
 - (void)droppableViewEndedDragging:(JDDroppableView *)view onTarget:(UIView *)target {
-    [view removeFromSuperview];
-
-    // TODO:
-    // Modify so the target controller will add view to the corresponding grid in the target view
-    [target addSubview:view];
+    if (target) {
+        [view removeFromSuperview];
+        DetailViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
+        
+        [targetVC addElement:view];
+    }
     
 }
 

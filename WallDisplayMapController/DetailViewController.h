@@ -10,4 +10,6 @@
 
 @interface DetailViewController : UIViewController
 
+- (void)addElement:(UIView *)vElement;
+
 @end
