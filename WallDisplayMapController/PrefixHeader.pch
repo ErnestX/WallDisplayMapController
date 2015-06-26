@@ -9,6 +9,13 @@
 #ifndef WallDisplayMapController_PrefixHeader_pch
 #define WallDisplayMapController_PrefixHeader_pch
 
+#ifdef __OBJC__
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#endif
+
 #define DEFINE_WEAK_SELF __weak __typeof(&*self) weakSelf = self;
 
 /*** Colors ***/

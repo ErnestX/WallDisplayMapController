@@ -30,11 +30,14 @@
     
     UISplitViewController *splitVC = [[UISplitViewController alloc] init];
     splitVC.viewControllers = @[masterNav, detailNav];
+    splitVC.maximumPrimaryColumnWidth = splitVC.view.bounds.size.width;
+    splitVC.preferredPrimaryColumnWidthFraction = 0.25;
+    
     splitVC.view.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
     
     self.window.rootViewController = splitVC;
     [self.window makeKeyAndVisible];
-    
+        
     return YES;
 }
 

@@ -10,14 +10,18 @@
 #import "UIColor+Extend.h"
 #import "Masonry.h"
 #import "UnavailableView.h"
+#import "JDDroppableView.h"
 
-@interface ChooseElementViewController () //<UITableViewDataSource, UITableViewDelegate>
+#define WIDGET_ELEMENT_HEIGHT 200.0
+
+@interface ChooseElementViewController () <JDDroppableViewDelegate>
 
 @end
 
 @implementation ChooseElementViewController {
     
-//    UITableView *tableElements;
+    UIScrollView *scrollView;
+    UIView *dropTarget;
 }
 
 - (void)viewDidLoad {
@@ -36,32 +40,60 @@
     lblTitle.textColor = COLOR_BG_WHITE;
     self.navigationItem.titleView = lblTitle;
     
+    UIViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
+    [[targetVC.view subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIView *subview = obj;
+        if (subview.tag == 100081){
+            dropTarget = subview;
+            *stop = YES;
+        }
+    }];
+    
     if (!self.arrData) {
         // No data, widget elements unavailable
         [self showDataUnavailable];
         
     } else {
         // Display widget elements in table cells with the data we have
-//        [self showTableWithSelectableElements];
+        [self showTableWithSelectableElements];
         
     }
     
 }
 
-//- (void)showTableWithSelectableElements {
-//    tableElements = [[UITableView alloc] init];
-//    tableElements.delegate = self;
-//    tableElements.dataSource = self;
-//    tableElements.showsHorizontalScrollIndicator = NO;
-//    tableElements.showsVerticalScrollIndicator = NO;
-//    tableElements.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
-//    [self.view addSubview:tableElements];
-//    
-//    DEFINE_WEAK_SELF
-//    [tableElements mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
-//    }];
-//}
+- (void)showTableWithSelectableElements {
+    
+    scrollView = [[UIScrollView alloc] init];
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
+    scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    scrollView.canCancelContentTouches = NO;
+    scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count+8)*WIDGET_ELEMENT_HEIGHT);
+    [self.view addSubview: scrollView];
+    
+    // Layout widget elements
+    for (int i=0; i<[self.arrData count]+8; i++) {
+        JDDroppableView * dropview = [[JDDroppableView alloc] initWithDropTarget: dropTarget];
+        dropview.backgroundColor = [UIColor orangeColor];
+        dropview.layer.cornerRadius = 3.0;
+        dropview.frame = CGRectMake(5.0, i*WIDGET_ELEMENT_HEIGHT, scrollView.frame.size.width*0.25-10.0, WIDGET_ELEMENT_HEIGHT-10.0);
+        dropview.delegate = self;
+        dropview.tag = i;
+        
+        
+        UIView *bottomView = [[UIView alloc] initWithFrame:dropview.frame];
+        bottomView.layer.cornerRadius = 3.0;
+        bottomView.backgroundColor = [UIColor orangeColor];
+        bottomView.alpha = 0.5;
+        bottomView.tag = i;
+        
+        [scrollView addSubview:bottomView];
+        [scrollView addSubview: dropview];
+    
+    }
+
+}
 
 - (void)showDataUnavailable {
     UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
@@ -75,106 +107,39 @@
     
     [vUnav show];
 }
-//
-//#pragma mark -- UITableViewDataSource
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *cellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        UILabel *lblTest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200.0, 100.0)];
-//        lblTest.center = CGPointMake(cell.contentView.frame.size.width/2, cell.contentView.frame.size.height/2);
-//        lblTest.text = @"HELLO WORLD";
-//        lblTest.backgroundColor = [UIColor greenColor];
-//        lblTest.textColor = [UIColor redColor];
-//        lblTest.userInteractionEnabled = YES;
-//        lblTest.textAlignment = NSTextAlignmentCenter;
-//        
-//        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
-//                                                                              action:@selector(pan:)];
-//        [lblTest addGestureRecognizer:pan];
-//
-//        [cell.contentView addSubview:lblTest];
-//        
-//        
-//        
-//    }
-//    cell.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
-//
-//    return cell;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return [self.arrData count];
-//}
-//
-//#pragma mark -- UITableViewDelegate
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 200.0;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableElements deselectRowAtIndexPath:indexPath animated:YES];
-//    
-//}
-//
-//- (void)pan:(UIPanGestureRecognizer *)recognizor {
-//    UILabel *lblPanned = (UILabel *)[recognizor view];
-//    UIView *referenceView = lblPanned.superview;
-//
-//    if (recognizor.state == UIGestureRecognizerStateEnded) {
-//        if (lblPanned.frame.origin.x < (referenceView.frame.origin.x + referenceView.frame.size.width)) {
-//            lblPanned.center = referenceView.center;
-//        } else {
-//            // stick it to DetailViewController's grid
-//            
-//
-//        }
-//        
-//    } else {
-//        NSLog(@"%f", [recognizor locationInView:referenceView].x);
-//        lblPanned.center = CGPointMake([recognizor locationInView:referenceView].x, [recognizor locationInView:referenceView].y);
-//    }
-//    
-//}
 
-//- (void)tap:(UITapGestureRecognizer *)recognizor {
-//    
-//    // view begin shaking to indicate it just entered dragging mode
-//    UIView *tappedView = [recognizor view];
-//    if ([tappedView.layer.animationKeys count] != 0) {
-//        
-//        // view can now be dragged
-//        [tappedView addGestureRecognizer:pan];
-//        
-//    } else {
-////        [UIView animateKeyframesWithDuration:0.124
-////                                       delay:0.0
-////                                     options:UIViewKeyframeAnimationOptionAllowUserInteraction |UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat
-////                                  animations:^{
-////                                      tappedView.transform = CGAffineTransformMakeRotation(-0.05);
-////                                      tappedView.transform = CGAffineTransformMakeRotation(0.05);
-////                                      
-////                                  }
-////                                  completion:nil];
-//        
-//        CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-//        CGFloat wobbleAngle = (rand() % (10 - 5) + 5) /100.0;
-//        NSValue* valLeft = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(wobbleAngle, 0.0f, 0.0f, 1.0f)];
-//        NSValue* valRight = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(-wobbleAngle, 0.0f, 0.0f, 1.0f)];
-//        animation.values = [NSArray arrayWithObjects:valLeft, valRight, nil];
-//        animation.autoreverses = YES;
-//        
-//        animation.duration = 0.125;
-//        animation.repeatCount = HUGE_VALF;
-//        [tappedView.layer addAnimation:animation forKey:@"iconShake"];
-//        
-//    }
-//    
-//
-//}
+#pragma mark JDDroppableViewDelegate
+
+- (void)droppableView:(JDDroppableView *)view enteredTarget:(UIView *)target {
+    
+}
+
+- (void)droppableView:(JDDroppableView *)view leftTarget:(UIView *)target {
+
+
+}
+
+- (void)droppableViewBeganDragging:(JDDroppableView *)view {
+
+}
+
+- (void)droppableViewDidMove:(JDDroppableView *)view {
+    [[[UIApplication sharedApplication] keyWindow] addSubview:view];
+
+}
+
+- (void)droppableViewEndedDragging:(JDDroppableView *)view onTarget:(UIView *)target {
+    [view removeFromSuperview];
+
+    // TODO:
+    // Modify so the target controller will add view to the corresponding grid in the target view
+    [target addSubview:view];
+    
+}
+
+- (BOOL)shouldAnimateDroppableViewBack:(JDDroppableView *)view wasDroppedOnTarget:(UIView *)target {
+    return NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
