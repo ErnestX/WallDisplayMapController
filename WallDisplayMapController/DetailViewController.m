@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "JDDroppableView.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "PNChart.h"
 
 const NSInteger ELEMENTS_PER_ROW = 3;
 
@@ -50,20 +51,29 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     lastY = 0;
 }
 
-// TODO: Modify this method so its input is data only, not view
+// TODO: Modify this method so its input is data only, and create the view here
 - (void)addElement:(UIView *)vElement {
-    vElement.frame = CGRectMake(lastX*gridSideLength+5.0, lastY*gridSideLength+5.0, gridSideLength-10.0, gridSideLength-10.0);
-    vElement.userInteractionEnabled = NO;
-    [gridView addSubview: vElement];
-    [self scrollToBottomAnimated: YES];
+    int randint = arc4random_uniform(100);
+    PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0)
+                                                                total:@100
+                                                              current:[NSNumber numberWithInt:randint]
+                                                            clockwise:YES
+                                                               shadow:YES
+                                                          shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
+                                                 displayCountingLabel:NO
+                                                    overrideLineWidth:@35];
+    circleChart.layer.borderColor = [UIColor blackColor].CGColor;
+    [circleChart setStrokeColor:RandomFlatColor];
+    circleChart.userInteractionEnabled = NO;
+    [gridView addSubview:circleChart];
+    [circleChart strokeChart];
     
     // update last position
     if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
         lastX = 0;
         lastY++;
-        
         gridView.contentSize = CGSizeMake(gridView.contentSize.width, (lastY+1)*gridSideLength);
-        
+
     } else {
         lastX++;
     }
