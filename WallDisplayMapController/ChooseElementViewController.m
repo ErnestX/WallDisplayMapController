@@ -12,14 +12,17 @@
 #import "Masonry.h"
 #import "UnavailableView.h"
 #import "JDDroppableView.h"
-
-#define WIDGET_ELEMENT_HEIGHT 200.0
+#import "DroppableCircleChart.h"
+#import "DroppableBarChart.h"
 
 @interface ChooseElementViewController () <JDDroppableViewDelegate>
+
+@property NSString *test;
 
 @end
 
 @implementation ChooseElementViewController {
+    CGFloat widgetElementSideLength;
     
     UIScrollView *scrollView;
     UIView *dropTarget;
@@ -64,33 +67,50 @@
 
 - (void)showTableWithSelectableElements {
     
+    widgetElementSideLength = self.view.frame.size.width * MASTER_VC_WIDTH_FRACTION;
     scrollView = [[UIScrollView alloc] init];
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     scrollView.canCancelContentTouches = NO;
-    scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count+8)*WIDGET_ELEMENT_HEIGHT);
+    scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count+8)*widgetElementSideLength);
     [self.view addSubview: scrollView];
+    
     
     // Layout widget elements
     for (int i=0; i<[self.arrData count]+8; i++) {
-        JDDroppableView * dropview = [[JDDroppableView alloc] initWithDropTarget: dropTarget];
-        dropview.backgroundColor = [UIColor orangeColor];
-        dropview.layer.cornerRadius = 3.0;
-        dropview.frame = CGRectMake(5.0, i*WIDGET_ELEMENT_HEIGHT, scrollView.frame.size.width*0.25-10.0, WIDGET_ELEMENT_HEIGHT-10.0);
-        dropview.delegate = self;
-        dropview.tag = i;
-        
-        
-        UIView *bottomView = [[UIView alloc] initWithFrame:dropview.frame];
-        bottomView.layer.cornerRadius = 3.0;
-        bottomView.backgroundColor = [UIColor orangeColor];
+        CGRect chartFrame = CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0);
+        DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
+                                                                         target:dropTarget
+                                                                       delegate:self];
+        DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
         bottomView.alpha = 0.5;
-        bottomView.tag = i;
-        
+        bottomView.userInteractionEnabled = NO;
         [scrollView addSubview:bottomView];
         [scrollView addSubview: dropview];
+        [dropview updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
+        [bottomView updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
+        
+//        [dropview updateBarChartWithValues:@[@1234, @2345, @34, @124, @2, @690] type:@"Mobility"];
+//        [bottomView updateBarChartWithValues:@[@1234, @2345, @34, @124, @2, @690] type:@"Mobility"];
+        
+//        DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0)];
+//        [dropview addDropTarget:dropTarget];
+//        dropview.delegate = self;
+//        dropview.tag = i;
+//        
+//        
+//        DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0)];
+//        bottomView.userInteractionEnabled = NO;
+//        bottomView.alpha = 0.5;
+//        bottomView.tag = i;
+//        
+//        [scrollView addSubview:bottomView];
+//        [scrollView addSubview: dropview];
+//        
+//        [dropview updateCircleChartWithCurrent:@66 type:@"Mobility" icon:nil];
+//        [bottomView updateCircleChartWithCurrent:@66 type:@"Mobility" icon:nil];
     
     }
 

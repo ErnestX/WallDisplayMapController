@@ -44,6 +44,7 @@
 
     [progressline moveToPoint:CGPointMake(self.frame.size.width / 2.0, self.frame.size.height)];
     [progressline addLineToPoint:CGPointMake(self.frame.size.width / 2.0, (1 - grade) * self.frame.size.height)];
+    self.strokeHeight = (1 - grade) * self.frame.size.height;
 
     [progressline setLineWidth:1.0];
     [progressline setLineCapStyle:kCGLineCapSquare];

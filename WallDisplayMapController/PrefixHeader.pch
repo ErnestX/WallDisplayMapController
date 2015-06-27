@@ -36,6 +36,7 @@
 //#define CHART_TYPE_PIE      @"chart_type_pie"
 //#define CHART_TYPE_CUSTOM   @"chart_type_custom"
 
+#define MASTER_VC_WIDTH_FRACTION 0.20
 
 /*** RabbitMQ ***/
 

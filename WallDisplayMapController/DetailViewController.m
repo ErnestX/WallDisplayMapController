@@ -12,6 +12,8 @@
 #import "JDDroppableView.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "PNChart.h"
+#import "DroppableBarChart.h"
+#import "DroppableCircleChart.h"
 
 const NSInteger ELEMENTS_PER_ROW = 3;
 
@@ -41,7 +43,7 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     gridSideLength = visibleWidth/ELEMENTS_PER_ROW;
 
     gridView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0, 10.0, visibleWidth-20.0, self.view.frame.size.height-20.0)];
-    gridView.backgroundColor = [UIColor flatSandColor];
+//    gridView.backgroundColor = [UIColor flatSandColor];
     gridView.tag = 100081;
     gridView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     gridView.contentSize = CGSizeMake(gridView.frame.size.width, gridView.frame.size.height);
@@ -54,19 +56,28 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 // TODO: Modify this method so its input is data only, and create the view here
 - (void)addElement:(UIView *)vElement {
     int randint = arc4random_uniform(100);
-    PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0)
-                                                                total:@100
-                                                              current:[NSNumber numberWithInt:randint]
-                                                            clockwise:YES
-                                                               shadow:YES
-                                                          shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
-                                                 displayCountingLabel:NO
-                                                    overrideLineWidth:@35];
-    circleChart.layer.borderColor = [UIColor blackColor].CGColor;
-    [circleChart setStrokeColor:RandomFlatColor];
-    circleChart.userInteractionEnabled = NO;
-    [gridView addSubview:circleChart];
-    [circleChart strokeChart];
+    
+    CGRect chartFrame = CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0);
+    DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
+                                                                    target:nil
+                                                                  delegate:self];
+    dropview.userInteractionEnabled = NO;
+    [gridView addSubview: dropview];
+    [dropview updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
+    
+//    PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0)
+//                                                                total:@100
+//                                                              current:[NSNumber numberWithInt:randint]
+//                                                            clockwise:YES
+//                                                               shadow:YES
+//                                                          shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
+//                                                 displayCountingLabel:NO
+//                                                    overrideLineWidth:@35];
+//    circleChart.layer.borderColor = [UIColor blackColor].CGColor;
+//    [circleChart setStrokeColor:RandomFlatColor];
+//    circleChart.userInteractionEnabled = NO;
+//    [gridView addSubview:circleChart];
+//    [circleChart strokeChart];
     
     // update last position
     if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {

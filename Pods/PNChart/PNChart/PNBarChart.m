@@ -208,7 +208,7 @@
             }
             
             bar = [[PNBar alloc] initWithFrame:CGRectMake(barXPosition, //Bar X position
-                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin, //Bar Y position
+                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin+_labelMarginTop, //Bar Y position
                                                           barWidth, // Bar witdh
                                                           chartCavanHeight)]; //Bar height
             

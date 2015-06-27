@@ -31,6 +31,8 @@
 		AE9E40331B3209FC0085000D /* MobilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9E40321B3209FC0085000D /* MobilityView.m */; };
 		AE9E40361B320AE00085000D /* UnavailableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9E40351B320AE00085000D /* UnavailableView.m */; };
 		AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */; };
+		AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */; };
+		AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
 		CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */; };
 		CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */; };
@@ -104,6 +106,10 @@
 		AE9E40351B320AE00085000D /* UnavailableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnavailableView.m; sourceTree = "<group>"; };
 		AEA1BF6D1B3C8A030079BD66 /* JDDroppableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDDroppableView.h; sourceTree = "<group>"; };
 		AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDDroppableView.m; sourceTree = "<group>"; };
+		AEA1BF701B3DEA410079BD66 /* DroppableCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableCircleChart.h; sourceTree = "<group>"; };
+		AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableCircleChart.m; sourceTree = "<group>"; };
+		AEA1BF731B3E09740079BD66 /* DroppableBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableBarChart.h; sourceTree = "<group>"; };
+		AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableBarChart.m; sourceTree = "<group>"; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639461B0E4FBC00E4FC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 		AE20E3F41B3B480F0066BBFE /* WidgetElementViews */ = {
 			isa = PBXGroup;
 			children = (
+				AEA1BF701B3DEA410079BD66 /* DroppableCircleChart.h */,
+				AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */,
+				AEA1BF731B3E09740079BD66 /* DroppableBarChart.h */,
+				AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */,
 			);
 			name = WidgetElementViews;
 			sourceTree = "<group>";
@@ -490,12 +500,14 @@
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
 				AE9E40361B320AE00085000D /* UnavailableView.m in Sources */,
 				AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */,
+				AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */,
 				AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
+				AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */,
 				AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
 				AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */,
