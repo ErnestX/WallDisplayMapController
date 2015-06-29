@@ -31,13 +31,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
-                          @"Buildings" : COLOR_WATERMELON,
-                          @"Energy" : FlatGreen,
-                          @"DistrictEnergy" : FlatPlum};
+                          @"Land Use" : COLOR_WATERMELON,
+                          @"Energy & Carbon" : FlatGreen,
+                          @"Economy" : FlatPlum,
+                          @"Equity" : FlatCoffee,
+                          @"Well Being" : FlatYellow};
         
         barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         barChart.labelMarginTop = 10.0;
-        barChart.labelFont = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:15.0];
+        barChart.labelFont = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:15.0];
         barChart.labelTextColor = [UIColor lightGrayColor];
         barChart.backgroundColor = COLOR_BG_WHITE;
         barChart.yLabelFormatter = ^NSString *(CGFloat yLabelValue) {
@@ -49,12 +51,13 @@
     return self;
 }
 
-- (void)updateBarChartWithValues:(NSArray *)values type:(NSString *)type {
 
+- (void)updateBarChartWithValues:(NSArray *)values labels:(NSArray *)labels type:(NSString *)type {
+    
     barChart.barWidth = barChart.frame.size.width/([values count]*2);
     barChart.strokeColor = dictTypeColor[type];
-//    [barChart setXLabels:@[@"People", @"Dwellings", @"asd", @"3453", @"1lajkh", @"awerga;sdf"]];
-    [barChart setXLabels:@[@"People", @"Dwellings"]];
+    
+    [barChart setXLabels:labels];
     barChart.showLabel = NO;
     [barChart setYValues:values];
     [barChart strokeChart];
@@ -71,12 +74,12 @@
         UILabel *lblBar = [[UILabel alloc] initWithFrame:CGRectMake(bar.frame.origin.x, bar.strokeHeight, bar.frame.size.width, 30.0)];
         lblBar.tag = 10086+idx;
         lblBar.text = [(NSNumber *)values[idx] stringValue];
-        lblBar.font = barChart.labelFont;
+        lblBar.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:16.0];
         lblBar.textColor = barChart.labelTextColor;
         lblBar.textAlignment = NSTextAlignmentCenter;
         lblBar.alpha = 0.2;
         [barChart addSubview:lblBar];
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:1.0
                              animations:^{
@@ -89,5 +92,6 @@
     }];
     
 }
+
 
 @end

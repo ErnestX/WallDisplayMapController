@@ -23,18 +23,20 @@
 #define COLOR_BG_WHITE [UIColor colorWithRed:250.0/255.0 green:250.0/255.0 blue:250.0/255.0 alpha:1.0]
 #define COLOR_LIGHT_BLUE [UIColor colorWithRed:0.518 green:0.824 blue:0.867 alpha:1.0]
 #define COLOR_WATERMELON [UIColor flatWatermelonColor]
+#define COLOR_BG_GREY [UIColor lightGrayColor]
 
 /*** Fonts ***/
 
 #define FONT_HELVETICA_NEUE_CONDENSEDBOLD @"HelveticaNeue-CondensedBold"
+#define FONT_HELVETICA_NEUE_MEDIUM @"HelveticaNeue-Medium"
 
 
 ///*** Chart Type ***/
-//
-//#define CHART_TYPE_BAR      @"chart_type_bar"
-//#define CHART_TYPE_CIRCLE   @"chart_type_circle"
-//#define CHART_TYPE_PIE      @"chart_type_pie"
-//#define CHART_TYPE_CUSTOM   @"chart_type_custom"
+
+#define CHART_TYPE_BAR      @"chart_type_bar"
+#define CHART_TYPE_CIRCLE   @"chart_type_circle"
+#define CHART_TYPE_PIE      @"chart_type_pie"
+#define CHART_TYPE_CUSTOM   @"chart_type_custom"
 
 #define MASTER_VC_WIDTH_FRACTION 0.20
 

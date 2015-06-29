@@ -33,7 +33,7 @@
     
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = COLOR_BG_WHITE;
-    self.view.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
+    self.view.backgroundColor = COLOR_BG_GREY;
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -70,47 +70,61 @@
     widgetElementSideLength = self.view.frame.size.width * MASTER_VC_WIDTH_FRACTION;
     scrollView = [[UIScrollView alloc] init];
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    scrollView.backgroundColor = [UIColor colorFromHexString:@"#e3e3e3"];
-    scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    scrollView.backgroundColor = COLOR_BG_GREY;
+    scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     scrollView.canCancelContentTouches = NO;
-    scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count+8)*widgetElementSideLength);
+    scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count)*widgetElementSideLength);
     [self.view addSubview: scrollView];
     
     
     // Layout widget elements
-    for (int i=0; i<[self.arrData count]+8; i++) {
-        CGRect chartFrame = CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0);
-        DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
-                                                                         target:dropTarget
-                                                                       delegate:self];
-        DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
-        bottomView.alpha = 0.5;
-        bottomView.userInteractionEnabled = NO;
-        [scrollView addSubview:bottomView];
-        [scrollView addSubview: dropview];
-        [dropview updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
-        [bottomView updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
+    for (int i=0; i<[self.arrData count]; i++) {
+        NSDictionary *dict = self.arrData[i];
+        NSString *chartType = dict[@"ch_type"];
+        NSDictionary *data = dict[@"ch_data"];
+        CGRect chartFrame = CGRectMake(1.0, i*widgetElementSideLength+0.5, widgetElementSideLength-2.0, widgetElementSideLength-1.0);
         
-//        [dropview updateBarChartWithValues:@[@1234, @2345, @34, @124, @2, @690] type:@"Mobility"];
-//        [bottomView updateBarChartWithValues:@[@1234, @2345, @34, @124, @2, @690] type:@"Mobility"];
+        if ([chartType isEqualToString:CHART_TYPE_BAR]) {
+            // build one single bar chart
+
+            DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
+                                                                            target:dropTarget
+                                                                          delegate:self];
+            DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
+            bottomView.alpha = 0.5;
+            bottomView.userInteractionEnabled = NO;
+            [scrollView addSubview:bottomView];
+            [scrollView addSubview: dropview];
+            
+            [dropview updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
+            [bottomView updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
+            
         
-//        DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0)];
-//        [dropview addDropTarget:dropTarget];
-//        dropview.delegate = self;
-//        dropview.tag = i;
-//        
-//        
-//        DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(5.0, i*widgetElementSideLength+5.0, widgetElementSideLength-10.0, widgetElementSideLength-10.0)];
-//        bottomView.userInteractionEnabled = NO;
-//        bottomView.alpha = 0.5;
-//        bottomView.tag = i;
-//        
-//        [scrollView addSubview:bottomView];
-//        [scrollView addSubview: dropview];
-//        
-//        [dropview updateCircleChartWithCurrent:@66 type:@"Mobility" icon:nil];
-//        [bottomView updateCircleChartWithCurrent:@66 type:@"Mobility" icon:nil];
+        } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
+            // build circle chart
+
+            DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
+            [dropview addDropTarget:dropTarget];
+            dropview.delegate = self;
+            
+            DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
+            bottomView.userInteractionEnabled = NO;
+            bottomView.alpha = 0.5;
+            
+            [scrollView addSubview:bottomView];
+            [scrollView addSubview: dropview];
+            
+            [dropview updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
+            [bottomView updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
+
+            
+        } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
+            // not now
+            
+        } else {
+            // custom, not now
+        }
     
     }
 

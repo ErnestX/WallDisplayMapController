@@ -25,6 +25,7 @@
     if (self) {
         
         self.errorMessage = text;
+        self.backgroundColor = [UIColor lightTextColor];
         
     }
     return self;
@@ -36,7 +37,7 @@
     lblMessage.textAlignment = NSTextAlignmentCenter;
     lblMessage.numberOfLines = 0;
     lblMessage.lineBreakMode = NSLineBreakByWordWrapping;
-    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue" size:19.0];
+    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
     lblMessage.textColor = [UIColor grayColor];
     
     [self addSubview:lblMessage];

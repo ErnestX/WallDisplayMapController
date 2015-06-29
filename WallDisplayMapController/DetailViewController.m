@@ -43,7 +43,6 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     gridSideLength = visibleWidth/ELEMENTS_PER_ROW;
 
     gridView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0, 10.0, visibleWidth-20.0, self.view.frame.size.height-20.0)];
-//    gridView.backgroundColor = [UIColor flatSandColor];
     gridView.tag = 100081;
     gridView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     gridView.contentSize = CGSizeMake(gridView.frame.size.width, gridView.frame.size.height);
@@ -63,7 +62,7 @@ const NSInteger ELEMENTS_PER_ROW = 3;
                                                                   delegate:self];
     dropview.userInteractionEnabled = NO;
     [gridView addSubview: dropview];
-    [dropview updateBarChartWithValues:@[@1234, @2345] type:@"Mobility"];
+    [dropview updateBarChartWithValues:@[@1234, @2345] labels:@[@"People", @"Dwellings"] type:@"Mobility"];
     
 //    PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0)
 //                                                                total:@100

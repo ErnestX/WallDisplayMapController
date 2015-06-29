@@ -10,19 +10,19 @@
 		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
 		AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE15E8731B30E28E00E9A47A /* WidgetViewController.m */; };
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
-		AE23B8EE1B348DD6009B0E2E /* carIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B8EB1B348DD6009B0E2E /* carIcon.png */; };
-		AE23B8EF1B348DD6009B0E2E /* walkingPersonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B8EC1B348DD6009B0E2E /* walkingPersonIcon.png */; };
-		AE23B8F01B348DD6009B0E2E /* busIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B8ED1B348DD6009B0E2E /* busIcon.png */; };
 		AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9491B34AE31009B0E2E /* LandUseView.m */; };
-		AE23B94E1B34B3FE009B0E2E /* houseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94B1B34B3FE009B0E2E /* houseIcon.png */; };
-		AE23B94F1B34B3FE009B0E2E /* rowHouseIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94C1B34B3FE009B0E2E /* rowHouseIcon.png */; };
-		AE23B9501B34B3FE009B0E2E /* apartmentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE23B94D1B34B3FE009B0E2E /* apartmentIcon.png */; };
 		AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */; };
 		AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */; };
 		AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477471B2BA32D006E8925 /* DensityModel.m */; };
 		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
 		AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774D1B2BA347006E8925 /* BuildingsModel.m */; };
 		AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477501B2BA43C006E8925 /* WidgetModel.m */; };
+		AE6C04241B41D4C700A1D777 /* active_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C041E1B41D4C700A1D777 /* active_pct.png */; };
+		AE6C04251B41D4C700A1D777 /* apart.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C041F1B41D4C700A1D777 /* apart.png */; };
+		AE6C04261B41D4C700A1D777 /* rowhouse.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04201B41D4C700A1D777 /* rowhouse.png */; };
+		AE6C04271B41D4C700A1D777 /* single.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04211B41D4C700A1D777 /* single.png */; };
+		AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04221B41D4C700A1D777 /* transit_pct.png */; };
+		AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04231B41D4C700A1D777 /* vehicle_pct.png */; };
 		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
 		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */; };
@@ -69,14 +69,8 @@
 		AE15E8731B30E28E00E9A47A /* WidgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetViewController.m; sourceTree = "<group>"; };
 		AE20E3F01B3B1C950066BBFE /* ChooseElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseElementViewController.h; sourceTree = "<group>"; };
 		AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseElementViewController.m; sourceTree = "<group>"; };
-		AE23B8EB1B348DD6009B0E2E /* carIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carIcon.png; sourceTree = "<group>"; };
-		AE23B8EC1B348DD6009B0E2E /* walkingPersonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walkingPersonIcon.png; sourceTree = "<group>"; };
-		AE23B8ED1B348DD6009B0E2E /* busIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = busIcon.png; sourceTree = "<group>"; };
 		AE23B9481B34AE31009B0E2E /* LandUseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandUseView.h; sourceTree = "<group>"; };
 		AE23B9491B34AE31009B0E2E /* LandUseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandUseView.m; sourceTree = "<group>"; };
-		AE23B94B1B34B3FE009B0E2E /* houseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = houseIcon.png; sourceTree = "<group>"; };
-		AE23B94C1B34B3FE009B0E2E /* rowHouseIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowHouseIcon.png; sourceTree = "<group>"; };
-		AE23B94D1B34B3FE009B0E2E /* apartmentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apartmentIcon.png; sourceTree = "<group>"; };
 		AE23B9531B34C3BB009B0E2E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RabbitMQManager.h; sourceTree = "<group>"; };
 		AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RabbitMQManager.m; sourceTree = "<group>"; };
@@ -90,6 +84,12 @@
 		AE64774D1B2BA347006E8925 /* BuildingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsModel.m; sourceTree = "<group>"; };
 		AE64774F1B2BA43C006E8925 /* WidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetModel.h; sourceTree = "<group>"; };
 		AE6477501B2BA43C006E8925 /* WidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetModel.m; sourceTree = "<group>"; };
+		AE6C041E1B41D4C700A1D777 /* active_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_pct.png; sourceTree = "<group>"; };
+		AE6C041F1B41D4C700A1D777 /* apart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apart.png; sourceTree = "<group>"; };
+		AE6C04201B41D4C700A1D777 /* rowhouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rowhouse.png; sourceTree = "<group>"; };
+		AE6C04211B41D4C700A1D777 /* single.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = single.png; sourceTree = "<group>"; };
+		AE6C04221B41D4C700A1D777 /* transit_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transit_pct.png; sourceTree = "<group>"; };
+		AE6C04231B41D4C700A1D777 /* vehicle_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vehicle_pct.png; sourceTree = "<group>"; };
 		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -323,12 +323,12 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				AE23B94B1B34B3FE009B0E2E /* houseIcon.png */,
-				AE23B94C1B34B3FE009B0E2E /* rowHouseIcon.png */,
-				AE23B94D1B34B3FE009B0E2E /* apartmentIcon.png */,
-				AE23B8EB1B348DD6009B0E2E /* carIcon.png */,
-				AE23B8EC1B348DD6009B0E2E /* walkingPersonIcon.png */,
-				AE23B8ED1B348DD6009B0E2E /* busIcon.png */,
+				AE6C041E1B41D4C700A1D777 /* active_pct.png */,
+				AE6C041F1B41D4C700A1D777 /* apart.png */,
+				AE6C04201B41D4C700A1D777 /* rowhouse.png */,
+				AE6C04211B41D4C700A1D777 /* single.png */,
+				AE6C04221B41D4C700A1D777 /* transit_pct.png */,
+				AE6C04231B41D4C700A1D777 /* vehicle_pct.png */,
 				CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */,
 				CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */,
 				CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */,
@@ -430,19 +430,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE23B94F1B34B3FE009B0E2E /* rowHouseIcon.png in Resources */,
 				CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */,
-				AE23B8F01B348DD6009B0E2E /* busIcon.png in Resources */,
-				AE23B8EF1B348DD6009B0E2E /* walkingPersonIcon.png in Resources */,
+				AE6C04261B41D4C700A1D777 /* rowhouse.png in Resources */,
 				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
 				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
+				AE6C04241B41D4C700A1D777 /* active_pct.png in Resources */,
+				AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */,
+				AE6C04251B41D4C700A1D777 /* apart.png in Resources */,
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
-				AE23B8EE1B348DD6009B0E2E /* carIcon.png in Resources */,
-				AE23B94E1B34B3FE009B0E2E /* houseIcon.png in Resources */,
+				AE6C04271B41D4C700A1D777 /* single.png in Resources */,
+				AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
-				AE23B9501B34B3FE009B0E2E /* apartmentIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

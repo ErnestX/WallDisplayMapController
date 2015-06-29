@@ -32,14 +32,35 @@
         dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
         
         // TEST DATA
-        NSArray *dataMob = @[@{@"model_vkt" : @12345, @"CEEI_vkt" : @10086},
-                             @{@"active_pct" : @3, @"transit_pct" : @34, @"vehicle_pct" : @78}];
+        // Mobility
+        NSDictionary *dictBar = @{@"ch_type" : CHART_TYPE_BAR,
+                                  @"ch_data" : @{@"model_vkt" : @12345, @"CEEI_vkt" : @10086}};
+        NSDictionary *dictCircle1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                     @"ch_data" : @{@"active_pct" : @3}};
+        NSDictionary *dictCircle2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                      @"ch_data" : @{@"transit_pct" : @34}};
+        NSDictionary *dictCircle3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                      @"ch_data" : @{@"vehicle_pct" : @78}};
         
-        NSArray *dataLU = @[@{@"people" : @228, @"dwellings" : @340},
-                            @{@"single" : @12, @"rowhouse" : @34, @"apart" : @98},
-                            @{@"rez_pct" : @30, @"comm_pct" : @25, @"civic_pct" : @2, @"ind_pct" : @43}];
+        NSArray *dataMob = @[dictBar, dictCircle1, dictCircle2, dictCircle3];
         
-        NSArray *dataEC = @[@{@"cost" : @4521}];
+        // Land Use
+        NSDictionary *dictBar1 = @{@"ch_type" : CHART_TYPE_BAR,
+                                   @"ch_data" : @{@"people" : @228, @"dwellings" : @340}};
+        NSDictionary *dictCircle4 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                      @"ch_data" : @{@"single" : @12}};
+        NSDictionary *dictCircle5 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                      @"ch_data" : @{@"rowhouse" : @34}};
+        NSDictionary *dictCircle6 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                                       @"ch_data" : @{@"apart" : @98}};
+        
+        NSArray *dataLU = @[dictBar1, dictCircle4, dictCircle5, dictCircle6];
+        
+        // Energy & Carbon
+        NSDictionary *dictCustom = @{@"ch_type" : CHART_TYPE_CUSTOM,
+                                     @"ch_data" : @{@"cost" : @4521}};
+        NSArray *dataEC = @[dictCustom];
+        
         [dictCategoryData addEntriesFromDictionary: @{@"Mobility" : dataMob,
                                                       @"Land Use" : dataLU,
                                                       @"Energy & Carbon" : dataEC}];
@@ -116,6 +137,7 @@
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target: nil action: nil];
     self.navigationItem.backBarButtonItem = backBarButton;
     vc.arrData = dictCategoryData[arrCategories[indexPath.row]];
+    vc.category = arrCategories[indexPath.row];
     
     [self.navigationController pushViewController:vc animated: YES];
     

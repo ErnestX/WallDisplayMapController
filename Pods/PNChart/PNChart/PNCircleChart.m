@@ -122,7 +122,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
     // Add counting label
 
     if (_displayCountingLabel) {
-        [_countingLabel setFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:_countingLabelFontSize]];
+        [_countingLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:_countingLabelFontSize]];
 
         NSString *format;
         switch (self.chartType) {
