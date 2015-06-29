@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) CGPoint returnPosition;
 @property (nonatomic, assign) BOOL shouldUpdateReturnPosition;
+@property (nonatomic, strong) NSMutableArray *dropTargets;
+
 
 - (id)initWithDropTarget:(UIView*)target;
 

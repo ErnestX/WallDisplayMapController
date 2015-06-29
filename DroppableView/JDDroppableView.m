@@ -12,7 +12,6 @@
 const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
 
 @interface JDDroppableView ()
-@property (nonatomic, strong) NSMutableArray *dropTargets;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, weak) UIView *activeDropTarget;
 @property (nonatomic, weak) UIView *outerView;

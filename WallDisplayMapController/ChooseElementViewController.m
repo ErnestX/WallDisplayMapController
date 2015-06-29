@@ -40,7 +40,7 @@
     
     UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80.0, 40.0)];
     lblTitle.text = self.title;
-    lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+    lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
     lblTitle.textColor = COLOR_BG_WHITE;
     self.navigationItem.titleView = lblTitle;
     
@@ -168,7 +168,8 @@
         [view removeFromSuperview];
         DetailViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
         
-        [targetVC addElement:view];
+        UIView *newView = view;
+        [targetVC addElement:newView];
     }
     
 }

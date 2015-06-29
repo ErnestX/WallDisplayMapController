@@ -33,9 +33,28 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 
     self.view.backgroundColor = COLOR_BG_WHITE;
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.tintColor = COLOR_BG_WHITE;
+    // Make navigation bar colored
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.backgroundColor = [UIColor colorFromHexString:@"#1ABC9C"];
+    
+    // Customize appearance of navigation bar title
+    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 40.0)];
+    lblTitle.text = @"City Plan Metrics";
+    lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
+    lblTitle.textColor = COLOR_BG_WHITE;
+    self.navigationItem.titleView = lblTitle;
+    
+    // Right navigation item
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
+    self.navigationItem.rightBarButtonItem = editBarButton;
     
     UIViewController *masterVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:0]).childViewControllers[0];
     CGFloat masterWidth = masterVC.view.frame.size.width;
@@ -52,31 +71,11 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     lastY = 0;
 }
 
-// TODO: Modify this method so its input is data only, and create the view here
 - (void)addElement:(UIView *)vElement {
-    int randint = arc4random_uniform(100);
     
     CGRect chartFrame = CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0);
-    DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
-                                                                    target:nil
-                                                                  delegate:self];
-    dropview.userInteractionEnabled = NO;
-    [gridView addSubview: dropview];
-    [dropview updateBarChartWithValues:@[@1234, @2345] labels:@[@"People", @"Dwellings"] type:@"Mobility"];
-    
-//    PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0)
-//                                                                total:@100
-//                                                              current:[NSNumber numberWithInt:randint]
-//                                                            clockwise:YES
-//                                                               shadow:YES
-//                                                          shadowColor:[UIColor colorWithFlatVersionOf:PNLightGrey]
-//                                                 displayCountingLabel:NO
-//                                                    overrideLineWidth:@35];
-//    circleChart.layer.borderColor = [UIColor blackColor].CGColor;
-//    [circleChart setStrokeColor:RandomFlatColor];
-//    circleChart.userInteractionEnabled = NO;
-//    [gridView addSubview:circleChart];
-//    [circleChart strokeChart];
+    vElement.frame = chartFrame;
+    [gridView addSubview: vElement];
     
     // update last position
     if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
@@ -104,6 +103,25 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     if (newOffset.y != gridView.contentOffset.y) {
         [gridView setContentOffset: newOffset animated: animated];
     }
+}
+
+- (void)widgetStartEditing {
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target: self action: @selector(widgetEndEditing)];
+    self.navigationItem.rightBarButtonItem = doneBarButton;
+    
+    NSArray *widgets = gridView.subviews;
+    if ([widgets count] != 0) {
+        // TODO: Start wobbling and show delete button on top right corner of each widget
+        
+    }
+    
+}
+
+- (void)widgetEndEditing {
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
+    self.navigationItem.rightBarButtonItem = editBarButton;
+    
+    // TODO: Stop wobbling and remove the delete buttons
 }
 
 - (void)didReceiveMemoryWarning {
