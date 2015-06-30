@@ -23,6 +23,8 @@
 		AE6C04271B41D4C700A1D777 /* single.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04211B41D4C700A1D777 /* single.png */; };
 		AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04221B41D4C700A1D777 /* transit_pct.png */; };
 		AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04231B41D4C700A1D777 /* vehicle_pct.png */; };
+		AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C042E1B42029400A1D777 /* DroppableChart.m */; };
+		AE6C04321B42070E00A1D777 /* WobbleAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C04311B42070E00A1D777 /* WobbleAnimator.m */; };
 		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
 		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */; };
@@ -90,6 +92,10 @@
 		AE6C04211B41D4C700A1D777 /* single.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = single.png; sourceTree = "<group>"; };
 		AE6C04221B41D4C700A1D777 /* transit_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transit_pct.png; sourceTree = "<group>"; };
 		AE6C04231B41D4C700A1D777 /* vehicle_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vehicle_pct.png; sourceTree = "<group>"; };
+		AE6C042D1B42029400A1D777 /* DroppableChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableChart.h; sourceTree = "<group>"; };
+		AE6C042E1B42029400A1D777 /* DroppableChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableChart.m; sourceTree = "<group>"; };
+		AE6C04301B42070E00A1D777 /* WobbleAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WobbleAnimator.h; sourceTree = "<group>"; };
+		AE6C04311B42070E00A1D777 /* WobbleAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WobbleAnimator.m; sourceTree = "<group>"; };
 		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -172,6 +178,8 @@
 				AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */,
 				AEA1BF731B3E09740079BD66 /* DroppableBarChart.h */,
 				AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */,
+				AE6C042D1B42029400A1D777 /* DroppableChart.h */,
+				AE6C042E1B42029400A1D777 /* DroppableChart.m */,
 			);
 			name = WidgetElementViews;
 			sourceTree = "<group>";
@@ -266,6 +274,8 @@
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */,
 				AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */,
+				AE6C04301B42070E00A1D777 /* WobbleAnimator.h */,
+				AE6C04311B42070E00A1D777 /* WobbleAnimator.m */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				CA2D53F01B1C205600B975B6 /* View */,
@@ -498,6 +508,7 @@
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
+				AE6C04321B42070E00A1D777 /* WobbleAnimator.m in Sources */,
 				AE9E40361B320AE00085000D /* UnavailableView.m in Sources */,
 				AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */,
 				AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */,
@@ -505,6 +516,7 @@
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
+				AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */,

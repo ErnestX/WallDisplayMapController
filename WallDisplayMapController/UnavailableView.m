@@ -46,7 +46,7 @@
     [lblMessage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.bottom.equalTo(weakSelf);
         make.centerX.equalTo(weakSelf);
-        make.width.equalTo(weakSelf.mas_width).with.offset(-35.0f);
+        make.width.equalTo(weakSelf.mas_width).with.offset(-15.0f);
     }];
 }
 

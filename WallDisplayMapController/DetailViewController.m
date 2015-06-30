@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Jialiang. All rights reserved.
 //
 
+#define RADIANS(degrees) ((degrees * M_PI) / 180.0)
+
 #import "DetailViewController.h"
 #import "UIColor+Extend.h"
 #import "Masonry.h"
@@ -14,10 +16,11 @@
 #import "PNChart.h"
 #import "DroppableBarChart.h"
 #import "DroppableCircleChart.h"
+#import "WobbleAnimator.h"
 
 const NSInteger ELEMENTS_PER_ROW = 3;
 
-@interface DetailViewController ()
+@interface DetailViewController ()<JDDroppableViewDelegate>
 
 @end
 
@@ -71,11 +74,42 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     lastY = 0;
 }
 
-- (void)addElement:(UIView *)vElement {
+- (void)addElement:(DroppableChart *)vElement {
     
     CGRect chartFrame = CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0);
-    vElement.frame = chartFrame;
-    [gridView addSubview: vElement];
+    
+    NSString *chartType = vElement.chartType;
+    NSDictionary *data = vElement.dictChart;
+    NSString *category = vElement.chartCategory;
+    
+    if ([chartType isEqualToString:CHART_TYPE_BAR]) {
+        // build one single bar chart
+        DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
+                                                                        target:[[UIView alloc] init]
+                                                                      delegate:self];
+        [gridView addSubview: dropview];
+        [dropview updateBarChartWithValues: [data allValues] labels:[data allKeys] type:category];
+        
+    } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
+        // build circle chart
+        
+        DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
+        [dropview addDropTarget:[[UIView alloc] init]];
+        dropview.delegate = self;
+        [gridView addSubview: dropview];
+        [dropview updateCircleChartWithCurrent:[data allValues][0] type:category icon:[data allKeys][0]];
+
+    } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
+        // not now
+        
+    } else {
+        // custom, not now
+    }
+
+    
+
+//    vElement.frame = chartFrame;
+//    [gridView addSubview: vElement];
     
     // update last position
     if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
@@ -112,6 +146,14 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     NSArray *widgets = gridView.subviews;
     if ([widgets count] != 0) {
         // TODO: Start wobbling and show delete button on top right corner of each widget
+        [widgets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+//                WobbleAnimator *animator = [[WobbleAnimator alloc] initWithTarget:obj];
+//                [animator startAnimation];
+                
+            });
+        }];
+        
         
     }
     
@@ -123,6 +165,17 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     
     // TODO: Stop wobbling and remove the delete buttons
 }
+
+#pragma JDDroppableViewDelegate
+
+- (void)droppableViewBeganDragging:(JDDroppableView *)view {
+    gridView.scrollEnabled = NO;
+}
+
+- (void)droppableViewEndedDragging:(JDDroppableView *)view onTarget:(UIView *)target {
+    gridView.scrollEnabled = YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

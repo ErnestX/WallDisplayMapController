@@ -48,7 +48,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
         // Init Icons
         double sideLength = self.frame.size.width;
         imageBg= [[UIView alloc] initWithFrame:CGRectMake(0, 0, sideLength-140.0, sideLength-140.0)];
-        imageBg.layer.cornerRadius = 32.5;
+        imageBg.layer.cornerRadius = (sideLength-140.0)/2;
         imageBg.layer.masksToBounds = YES;
         ivIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, sideLength-160.0, sideLength-160.0)];
         imageBg.center = circleChart.center;

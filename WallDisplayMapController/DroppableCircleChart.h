@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Jialiang. All rights reserved.
 //
 
-#import "JDDroppableView.h"
+#import "DroppableChart.h"
 
-@interface DroppableCircleChart : JDDroppableView
+@interface DroppableCircleChart : DroppableChart
 
 - (void)updateCircleChartWithCurrent:(NSNumber *)current type:(NSString *)type icon:(NSString *)iconName;
 

@@ -91,6 +91,7 @@
             DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
                                                                             target:dropTarget
                                                                           delegate:self];
+
             DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
             bottomView.alpha = 0.5;
             bottomView.userInteractionEnabled = NO;
@@ -100,6 +101,9 @@
             [dropview updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
             [bottomView updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
             
+            dropview.dictChart = data;
+            dropview.chartType = chartType;
+            dropview.chartCategory = self.category;
         
         } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
             // build circle chart
@@ -117,13 +121,18 @@
             
             [dropview updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
             [bottomView updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
+            
+            dropview.dictChart = data;
+            dropview.chartType = chartType;
+            dropview.chartCategory = self.category;
 
             
         } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
             // not now
             
         } else {
-            // custom, not now
+            // temporary code
+
         }
     
     }
@@ -168,7 +177,7 @@
         [view removeFromSuperview];
         DetailViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
         
-        UIView *newView = view;
+        DroppableChart *newView = (DroppableChart *)view;
         [targetVC addElement:newView];
     }
     
