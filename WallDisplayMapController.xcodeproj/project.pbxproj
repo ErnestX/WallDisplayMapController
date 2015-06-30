@@ -24,7 +24,6 @@
 		AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04221B41D4C700A1D777 /* transit_pct.png */; };
 		AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04231B41D4C700A1D777 /* vehicle_pct.png */; };
 		AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C042E1B42029400A1D777 /* DroppableChart.m */; };
-		AE6C04321B42070E00A1D777 /* WobbleAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C04311B42070E00A1D777 /* WobbleAnimator.m */; };
 		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
 		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */; };
@@ -35,6 +34,8 @@
 		AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF6E1B3C8A030079BD66 /* JDDroppableView.m */; };
 		AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */; };
 		AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */; };
+		AEB81D941B43113300EA1450 /* WobbleAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB81D931B43113300EA1450 /* WobbleAnimator.m */; };
+		AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB81D961B43490900EA1450 /* DeleteButton.m */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
 		CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */; };
 		CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */; };
@@ -94,8 +95,6 @@
 		AE6C04231B41D4C700A1D777 /* vehicle_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vehicle_pct.png; sourceTree = "<group>"; };
 		AE6C042D1B42029400A1D777 /* DroppableChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableChart.h; sourceTree = "<group>"; };
 		AE6C042E1B42029400A1D777 /* DroppableChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableChart.m; sourceTree = "<group>"; };
-		AE6C04301B42070E00A1D777 /* WobbleAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WobbleAnimator.h; sourceTree = "<group>"; };
-		AE6C04311B42070E00A1D777 /* WobbleAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WobbleAnimator.m; sourceTree = "<group>"; };
 		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -116,6 +115,10 @@
 		AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableCircleChart.m; sourceTree = "<group>"; };
 		AEA1BF731B3E09740079BD66 /* DroppableBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableBarChart.h; sourceTree = "<group>"; };
 		AEA1BF741B3E09740079BD66 /* DroppableBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableBarChart.m; sourceTree = "<group>"; };
+		AEB81D921B43113300EA1450 /* WobbleAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WobbleAnimator.h; sourceTree = "<group>"; };
+		AEB81D931B43113300EA1450 /* WobbleAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WobbleAnimator.m; sourceTree = "<group>"; };
+		AEB81D951B43490900EA1450 /* DeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteButton.h; sourceTree = "<group>"; };
+		AEB81D961B43490900EA1450 /* DeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteButton.m; sourceTree = "<group>"; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639461B0E4FBC00E4FC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -274,8 +277,8 @@
 				CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */,
 				AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */,
 				AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */,
-				AE6C04301B42070E00A1D777 /* WobbleAnimator.h */,
-				AE6C04311B42070E00A1D777 /* WobbleAnimator.m */,
+				AEB81D921B43113300EA1450 /* WobbleAnimator.h */,
+				AEB81D931B43113300EA1450 /* WobbleAnimator.m */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				CA2D53F01B1C205600B975B6 /* View */,
@@ -326,6 +329,8 @@
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
 				CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */,
 				CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */,
+				AEB81D951B43490900EA1450 /* DeleteButton.h */,
+				AEB81D961B43490900EA1450 /* DeleteButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -508,7 +513,7 @@
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
-				AE6C04321B42070E00A1D777 /* WobbleAnimator.m in Sources */,
+				AEB81D941B43113300EA1450 /* WobbleAnimator.m in Sources */,
 				AE9E40361B320AE00085000D /* UnavailableView.m in Sources */,
 				AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */,
 				AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */,
@@ -526,6 +531,7 @@
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 				AE9E40331B3209FC0085000D /* MobilityView.m in Sources */,
 				AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */,
+				AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */,
 				AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,

@@ -105,11 +105,6 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     } else {
         // custom, not now
     }
-
-    
-
-//    vElement.frame = chartFrame;
-//    [gridView addSubview: vElement];
     
     // update last position
     if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
@@ -148,9 +143,18 @@ const NSInteger ELEMENTS_PER_ROW = 3;
         // TODO: Start wobbling and show delete button on top right corner of each widget
         [widgets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             dispatch_async(dispatch_get_main_queue(), ^{
-//                WobbleAnimator *animator = [[WobbleAnimator alloc] initWithTarget:obj];
-//                [animator startAnimation];
-                
+                if ([obj isKindOfClass:[DroppableChart class]]) {
+                    DroppableChart *chart = (DroppableChart *)obj;
+                    [chart.animator startAnimation];
+                    
+                    chart.btnDelete.hidden = NO;
+                    [chart.btnDelete addTarget:self
+                                        action:@selector(deleteElement:)
+                              forControlEvents:UIControlEventTouchUpInside];
+                    [chart bringSubviewToFront:chart.btnDelete];
+
+                }
+
             });
         }];
         
@@ -163,7 +167,27 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
     self.navigationItem.rightBarButtonItem = editBarButton;
     
-    // TODO: Stop wobbling and remove the delete buttons
+    // stop wobbling
+    NSArray *widgets = gridView.subviews;
+    if ([widgets count] != 0) {
+        [widgets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([obj isKindOfClass:[DroppableChart class]]) {
+                    DroppableChart *chart = (DroppableChart *)obj;
+                    [chart.animator stopAnimation];
+                    
+                    chart.btnDelete.hidden = YES;
+                }
+                
+            });
+        }];
+        
+        
+    }
+}
+
+- (void)deleteElement:(id)sender {
+    
 }
 
 #pragma JDDroppableViewDelegate

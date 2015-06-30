@@ -7,6 +7,8 @@
 //
 
 #import "JDDroppableView.h"
+#import "WobbleAnimator.h"
+#import "DeleteButton.h"
 
 @interface DroppableChart : JDDroppableView
 
@@ -14,5 +16,8 @@
 @property NSInteger *chartTag;
 @property NSString *chartType;
 @property NSString *chartCategory;
+@property WobbleAnimator *animator;
+
+@property DeleteButton *btnDelete;
 
 @end
