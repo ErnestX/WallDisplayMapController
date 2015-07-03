@@ -34,6 +34,10 @@
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
 		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
 		CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */; };
+		CA2631541B4702CA00A74FB7 /* pieChatIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631531B4702CA00A74FB7 /* pieChatIcon@2x.png */; };
+		CA2631561B4702D000A74FB7 /* pieChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631551B4702D000A74FB7 /* pieChatIcon.png */; };
+		CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631631B4712E300A74FB7 /* remoteIcon.png */; };
+		CA2631661B4712E300A74FB7 /* remoteIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */; };
 		CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
 		CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */; };
@@ -106,6 +110,10 @@
 		CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayProtocal.h; sourceTree = "<group>"; };
 		CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapWallDisplayController.h; sourceTree = "<group>"; };
 		CA16396F1B0E7AC000E4FC81 /* MapWallDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapWallDisplayController.m; sourceTree = "<group>"; };
+		CA2631531B4702CA00A74FB7 /* pieChatIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pieChatIcon@2x.png"; sourceTree = "<group>"; };
+		CA2631551B4702D000A74FB7 /* pieChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieChatIcon.png; sourceTree = "<group>"; };
+		CA2631631B4712E300A74FB7 /* remoteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remoteIcon.png; sourceTree = "<group>"; };
+		CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remoteIcon@2x.png"; sourceTree = "<group>"; };
 		CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
@@ -283,6 +291,10 @@
 				CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */,
 				CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */,
 				CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */,
+				CA2631531B4702CA00A74FB7 /* pieChatIcon@2x.png */,
+				CA2631551B4702D000A74FB7 /* pieChatIcon.png */,
+				CA2631631B4712E300A74FB7 /* remoteIcon.png */,
+				CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -385,12 +397,16 @@
 				AE23B8EF1B348DD6009B0E2E /* walkingPersonIcon.png in Resources */,
 				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
 				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
+				CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */,
 				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
 				AE23B8EE1B348DD6009B0E2E /* carIcon.png in Resources */,
 				AE23B94E1B34B3FE009B0E2E /* houseIcon.png in Resources */,
+				CA2631541B4702CA00A74FB7 /* pieChatIcon@2x.png in Resources */,
+				CA2631661B4712E300A74FB7 /* remoteIcon@2x.png in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
+				CA2631561B4702D000A74FB7 /* pieChatIcon.png in Resources */,
 				AE23B9501B34B3FE009B0E2E /* apartmentIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
