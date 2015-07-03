@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AE0E803F1B46F8EA0047AD80 /* RAReorderableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0E803E1B46F8EA0047AD80 /* RAReorderableLayout.swift */; };
+		AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E80411B471E210047AD80 /* MetricCollectionViewCell.m */; };
 		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
 		AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE15E8731B30E28E00E9A47A /* WidgetViewController.m */; };
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
@@ -69,6 +70,8 @@
 		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AE0E803D1B46F8E90047AD80 /* WallDisplayMapController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WallDisplayMapController-Bridging-Header.h"; sourceTree = "<group>"; };
 		AE0E803E1B46F8EA0047AD80 /* RAReorderableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAReorderableLayout.swift; sourceTree = "<group>"; };
+		AE0E80401B471E210047AD80 /* MetricCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricCollectionViewCell.h; sourceTree = "<group>"; };
+		AE0E80411B471E210047AD80 /* MetricCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricCollectionViewCell.m; sourceTree = "<group>"; };
 		AE1203091B1E2A2D0058A43A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		AE15E8721B30E28E00E9A47A /* WidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetViewController.h; sourceTree = "<group>"; };
 		AE15E8731B30E28E00E9A47A /* WidgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetViewController.m; sourceTree = "<group>"; };
@@ -336,6 +339,8 @@
 				CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */,
 				AEB81D951B43490900EA1450 /* DeleteButton.h */,
 				AEB81D961B43490900EA1450 /* DeleteButton.m */,
+				AE0E80401B471E210047AD80 /* MetricCollectionViewCell.h */,
+				AE0E80411B471E210047AD80 /* MetricCollectionViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */,
 				AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
+				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
 				AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */,
 				AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */,
