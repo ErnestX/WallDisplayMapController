@@ -17,6 +17,7 @@
 #import "DroppableBarChart.h"
 #import "DroppableCircleChart.h"
 #import "WobbleAnimator.h"
+#import "WallDisplayMapController-Swift.h"
 
 const NSInteger ELEMENTS_PER_ROW = 3;
 

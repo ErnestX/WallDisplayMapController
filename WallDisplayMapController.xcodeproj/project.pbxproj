@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0E803F1B46F8EA0047AD80 /* RAReorderableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0E803E1B46F8EA0047AD80 /* RAReorderableLayout.swift */; };
 		AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1203091B1E2A2D0058A43A /* Launch Screen.xib */; };
 		AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE15E8731B30E28E00E9A47A /* WidgetViewController.m */; };
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
@@ -50,7 +51,7 @@
 		CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */; };
 		CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */; };
 		CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */; };
-		F7ECAF858BC858A513877273 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAAEAC59C5CBA45D8961EE5 /* libPods.a */; };
+		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +66,9 @@
 
 /* Begin PBXFileReference section */
 		01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		3BAAEAC59C5CBA45D8961EE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3211977183155B24E27D81 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AE0E803D1B46F8E90047AD80 /* WallDisplayMapController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WallDisplayMapController-Bridging-Header.h"; sourceTree = "<group>"; };
+		AE0E803E1B46F8EA0047AD80 /* RAReorderableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAReorderableLayout.swift; sourceTree = "<group>"; };
 		AE1203091B1E2A2D0058A43A /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		AE15E8721B30E28E00E9A47A /* WidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetViewController.h; sourceTree = "<group>"; };
 		AE15E8731B30E28E00E9A47A /* WidgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetViewController.m; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		AEB81D931B43113300EA1450 /* WobbleAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WobbleAnimator.m; sourceTree = "<group>"; };
 		AEB81D951B43490900EA1450 /* DeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteButton.h; sourceTree = "<group>"; };
 		AEB81D961B43490900EA1450 /* DeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteButton.m; sourceTree = "<group>"; };
+		C2EB0F574A27F24236C46473 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1639461B0E4FBC00E4FC81 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -151,7 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7ECAF858BC858A513877273 /* libPods.a in Frameworks */,
+				D38A9265F06F710B6C109543 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +269,7 @@
 		CA1639431B0E4FBC00E4FC81 /* WallDisplayMapController */ = {
 			isa = PBXGroup;
 			children = (
+				AE0E803E1B46F8EA0047AD80 /* RAReorderableLayout.swift */,
 				CA1639481B0E4FBC00E4FC81 /* AppDelegate.h */,
 				CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */,
 				CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */,
@@ -287,6 +291,7 @@
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
 				CA42E0E31B1CF55F0011726E /* resources */,
 				CA1639441B0E4FBC00E4FC81 /* Supporting Files */,
+				AE0E803D1B46F8E90047AD80 /* WallDisplayMapController-Bridging-Header.h */,
 			);
 			path = WallDisplayMapController;
 			sourceTree = "<group>";
@@ -358,7 +363,7 @@
 				AEA1BF6C1B3C8A030079BD66 /* DroppableView */,
 				AE869D3A1B0EA9FA000900FF /* XMLDictionary.h */,
 				AE869D3B1B0EA9FA000900FF /* XMLDictionary.m */,
-				3BAAEAC59C5CBA45D8961EE5 /* libPods.a */,
+				C2EB0F574A27F24236C46473 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
 				AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */,
+				AE0E803F1B46F8EA0047AD80 /* RAReorderableLayout.swift in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 				AE9E40331B3209FC0085000D /* MobilityView.m in Sources */,
 				AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */,
@@ -590,6 +596,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -611,7 +619,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = WallDisplayMapController;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMagController-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -636,6 +647,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -650,7 +663,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = WallDisplayMapController;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMagController-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -661,11 +677,14 @@
 			baseConfigurationReference = 6B3211977183155B24E27D81 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WallDisplayMapController/PrefixHeader.pch;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -675,11 +694,13 @@
 			baseConfigurationReference = 01F79DA70D6D5B20AF004F8F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WallDisplayMapController/PrefixHeader.pch;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
