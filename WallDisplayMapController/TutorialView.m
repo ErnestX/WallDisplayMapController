@@ -28,6 +28,8 @@
         [self initTutorialPlayerForResource:@"rotateGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(CGRectGetMidX(self.frame), 0, CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
         [self initTutorialPlayerForResource:@"tiltGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(0, CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
         [self initTutorialPlayerForResource:@"zoomGestureMovie" withExtension:@"mp4" withFrame:CGRectMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame), CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+        
+        
     }
     return self;
 }

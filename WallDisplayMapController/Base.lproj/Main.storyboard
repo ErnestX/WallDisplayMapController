@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="dUq-9i-FSJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -36,8 +37,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTh-2w-Uog">
-                                <rect key="frame" x="706" y="986" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTh-2w-Uog">
+                                <rect key="frame" x="711" y="939" width="57" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Help">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,11 +50,15 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sTh-2w-Uog" secondAttribute="bottom" constant="8" id="4pI-1H-04n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sTh-2w-Uog" secondAttribute="trailing" constant="-16" id="8U0-k3-UDh"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Remote" image="remoteIcon.png" id="4aD-Wi-cqw"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1248" y="950"/>
+            <point key="canvasLocation" x="1085" y="954"/>
         </scene>
         <!--Metrics-->
         <scene sceneID="7pN-UK-nlb">
@@ -72,7 +77,7 @@
                     <tabBarItem key="tabBarItem" title="Metrics" image="pieChatIcon.png" id="92C-gs-KIo"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1248" y="-125"/>
+            <point key="canvasLocation" x="1085" y="-146"/>
         </scene>
     </scenes>
     <resources>

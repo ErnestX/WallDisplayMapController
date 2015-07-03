@@ -42,6 +42,8 @@
 
 - (void) showTutorial
 {
+    NSLog(@"show tutorail");
+    [tutorialView removeFromSuperview];
     tutorialView = [[TutorialView alloc] initWithFrame:self.view.frame];
     [tutorialView setController:self];
     tutorialView.backgroundColor = [UIColor whiteColor];
