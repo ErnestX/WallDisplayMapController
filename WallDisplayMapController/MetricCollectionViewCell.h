@@ -11,5 +11,7 @@
 @interface MetricCollectionViewCell : UICollectionViewCell
 
 - (void)updateWithData:(NSDictionary *)dict;
+- (void)startAnimatingWithTarget:(id)target;
+- (void)stopAnimating;
 
 @end

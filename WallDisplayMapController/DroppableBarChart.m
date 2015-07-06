@@ -77,17 +77,17 @@
         lblBar.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:16.0];
         lblBar.textColor = barChart.labelTextColor;
         lblBar.textAlignment = NSTextAlignmentCenter;
-        lblBar.alpha = 0.2;
+        lblBar.alpha = 1.0;//0.2;
         [barChart addSubview:lblBar];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:1.0
-                             animations:^{
-                                 lblBar.alpha = 1.0;
-                             }
-                             completion:nil];
-            
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [UIView animateWithDuration:1.0
+//                             animations:^{
+//                                 lblBar.alpha = 1.0;
+//                             }
+//                             completion:nil];
+//        
+//        });
         
     }];
     

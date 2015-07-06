@@ -29,13 +29,10 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 @implementation DetailViewController {
     CGFloat visibleWidth;
     CGFloat gridSideLength;
-    
-    int lastX;      // last x position
-    int lastY;      // last y position
-    
     UICollectionView *gridView;
     
     NSMutableArray *arrData;
+    BOOL isEditing;
     
 }
 
@@ -43,8 +40,7 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     self = [super init];
     if (self) {
         arrData = [NSMutableArray arrayWithCapacity:20];
-        lastX = 0;
-        lastY = 0;
+        isEditing = NO;
     }
     return self;
 }
@@ -103,115 +99,35 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 }
 
 - (void)addElement:(DroppableChart *)vElement {
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    data[@"chart_content"] = vElement.dictChart;
+    data[@"chart_type"] = vElement.chartType;
+    data[@"chart_category"] = vElement.chartCategory;
+    [arrData addObject:data];
     
-//    CGRect chartFrame = CGRectMake(lastX*gridSideLength+30.0, lastY*gridSideLength+30.0, gridSideLength-60.0, gridSideLength-60.0);
-//    
-//    NSString *chartType = vElement.chartType;
-//    NSDictionary *data = vElement.dictChart;
-//    NSString *category = vElement.chartCategory;
-//    
-//    if ([chartType isEqualToString:CHART_TYPE_BAR]) {
-//        // build one single bar chart
-//        DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
-//                                                                        target:[[UIView alloc] init]
-//                                                                      delegate:self];
-//        [gridView addSubview: dropview];
-//        [dropview updateBarChartWithValues: [data allValues] labels:[data allKeys] type:category];
-//        
-//    } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
-//        // build circle chart
-//        
-//        DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
-//        [dropview addDropTarget:[[UIView alloc] init]];
-//        dropview.delegate = self;
-//        [gridView addSubview: dropview];
-//        [dropview updateCircleChartWithCurrent:[data allValues][0] type:category icon:[data allKeys][0]];
-//
-//    } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
-//        // not now
-//        
-//    } else {
-//        // custom, not now
-//    }
-//    
-//    // update last position
-//    if (((lastX+1) % ELEMENTS_PER_ROW) == 0) {
-//        lastX = 0;
-//        lastY++;
-//        gridView.contentSize = CGSizeMake(gridView.contentSize.width, (lastY+1)*gridSideLength);
-//
-//    } else {
-//        lastX++;
-//    }
-//    
-//    [self scrollToBottomAnimated:YES];
+    [gridView reloadData];
+    [self scrollToBottomAnimated:YES];
 
 }
 
-//- (void)scrollToBottomAnimated:(BOOL)animated
-//{
-//    [gridView.layer removeAllAnimations];
-//    
-//    CGFloat bottomScrollPosition = gridView.contentSize.height;
-//    bottomScrollPosition -= gridView.frame.size.height;
-//    bottomScrollPosition += gridView.contentInset.top;
-//    bottomScrollPosition = MAX(-gridView.contentInset.top,bottomScrollPosition);
-//    CGPoint newOffset = CGPointMake(-gridView.contentInset.left, bottomScrollPosition);
-//    if (newOffset.y != gridView.contentOffset.y) {
-//        [gridView setContentOffset: newOffset animated: animated];
-//    }
-//}
+- (void)scrollToBottomAnimated:(BOOL)animated {
+    [gridView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[arrData count]-1
+                                                          inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom
+                             animated:YES];
+}
 
 - (void)widgetStartEditing {
-//    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target: self action: @selector(widgetEndEditing)];
-//    self.navigationItem.rightBarButtonItem = doneBarButton;
-//    
-//    NSArray *widgets = gridView.subviews;
-//    if ([widgets count] != 0) {
-//        // TODO: Start wobbling and show delete button on top right corner of each widget
-//        [widgets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if ([obj isKindOfClass:[DroppableChart class]]) {
-//                    DroppableChart *chart = (DroppableChart *)obj;
-//                    [chart.animator startAnimation];
-//                    
-//                    chart.btnDelete.hidden = NO;
-//                    [chart.btnDelete addTarget:self
-//                                        action:@selector(deleteElement:)
-//                              forControlEvents:UIControlEventTouchUpInside];
-//                    [chart bringSubviewToFront:chart.btnDelete];
-//
-//                }
-//
-//            });
-//        }];
-//        
-//        
-//    }
-    
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target: self action: @selector(widgetEndEditing)];
+    self.navigationItem.rightBarButtonItem = doneBarButton;
+    isEditing = YES;
+    [gridView reloadData];
 }
 
 - (void)widgetEndEditing {
-//    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
-//    self.navigationItem.rightBarButtonItem = editBarButton;
-//    
-//    // stop wobbling
-//    NSArray *widgets = gridView.subviews;
-//    if ([widgets count] != 0) {
-//        [widgets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if ([obj isKindOfClass:[DroppableChart class]]) {
-//                    DroppableChart *chart = (DroppableChart *)obj;
-//                    [chart.animator stopAnimation];
-//                    
-//                    chart.btnDelete.hidden = YES;
-//                }
-//                
-//            });
-//        }];
-//        
-//        
-//    }
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
+    self.navigationItem.rightBarButtonItem = editBarButton;
+    isEditing = NO;
+    [gridView reloadData];
 }
 
 - (void)deleteElement:(id)sender {
@@ -224,15 +140,18 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     
     MetricCollectionViewCell *cell = (MetricCollectionViewCell *)[collectionView  dequeueReusableCellWithReuseIdentifier:@"testcell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor colorWithRed:indexPath.item*10.0/255.0 green:indexPath.item*10.0/255.0 blue:indexPath.item*10.0/255.0 alpha:1.0];
-    [cell updateWithData:@{@"test" : [NSString stringWithFormat:@"%d", (int)indexPath.item]}];
-
-    
+    //update the cell's chart with the data in the array
+    [cell updateWithData:[arrData objectAtIndex:indexPath.item]];
+    if (isEditing) {
+        [cell startAnimatingWithTarget:self];
+    } else {
+        [cell stopAnimating];
+    }
     return cell;
 }
 
 -(NSInteger)collectionView:(UICollectionView * __nonnull)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) return 30;//[arrData count];
+    if (section == 0) return [arrData count];
     else return  0;
 }
 
@@ -245,6 +164,13 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     return YES;
 }
 
+- (void)collectionView:(UICollectionView * __nonnull)collectionView atIndexPath:(NSIndexPath * __nonnull)atIndexPath didMoveToIndexPath:(NSIndexPath * __nonnull)toIndexPath {
+    
+    NSDictionary *data = [arrData objectAtIndex:atIndexPath.item];
+    [arrData removeObjectAtIndex:atIndexPath.item];
+    [arrData insertObject:data atIndex:toIndexPath.item];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

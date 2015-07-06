@@ -45,14 +45,8 @@
     self.navigationItem.titleView = lblTitle;
     
     UIViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
-    [[targetVC.view subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        UIView *subview = obj;
-        if (subview.tag == 100081){
-            dropTarget = subview;
-            *stop = YES;
-        }
-    }];
-    
+    dropTarget = [targetVC.view viewWithTag:100081];
+
     if (!self.arrData) {
         // No data, widget elements unavailable
         [self showDataUnavailable];
