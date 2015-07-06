@@ -14,6 +14,8 @@
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
 		AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9491B34AE31009B0E2E /* LandUseView.m */; };
 		AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */; };
+		AE3B9CF71B4B22630037AEF2 /* pieChatIcon_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */; };
+		AE3B9CF81B4B22630037AEF2 /* remoteIcon_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */; };
 		AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */; };
 		AE6477481B2BA32D006E8925 /* DensityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6477471B2BA32D006E8925 /* DensityModel.m */; };
 		AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE64774A1B2BA33B006E8925 /* EnergyModel.m */; };
@@ -85,6 +87,8 @@
 		AE23B9531B34C3BB009B0E2E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RabbitMQManager.h; sourceTree = "<group>"; };
 		AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RabbitMQManager.m; sourceTree = "<group>"; };
+		AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieChatIcon_unselected.png; sourceTree = "<group>"; };
+		AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remoteIcon_unselected.png; sourceTree = "<group>"; };
 		AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictEnergyModel.h; sourceTree = "<group>"; };
 		AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictEnergyModel.m; sourceTree = "<group>"; };
 		AE6477461B2BA32D006E8925 /* DensityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DensityModel.h; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */,
+				AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */,
 				AE6C041E1B41D4C700A1D777 /* active_pct.png */,
 				AE6C041F1B41D4C700A1D777 /* apart.png */,
 				AE6C04201B41D4C700A1D777 /* rowhouse.png */,
@@ -468,17 +474,16 @@
 				AE6C04261B41D4C700A1D777 /* rowhouse.png in Resources */,
 				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
 				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
-
 				CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */,
 				CA2631541B4702CA00A74FB7 /* pieChatIcon@2x.png in Resources */,
 				CA2631661B4712E300A74FB7 /* remoteIcon@2x.png in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
 				CA2631561B4702D000A74FB7 /* pieChatIcon.png in Resources */,
-
+				AE3B9CF71B4B22630037AEF2 /* pieChatIcon_unselected.png in Resources */,
 				AE6C04241B41D4C700A1D777 /* active_pct.png in Resources */,
 				AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */,
+				AE3B9CF81B4B22630037AEF2 /* remoteIcon_unselected.png in Resources */,
 				AE6C04251B41D4C700A1D777 /* apart.png in Resources */,
-				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
 				AE6C04271B41D4C700A1D777 /* single.png in Resources */,
 				AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */,

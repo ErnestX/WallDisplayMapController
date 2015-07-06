@@ -51,35 +51,48 @@ const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
 - (void)commonInit;
 {
     self.shouldUpdateReturnPosition = YES;
+    self.isDraggable = YES;
 }
 
 #pragma mark UIResponder (touch handling)
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
 {
-    [super touchesBegan:touches withEvent:event];
-	[self beginDrag];
-    [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
-                animated:YES];
+    if (self.isDraggable) {
+        [super touchesBegan:touches withEvent:event];
+        [self beginDrag];
+        [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
+                    animated:YES];
+    }
+
 }
 
 - (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event
 {
-    [super touchesMoved:touches withEvent:event];
-    [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
-                animated:NO];
+    if (self.isDraggable) {
+        [super touchesMoved:touches withEvent:event];
+        [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
+                    animated:NO];
+    }
+
 }
 
 - (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
 {
-    [super touchesEnded:touches withEvent:event];
-	[self endDrag];
+    if (self.isDraggable) {
+        [super touchesEnded:touches withEvent:event];
+        [self endDrag];
+    }
+    
 }
 
 - (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event
 {
-    [super touchesCancelled:touches withEvent:event];
-	[self endDrag];
+    if (self.isDraggable) {
+        [super touchesCancelled:touches withEvent:event];
+        [self endDrag];
+    }
+
 }
 
 #pragma mark target managment

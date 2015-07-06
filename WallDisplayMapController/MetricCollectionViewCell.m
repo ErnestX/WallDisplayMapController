@@ -33,6 +33,7 @@
     if ([chartType isEqualToString:CHART_TYPE_BAR]) {
         
         DroppableBarChart *barChart = [[DroppableBarChart alloc] initWithFrame:self.bounds];
+        barChart.isDraggable = NO;
         barChart.tag = 33333;
         for (UIGestureRecognizer *recognizer in barChart.gestureRecognizers) {
             [barChart removeGestureRecognizer:recognizer];
@@ -45,6 +46,7 @@
 
     } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
         DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:self.bounds];
+        circleChart.isDraggable = NO;
         circleChart.tag = 33333;
         for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
             [circleChart removeGestureRecognizer:recognizer];

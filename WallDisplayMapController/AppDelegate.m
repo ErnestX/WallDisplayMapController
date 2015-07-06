@@ -12,6 +12,7 @@
 #import "DetailViewController.h"
 #import "MapControlViewController.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "UIColor+Extend.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +32,8 @@
     UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:detailVC];
     UISplitViewController *splitVC = [[UISplitViewController alloc] init];
     splitVC.title = @"Metrics";
+    splitVC.tabBarItem.image = [[UIImage imageNamed:@"pieChatIcon_unselected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    splitVC.tabBarItem.selectedImage = [UIImage imageNamed:@"pieChatIcon.png"];
     splitVC.viewControllers = @[masterNav, detailNav];
     splitVC.maximumPrimaryColumnWidth = splitVC.view.bounds.size.width;
     splitVC.preferredPrimaryColumnWidthFraction = MASTER_VC_WIDTH_FRACTION;
@@ -40,10 +43,19 @@
     // Remote 3D viewController
     MapControlViewController *remoteVC = [[MapControlViewController alloc] init];
     remoteVC.title = @"Remote";
+    remoteVC.tabBarItem.image = [[UIImage imageNamed:@"remoteIcon_unselected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    remoteVC.tabBarItem.selectedImage = [UIImage imageNamed:@"remoteIcon.png"];
     
     // Set up TabBar viewController
     UITabBarController *tabVC = [[UITabBarController alloc] init];
     tabVC.viewControllers = @[splitVC, remoteVC];
+    tabVC.tabBar.tintColor = [UIColor whiteColor];
+    tabVC.tabBar.barTintColor = [UIColor colorFromHexString:@"#1ABC9C"];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorFromHexString:@"#CBCBCB"] }
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
+                                             forState:UIControlStateSelected];
     
     self.window.rootViewController = tabVC;
     [self.window makeKeyAndVisible];
