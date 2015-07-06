@@ -29,7 +29,6 @@
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
 		CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */; };
 		CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */; };
-		CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */; };
 		CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1639511B0E4FBC00E4FC81 /* Images.xcassets */; };
 		CA1639611B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639601B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.m */; };
 		CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16396B1B0E546300E4FC81 /* MapControlView.m */; };
@@ -100,7 +99,6 @@
 		CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CA16394B1B0E4FBC00E4FC81 /* MapControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapControlViewController.h; sourceTree = "<group>"; };
 		CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapControlViewController.m; sourceTree = "<group>"; };
-		CA16394F1B0E4FBC00E4FC81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA1639511B0E4FBC00E4FC81 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CA16395A1B0E4FBC00E4FC81 /* WallDisplayMapControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallDisplayMapControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA16395F1B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				CA2D53F01B1C205600B975B6 /* View */,
-				CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */,
 				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
 				CA1639511B0E4FBC00E4FC81 /* Images.xcassets */,
 				CA42E0E31B1CF55F0011726E /* resources */,
@@ -398,7 +395,6 @@
 				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
 				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
 				CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */,
-				CA1639501B0E4FBC00E4FC81 /* Main.storyboard in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
 				AE23B8EE1B348DD6009B0E2E /* carIcon.png in Resources */,
 				AE23B94E1B34B3FE009B0E2E /* houseIcon.png in Resources */,
@@ -497,17 +493,6 @@
 			targetProxy = CA16395B1B0E4FBC00E4FC81 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CA16394E1B0E4FBC00E4FC81 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA16394F1B0E4FBC00E4FC81 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CA1639621B0E4FBC00E4FC81 /* Debug */ = {
