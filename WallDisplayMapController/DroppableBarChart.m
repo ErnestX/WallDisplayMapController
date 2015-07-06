@@ -13,6 +13,7 @@
 @implementation DroppableBarChart {
     
     NSDictionary *dictTypeColor;
+    NSDictionary *dictTitle;
     PNBarChart *barChart;
 }
 
@@ -37,6 +38,11 @@
                           @"Equity" : FlatCoffee,
                           @"Well Being" : FlatYellow};
         
+        dictTitle = @{@"CEEI_vkt" : @"Existing",
+                      @"model_vkt" : @"Current design",
+                      @"dwellings" : @"Dwellings",
+                      @"people" : @"People"};
+        
         barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         barChart.labelMarginTop = 10.0;
         barChart.labelFont = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:15.0];
@@ -57,7 +63,14 @@
     barChart.barWidth = barChart.frame.size.width/([values count]*2);
     barChart.strokeColor = dictTypeColor[type];
     
-    [barChart setXLabels:labels];
+    NSMutableArray *arrLabels = [NSMutableArray array];
+    [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *text = (NSString *)obj;
+        arrLabels[idx] = dictTitle[text];
+        
+    }];
+    
+    [barChart setXLabels:arrLabels];
     barChart.showLabel = NO;
     [barChart setYValues:values];
     [barChart strokeChart];

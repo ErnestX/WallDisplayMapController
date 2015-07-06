@@ -16,6 +16,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
 @implementation DroppableCircleChart {
     PNCircleChart *circleChart;
     NSDictionary *dictTypeColor;
+    NSDictionary *dictTitle;
     
     UIView *imageBg;
     UIImageView *ivIcon;
@@ -34,6 +35,15 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                           @"Economy" : FlatPlum,
                           @"Equity" : FlatCoffee,
                           @"Well Being" : FlatYellow};
+        
+        dictTitle = @{@"single" : @"Single attached",
+                      @"rowhouse" : @"Rowhouse",
+                      @"apart" : @"Apartment",
+                      @"active_pct" : @"Active",
+                      @"transit_pct" : @"Transit",
+                      @"vehicle_pct" : @"Vehicle"
+                      };
+        
         circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(CIRCLE_EDGE_INSET-10.0, CIRCLE_EDGE_INSET+10.0, sideLength, sideLength)
                                                                     total:@100
                                                                   current:@0
@@ -86,7 +96,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     ivIcon.image = [UIImage imageNamed:iconName];
 
     // Update Labels
-    lblTitle.text = iconName;
+    lblTitle.text = dictTitle[iconName];
     lblPercent.text = [NSString stringWithFormat:@"%d%%", [current intValue]];
 }
 

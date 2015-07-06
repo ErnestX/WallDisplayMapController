@@ -193,6 +193,10 @@
 		AE20E3F41B3B480F0066BBFE /* WidgetElementViews */ = {
 			isa = PBXGroup;
 			children = (
+				AEB81D951B43490900EA1450 /* DeleteButton.h */,
+				AEB81D961B43490900EA1450 /* DeleteButton.m */,
+				AE0E80401B471E210047AD80 /* MetricCollectionViewCell.h */,
+				AE0E80411B471E210047AD80 /* MetricCollectionViewCell.m */,
 				AEA1BF701B3DEA410079BD66 /* DroppableCircleChart.h */,
 				AEA1BF711B3DEA410079BD66 /* DroppableCircleChart.m */,
 				AEA1BF731B3E09740079BD66 /* DroppableBarChart.h */,
@@ -346,10 +350,6 @@
 				CA16396B1B0E546300E4FC81 /* MapControlView.m */,
 				CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */,
 				CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */,
-				AEB81D951B43490900EA1450 /* DeleteButton.h */,
-				AEB81D961B43490900EA1450 /* DeleteButton.m */,
-				AE0E80401B471E210047AD80 /* MetricCollectionViewCell.h */,
-				AE0E80411B471E210047AD80 /* MetricCollectionViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
