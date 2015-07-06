@@ -10,6 +10,7 @@
 #import "RabbitMQManager.h"
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "MapControlViewController.h"
 #import <ChameleonFramework/Chameleon.h>
 
 @interface AppDelegate ()
@@ -22,20 +23,29 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    // Metrics viewController
     MasterViewController *masterVC = [[MasterViewController alloc] init];
     DetailViewController *detailVC = [[DetailViewController alloc] init];
     UINavigationController *masterNav = [[UINavigationController alloc]
                                          initWithRootViewController:masterVC];
     UINavigationController *detailNav = [[UINavigationController alloc] initWithRootViewController:detailVC];
-    
     UISplitViewController *splitVC = [[UISplitViewController alloc] init];
+    splitVC.title = @"Metrics";
     splitVC.viewControllers = @[masterNav, detailNav];
     splitVC.maximumPrimaryColumnWidth = splitVC.view.bounds.size.width;
     splitVC.preferredPrimaryColumnWidthFraction = MASTER_VC_WIDTH_FRACTION;
-    
     splitVC.view.backgroundColor = [UIColor colorWithFlatVersionOf:[UIColor darkGrayColor]];
     
-    self.window.rootViewController = splitVC;
+    
+    // Remote 3D viewController
+    MapControlViewController *remoteVC = [[MapControlViewController alloc] init];
+    remoteVC.title = @"Remote";
+    
+    // Set up TabBar viewController
+    UITabBarController *tabVC = [[UITabBarController alloc] init];
+    tabVC.viewControllers = @[splitVC, remoteVC];
+    
+    self.window.rootViewController = tabVC;
     [self.window makeKeyAndVisible];
         
     return YES;
