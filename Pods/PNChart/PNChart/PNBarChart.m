@@ -208,7 +208,7 @@
             }
             
             bar = [[PNBar alloc] initWithFrame:CGRectMake(barXPosition, //Bar X position
-                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin, //Bar Y position
+                                                          self.frame.size.height - chartCavanHeight - kXLabelHeight - _chartMargin+_labelMarginTop, //Bar Y position
                                                           barWidth, // Bar witdh
                                                           chartCavanHeight)]; //Bar height
             
@@ -286,7 +286,7 @@
         pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         pathAnimation.fromValue = @0.0f;
         pathAnimation.toValue = @1.0f;
-        [_chartBottomLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+//        [_chartBottomLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
 
         _chartBottomLine.strokeEnd = 1.0;
 
@@ -318,7 +318,7 @@
         pathLeftAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         pathLeftAnimation.fromValue = @0.0f;
         pathLeftAnimation.toValue = @1.0f;
-        [_chartLeftLine addAnimation:pathLeftAnimation forKey:@"strokeEndAnimation"];
+//        [_chartLeftLine addAnimation:pathLeftAnimation forKey:@"strokeEndAnimation"];
 
         _chartLeftLine.strokeEnd = 1.0;
 

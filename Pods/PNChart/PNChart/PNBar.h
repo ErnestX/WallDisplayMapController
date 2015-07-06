@@ -20,4 +20,6 @@
 @property (nonatomic) CGFloat barRadius;
 @property (nonatomic) CAShapeLayer *gradientMask;
 
+@property (nonatomic) CGFloat strokeHeight;
+
 @end

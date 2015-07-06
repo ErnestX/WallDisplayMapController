@@ -25,6 +25,7 @@
     if (self) {
         
         self.errorMessage = text;
+        self.backgroundColor = [UIColor lightTextColor];
         
     }
     return self;
@@ -36,14 +37,16 @@
     lblMessage.textAlignment = NSTextAlignmentCenter;
     lblMessage.numberOfLines = 0;
     lblMessage.lineBreakMode = NSLineBreakByWordWrapping;
-    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:25.0];
-    lblMessage.textColor = [UIColor lightGrayColor];
+    lblMessage.font = [UIFont fontWithName:@"HelveticaNeue" size:17.0];
+    lblMessage.textColor = [UIColor grayColor];
     
     [self addSubview:lblMessage];
     
-    __weak typeof(self) weakSelf = self;
+    DEFINE_WEAK_SELF
     [lblMessage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.and.centerY.equalTo(weakSelf);
+        make.top.and.bottom.equalTo(weakSelf);
+        make.centerX.equalTo(weakSelf);
+        make.width.equalTo(weakSelf.mas_width).with.offset(-15.0f);
     }];
 }
 
