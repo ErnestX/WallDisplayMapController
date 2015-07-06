@@ -57,6 +57,16 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    isEditing = NO;
+    if (gridView && [arrData count] != 0) {
+        UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
+        self.navigationItem.rightBarButtonItem = editBarButton;
+        [gridView reloadData];
+
+    }
+}
+
 - (void)configureCollectionView {
     // Set up CollectionView
     CGFloat gridSize = (visibleWidth-20.0)/3.0-7.0;
@@ -131,6 +141,10 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 }
 
 - (void)deleteElement:(id)sender {
+    UIButton *btnDelete = (UIButton *)sender;
+    NSIndexPath *indexPath = [gridView indexPathForItemAtPoint:[gridView convertPoint:btnDelete.center fromView:btnDelete.superview.superview]];
+    [arrData removeObjectAtIndex:indexPath.item];
+    [gridView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.item inSection:0]]];
     
 }
 
@@ -169,7 +183,7 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     NSDictionary *data = [arrData objectAtIndex:atIndexPath.item];
     [arrData removeObjectAtIndex:atIndexPath.item];
     [arrData insertObject:data atIndex:toIndexPath.item];
-    
+    [gridView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -21,9 +21,7 @@
     return self;
 }
 
-
 - (void)updateWithData:(NSDictionary *)dict {
-    
     NSString *chartType = dict[@"chart_type"];
     NSDictionary *content = dict[@"chart_content"];
     NSString *chartCategory = dict[@"chart_category"];
@@ -31,18 +29,17 @@
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     if ([chartType isEqualToString:CHART_TYPE_BAR]) {
-        
         DroppableBarChart *barChart = [[DroppableBarChart alloc] initWithFrame:self.bounds];
         barChart.isDraggable = NO;
         barChart.tag = 33333;
         for (UIGestureRecognizer *recognizer in barChart.gestureRecognizers) {
             [barChart removeGestureRecognizer:recognizer];
         }
-        
         [self addSubview:barChart];
         [barChart updateBarChartWithValues:[content allValues]
                                     labels:[content allKeys]
                                       type:chartCategory];
+        
 
     } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
         DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:self.bounds];
@@ -54,6 +51,7 @@
         [circleChart updateCircleChartWithCurrent:[content allValues][0]
                                              type:chartCategory
                                              icon:[content allKeys][0]];
+        
 
     } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
         // not now
