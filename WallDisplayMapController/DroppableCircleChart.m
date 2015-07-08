@@ -72,7 +72,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
         lblTitle.center = CGPointMake(circleChart.center.x, 25.0);
         lblTitle.textAlignment = NSTextAlignmentCenter;
         lblTitle.textColor = [UIColor lightGrayColor];
-        lblTitle.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:25.0];
+        lblTitle.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:20.0];
         [self addSubview:lblTitle];
         
         lblPercent = [[UILabel alloc] initWithFrame:CGRectMake(sideLength*0.75, sideLength*1.1, 100.0, 50.0)];

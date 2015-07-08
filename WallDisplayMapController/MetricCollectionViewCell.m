@@ -61,6 +61,9 @@
     }
 }
 
+- (void)changeBgColor:(UIColor *)color {
+    
+}
 
 - (void)startAnimatingWithTarget:(id)target {
     DroppableChart *chart = (DroppableChart *)[self viewWithTag:33333];

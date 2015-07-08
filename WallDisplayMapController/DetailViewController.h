@@ -11,5 +11,6 @@
 @interface DetailViewController : UIViewController
 
 - (void)addElement:(UIView *)vElement;
+- (CGPoint)getCenterOfLastEmptyPosition;
 
 @end

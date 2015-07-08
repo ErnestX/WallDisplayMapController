@@ -17,7 +17,7 @@
         
         self.animator = [[WobbleAnimator alloc] initWithTarget:self];
         self.btnDelete = [DeleteButton buttonWithType:UIButtonTypeCustom];
-        self.btnDelete.frame = CGRectMake(10.0, BUTTON_SIZE, BUTTON_SIZE, BUTTON_SIZE);
+        self.btnDelete.frame = CGRectMake(8.0, 25.0-BUTTON_SIZE/2, BUTTON_SIZE, BUTTON_SIZE);
         self.btnDelete.hidden = YES;
         [self addSubview:self.btnDelete];
         

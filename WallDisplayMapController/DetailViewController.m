@@ -20,7 +20,7 @@
 #import "WallDisplayMapController-Swift.h"
 #import "MetricCollectionViewCell.h"
 
-const NSInteger ELEMENTS_PER_ROW = 3;
+const NSInteger ELEMENTS_PER_ROW = 4;
 
 @interface DetailViewController ()<RAReorderableLayoutDataSource, RAReorderableLayoutDelegate>
 
@@ -69,12 +69,13 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 
 - (void)configureCollectionView {
     // Set up CollectionView
-    CGFloat gridSize = (visibleWidth-20.0)/3.0-7.0;
     RAReorderableLayout *aFlowLayout = [[RAReorderableLayout alloc] init];
-    [aFlowLayout setItemSize:CGSizeMake(gridSize, gridSize)];
+    [aFlowLayout setItemSize:CGSizeMake(gridSideLength, gridSideLength)];
     [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    aFlowLayout.minimumInteritemSpacing = 0.0;
+    aFlowLayout.minimumLineSpacing = 0.0;
     
-    gridView = [[UICollectionView alloc] initWithFrame:CGRectMake(10.0, 10.0, visibleWidth-20.0, self.view.frame.size.height-64.0) collectionViewLayout:aFlowLayout];
+    gridView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0, 0.0, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0) collectionViewLayout:aFlowLayout];
     [gridView registerClass:[MetricCollectionViewCell class] forCellWithReuseIdentifier:@"testcell"];
     gridView.backgroundColor = ClearColor;
     gridView.tag = 100081;
@@ -82,6 +83,22 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     gridView.dataSource = self;
     gridView.delegate = self;
     [self.view addSubview:gridView];
+    
+    // TODO: check if People & Dwellings data is available, display it in top left corner
+    // and add to arrData
+    
+    // Test data
+    NSDictionary *dictBar1 = @{@"people" : @228, @"dwellings" : @340};
+    
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    data[@"chart_content"] = dictBar1;
+    data[@"chart_type"] = CHART_TYPE_BAR;
+    data[@"chart_category"] = @"Land Use";
+    [arrData addObject:data];
+    
+    [gridView reloadData];
+    
+    
 }
 
 - (void)configureNavigationBarAppearance {
@@ -109,6 +126,7 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 }
 
 - (void)addElement:(DroppableChart *)vElement {
+    
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
     data[@"chart_content"] = vElement.dictChart;
     data[@"chart_type"] = vElement.chartType;
@@ -118,6 +136,21 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     [gridView reloadData];
     [self scrollToBottomAnimated:YES];
 
+}
+
+- (CGPoint)getCenterOfLastEmptyPosition {
+    CGFloat x = 0;
+    CGFloat y = 0;
+    
+    NSInteger column = arrData.count % ELEMENTS_PER_ROW + 1;
+    x = column * gridSideLength + gridSideLength/2;
+    
+    NSInteger row = arrData.count / ELEMENTS_PER_ROW + 1;
+    y = row * gridSideLength - gridSideLength/2;
+    
+    CGPoint pointInSuperview = [self.view.superview convertPoint:CGPointMake(x, y) fromView:self.view];
+
+    return pointInSuperview;
 }
 
 - (void)scrollToBottomAnimated:(BOOL)animated {
@@ -156,11 +189,12 @@ const NSInteger ELEMENTS_PER_ROW = 3;
     
     //update the cell's chart with the data in the array
     [cell updateWithData:[arrData objectAtIndex:indexPath.item]];
-    if (isEditing) {
+    if (isEditing && indexPath.item != 0) {
         [cell startAnimatingWithTarget:self];
     } else {
         [cell stopAnimating];
     }
+    
     return cell;
 }
 
@@ -175,7 +209,25 @@ const NSInteger ELEMENTS_PER_ROW = 3;
 
 #pragma RAReorderableLayout Delegate
 - (BOOL)collectionView:(UICollectionView * __nonnull)collectionView allowMoveAtIndexPath:(NSIndexPath * __nonnull)indexPath {
-    return YES;
+    
+    if (indexPath.item == 0) {
+        return NO;
+    } else return YES;
+    
+}
+
+- (BOOL)collectionView:(UICollectionView * __nonnull)collectionView atIndexPath:(NSIndexPath * __nonnull)atIndexPath canMoveToIndexPath:(NSIndexPath * __nonnull)canMoveToIndexPath {
+    if (canMoveToIndexPath.item == 0) {
+        return NO;
+    } else return YES;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView * __nonnull)collectionView reorderingItemAlphaInSection:(NSInteger)section {
+    return 0.3;
 }
 
 - (void)collectionView:(UICollectionView * __nonnull)collectionView atIndexPath:(NSIndexPath * __nonnull)atIndexPath didMoveToIndexPath:(NSIndexPath * __nonnull)toIndexPath {

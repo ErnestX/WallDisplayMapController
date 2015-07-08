@@ -21,6 +21,7 @@
 @implementation MasterViewController {
     NSArray *arrCategories;
     NSMutableDictionary *dictCategoryData;
+    NSDictionary *dictTypeColor;
     
     UITableView *tableCategory;
 }
@@ -29,6 +30,15 @@
     self = [super init];
     if (self) {
         arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
+        
+        
+        dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
+                          @"Land Use" : COLOR_WATERMELON,
+                          @"Energy & Carbon" : FlatOrange,
+                          @"Economy" : FlatYellow,
+                          @"Equity" : FlatLime,
+                          @"Well Being" : FlatMint};
+        
         dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
         
         // TEST DATA
@@ -45,8 +55,8 @@
         NSArray *dataMob = @[dictBar, dictCircle1, dictCircle2, dictCircle3];
         
         // Land Use
-        NSDictionary *dictBar1 = @{@"ch_type" : CHART_TYPE_BAR,
-                                   @"ch_data" : @{@"people" : @228, @"dwellings" : @340}};
+//        NSDictionary *dictBar1 = @{@"ch_type" : CHART_TYPE_BAR,
+//                                   @"ch_data" : @{@"people" : @228, @"dwellings" : @340}};
         NSDictionary *dictCircle4 = @{@"ch_type" : CHART_TYPE_CIRCLE,
                                       @"ch_data" : @{@"single" : @12}};
         NSDictionary *dictCircle5 = @{@"ch_type" : CHART_TYPE_CIRCLE,
@@ -54,7 +64,7 @@
         NSDictionary *dictCircle6 = @{@"ch_type" : CHART_TYPE_CIRCLE,
                                        @"ch_data" : @{@"apart" : @98}};
         
-        NSArray *dataLU = @[dictBar1, dictCircle4, dictCircle5, dictCircle6];
+        NSArray *dataLU = @[dictCircle4, dictCircle5, dictCircle6];
         
         // Energy & Carbon
         NSDictionary *dictCustom = @{@"ch_type" : CHART_TYPE_CUSTOM,
@@ -118,8 +128,8 @@
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.textColor = COLOR_BG_WHITE;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
+    cell.textLabel.textColor = dictTypeColor[arrCategories[indexPath.row]];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20.0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = arrCategories[indexPath.row];
     return cell;

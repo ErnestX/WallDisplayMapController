@@ -168,11 +168,20 @@
 
 - (void)droppableViewEndedDragging:(JDDroppableView *)view onTarget:(UIView *)target {
     if (target) {
-        [view removeFromSuperview];
+        
         DetailViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
         
-        DroppableChart *newView = (DroppableChart *)view;
-        [targetVC addElement:newView];
+        [UIView animateWithDuration:0.2
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             view.center = [targetVC getCenterOfLastEmptyPosition];
+                         }
+                         completion:^(BOOL finished) {
+                             [view removeFromSuperview];
+                             DroppableChart *newView = (DroppableChart *)view;
+                             [targetVC addElement:newView];
+                         }];
     }
     
 }
