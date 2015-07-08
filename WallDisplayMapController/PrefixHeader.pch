@@ -51,7 +51,7 @@
 #define ROUTING_KEY_WIDGET amqp_cstring_bytes("/widget/test")
 
 // configuration parameters
-#define HOST_NAME "192.168.0.110"
+#define HOST_NAME "192.168.0.101"
 #define PORT_NUMBER 5672
 #define EXCHANGE_NAME amqp_cstring_bytes("DefaultExchange")
 #define VHOST_NAME "/"

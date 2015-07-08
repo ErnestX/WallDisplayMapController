@@ -31,10 +31,11 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
         
         dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
                           @"Land Use" : COLOR_WATERMELON,
-                          @"Energy & Carbon" : FlatGreen,
-                          @"Economy" : FlatPlum,
-                          @"Equity" : FlatCoffee,
-                          @"Well Being" : FlatYellow};
+                          @"Energy & Carbon" : FlatOrange,
+                          @"Economy" : FlatYellow,
+                          @"Equity" : FlatLime,
+                          @"Well Being" : FlatMint};
+        
         
         dictTitle = @{@"single" : @"Single attached",
                       @"rowhouse" : @"Rowhouse",
@@ -54,7 +55,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                                                         overrideLineWidth:[NSNumber numberWithFloat:sideLength*0.20]];
         circleChart.backgroundColor = COLOR_BG_WHITE;
         self.backgroundColor = COLOR_BG_WHITE;
-        circleChart.userInteractionEnabled = NO;
+//        circleChart.userInteractionEnabled = NO;
         [self addSubview:circleChart];
         
         // Init Icons

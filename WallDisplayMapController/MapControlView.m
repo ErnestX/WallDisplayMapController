@@ -7,6 +7,8 @@
 //
 
 #import "MapControlView.h"
+#import <ChameleonFramework/Chameleon.h>
+#import "UIColor+Extend.h"
 
 @implementation MapControlView {
     id <MapWallDisplayProtocal> target;
@@ -18,13 +20,12 @@
     UILabel* connectingLabel;
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         [self customInit];
+        self.backgroundColor = [UIColor colorFromHexString:@"#34495e"];
     }
-    
     return self;
 }
 
@@ -44,7 +45,7 @@
     [self initGestureRecgonizers];
     
     // init UI
-    //[self initAndShowInstructions];
+//    [self initAndShowInstructions];
 }
 
 #pragma mark - Gesture Recognition

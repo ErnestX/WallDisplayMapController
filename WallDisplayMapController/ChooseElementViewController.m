@@ -88,7 +88,7 @@
 
             DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
             bottomView.alpha = 0.5;
-            bottomView.userInteractionEnabled = NO;
+//            bottomView.userInteractionEnabled = NO;
             [scrollView addSubview:bottomView];
             [scrollView addSubview: dropview];
             
@@ -107,7 +107,7 @@
             dropview.delegate = self;
             
             DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
-            bottomView.userInteractionEnabled = NO;
+//            bottomView.userInteractionEnabled = NO;
             bottomView.alpha = 0.5;
             
             [scrollView addSubview:bottomView];

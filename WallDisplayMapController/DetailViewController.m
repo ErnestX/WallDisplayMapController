@@ -19,6 +19,7 @@
 #import "WobbleAnimator.h"
 #import "WallDisplayMapController-Swift.h"
 #import "MetricCollectionViewCell.h"
+#import "GlobalManager.h"
 
 const NSInteger ELEMENTS_PER_ROW = 4;
 
@@ -84,14 +85,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     gridView.delegate = self;
     [self.view addSubview:gridView];
     
-    // TODO: check if People & Dwellings data is available, display it in top left corner
-    // and add to arrData
-    
-    // Test data
-    NSDictionary *dictBar1 = @{@"people" : @228, @"dwellings" : @340};
+    NSDictionary *dictPD = [[GlobalManager sharedInstance] getPeopleAndDwellings];
     
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
-    data[@"chart_content"] = dictBar1;
+    data[@"chart_content"] = dictPD;
     data[@"chart_type"] = CHART_TYPE_BAR;
     data[@"chart_category"] = @"Land Use";
     [arrData addObject:data];

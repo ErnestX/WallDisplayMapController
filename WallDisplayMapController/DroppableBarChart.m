@@ -33,10 +33,11 @@
     if (self) {
         dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
                           @"Land Use" : COLOR_WATERMELON,
-                          @"Energy & Carbon" : FlatGreen,
-                          @"Economy" : FlatPlum,
-                          @"Equity" : FlatCoffee,
-                          @"Well Being" : FlatYellow};
+                          @"Energy & Carbon" : FlatOrange,
+                          @"Economy" : FlatYellow,
+                          @"Equity" : FlatLime,
+                          @"Well Being" : FlatMint};
+        
         
         dictTitle = @{@"CEEI_vkt" : @"Existing",
                       @"model_vkt" : @"Current design",

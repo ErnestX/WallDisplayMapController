@@ -13,6 +13,7 @@
 #import "XMLDictionary.h"
 #import "UIColor+Extend.h"
 #import "ChooseElementViewController.h"
+#import "GlobalManager.h"
 
 @interface MasterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -31,7 +32,6 @@
     if (self) {
         arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
         
-        
         dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
                           @"Land Use" : COLOR_WATERMELON,
                           @"Energy & Carbon" : FlatOrange,
@@ -40,40 +40,6 @@
                           @"Well Being" : FlatMint};
         
         dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
-        
-        // TEST DATA
-        // Mobility
-        NSDictionary *dictBar = @{@"ch_type" : CHART_TYPE_BAR,
-                                  @"ch_data" : @{@"model_vkt" : @12345, @"CEEI_vkt" : @10086}};
-        NSDictionary *dictCircle1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                     @"ch_data" : @{@"active_pct" : @3}};
-        NSDictionary *dictCircle2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                      @"ch_data" : @{@"transit_pct" : @34}};
-        NSDictionary *dictCircle3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                      @"ch_data" : @{@"vehicle_pct" : @78}};
-        
-        NSArray *dataMob = @[dictBar, dictCircle1, dictCircle2, dictCircle3];
-        
-        // Land Use
-//        NSDictionary *dictBar1 = @{@"ch_type" : CHART_TYPE_BAR,
-//                                   @"ch_data" : @{@"people" : @228, @"dwellings" : @340}};
-        NSDictionary *dictCircle4 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                      @"ch_data" : @{@"single" : @12}};
-        NSDictionary *dictCircle5 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                      @"ch_data" : @{@"rowhouse" : @34}};
-        NSDictionary *dictCircle6 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                                       @"ch_data" : @{@"apart" : @98}};
-        
-        NSArray *dataLU = @[dictCircle4, dictCircle5, dictCircle6];
-        
-        // Energy & Carbon
-        NSDictionary *dictCustom = @{@"ch_type" : CHART_TYPE_CUSTOM,
-                                     @"ch_data" : @{@"cost" : @4521}};
-        NSArray *dataEC = @[dictCustom];
-        
-        [dictCategoryData addEntriesFromDictionary: @{@"Mobility" : dataMob,
-                                                      @"Land Use" : dataLU,
-                                                      @"Energy & Carbon" : dataEC}];
         
     }
     return self;
@@ -114,6 +80,18 @@
         make.top.bottom.leading.and.trailing.equalTo(weakSelf.view);
     }];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [arrCategories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *category = (NSString *)obj;
+        NSArray *arrData = [[GlobalManager sharedInstance] getWidgetElementsByCategory:category];
+        if (arrData) {
+            dictCategoryData[category] = arrData;
+        }
+        
+    }];
 }
 
 #pragma mark UITableViewDataSource

@@ -96,4 +96,9 @@
     [(MapControlView*)self.view hideConnectingMessage];
 }
 
+- (void)dealloc {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

@@ -66,4 +66,8 @@
     [controller exitTutorial];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
