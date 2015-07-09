@@ -17,4 +17,7 @@
 - (NSArray *)getWidgetElementsByCategory:(NSString *)category;
 - (NSDictionary *)getPeopleAndDwellings;
 
+- (BOOL)isWidgetAvailableForKey:(NSString *)key;
+- (void)setWidgetForKey:(NSString *)key available:(BOOL)isAvailable;
+
 @end

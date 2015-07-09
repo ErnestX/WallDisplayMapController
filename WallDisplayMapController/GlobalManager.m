@@ -21,6 +21,7 @@
 @property (nonatomic, strong) EnergyModel *modelEnergy;
 @property (nonatomic, strong) DistrictEnergyModel *modelDistrictEnergy;
 
+@property (nonatomic, strong) NSMutableDictionary *dictWidgetStatus;
 
 @end
 
@@ -31,6 +32,7 @@
     static dispatch_once_t done;
     dispatch_once(&done,^{
         instance = [[GlobalManager alloc] init];
+        instance.dictWidgetStatus = [NSMutableDictionary dictionaryWithCapacity:25.0];
     });
     return instance;
 }
@@ -44,45 +46,70 @@
 - (NSArray *)getWidgetElementsByCategory:(NSString *)category {
     if ([category isEqualToString:@"Mobility"] && self.modelDensity) {
         
-        NSDictionary *mob1 = @{@"ch_type" : CHART_TYPE_BAR,
-                               @"ch_data" : @{@"model_vkt" : self.modelDensity.modelVKT, @"CEEI_vkt" : self.modelDensity.CEEIKVT}};
-        NSDictionary *mob2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : @{@"active_pct" : self.modelDensity.modelActiveTripsPercent}};
-        NSDictionary *mob3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : @{@"transit_pct" : self.modelDensity.modelTransitTripsPercent}};
-        NSDictionary *mob4 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : @{@"vehicle_pct" : self.modelDensity.modelVehicleTripsPercent}};
+        NSMutableDictionary *mob0 = [NSMutableDictionary dictionaryWithDictionary: @{@"ch_type" : CHART_TYPE_BAR,
+                                                                                     @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"model_vkt" : self.modelDensity.modelVKT,                        @"CEEI_vkt" : self.modelDensity.CEEIKVT}]}];
         
-        return @[mob1, mob2, mob3, mob4];
+        NSMutableDictionary *mob1 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"active_pct" : self.modelDensity.modelActiveTripsPercent}]}];
+        
+        NSMutableDictionary *mob2 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"transit_pct" : self.modelDensity.modelTransitTripsPercent}]}];
+        
+        NSMutableDictionary *mob3 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"vehicle_pct" : self.modelDensity.modelVehicleTripsPercent}]}];
+        
+        DEFINE_WEAK_SELF
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[mob0, mob1, mob2, mob3]];
+        [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSMutableDictionary *mobi = (NSMutableDictionary *)obj;
+            NSString *key = [NSString stringWithFormat:@"mob%d", (int)idx];
+            mobi[@"ch_data"][@"ch_key"] = key;
+            if (!weakSelf.dictWidgetStatus[key]) {
+                weakSelf.dictWidgetStatus[key] = [NSNumber numberWithBool:YES];
+            }
+        }];
+        
+        return temp;
         
     } else if ([category isEqualToString:@"Land Use"] && self.modelBuildings) {
         
-        // a;sdfkja
+        NSDictionary *lu0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent}]};
         NSDictionary *lu1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : @{@"single" : self.modelBuildings.detachedPercent}};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rowhouse" : self.modelBuildings.attachedPercent}]};
         NSDictionary *lu2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : @{@"rowhouse" : self.modelBuildings.attachedPercent}};
-        NSDictionary *lu3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : @{@"apart" : self.modelBuildings.stackedPercent}};
-        return @[lu1, lu2, lu3];
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"apart" : self.modelBuildings.stackedPercent}]};
+        
+        DEFINE_WEAK_SELF
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[lu0, lu1, lu2]];
+        [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSMutableDictionary *lui = (NSMutableDictionary *)obj;
+            NSString *key = [NSString stringWithFormat:@"lu%d", (int)idx];
+            lui[@"ch_data"][@"ch_key"] = key;
+            if (!weakSelf.dictWidgetStatus[key]) {
+                weakSelf.dictWidgetStatus[key] = [NSNumber numberWithBool:YES];
+            }
+        }];
+        
+        return temp;
         
     } else if ([category isEqualToString:@"Energy & Carbon"]) {
         
-        return nil;
+        return @[];
         
     } else if ([category isEqualToString:@"Economy"]) {
         
-        return nil;
+        return @[];
         
     } else if ([category isEqualToString:@"Equity"]) {
         
-        return nil;
+        return @[];
         
     } else if ([category isEqualToString:@"Well Being"]){
         
-        return nil;
+        return @[];
 
-    } else return nil;
+    } else return @[];
     
 }
 
@@ -108,7 +135,6 @@
             if (!_modelDensity)
                 _modelDensity = [[DensityModel alloc] init];
             [_modelDensity updateModelWithDictionary:dictModel];
-            
             
             
         } else if ([urlBase containsString:WIDGET_BUILDINGS]) {
@@ -157,6 +183,15 @@
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:WIDGET_DATA_UPDATED object:nil]];
         NSLog(@"message: %@", msg);
     }];
+}
+
+- (BOOL)isWidgetAvailableForKey:(NSString *)key {
+    NSNumber *isAvailable = self.dictWidgetStatus[key];
+    return [isAvailable boolValue];
+}
+
+- (void)setWidgetForKey:(NSString *)key available:(BOOL)isAvailable {
+    self.dictWidgetStatus[key] = [NSNumber numberWithBool:isAvailable];
 }
 
 @end

@@ -83,54 +83,76 @@
     [self.view addSubview: scrollView];
     
     
+    
+    // CHECK IF THE DATA IS AVAILABLE, IF NOT ONLY DISPLAY BOTTOM VIEW
+    
+    
+    
     // Layout widget elements
     for (int i=0; i<[self.arrData count]; i++) {
         NSDictionary *dict = self.arrData[i];
         NSString *chartType = dict[@"ch_type"];
         NSDictionary *data = dict[@"ch_data"];
+        NSString *key = data[@"ch_key"];
+        BOOL isAvailable = [[GlobalManager sharedInstance] isWidgetAvailableForKey:key];
         CGRect chartFrame = CGRectMake(1.0, i*widgetElementSideLength+0.5, widgetElementSideLength-2.0, widgetElementSideLength-1.0);
+        
+        NSArray *filteredKeys = [[data allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![(NSString *)evaluatedObject isEqualToString:@"ch_key"];
+        }]] ;
+        NSArray *filteredValues = [[data allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![evaluatedObject isKindOfClass:[NSString class]];
+        }]];
         
         if ([chartType isEqualToString:CHART_TYPE_BAR]) {
             // build one single bar chart
-
-            DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
-                                                                            target:dropTarget
-                                                                          delegate:self];
-
             DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
             bottomView.alpha = 0.5;
             bottomView.userInteractionEnabled = NO;
             [scrollView addSubview:bottomView];
-            [scrollView addSubview: dropview];
             
-            [dropview updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
-            [bottomView updateBarChartWithValues: [data allValues] labels:[data allKeys] type:self.category];
+
+            [bottomView updateBarChartWithValues: filteredValues labels:filteredKeys type:self.category];
+
+            if (isAvailable) {
+                DroppableBarChart *dropview = [[DroppableBarChart alloc] initWithFrame:chartFrame
+                                                                                target:dropTarget
+                                                                              delegate:self];
+                [scrollView addSubview: dropview];
+                [dropview updateBarChartWithValues: filteredValues labels:filteredKeys type:self.category];
+                
+                
+                dropview.dictChart = data;
+                dropview.chartType = chartType;
+                dropview.chartCategory = self.category;
+            }
+
             
-            dropview.dictChart = data;
-            dropview.chartType = chartType;
-            dropview.chartCategory = self.category;
+
         
         } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
             // build circle chart
-
-            DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
-            [dropview addDropTarget:dropTarget];
-            dropview.delegate = self;
-            
             DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
             bottomView.userInteractionEnabled = NO;
             bottomView.alpha = 0.5;
-            
+            [bottomView updateCircleChartWithCurrent:filteredValues[0] type:self.category icon:filteredKeys[0]];
             [scrollView addSubview:bottomView];
-            [scrollView addSubview: dropview];
             
-            [dropview updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
-            [bottomView updateCircleChartWithCurrent:[data allValues][0] type:self.category icon:[data allKeys][0]];
-            
-            dropview.dictChart = data;
-            dropview.chartType = chartType;
-            dropview.chartCategory = self.category;
-
+            if (isAvailable) {
+                DroppableCircleChart * dropview = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
+                [dropview addDropTarget:dropTarget];
+                dropview.delegate = self;
+                
+                
+                [scrollView addSubview: dropview];
+                
+                [dropview updateCircleChartWithCurrent:filteredValues[0] type:self.category icon:filteredKeys[0]];
+                
+                
+                dropview.dictChart = data;
+                dropview.chartType = chartType;
+                dropview.chartCategory = self.category;
+            }
             
         } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
             // not now
@@ -172,11 +194,17 @@
     
     DEFINE_WEAK_SELF
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.arrData removeAllObjects];
-        [weakSelf.arrData addObjectsFromArray:[[GlobalManager sharedInstance] getWidgetElementsByCategory:self.category]];
-        [vUnavailable removeFromSuperview];
-        [[scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [weakSelf reloadData];
+        NSArray *newData = [[GlobalManager sharedInstance] getWidgetElementsByCategory:self.category];
+        if (!newData || newData.count == 0) {
+            return ;
+        } else {
+            [weakSelf.arrData removeAllObjects];
+            [weakSelf.arrData addObjectsFromArray:newData];
+            [vUnavailable removeFromSuperview];
+            [[scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [weakSelf reloadData];
+        }
+
     });
     
 }
@@ -216,6 +244,9 @@
                              [view removeFromSuperview];
                              DroppableChart *newView = (DroppableChart *)view;
                              [targetVC addElement:newView];
+                             
+                             [[GlobalManager sharedInstance] setWidgetForKey:newView.dictChart[@"ch_key"] available:NO];
+
                          }];
     }
     

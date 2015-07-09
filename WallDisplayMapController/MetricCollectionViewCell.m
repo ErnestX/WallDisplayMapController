@@ -28,6 +28,13 @@
     
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+    NSArray *filteredKeys = [[content allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ![(NSString *)evaluatedObject isEqualToString:@"ch_key"];
+    }]] ;
+    NSArray *filteredValues = [[content allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ![evaluatedObject isKindOfClass:[NSString class]];
+    }]];
+    
     if ([chartType isEqualToString:CHART_TYPE_BAR]) {
         DroppableBarChart *barChart = [[DroppableBarChart alloc] initWithFrame:self.bounds];
         barChart.isDraggable = NO;
@@ -36,8 +43,9 @@
             [barChart removeGestureRecognizer:recognizer];
         }
         [self addSubview:barChart];
-        [barChart updateBarChartWithValues:[content allValues]
-                                    labels:[content allKeys]
+        
+        [barChart updateBarChartWithValues:filteredValues
+                                    labels:filteredKeys
                                       type:chartCategory];
         
 
@@ -48,9 +56,9 @@
         for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
             [circleChart removeGestureRecognizer:recognizer];
         }        [self addSubview:circleChart];
-        [circleChart updateCircleChartWithCurrent:[content allValues][0]
+        [circleChart updateCircleChartWithCurrent:filteredValues[0]
                                              type:chartCategory
-                                             icon:[content allKeys][0]];
+                                             icon:filteredKeys[0]];
         
 
     } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {

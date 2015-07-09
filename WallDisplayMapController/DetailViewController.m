@@ -174,8 +174,16 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 - (void)deleteElement:(id)sender {
     UIButton *btnDelete = (UIButton *)sender;
     NSIndexPath *indexPath = [gridView indexPathForItemAtPoint:[gridView convertPoint:btnDelete.center fromView:btnDelete.superview.superview]];
+    
+    NSDictionary *temp = [arrData objectAtIndex:indexPath.item];
+    NSString *key = temp[@"chart_content"][@"ch_key"];
+    [[GlobalManager sharedInstance] setWidgetForKey:key available:YES];
+    
     [arrData removeObjectAtIndex:indexPath.item];
     [gridView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.item inSection:0]]];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:WIDGET_DATA_UPDATED object:nil];
+
     
 }
 
