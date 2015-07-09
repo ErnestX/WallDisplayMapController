@@ -155,7 +155,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pathAnimation.fromValue = @0.0f;
     pathAnimation.toValue = @([_current floatValue] / [_total floatValue]);
-//    [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     _circle.strokeEnd   = [_current floatValue] / [_total floatValue];
 
     [_countingLabel countFrom:0 to:[_current floatValue]/([_total floatValue]/100.0) withDuration:self.duration];
@@ -191,7 +191,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
 
         self.gradientMask.strokeEnd = [_current floatValue] / [_total floatValue];
 
-//        [self.gradientMask addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+        [self.gradientMask addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     }
 }
 
@@ -224,9 +224,9 @@ displayCountingLabel:(BOOL)displayCountingLabel
     
     if (_strokeColorGradientStart) {
         self.gradientMask.strokeEnd = _circle.strokeEnd;
-//        [self.gradientMask addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+        [self.gradientMask addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     }
-//    [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    [_circle addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     
     if (_displayCountingLabel) {
         [self.countingLabel countFrom:fmin([_current floatValue], [_total floatValue]) to:fmin([current floatValue], [total floatValue]) withDuration:self.duration];

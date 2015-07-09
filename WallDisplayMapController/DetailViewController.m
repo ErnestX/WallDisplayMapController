@@ -131,7 +131,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     data[@"chart_category"] = vElement.chartCategory;
     [arrData addObject:data];
     
-    [gridView reloadData];
+    [gridView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:arrData.count-1 inSection:0]]];
     [self scrollToBottomAnimated:YES];
 
 }
@@ -162,6 +162,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     self.navigationItem.rightBarButtonItem = doneBarButton;
     isEditing = YES;
     [gridView reloadData];
+
 }
 
 - (void)widgetEndEditing {
