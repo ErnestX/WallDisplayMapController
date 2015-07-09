@@ -21,7 +21,7 @@
 
 @implementation MasterViewController {
     NSArray *arrCategories;
-    NSMutableDictionary *dictCategoryData;
+//    NSMutableDictionary *dictCategoryData;
     NSDictionary *dictTypeColor;
     
     UITableView *tableCategory;
@@ -39,7 +39,9 @@
                           @"Equity" : FlatLime,
                           @"Well Being" : FlatMint};
         
-        dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
+//        dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:[GlobalManager sharedInstance] selector:@selector(beginConsumingMetricsData) name:RMQ_CONSUMER_THREAD_STARTED object:nil];
         
     }
     return self;
@@ -82,18 +84,6 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [arrCategories enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *category = (NSString *)obj;
-        NSArray *arrData = [[GlobalManager sharedInstance] getWidgetElementsByCategory:category];
-        if (arrData) {
-            dictCategoryData[category] = arrData;
-        }
-        
-    }];
-}
-
 #pragma mark UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"Cell";
@@ -125,7 +115,6 @@
     vc.title = arrCategories[indexPath.row];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target: nil action: nil];
     self.navigationItem.backBarButtonItem = backBarButton;
-    vc.arrData = dictCategoryData[arrCategories[indexPath.row]];
     vc.category = arrCategories[indexPath.row];
     
     [self.navigationController pushViewController:vc animated: YES];
@@ -134,6 +123,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80.0;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:[GlobalManager sharedInstance] name:RMQ_CONSUMER_THREAD_STARTED object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {

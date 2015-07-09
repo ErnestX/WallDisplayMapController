@@ -55,7 +55,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                                                         overrideLineWidth:[NSNumber numberWithFloat:sideLength*0.20]];
         circleChart.backgroundColor = COLOR_BG_WHITE;
         self.backgroundColor = COLOR_BG_WHITE;
-//        circleChart.userInteractionEnabled = NO;
+        circleChart.userInteractionEnabled = NO;
         [self addSubview:circleChart];
         
         // Init Icons

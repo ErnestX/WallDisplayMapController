@@ -42,6 +42,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     if (self) {
         arrData = [NSMutableArray arrayWithCapacity:20];
         isEditing = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(widgetDataUpdated) name:WIDGET_DATA_UPDATED object:nil];
     }
     return self;
 }
@@ -178,7 +179,20 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
 }
 
-#pragma RAReorderableLayout Datasource
+- (void)widgetDataUpdated {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        data[@"chart_content"] = [[GlobalManager sharedInstance] getPeopleAndDwellings];
+        data[@"chart_type"] = CHART_TYPE_BAR;
+        data[@"chart_category"] = @"Land Use";
+        [arrData replaceObjectAtIndex:0 withObject:data];
+        
+        [gridView reloadData];
+    });
+
+}
+
+#pragma mark RAReorderableLayout Datasource
 
 - (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath {
     
@@ -204,7 +218,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     return  1;
 }
 
-#pragma RAReorderableLayout Delegate
+#pragma mark RAReorderableLayout Delegate
 - (BOOL)collectionView:(UICollectionView * __nonnull)collectionView allowMoveAtIndexPath:(NSIndexPath * __nonnull)indexPath {
     
     if (indexPath.item == 0) {
@@ -233,6 +247,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     [arrData removeObjectAtIndex:atIndexPath.item];
     [arrData insertObject:data atIndex:toIndexPath.item];
     [gridView reloadData];
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

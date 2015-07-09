@@ -10,7 +10,6 @@
 
 @interface ChooseElementViewController : UIViewController
 
-@property NSArray *arrData;
 @property NSString *category;
 
 @end

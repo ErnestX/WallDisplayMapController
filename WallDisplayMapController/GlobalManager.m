@@ -154,6 +154,7 @@
             
         }
         
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:WIDGET_DATA_UPDATED object:nil]];
         NSLog(@"message: %@", msg);
     }];
 }

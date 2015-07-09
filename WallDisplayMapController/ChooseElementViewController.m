@@ -14,18 +14,33 @@
 #import "JDDroppableView.h"
 #import "DroppableCircleChart.h"
 #import "DroppableBarChart.h"
+#import "GlobalManager.h"
 
 @interface ChooseElementViewController () <JDDroppableViewDelegate>
 
-@property NSString *test;
+@property (nonatomic, strong) NSMutableArray *arrData;
 
 @end
 
 @implementation ChooseElementViewController {
     CGFloat widgetElementSideLength;
     
+    UnavailableView *vUnavailable;
     UIScrollView *scrollView;
     UIView *dropTarget;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(widgetDataUpdated) name:WIDGET_DATA_UPDATED object:nil];
+        self.arrData = [NSMutableArray arrayWithCapacity:5];
+        vUnavailable = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
+        scrollView = [[UIScrollView alloc] init];
+
+
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -46,23 +61,19 @@
     
     UIViewController *targetVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:1]).childViewControllers[0];
     dropTarget = [targetVC.view viewWithTag:100081];
-
-    if (!self.arrData) {
-        // No data, widget elements unavailable
-        [self showDataUnavailable];
-        
-    } else {
-        // Display widget elements in table cells with the data we have
-        [self showTableWithSelectableElements];
-        
-    }
+    
+    [self.arrData addObjectsFromArray:[[GlobalManager sharedInstance] getWidgetElementsByCategory:self.category]];
+    
+    DEFINE_WEAK_SELF
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf reloadData];
+    });
     
 }
 
 - (void)showTableWithSelectableElements {
     
-    widgetElementSideLength = self.view.frame.size.width * MASTER_VC_WIDTH_FRACTION;
-    scrollView = [[UIScrollView alloc] init];
+    widgetElementSideLength = self.view.frame.size.width;// * MASTER_VC_WIDTH_FRACTION;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.backgroundColor = COLOR_BG_GREY;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
@@ -88,7 +99,7 @@
 
             DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
             bottomView.alpha = 0.5;
-//            bottomView.userInteractionEnabled = NO;
+            bottomView.userInteractionEnabled = NO;
             [scrollView addSubview:bottomView];
             [scrollView addSubview: dropview];
             
@@ -107,7 +118,7 @@
             dropview.delegate = self;
             
             DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
-//            bottomView.userInteractionEnabled = NO;
+            bottomView.userInteractionEnabled = NO;
             bottomView.alpha = 0.5;
             
             [scrollView addSubview:bottomView];
@@ -134,16 +145,40 @@
 }
 
 - (void)showDataUnavailable {
-    UnavailableView *vUnav = [[UnavailableView alloc] initWithInfoText:@"Sorry, the requested information is currently unavailable."];
-    [self.view addSubview:vUnav];
+    [self.view addSubview:vUnavailable];
     
     DEFINE_WEAK_SELF
-    [vUnav mas_makeConstraints:^(MASConstraintMaker *make) {
+    [vUnavailable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.top.and.bottom.equalTo(weakSelf.view);
         
     }];
     
-    [vUnav show];
+    [vUnavailable show];
+}
+
+- (void)reloadData {
+    if (!self.arrData || self.arrData.count == 0) {
+        // No data, widget elements unavailable
+        [self showDataUnavailable];
+        
+    } else {
+        // Display widget elements in table cells with the data we have
+        [self showTableWithSelectableElements];
+        
+    }
+}
+
+- (void)widgetDataUpdated {
+    
+    DEFINE_WEAK_SELF
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.arrData removeAllObjects];
+        [weakSelf.arrData addObjectsFromArray:[[GlobalManager sharedInstance] getWidgetElementsByCategory:self.category]];
+        [vUnavailable removeFromSuperview];
+        [[scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [weakSelf reloadData];
+    });
+    
 }
 
 #pragma mark JDDroppableViewDelegate
@@ -188,6 +223,10 @@
 
 - (BOOL)shouldAnimateDroppableViewBack:(JDDroppableView *)view wasDroppedOnTarget:(UIView *)target {
     return NO;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

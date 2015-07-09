@@ -72,4 +72,6 @@
 #define RMQ_CONN_WILL_OPEN @"rmq_connection_about_to_open"
 #define RMQ_CONSUMER_THREAD_STARTED @"rmq_consumer_thread_started"
 
+#define WIDGET_DATA_UPDATED @"widget_data_updated"
+
 #endif
