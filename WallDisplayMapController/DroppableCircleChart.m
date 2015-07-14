@@ -42,7 +42,11 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                       @"apart" : @"Apartment",
                       @"active_pct" : @"Active",
                       @"transit_pct" : @"Transit",
-                      @"vehicle_pct" : @"Vehicle"
+                      @"vehicle_pct" : @"Vehicle",
+                      @"rez" : @"Residential",
+                      @"comm" : @"Commercial",
+                      @"civic" : @"Civic",
+                      @"ind" : @"Industrial",
                       };
         
         circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(CIRCLE_EDGE_INSET-10.0, CIRCLE_EDGE_INSET+10.0, sideLength, sideLength)
@@ -93,8 +97,17 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     
     
     // Update Icons
-    imageBg.backgroundColor = dictTypeColor[type];
-    ivIcon.image = [UIImage imageNamed:iconName];
+    UIImage *imgIcon = [UIImage imageNamed:iconName];
+    if (imgIcon) {
+        imageBg.backgroundColor = dictTypeColor[type];
+        ivIcon.image = [UIImage imageNamed:iconName];
+    } else {
+        imageBg.alpha = 0.0;
+        lblPercent.textAlignment = NSTextAlignmentCenter;
+        lblPercent.center = ivIcon.center;
+    }
+    
+
 
     // Update Labels
     lblTitle.text = dictTitle[iconName];

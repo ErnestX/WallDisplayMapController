@@ -74,14 +74,16 @@
     } else if ([category isEqualToString:@"Land Use"] && self.modelBuildings) {
         
         NSDictionary *lu0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rez" : self.modelBuildings.rezPercent}]};
         NSDictionary *lu1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rowhouse" : self.modelBuildings.attachedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"comm" : self.modelBuildings.commPercent}]};
         NSDictionary *lu2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"apart" : self.modelBuildings.stackedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"civic" : self.modelBuildings.civicPercent}]};
+        NSDictionary *lu3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"ind" : self.modelBuildings.indPercent}]};
         
         DEFINE_WEAK_SELF
-        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[lu0, lu1, lu2]];
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[lu0, lu1, lu2, lu3]];
         [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSMutableDictionary *lui = (NSMutableDictionary *)obj;
             NSString *key = [NSString stringWithFormat:@"lu%d", (int)idx];
@@ -103,7 +105,25 @@
         
     } else if ([category isEqualToString:@"Equity"]) {
         
-        return @[];
+        NSDictionary *eq0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent}]};
+        NSDictionary *eq1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rowhouse" : self.modelBuildings.attachedPercent}]};
+        NSDictionary *eq2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"apart" : self.modelBuildings.stackedPercent}]};
+        
+        DEFINE_WEAK_SELF
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[eq0, eq1, eq2]];
+        [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSMutableDictionary *lui = (NSMutableDictionary *)obj;
+            NSString *key = [NSString stringWithFormat:@"eq%d", (int)idx];
+            lui[@"ch_data"][@"ch_key"] = key;
+            if (!weakSelf.dictWidgetStatus[key]) {
+                weakSelf.dictWidgetStatus[key] = [NSNumber numberWithBool:YES];
+            }
+        }];
+        
+        return temp;
         
     } else if ([category isEqualToString:@"Well Being"]){
         
