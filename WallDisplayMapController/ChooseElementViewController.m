@@ -16,6 +16,7 @@
 #import "DroppableBarChart.h"
 #import "GlobalManager.h"
 #import "DroppableNumberView.h"
+#import "DroppableSingleBarView.h"
 
 @interface ChooseElementViewController () <JDDroppableViewDelegate>
 
@@ -173,6 +174,27 @@
                 dropview.chartCategory = self.category;
             }
             
+        } else if ([chartType isEqualToString:CHART_TYPE_SINGLE_BAR]) {
+            
+            DroppableSingleBarView *bottomView = [[DroppableSingleBarView alloc] initWithFrame:chartFrame];
+            bottomView.userInteractionEnabled = NO;
+            bottomView.alpha = 0.5;
+            [bottomView updateWithArrayThresholds:data[@"thresholds"] current:data[@"current"] title:data[@"title"] type:self.category];
+            [scrollView addSubview:bottomView];
+            
+            if (isAvailable) {
+                DroppableSingleBarView * dropview = [[DroppableSingleBarView alloc] initWithFrame:chartFrame];
+                [dropview addDropTarget:dropTarget];
+                dropview.delegate = self;
+                
+                [scrollView addSubview: dropview];
+                [dropview updateWithArrayThresholds:data[@"thresholds"] current:data[@"current"] title:data[@"title"] type:self.category];
+                
+                dropview.dictChart = data;
+                dropview.chartType = chartType;
+                dropview.chartCategory = self.category;
+            }
+
         } else {
             // temporary code
 

@@ -106,8 +106,13 @@
                                     @"sub" : @"Household",
                                     @"desc" : @"(annual average cost of energy)"}]};
         
+        NSDictionary *ec2 = @{@"ch_type" : CHART_TYPE_SINGLE_BAR,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"thresholds" : @[@{@"thresh_value" : self.modelDistrictEnergy.districtThresholdFAR,                                  @"thresh_icon" : @"DE.png"}],
+                                                                                            @"current" : self.modelDistrictEnergy.far,
+                                                                                            @"title": @"Building Density"}]};
+        
         DEFINE_WEAK_SELF
-        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[ec0, ec1]];
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[ec0, ec1, ec2]];
         [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSMutableDictionary *lui = (NSMutableDictionary *)obj;
             NSString *key = [NSString stringWithFormat:@"ec%d", (int)idx];

@@ -14,6 +14,7 @@
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
 		AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9491B34AE31009B0E2E /* LandUseView.m */; };
 		AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */; };
+		AE2C30BC1B57160A006A955E /* DE.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2C30BB1B57160A006A955E /* DE.png */; };
 		AE3B9CF71B4B22630037AEF2 /* pieChatIcon_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */; };
 		AE3B9CF81B4B22630037AEF2 /* remoteIcon_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */; };
 		AE3BF0111B4C3F7300CB2B88 /* GlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3BF0101B4C3F7300CB2B88 /* GlobalManager.m */; };
@@ -93,6 +94,7 @@
 		AE23B9531B34C3BB009B0E2E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RabbitMQManager.h; sourceTree = "<group>"; };
 		AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RabbitMQManager.m; sourceTree = "<group>"; };
+		AE2C30BB1B57160A006A955E /* DE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DE.png; sourceTree = "<group>"; };
 		AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieChatIcon_unselected.png; sourceTree = "<group>"; };
 		AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remoteIcon_unselected.png; sourceTree = "<group>"; };
 		AE3BF00F1B4C3F7300CB2B88 /* GlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalManager.h; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				AE2C30BB1B57160A006A955E /* DE.png */,
 				AED3B8031B55E233008292C4 /* heating_icon.png */,
 				AED3B8041B55E233008292C4 /* lights_icon.png */,
 				AED3B8051B55E233008292C4 /* mobility_icon.png */,
@@ -514,6 +517,7 @@
 				AE6C04271B41D4C700A1D777 /* single.png in Resources */,
 				AED3B8071B55E233008292C4 /* lights_icon.png in Resources */,
 				AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */,
+				AE2C30BC1B57160A006A955E /* DE.png in Resources */,
 				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

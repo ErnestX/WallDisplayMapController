@@ -11,5 +11,6 @@
 @interface DroppableSingleBarView : DroppableChart
 
 - (instancetype)initWithFrame:(CGRect)frame target:(UIView *)target delegate:(id)delegate;
+- (void)updateWithArrayThresholds:(NSArray *)arrThresholds current:(NSNumber *)current title:(NSString *)title type:(NSString *)type;
 
 @end

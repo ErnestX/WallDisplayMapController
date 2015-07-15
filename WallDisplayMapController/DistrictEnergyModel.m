@@ -11,8 +11,12 @@
 @implementation DistrictEnergyModel
 
 - (void)updateModelWithDictionary:(NSDictionary *)dict {
-    self.districtThresholdFAR = [NSNumber numberWithDouble:[dict[@"FAR"] doubleValue]];
-    self.far = [NSNumber numberWithDouble:[dict[@"FAR"] doubleValue]];
+    if (dict[@"district_threshold_FAR"]) {
+        self.districtThresholdFAR = [NSNumber numberWithDouble:[dict[@"district_threshold_FAR"] doubleValue]];
+    } else {
+        self.districtThresholdFAR = @1.1;
+    }
+    self.far = [NSNumber numberWithFloat:roundToTwo([dict[@"FAR"] floatValue])];
     
     self.heatingPercent = [NSNumber numberWithInt:(int)roundl([dict[@"heating_percent"] doubleValue] * 100.0)];
     self.lightsPercent = [NSNumber numberWithInt:(int)roundl([dict[@"lights_percent"] doubleValue] * 100.0)];

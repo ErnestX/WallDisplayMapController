@@ -11,6 +11,7 @@
 #import "DroppableBarChart.h"
 #import "DroppableCircleChart.h"
 #import "DroppableNumberView.h"
+#import "DroppableSingleBarView.h"
 
 @implementation MetricCollectionViewCell
 
@@ -76,8 +77,19 @@
         [self addSubview:circleChart];
         [circleChart updateWithMainMeasure:content[@"main"] subMeasure:content[@"sub"] description:content[@"desc"] type:chartCategory];
         
+    } else if ([chartType isEqualToString:CHART_TYPE_SINGLE_BAR]) {
+        DroppableSingleBarView *circleChart = [[DroppableSingleBarView alloc] initWithFrame:self.bounds];
+        circleChart.isDraggable = NO;
+        circleChart.tag = 33333;
+        for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
+            [circleChart removeGestureRecognizer:recognizer];
+        }
+        [self addSubview:circleChart];
+        [circleChart updateWithArrayThresholds:content[@"thresholds"] current:content[@"current"] title:content[@"title"] type:chartCategory];
+
     } else {
         // custom, not now
+        
     }
 }
 
