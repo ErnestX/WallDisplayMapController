@@ -18,6 +18,7 @@
 @property NSNumber *lightsPercent;
 @property NSNumber *mobilityPercent;
 
+@property NSNumber *emissionsPerCapita;
 @property NSNumber *energyHouseholdIncome;
 
 @end

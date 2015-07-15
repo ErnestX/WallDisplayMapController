@@ -12,7 +12,6 @@
 
 @implementation DroppableBarChart {
     
-    NSDictionary *dictTypeColor;
     NSDictionary *dictTitle;
     PNBarChart *barChart;
 }
@@ -31,13 +30,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
-                          @"Land Use" : COLOR_WATERMELON,
-                          @"Energy & Carbon" : FlatOrange,
-                          @"Economy" : FlatYellow,
-                          @"Equity" : FlatLime,
-                          @"Well Being" : FlatMint};
-        
         
         dictTitle = @{@"CEEI_vkt" : @"Existing",
                       @"model_vkt" : @"Current design",
@@ -62,7 +54,7 @@
 - (void)updateBarChartWithValues:(NSArray *)values labels:(NSArray *)labels type:(NSString *)type {
     
     barChart.barWidth = barChart.frame.size.width/([values count]*2);
-    barChart.strokeColor = dictTypeColor[type];
+    barChart.strokeColor = DICT_COLOR_TYPE[type];
     
     NSMutableArray *arrLabels = [NSMutableArray array];
     [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

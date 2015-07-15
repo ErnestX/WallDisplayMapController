@@ -21,8 +21,6 @@
 
 @implementation MasterViewController {
     NSArray *arrCategories;
-//    NSMutableDictionary *dictCategoryData;
-    NSDictionary *dictTypeColor;
     
     UITableView *tableCategory;
 }
@@ -31,16 +29,7 @@
     self = [super init];
     if (self) {
         arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
-        
-        dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
-                          @"Land Use" : COLOR_WATERMELON,
-                          @"Energy & Carbon" : FlatOrange,
-                          @"Economy" : FlatYellow,
-                          @"Equity" : FlatLime,
-                          @"Well Being" : FlatMint};
-        
-//        dictCategoryData = [[NSMutableDictionary alloc] initWithCapacity:10.0];
-        
+                
         [[NSNotificationCenter defaultCenter] addObserver:[GlobalManager sharedInstance] selector:@selector(beginConsumingMetricsData) name:RMQ_CONSUMER_THREAD_STARTED object:nil];
         
     }
@@ -96,7 +85,7 @@
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.textColor = dictTypeColor[arrCategories[indexPath.row]];
+    cell.textLabel.textColor = DICT_COLOR_TYPE[arrCategories[indexPath.row]];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20.0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = arrCategories[indexPath.row];

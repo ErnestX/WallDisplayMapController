@@ -15,7 +15,6 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
 
 @implementation DroppableCircleChart {
     PNCircleChart *circleChart;
-    NSDictionary *dictTypeColor;
     NSDictionary *dictTitle;
     
     UIView *imageBg;
@@ -28,14 +27,6 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     self = [super initWithFrame:frame];
     if (self) {
         double sideLength = self.frame.size.width-2*CIRCLE_EDGE_INSET;
-        
-        dictTypeColor = @{@"Mobility" : COLOR_LIGHT_BLUE,
-                          @"Land Use" : COLOR_WATERMELON,
-                          @"Energy & Carbon" : FlatOrange,
-                          @"Economy" : FlatYellow,
-                          @"Equity" : FlatLime,
-                          @"Well Being" : FlatMint};
-        
         
         dictTitle = @{@"single" : @"Single attached",
                       @"rowhouse" : @"Rowhouse",
@@ -91,7 +82,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
 }
 
 - (void)updateCircleChartWithCurrent:(NSNumber *)current type:(NSString *)type icon:(NSString *)iconName {
-    [circleChart setStrokeColor:dictTypeColor[type]];
+    [circleChart setStrokeColor:DICT_COLOR_TYPE[type]];
     [circleChart strokeChart];
     [circleChart updateChartByCurrent:current];
     
@@ -99,7 +90,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     // Update Icons
     UIImage *imgIcon = [UIImage imageNamed:iconName];
     if (imgIcon) {
-        imageBg.backgroundColor = dictTypeColor[type];
+        imageBg.backgroundColor = DICT_COLOR_TYPE[type];
         ivIcon.image = [UIImage imageNamed:iconName];
     } else {
         imageBg.alpha = 0.0;

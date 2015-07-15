@@ -15,6 +15,7 @@
 #import "DroppableCircleChart.h"
 #import "DroppableBarChart.h"
 #import "GlobalManager.h"
+#import "DroppableNumberView.h"
 
 @interface ChooseElementViewController () <JDDroppableViewDelegate>
 
@@ -82,12 +83,6 @@
     scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count)*widgetElementSideLength);
     [self.view addSubview: scrollView];
     
-    
-    
-    // CHECK IF THE DATA IS AVAILABLE, IF NOT ONLY DISPLAY BOTTOM VIEW
-    
-    
-    
     // Layout widget elements
     for (int i=0; i<[self.arrData count]; i++) {
         NSDictionary *dict = self.arrData[i];
@@ -126,9 +121,7 @@
                 dropview.chartType = chartType;
                 dropview.chartCategory = self.category;
             }
-
             
-
         
         } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
             // build circle chart
@@ -156,6 +149,29 @@
             
         } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
             // not now
+            
+        } if ([chartType isEqualToString:CHART_TYPE_NUMBER]) {
+            // build number view
+            
+            DroppableNumberView *bottomView = [[DroppableNumberView alloc] initWithFrame:chartFrame];
+            bottomView.alpha = 0.5;
+            bottomView.userInteractionEnabled = NO;
+            [scrollView addSubview:bottomView];
+            
+            
+            [bottomView  updateWithMainMeasure:data[@"main"] subMeasure:data[@"sub"] description:data[@"desc"] type:self.category];
+            
+            if (isAvailable) {
+                DroppableNumberView *dropview = [[DroppableNumberView alloc] initWithFrame:chartFrame
+                                                                                target:dropTarget
+                                                                              delegate:self];
+                [scrollView addSubview: dropview];
+                [dropview  updateWithMainMeasure:data[@"main"] subMeasure:data[@"sub"] description:data[@"desc"] type:self.category];
+                
+                dropview.dictChart = data;
+                dropview.chartType = chartType;
+                dropview.chartCategory = self.category;
+            }
             
         } else {
             // temporary code

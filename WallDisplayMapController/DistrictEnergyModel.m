@@ -19,8 +19,14 @@
     self.mobilityPercent = [NSNumber numberWithInt:(int)roundl([dict[@"mobility_percent"] doubleValue] * 100.0)];
     
     self.energyHouseholdIncome = [NSNumber numberWithInt:(int)roundl([dict[@"energy_household_income"] doubleValue])];
+    self.emissionsPerCapita = [NSNumber numberWithFloat:roundToTwo([dict[@"emissions_capita"] floatValue])];
     
     [super updateModelWithDictionary:dict];
+}
+
+float roundToTwo(float num)
+{
+    return round(10 * num) / 10;
 }
 
 @end

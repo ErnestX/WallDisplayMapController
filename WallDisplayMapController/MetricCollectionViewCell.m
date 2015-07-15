@@ -10,6 +10,7 @@
 #import "DroppableChart.h"
 #import "DroppableBarChart.h"
 #import "DroppableCircleChart.h"
+#import "DroppableNumberView.h"
 
 @implementation MetricCollectionViewCell
 
@@ -55,7 +56,8 @@
         circleChart.tag = 33333;
         for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
             [circleChart removeGestureRecognizer:recognizer];
-        }        [self addSubview:circleChart];
+        }
+        [self addSubview:circleChart];
         [circleChart updateCircleChartWithCurrent:filteredValues[0]
                                              type:chartCategory
                                              icon:filteredKeys[0]];
@@ -64,6 +66,16 @@
     } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
         // not now
 
+    } else if ([chartType isEqualToString:CHART_TYPE_NUMBER]) {
+        DroppableNumberView *circleChart = [[DroppableNumberView alloc] initWithFrame:self.bounds];
+        circleChart.isDraggable = NO;
+        circleChart.tag = 33333;
+        for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
+            [circleChart removeGestureRecognizer:recognizer];
+        }
+        [self addSubview:circleChart];
+        [circleChart updateWithMainMeasure:content[@"main"] subMeasure:content[@"sub"] description:content[@"desc"] type:chartCategory];
+        
     } else {
         // custom, not now
     }

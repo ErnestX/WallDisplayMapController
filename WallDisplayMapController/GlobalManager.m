@@ -95,15 +95,36 @@
         
         return temp;
         
-    } else if ([category isEqualToString:@"Energy & Carbon"]) {
+    } else if ([category isEqualToString:@"Energy & Carbon"] && self.modelEnergy) {
+        NSDictionary *ec0 = @{@"ch_type" : CHART_TYPE_NUMBER,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [self.modelDistrictEnergy.emissionsPerCapita stringValue],
+                                    @"sub" : @"Individual",
+                                    @"desc" : @"(tonnes CO2e per capita)"}]};
         
-        return @[];
+        NSDictionary *ec1 = @{@"ch_type" : CHART_TYPE_NUMBER,
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [NSString stringWithFormat:@"$%d", [self.modelDistrictEnergy.energyHouseholdIncome intValue]],
+                                    @"sub" : @"Household",
+                                    @"desc" : @"(annual average cost of energy)"}]};
+        
+        DEFINE_WEAK_SELF
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[ec0, ec1]];
+        [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSMutableDictionary *lui = (NSMutableDictionary *)obj;
+            NSString *key = [NSString stringWithFormat:@"ec%d", (int)idx];
+            lui[@"ch_data"][@"ch_key"] = key;
+            if (!weakSelf.dictWidgetStatus[key]) {
+                weakSelf.dictWidgetStatus[key] = [NSNumber numberWithBool:YES];
+            }
+        }];
+        
+        return temp;
+        
         
     } else if ([category isEqualToString:@"Economy"]) {
         
         return @[];
         
-    } else if ([category isEqualToString:@"Equity"]) {
+    } else if ([category isEqualToString:@"Equity"] && self.modelBuildings) {
         
         NSDictionary *eq0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent}]};
