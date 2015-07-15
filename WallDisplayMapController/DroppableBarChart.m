@@ -86,14 +86,14 @@
         lblBar.alpha = 1.0;//0.2;
         [barChart addSubview:lblBar];
         
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [UIView animateWithDuration:1.0
-//                             animations:^{
-//                                 lblBar.alpha = 1.0;
-//                             }
-//                             completion:nil];
-//        
-//        });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:1.0
+                             animations:^{
+                                 lblBar.alpha = 1.0;
+                             }
+                             completion:nil];
+        
+        });
         
     }];
     

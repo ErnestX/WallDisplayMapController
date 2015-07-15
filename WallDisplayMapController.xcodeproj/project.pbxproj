@@ -42,6 +42,10 @@
 		AEB81D941B43113300EA1450 /* WobbleAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB81D931B43113300EA1450 /* WobbleAnimator.m */; };
 		AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB81D961B43490900EA1450 /* DeleteButton.m */; };
 		AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */; };
+		AED3B8021B55DEAC008292C4 /* DroppableSingleBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */; };
+		AED3B8061B55E233008292C4 /* heating_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AED3B8031B55E233008292C4 /* heating_icon.png */; };
+		AED3B8071B55E233008292C4 /* lights_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AED3B8041B55E233008292C4 /* lights_icon.png */; };
+		AED3B8081B55E233008292C4 /* mobility_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AED3B8051B55E233008292C4 /* mobility_icon.png */; };
 		CA1639471B0E4FBC00E4FC81 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639461B0E4FBC00E4FC81 /* main.m */; };
 		CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1639491B0E4FBC00E4FC81 /* AppDelegate.m */; };
 		CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA16394C1B0E4FBC00E4FC81 /* MapControlViewController.m */; };
@@ -137,6 +141,11 @@
 		AEB81D961B43490900EA1450 /* DeleteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteButton.m; sourceTree = "<group>"; };
 		AED3B7FD1B558D0D008292C4 /* DroppableNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableNumberView.h; sourceTree = "<group>"; };
 		AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableNumberView.m; sourceTree = "<group>"; };
+		AED3B8001B55DEAC008292C4 /* DroppableSingleBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableSingleBarView.h; sourceTree = "<group>"; };
+		AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableSingleBarView.m; sourceTree = "<group>"; };
+		AED3B8031B55E233008292C4 /* heating_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heating_icon.png; sourceTree = "<group>"; };
+		AED3B8041B55E233008292C4 /* lights_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lights_icon.png; sourceTree = "<group>"; };
+		AED3B8051B55E233008292C4 /* mobility_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mobility_icon.png; sourceTree = "<group>"; };
 		C2EB0F574A27F24236C46473 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639411B0E4FBC00E4FC81 /* WallDisplayMapController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallDisplayMapController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1639451B0E4FBC00E4FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +220,8 @@
 				AE6C042E1B42029400A1D777 /* DroppableChart.m */,
 				AED3B7FD1B558D0D008292C4 /* DroppableNumberView.h */,
 				AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */,
+				AED3B8001B55DEAC008292C4 /* DroppableSingleBarView.h */,
+				AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */,
 			);
 			name = WidgetElementViews;
 			sourceTree = "<group>";
@@ -367,6 +378,9 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				AED3B8031B55E233008292C4 /* heating_icon.png */,
+				AED3B8041B55E233008292C4 /* lights_icon.png */,
+				AED3B8051B55E233008292C4 /* mobility_icon.png */,
 				AE3B9CF51B4B22630037AEF2 /* pieChatIcon_unselected.png */,
 				AE3B9CF61B4B22630037AEF2 /* remoteIcon_unselected.png */,
 				AE6C041E1B41D4C700A1D777 /* active_pct.png */,
@@ -485,6 +499,7 @@
 				CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */,
 				CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */,
 				CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */,
+				AED3B8081B55E233008292C4 /* mobility_icon.png in Resources */,
 				CA2631541B4702CA00A74FB7 /* pieChatIcon@2x.png in Resources */,
 				CA2631661B4712E300A74FB7 /* remoteIcon@2x.png in Resources */,
 				CA1639521B0E4FBC00E4FC81 /* Images.xcassets in Resources */,
@@ -493,9 +508,11 @@
 				AE6C04241B41D4C700A1D777 /* active_pct.png in Resources */,
 				AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */,
 				AE3B9CF81B4B22630037AEF2 /* remoteIcon_unselected.png in Resources */,
+				AED3B8061B55E233008292C4 /* heating_icon.png in Resources */,
 				AE6C04251B41D4C700A1D777 /* apart.png in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,
 				AE6C04271B41D4C700A1D777 /* single.png in Resources */,
+				AED3B8071B55E233008292C4 /* lights_icon.png in Resources */,
 				AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */,
 				AE12030A1B1E2A2D0058A43A /* Launch Screen.xib in Resources */,
 			);
@@ -570,6 +587,7 @@
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
 				AE15E8741B30E28E00E9A47A /* WidgetViewController.m in Sources */,
 				AE0E803F1B46F8EA0047AD80 /* RAReorderableLayout.swift in Sources */,
+				AED3B8021B55DEAC008292C4 /* DroppableSingleBarView.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
 				AE3BF0111B4C3F7300CB2B88 /* GlobalManager.m in Sources */,
 				AE9E40331B3209FC0085000D /* MobilityView.m in Sources */,
