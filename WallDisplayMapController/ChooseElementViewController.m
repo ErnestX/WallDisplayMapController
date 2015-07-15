@@ -150,7 +150,7 @@
         } else if ([chartType isEqualToString:CHART_TYPE_PIE]) {
             // not now
             
-        } if ([chartType isEqualToString:CHART_TYPE_NUMBER]) {
+        } else if ([chartType isEqualToString:CHART_TYPE_NUMBER]) {
             // build number view
             
             DroppableNumberView *bottomView = [[DroppableNumberView alloc] initWithFrame:chartFrame];

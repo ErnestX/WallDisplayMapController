@@ -95,7 +95,7 @@
         
         return temp;
         
-    } else if ([category isEqualToString:@"Energy & Carbon"] && self.modelEnergy) {
+    } else if ([category isEqualToString:@"Energy & Carbon"] && self.modelDistrictEnergy) {
         NSDictionary *ec0 = @{@"ch_type" : CHART_TYPE_NUMBER,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [self.modelDistrictEnergy.emissionsPerCapita stringValue],
                                     @"sub" : @"Individual",
