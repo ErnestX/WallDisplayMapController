@@ -11,6 +11,7 @@
 @interface MaskContentView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)targetVC;
+- (void)showContent:(NSDictionary *)data;
 
 
 @end
