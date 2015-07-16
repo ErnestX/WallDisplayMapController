@@ -63,6 +63,8 @@ const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
         [self beginDrag];
         [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
                     animated:YES];
+    } else {
+        [[self nextResponder] touchesBegan:touches withEvent:event];
     }
 
 }
@@ -73,6 +75,8 @@ const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
         [super touchesMoved:touches withEvent:event];
         [self dragAtPosition:[[touches anyObject] locationInView:self.superview]
                     animated:NO];
+    } else {
+        [[self nextResponder] touchesMoved:touches withEvent:event];
     }
 
 }
@@ -82,6 +86,8 @@ const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
     if (self.isDraggable) {
         [super touchesEnded:touches withEvent:event];
         [self endDrag];
+    } else {
+        [[self nextResponder] touchesEnded:touches withEvent:event];
     }
     
 }
@@ -91,6 +97,8 @@ const CGFloat JDDroppableViewDefaultAnimationDuration = 0.33;
     if (self.isDraggable) {
         [super touchesCancelled:touches withEvent:event];
         [self endDrag];
+    } else {
+        [[self nextResponder] touchesCancelled:touches withEvent:event];
     }
 
 }

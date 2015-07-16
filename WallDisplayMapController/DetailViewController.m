@@ -20,6 +20,7 @@
 #import "WallDisplayMapController-Swift.h"
 #import "MetricCollectionViewCell.h"
 #import "GlobalManager.h"
+#import "MaskContentView.h"
 
 const NSInteger ELEMENTS_PER_ROW = 4;
 
@@ -229,15 +230,20 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 
 #pragma mark RAReorderableLayout Delegate
 
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-}
 
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];
+
+    [window addSubview:maskView];
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         maskView.alpha = 0.5;
+                     }
+                     completion:nil];
     
 }
 

@@ -50,6 +50,7 @@
                                     labels:filteredKeys
                                       type:chartCategory];
         
+        
 
     } else if ([chartType isEqualToString:CHART_TYPE_CIRCLE]) {
         DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:self.bounds];
@@ -91,10 +92,23 @@
         // custom, not now
         
     }
+    
 }
 
-- (void)changeBgColor:(UIColor *)color {
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.nextResponder touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.nextResponder touchesEnded:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.nextResponder touchesCancelled:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.nextResponder touchesMoved:touches withEvent:event];
 }
 
 - (void)startAnimatingWithTarget:(id)target {

@@ -48,38 +48,12 @@
         vStrokeBar = [[UIView alloc] init];
         [self addSubview:vStrokeBar];
         
-        DEFINE_WEAK_SELF
-        [vBarBg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(weakSelf).with.offset(55.0f);
-            make.width.equalTo(@20);
-            make.bottom.equalTo(weakSelf).with.offset(-5.0f);
-            make.height.equalTo(weakSelf.mas_height).multipliedBy(0.9f);
-        }];
-        
-        [vStrokeBar mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.bottom.equalTo(vBarBg);
-            make.height.equalTo(@0);
-        }];
-        
         lblCurrentValue = [[UILabel alloc] init];
         lblCurrentValue.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:20.0];
         [self addSubview:lblCurrentValue];
         
-        [lblCurrentValue mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(@0);
-            make.centerX.equalTo(vBarBg).with.offset(30.0f);
-        }];
-        
-        [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(weakSelf).with.offset(15.0f);
-            make.trailing.lessThanOrEqualTo(vBarBg.mas_leading).with.offset(-30.0f);
-            make.bottom.equalTo(vBarBg).with.offset(-30.0f);
-        }];
-        
         arrThresholdLables = [NSMutableArray arrayWithCapacity:5];
         
-        [self layoutIfNeeded];
-
     }
     return self;
     
@@ -102,7 +76,19 @@
     lblTitle.text = title;
     
     DEFINE_WEAK_SELF
-
+    [lblTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(weakSelf).with.offset(15.0f);
+        make.trailing.lessThanOrEqualTo(vBarBg.mas_leading).with.offset(-30.0f);
+        make.bottom.equalTo(vBarBg).with.offset(-30.0f);
+    }];
+    
+    [vBarBg mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf).with.offset(55.0f);
+        make.width.equalTo(@20);
+        make.bottom.equalTo(weakSelf).with.offset(-5.0f);
+        make.height.equalTo(weakSelf.mas_height).multipliedBy(0.9f);
+    }];
+    
     NSMutableArray *temp = [NSMutableArray arrayWithCapacity:arrThresholds.count];
     [arrThresholds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict = (NSDictionary *)obj;
@@ -112,17 +98,27 @@
     maxValue = maxValue * 1.2;
     vStrokeBar.backgroundColor = DICT_COLOR_TYPE[type];
     
-    // Stroke bar
     [vStrokeBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(vBarBg);
+        make.height.equalTo(@0);
+    }];
+    
+    [vStrokeBar layoutIfNeeded];
+    
+    // Stroke bar
+    [vStrokeBar mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(vBarBg);
         float percent = [current floatValue] / maxValue;
-        make.height.equalTo(vBarBg).multipliedBy(percent);
+        make.height.equalTo(weakSelf.mas_height).multipliedBy(percent*0.9);
     }];
     
     lblCurrentValue.text = [current stringValue];
     lblCurrentValue.textColor = DICT_COLOR_TYPE[type];
     
     [lblCurrentValue mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(vBarBg).with.offset(30.0f);
         make.centerY.equalTo(vStrokeBar.mas_top);
+        
     }];
     
     // Add threshold labels
@@ -143,9 +139,8 @@
             UIView *vLine = [[UIView alloc] init];
             vLine.backgroundColor = [UIColor lightGrayColor];
             [weakSelf addSubview:vLine];
-//            [vBarBg bringSubviewToFront:vLine];
             
-            [iconBg mas_makeConstraints:^(MASConstraintMaker *make) {
+            [iconBg mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(vBarBg).with.offset(-31.0f);
                 make.width.height.equalTo(@27);
         
@@ -154,14 +149,14 @@
                 make.top.equalTo(vBarBg.mas_top).with.offset(total*(1-percent));
             }];
             
-            [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            [vLine mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.width.equalTo(vStrokeBar).multipliedBy(1.2f);
                 make.trailing.equalTo(vStrokeBar);
                 make.height.equalTo(@1.0);
                 make.centerY.equalTo(iconBg);
             }];
             
-            [ivTh mas_makeConstraints:^(MASConstraintMaker *make) {
+            [ivTh mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.centerX.centerY.equalTo(iconBg);
                 make.height.width.equalTo(@17.0);
             }];
