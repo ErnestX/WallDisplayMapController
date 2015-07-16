@@ -34,7 +34,7 @@
         maxValue = 0.0;
         
         lblTitle = [[UILabel alloc] init];
-        lblTitle.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:25.0f];
+        lblTitle.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:23.0f];
         lblTitle.textColor = [UIColor lightGrayColor];
         lblTitle.textAlignment = NSTextAlignmentLeft;
         lblTitle.numberOfLines = 0;
@@ -50,7 +50,7 @@
         
         DEFINE_WEAK_SELF
         [vBarBg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(weakSelf).with.offset(50.0f);
+            make.centerX.equalTo(weakSelf).with.offset(55.0f);
             make.width.equalTo(@20);
             make.bottom.equalTo(weakSelf).with.offset(-5.0f);
             make.height.equalTo(weakSelf.mas_height).multipliedBy(0.9f);
@@ -71,9 +71,9 @@
         }];
         
         [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(weakSelf).with.offset(20.0f);
-            make.trailing.lessThanOrEqualTo(vBarBg.mas_leading).with.offset(-35.0f);
-            make.bottom.equalTo(vBarBg).with.offset(-20.0f);
+            make.leading.equalTo(weakSelf).with.offset(15.0f);
+            make.trailing.lessThanOrEqualTo(vBarBg.mas_leading).with.offset(-30.0f);
+            make.bottom.equalTo(vBarBg).with.offset(-30.0f);
         }];
         
         arrThresholdLables = [NSMutableArray arrayWithCapacity:5];
@@ -142,8 +142,8 @@
             
             UIView *vLine = [[UIView alloc] init];
             vLine.backgroundColor = [UIColor lightGrayColor];
-            [vBarBg addSubview:vLine];
-            [vBarBg bringSubviewToFront:vLine];
+            [weakSelf addSubview:vLine];
+//            [vBarBg bringSubviewToFront:vLine];
             
             [iconBg mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(vBarBg).with.offset(-31.0f);
@@ -155,8 +155,8 @@
             }];
             
             [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.width.equalTo(vBarBg).multipliedBy(1.2f);
-                make.trailing.equalTo(vBarBg);
+                make.width.equalTo(vStrokeBar).multipliedBy(1.2f);
+                make.trailing.equalTo(vStrokeBar);
                 make.height.equalTo(@1.0);
                 make.centerY.equalTo(iconBg);
             }];

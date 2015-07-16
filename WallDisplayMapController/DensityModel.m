@@ -13,8 +13,12 @@
 - (void)updateModelWithDictionary:(NSDictionary *)dict {
     [super updateModelWithDictionary:dict];
     
-//    self.activeDensityThreshold = TODO
-//    self.transitDensityThreshold = TODO
+    NSNumber *threshActive = dict[@"active_density_threshold"];
+    self.activeDensityThreshold = threshActive? threshActive : @65.0;
+    
+    NSNumber *threshTransit = dict[@"transit_density_threshold"];
+    self.transitDensityThreshold = threshTransit? threshTransit : @35.0;
+
     self.densityMetric = [NSNumber numberWithInteger: [dict[@"density_metric"] integerValue]];
     
     self.modelVKT = [NSNumber numberWithInteger: [dict[@"model_vkt"] integerValue]];

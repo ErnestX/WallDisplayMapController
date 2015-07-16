@@ -49,7 +49,7 @@
         NSMutableDictionary *mob0 = [NSMutableDictionary dictionaryWithDictionary: @{@"ch_type" : CHART_TYPE_BAR,
                                                                                      @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"model_vkt" : self.modelDensity.modelVKT,                        @"CEEI_vkt" : self.modelDensity.CEEIKVT}]}];
         
-        NSMutableDictionary *mob1 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
+        NSMutableDictionary *mob4 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
                                @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"active_pct" : self.modelDensity.modelActiveTripsPercent}]}];
         
         NSMutableDictionary *mob2 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
@@ -58,8 +58,15 @@
         NSMutableDictionary *mob3 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
                                @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"vehicle_pct" : self.modelDensity.modelVehicleTripsPercent}]}];
         
+        NSMutableDictionary *mob1 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_SINGLE_BAR,
+                                                                                    @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"thresholds" : @[@{@"thresh_value" : self.modelDensity.transitDensityThreshold,                                  @"thresh_icon" : @"transit_pct.png"},
+                                                                                                                                                                    @{@"thresh_value" : self.modelDensity.activeDensityThreshold,
+                                                                                                                                                                      @"thresh_icon" : @"active_pct.png"}],
+                                                                                                                                                  @"current" : self.modelDensity.densityMetric,
+                                                                                                                                                  @"title": @"Population Density"}]}];
+        
         DEFINE_WEAK_SELF
-        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[mob0, mob1, mob2, mob3]];
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:@[mob0, mob1, mob2, mob3, mob4]];
         [temp enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSMutableDictionary *mobi = (NSMutableDictionary *)obj;
             NSString *key = [NSString stringWithFormat:@"mob%d", (int)idx];
