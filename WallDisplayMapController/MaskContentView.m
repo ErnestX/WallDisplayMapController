@@ -26,7 +26,7 @@
 
 - (void) handleTapOnMask:(UIPanGestureRecognizer*)recognizer {
     DEFINE_WEAK_SELF
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.15
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{

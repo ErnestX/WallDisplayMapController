@@ -237,11 +237,11 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];
 
     [window addSubview:maskView];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.15
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         maskView.alpha = 0.5;
+                         maskView.alpha = 0.7;
                      }
                      completion:nil];
     
