@@ -82,6 +82,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
 }
 
 - (void)updateCircleChartWithCurrent:(NSNumber *)current type:(NSString *)type icon:(NSString *)iconName {
+        
     [circleChart setStrokeColor:DICT_COLOR_TYPE[type]];
     [circleChart strokeChart];
     [circleChart updateChartByCurrent:current];
@@ -92,6 +93,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     if (imgIcon) {
         imageBg.backgroundColor = DICT_COLOR_TYPE[type];
         ivIcon.image = [UIImage imageNamed:iconName];
+        ivIcon.contentMode = UIViewContentModeScaleAspectFit;
     } else {
         imageBg.alpha = 0.0;
         lblPercent.textAlignment = NSTextAlignmentCenter;
@@ -103,6 +105,15 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
     // Update Labels
     lblTitle.text = dictTitle[iconName];
     lblPercent.text = [NSString stringWithFormat:@"%d%%", [current intValue]];
+}
+
+- (void)setShadowColor:(UIColor *)color {
+    circleChart.circleBackground.strokeColor = color.CGColor;
+}
+
+- (void)clearBg {
+    self.backgroundColor = ClearColor;
+    circleChart.backgroundColor = ClearColor;
 }
 
 @end

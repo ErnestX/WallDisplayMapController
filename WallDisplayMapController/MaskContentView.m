@@ -8,6 +8,7 @@
 
 #import "MaskContentView.h"
 #import "Masonry.h"
+#import "DroppableCircleChart.h"
 #import <Chameleon.h>
 
 @implementation MaskContentView {
@@ -20,40 +21,60 @@
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnMask:)];
-        [self addGestureRecognizer:tap];        
+        [self addGestureRecognizer:tap];
+        
+        contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 700.0, 400.0)];
+        contentView.center = self.center;
+        contentView.backgroundColor = ClearColor;
+        [self addSubview:contentView];
 
     }
     return self;
 }
 
 - (void)showContent:(NSDictionary *)data {
-    DEFINE_WEAK_SELF
-    contentView = [[UIView alloc] init];
-    contentView.backgroundColor = [UIColor clearColor];
-    [weakSelf addSubview:contentView];
-    
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(weakSelf);
-        make.height.equalTo(@400);
-        make.width.equalTo(@700);
-    }];
-    
-    if (!data[@"detail_info"]) {
+    if (!data[@"chart_content"][@"detail_info"]) {
         UILabel *lblNoInfo = [[UILabel alloc] init];
         lblNoInfo.textColor = COLOR_BG_WHITE;
-        lblNoInfo.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:30.0];
+        lblNoInfo.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25.0];
         lblNoInfo.textAlignment = NSTextAlignmentCenter;
         lblNoInfo.numberOfLines = 0;
         lblNoInfo.lineBreakMode = NSLineBreakByWordWrapping;
-        lblNoInfo.text = @"Sorry, there are no detailed information to be displayed for this element.";
+        lblNoInfo.text = @"Sorry, there is no detailed information to be displayed for this metric.";
         [contentView addSubview:lblNoInfo];
         
         [lblNoInfo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.top.bottom.equalTo(contentView);
+            make.centerX.equalTo(contentView);
+            make.width.lessThanOrEqualTo(@500);
+            make.centerY.equalTo(contentView);
         }];
         
-        
     } else {
+        // display three circle charts
+        NSArray *circlesData = data[@"chart_content"][@"detail_info"];
+        [circlesData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *iconName = [NSString stringWithFormat:@"%@_icon.png", obj[@"key"]];
+                NSNumber *currentValue = obj[@"value"];
+                
+                CGFloat circleSide = 700.0/3;
+                
+                DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(idx*circleSide, 400.0/2-circleSide/2, circleSide, circleSide)];
+                circleChart.isDraggable = NO;
+                [circleChart clearBg];
+                [circleChart setShadowColor:[UIColor colorWithWhite:1.0 alpha:0.3]];
+                for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
+                    [circleChart removeGestureRecognizer:recognizer];
+                }
+                [contentView addSubview:circleChart];
+                [circleChart updateCircleChartWithCurrent:currentValue
+                                                     type:data[@"chart_category"]
+                                                     icon:iconName];
+            });
+            
+
+        }];
         
     }
     

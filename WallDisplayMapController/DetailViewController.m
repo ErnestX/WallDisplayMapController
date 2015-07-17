@@ -242,10 +242,9 @@ const NSInteger ELEMENTS_PER_ROW = 4;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
-                     }
-                     completion:^(BOOL finished) {
                          [maskView showContent:[arrData objectAtIndex:indexPath.item]];
-                     }];
+                     }
+                     completion:nil];
     
 }
 

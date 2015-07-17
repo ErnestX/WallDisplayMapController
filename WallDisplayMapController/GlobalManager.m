@@ -108,10 +108,18 @@
                                     @"sub" : @"Individual",
                                     @"desc" : @"(tonnes CO2e per capita)"}]};
         
+        NSArray *detail_info_ec1 = @[@{@"key" : @"heating",
+                                       @"value" : self.modelDistrictEnergy.heatingPercent},
+                                     @{@"key" : @"lights",
+                                       @"value" : self.modelDistrictEnergy.lightsPercent},
+                                     @{@"key" : @"mobility",
+                                       @"value" : self.modelDistrictEnergy.mobilityPercent}];
+        
         NSDictionary *ec1 = @{@"ch_type" : CHART_TYPE_NUMBER,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [NSString stringWithFormat:@"$%d", [self.modelDistrictEnergy.energyHouseholdIncome intValue]],
                                     @"sub" : @"Household",
-                                    @"desc" : @"(annual average cost of energy)"}]};
+                                    @"desc" : @"(annual average cost of energy)",
+                                                                                            @"detail_info" : detail_info_ec1}]};
         
         NSDictionary *ec2 = @{@"ch_type" : CHART_TYPE_SINGLE_BAR,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"thresholds" : @[@{@"thresh_value" : self.modelDistrictEnergy.districtThresholdFAR,                                  @"thresh_icon" : @"DE.png"}],

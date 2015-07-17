@@ -12,4 +12,7 @@
 
 - (void)updateCircleChartWithCurrent:(NSNumber *)current type:(NSString *)type icon:(NSString *)iconName;
 
+- (void)clearBg;
+- (void)setShadowColor:(UIColor *)color;
+
 @end
