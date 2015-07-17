@@ -14,5 +14,6 @@
 
 - (void)clearBg;
 - (void)setShadowColor:(UIColor *)color;
+- (void)changeTextColorTo:(UIColor *)color;
 
 @end

@@ -64,6 +64,7 @@
                 circleChart.isDraggable = NO;
                 [circleChart clearBg];
                 [circleChart setShadowColor:[UIColor colorWithWhite:1.0 alpha:0.3]];
+                [circleChart changeTextColorTo:FlatWhite];
                 for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
                     [circleChart removeGestureRecognizer:recognizer];
                 }

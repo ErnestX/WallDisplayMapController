@@ -38,6 +38,9 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                       @"comm" : @"Commercial",
                       @"civic" : @"Civic",
                       @"ind" : @"Industrial",
+                      @"heating_icon.png" : @"Heating + Hot water",
+                      @"lights_icon.png" : @"Lights + Appliances",
+                      @"mobility_icon.png" : @"Personal mobility"
                       };
         
         circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(CIRCLE_EDGE_INSET-10.0, CIRCLE_EDGE_INSET+10.0, sideLength, sideLength)
@@ -114,6 +117,11 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
 - (void)clearBg {
     self.backgroundColor = ClearColor;
     circleChart.backgroundColor = ClearColor;
+}
+
+- (void)changeTextColorTo:(UIColor *)color {
+    lblTitle.textColor = color;
+    lblPercent.textColor = color;
 }
 
 @end
