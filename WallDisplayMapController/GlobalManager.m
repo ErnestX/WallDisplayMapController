@@ -46,20 +46,36 @@
 - (NSArray *)getWidgetElementsByCategory:(NSString *)category {
     if ([category isEqualToString:@"Mobility"] && self.modelDensity) {
         
+        NSDictionary *detail_info_mob0 = @{@"type" : @"desc",
+                                          @"data" : @{@"title" : @"Distance",
+                                                      @"subtitle" : @"(km per person in a year)"}};
+        
+        NSDictionary *detail_info_mob1 = @{@"type" : @"desc",
+                                           @"data" : @{@"subtitle" : @"(People per hectare and mode thresholds)"}};
+        
+        NSDictionary *detail_info_mob234 = @{@"type" : @"desc",
+                                           @"data" : @{@"title" : @"Mode",
+                                                       @"subtitle" : @"(% of annual trips by mode)"}};
+        
+        
         NSMutableDictionary *mob0 = [NSMutableDictionary dictionaryWithDictionary: @{@"ch_type" : CHART_TYPE_BAR,
-                                                                                     @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"model_vkt" : self.modelDensity.modelVKT,                        @"CEEI_vkt" : self.modelDensity.CEEIKVT}]}];
+                                                                                     @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"model_vkt" : self.modelDensity.modelVKT,                        @"CEEI_vkt" : self.modelDensity.CEEIKVT,
+                                                                                                                                                   @"detail_info" : detail_info_mob0}]}];
         
         NSMutableDictionary *mob4 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"active_pct" : self.modelDensity.modelActiveTripsPercent}]}];
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"active_pct" : self.modelDensity.modelActiveTripsPercent,
+                                                                                             @"detail_info" : detail_info_mob234}]}];
         
         NSMutableDictionary *mob2 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"transit_pct" : self.modelDensity.modelTransitTripsPercent}]}];
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"transit_pct" : self.modelDensity.modelTransitTripsPercent,
+                                                                                             @"detail_info" : detail_info_mob234}]}];
         
         NSMutableDictionary *mob3 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_CIRCLE,
-                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"vehicle_pct" : self.modelDensity.modelVehicleTripsPercent}]}];
+                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"vehicle_pct" : self.modelDensity.modelVehicleTripsPercent,
+                                                                                             @"detail_info" : detail_info_mob234}]}];
         
         NSMutableDictionary *mob1 = [NSMutableDictionary dictionaryWithDictionary:@{@"ch_type" : CHART_TYPE_SINGLE_BAR,
-                                                                                    @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"thresholds" : @[@{@"thresh_value" : self.modelDensity.transitDensityThreshold,                                  @"thresh_icon" : @"transit_pct.png"},
+                                                                                    @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"detail_info" : detail_info_mob1, @"thresholds" : @[@{@"thresh_value" : self.modelDensity.transitDensityThreshold,                                  @"thresh_icon" : @"transit_pct.png"},
                                                                                                                                                                     @{@"thresh_value" : self.modelDensity.activeDensityThreshold,
                                                                                                                                                                       @"thresh_icon" : @"active_pct.png"}],
                                                                                                                                                   @"current" : self.modelDensity.densityMetric,
@@ -80,14 +96,34 @@
         
     } else if ([category isEqualToString:@"Land Use"] && self.modelBuildings) {
         
+        NSDictionary *detail_info_lu0 = @{@"type" : @"desc",
+                                         @"data" : @{@"title" : @"Floor area",
+                                                     @"subtitle" : @"(% of floor area used for Residential)"}};
+        
+        NSDictionary *detail_info_lu1 = @{@"type" : @"desc",
+                                         @"data" : @{@"title" : @"Floor area",
+                                                     @"subtitle" : @"(% of floor area used for Commercial)"}};
+        
+        NSDictionary *detail_info_lu2 = @{@"type" : @"desc",
+                                         @"data" : @{@"title" : @"Floor area",
+                                                     @"subtitle" : @"(% of floor area used for Civic)"}};
+        
+        NSDictionary *detail_info_lu3 = @{@"type" : @"desc",
+                                         @"data" : @{@"title" : @"Floor area",
+                                                     @"subtitle" : @"(% of floor area used for Industrial)"}};
+        
         NSDictionary *lu0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rez" : self.modelBuildings.rezPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rez" : self.modelBuildings.rezPercent,
+                                                                                            @"detail_info" : detail_info_lu0}]};
         NSDictionary *lu1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"comm" : self.modelBuildings.commPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"comm" : self.modelBuildings.commPercent,
+                                                                                            @"detail_info" : detail_info_lu1}]};
         NSDictionary *lu2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"civic" : self.modelBuildings.civicPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"civic" : self.modelBuildings.civicPercent,
+                                                                                            @"detail_info" : detail_info_lu2}]};
         NSDictionary *lu3 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"ind" : self.modelBuildings.indPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"ind" : self.modelBuildings.indPercent,
+                                                                                            @"detail_info" : detail_info_lu3}]};
         
         DEFINE_WEAK_SELF
         NSMutableArray *temp = [NSMutableArray arrayWithArray:@[lu0, lu1, lu2, lu3]];
@@ -103,17 +139,29 @@
         return temp;
         
     } else if ([category isEqualToString:@"Energy & Carbon"] && self.modelDistrictEnergy) {
+        
+        NSDictionary *detail_info_ec0 = @{@"type" : @"desc",
+                                           @"data" : @{@"title" : @"Individual",
+                                                       @"subtitle" : @"emissions discounted when district energy threshold met"}};
+        
+        NSDictionary *detail_info_ec1 = @{@"type" : @"circles",
+                                          @"data" : @[@{@"key" : @"heating",
+                                                        @"value" : self.modelDistrictEnergy.heatingPercent},
+                                                      @{@"key" : @"lights",
+                                                        @"value" : self.modelDistrictEnergy.lightsPercent},
+                                                      @{@"key" : @"mobility",
+                                                        @"value" : self.modelDistrictEnergy.mobilityPercent}]};
+        
+        NSDictionary *detail_info_ec2 = @{@"type" : @"desc",
+                                          @"data" : @{@"subtitle" : @"(floor area per neighbourhood area)"}};
+        
+        
         NSDictionary *ec0 = @{@"ch_type" : CHART_TYPE_NUMBER,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [self.modelDistrictEnergy.emissionsPerCapita stringValue],
                                     @"sub" : @"Individual",
-                                    @"desc" : @"(tonnes CO2e per capita)"}]};
+                                    @"desc" : @"(tonnes CO2e per capita)",
+                                                                                            @"detail_info" : detail_info_ec0}]};
         
-        NSArray *detail_info_ec1 = @[@{@"key" : @"heating",
-                                       @"value" : self.modelDistrictEnergy.heatingPercent},
-                                     @{@"key" : @"lights",
-                                       @"value" : self.modelDistrictEnergy.lightsPercent},
-                                     @{@"key" : @"mobility",
-                                       @"value" : self.modelDistrictEnergy.mobilityPercent}];
         
         NSDictionary *ec1 = @{@"ch_type" : CHART_TYPE_NUMBER,
                               @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"main" : [NSString stringWithFormat:@"$%d", [self.modelDistrictEnergy.energyHouseholdIncome intValue]],
@@ -122,7 +170,7 @@
                                                                                             @"detail_info" : detail_info_ec1}]};
         
         NSDictionary *ec2 = @{@"ch_type" : CHART_TYPE_SINGLE_BAR,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"thresholds" : @[@{@"thresh_value" : self.modelDistrictEnergy.districtThresholdFAR,                                  @"thresh_icon" : @"DE.png"}],
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"detail_info" : detail_info_ec2, @"thresholds" : @[@{@"thresh_value" : self.modelDistrictEnergy.districtThresholdFAR,                                  @"thresh_icon" : @"DE.png"}],
                                                                                             @"current" : self.modelDistrictEnergy.far,
                                                                                             @"title": @"Building Density"}]};
         
@@ -146,12 +194,19 @@
         
     } else if ([category isEqualToString:@"Equity"] && self.modelBuildings) {
         
+        NSDictionary *detail_info_eq = @{@"type" : @"desc",
+                                          @"data" : @{@"title" : @"Unit Type",
+                                                      @"subtitle" : @"(% of all residential units)"}};
+        
         NSDictionary *eq0 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"single" : self.modelBuildings.detachedPercent,
+                                                                                            @"detail_info" : detail_info_eq}]};
         NSDictionary *eq1 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rowhouse" : self.modelBuildings.attachedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"rowhouse" : self.modelBuildings.attachedPercent,
+                                                                                            @"detail_info" : detail_info_eq}]};
         NSDictionary *eq2 = @{@"ch_type" : CHART_TYPE_CIRCLE,
-                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"apart" : self.modelBuildings.stackedPercent}]};
+                              @"ch_data" : [NSMutableDictionary dictionaryWithDictionary: @{@"apart" : self.modelBuildings.stackedPercent,
+                                                                                            @"detail_info" : detail_info_eq}]};
         
         DEFINE_WEAK_SELF
         NSMutableArray *temp = [NSMutableArray arrayWithArray:@[eq0, eq1, eq2]];

@@ -94,10 +94,12 @@
         CGRect chartFrame = CGRectMake(1.0, i*widgetElementSideLength+0.5, widgetElementSideLength-2.0, widgetElementSideLength-1.0);
         
         NSArray *filteredKeys = [[data allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return ![(NSString *)evaluatedObject isEqualToString:@"ch_key"];
+            return !([(NSString *)evaluatedObject isEqualToString:@"ch_key"] ||
+                     [(NSString *)evaluatedObject isEqualToString:@"detail_info"]);
         }]] ;
         NSArray *filteredValues = [[data allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return ![evaluatedObject isKindOfClass:[NSString class]];
+            return !([evaluatedObject isKindOfClass:[NSString class]] ||
+                     [evaluatedObject isKindOfClass:[NSDictionary class]]);
         }]];
         
         if ([chartType isEqualToString:CHART_TYPE_BAR]) {

@@ -238,7 +238,6 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 #pragma mark RAReorderableLayout Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];

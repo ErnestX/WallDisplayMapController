@@ -40,8 +40,12 @@
         lblNoInfo.textAlignment = NSTextAlignmentCenter;
         lblNoInfo.numberOfLines = 0;
         lblNoInfo.lineBreakMode = NSLineBreakByWordWrapping;
-        lblNoInfo.text = @"Sorry, there is no detailed information to be displayed for this metric.";
+        lblNoInfo.text = @"Sorry, there is no detailed information to be displayed for this indicator.";
         [contentView addSubview:lblNoInfo];
+        
+        UIImageView *iconError = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error_img2.png"]];
+        iconError.contentMode = UIViewContentModeScaleAspectFit;
+        [contentView addSubview:iconError];
         
         [lblNoInfo mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(contentView);
@@ -49,33 +53,76 @@
             make.centerY.equalTo(contentView);
         }];
         
-    } else {
-        // display three circle charts
-        NSArray *circlesData = data[@"chart_content"][@"detail_info"];
-        [circlesData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSString *iconName = [NSString stringWithFormat:@"%@_icon.png", obj[@"key"]];
-                NSNumber *currentValue = obj[@"value"];
-                
-                CGFloat circleSide = 700.0/3;
-                
-                DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(idx*circleSide, 400.0/2-circleSide/2, circleSide, circleSide)];
-                circleChart.isDraggable = NO;
-                [circleChart clearBg];
-                [circleChart setShadowColor:[UIColor colorWithWhite:1.0 alpha:0.3]];
-                [circleChart changeTextColorTo:FlatWhite];
-                for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
-                    [circleChart removeGestureRecognizer:recognizer];
-                }
-                [contentView addSubview:circleChart];
-                [circleChart updateCircleChartWithCurrent:currentValue
-                                                     type:data[@"chart_category"]
-                                                     icon:iconName];
-            });
-            
-
+        [iconError mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(contentView);
+            make.bottom.equalTo(lblNoInfo.mas_top).with.offset(-20.0f);
+            make.width.height.equalTo(@50);
         }];
+        
+    } else {
+        NSString *type = data[@"chart_content"][@"detail_info"][@"type"];
+        
+        if ([type isEqualToString:@"circles"]) {
+            NSArray *content = data[@"chart_content"][@"detail_info"][@"data"];
+            
+            [content enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *iconName = [NSString stringWithFormat:@"%@_icon.png", obj[@"key"]];
+                    NSNumber *currentValue = obj[@"value"];
+                    
+                    CGFloat circleSide = 700.0/3;
+                    
+                    DroppableCircleChart *circleChart = [[DroppableCircleChart alloc] initWithFrame:CGRectMake(idx*circleSide, 400.0/2-circleSide/2, circleSide, circleSide)];
+                    circleChart.isDraggable = NO;
+                    [circleChart clearBg];
+                    [circleChart setShadowColor:[UIColor colorWithWhite:1.0 alpha:0.3]];
+                    [circleChart changeTextColorTo:FlatWhite];
+                    for (UIGestureRecognizer *recognizer in circleChart.gestureRecognizers) {
+                        [circleChart removeGestureRecognizer:recognizer];
+                    }
+                    [contentView addSubview:circleChart];
+                    [circleChart updateCircleChartWithCurrent:currentValue
+                                                         type:data[@"chart_category"]
+                                                         icon:iconName];
+                });
+                
+                
+            }];
+
+        } else {
+            NSDictionary *content = data[@"chart_content"][@"detail_info"][@"data"];
+            
+            NSString *title = content[@"title"];
+            NSString *subtitle = content[@"subtitle"];
+            
+            UILabel *lblTitle = [[UILabel alloc] init];
+            lblTitle.text = title;
+            lblTitle.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:40.0f];
+            lblTitle.textColor = COLOR_BG_WHITE;
+            [contentView addSubview:lblTitle];
+            
+            UILabel *lblSub = [[UILabel alloc] init];
+            lblSub.text = subtitle;
+            lblSub.font = [UIFont fontWithName:@"HelveticaNeue" size:25.0f];
+            lblSub.textColor = COLOR_BG_WHITE;
+            lblSub.numberOfLines = 0;
+            lblSub.lineBreakMode = NSLineBreakByWordWrapping;
+            [contentView addSubview:lblSub];
+            
+            [lblSub mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(contentView);
+                make.width.lessThanOrEqualTo(@500);
+            }];
+            
+            [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(contentView);
+                make.bottom.equalTo(lblSub.mas_top).with.offset(-20.0f);
+            }];
+
+            
+        }
+        
         
     }
     

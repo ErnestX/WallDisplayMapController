@@ -31,10 +31,12 @@
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSArray *filteredKeys = [[content allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return ![(NSString *)evaluatedObject isEqualToString:@"ch_key"];
+        return !([(NSString *)evaluatedObject isEqualToString:@"ch_key"] ||
+                 [(NSString *)evaluatedObject isEqualToString:@"detail_info"]);
     }]] ;
     NSArray *filteredValues = [[content allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return ![evaluatedObject isKindOfClass:[NSString class]];
+        return !([evaluatedObject isKindOfClass:[NSString class]] ||
+                 [evaluatedObject isKindOfClass:[NSDictionary class]]);
     }]];
     
     if ([chartType isEqualToString:CHART_TYPE_BAR]) {
@@ -126,6 +128,16 @@
     chart.btnDelete.hidden = YES;
     [chart.btnDelete removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [chart.animator stopAnimation];
+}
+
+- (void)setSelected:(BOOL)selected {
+    if (selected) {
+        
+        
+    } else {
+        
+    }
+    
 }
 
 @end
