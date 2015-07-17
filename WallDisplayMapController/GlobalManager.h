@@ -15,6 +15,7 @@
 + (GlobalManager *)sharedInstance;
 - (void)beginConsumingMetricsData;
 - (NSArray *)getWidgetElementsByCategory:(NSString *)category;
+- (NSDictionary *)getWidgetElementByCategory:(NSString *)category andKey:(NSString *)key;
 - (NSDictionary *)getPeopleAndDwellings;
 
 - (BOOL)isWidgetAvailableForKey:(NSString *)key;

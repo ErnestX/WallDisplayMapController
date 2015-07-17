@@ -197,7 +197,14 @@ const NSInteger ELEMENTS_PER_ROW = 4;
         data[@"chart_category"] = @"Land Use";
         [arrData replaceObjectAtIndex:0 withObject:data];
         
+        [arrData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if (idx == 0) return;
+            obj[@"chart_content"] = [[GlobalManager sharedInstance] getWidgetElementByCategory:obj[@"chart_category"] andKey:obj[@"chart_content"][@"ch_key"]][@"ch_data"];
+            
+        }];
+        
         [gridView reloadData];
+
     });
 
 }

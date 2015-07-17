@@ -174,6 +174,21 @@
     
 }
 
+- (NSDictionary *)getWidgetElementByCategory:(NSString *)category andKey:(NSString *)key {
+    NSArray *resultsByCategory = [self getWidgetElementsByCategory:category];
+    __block NSDictionary *result;
+    [resultsByCategory enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSString *dataKey = obj[@"ch_data"][@"ch_key"];
+        if ([dataKey isEqualToString:key]) {
+            result = obj;
+            *stop = YES;
+        }
+    }];
+
+    return result;
+}
+
 - (void)beginConsumingMetricsData {
     DEFINE_WEAK_SELF
     
