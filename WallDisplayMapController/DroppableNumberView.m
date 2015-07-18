@@ -20,7 +20,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = COLOR_BG_WHITE;
+        self.backgroundColor = ClearColor;//COLOR_BG_WHITE;
         
         lblMain = [[UILabel alloc] init];
         lblMain.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:60.0];

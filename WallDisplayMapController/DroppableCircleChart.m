@@ -51,8 +51,8 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                                                               shadowColor:[UIColor colorFromHexString:@"#e3e3e3"]
                                                      displayCountingLabel:NO
                                                         overrideLineWidth:[NSNumber numberWithFloat:sideLength*0.20]];
-        circleChart.backgroundColor = COLOR_BG_WHITE;
-        self.backgroundColor = COLOR_BG_WHITE;
+        circleChart.backgroundColor = ClearColor;//COLOR_BG_WHITE;
+        self.backgroundColor = ClearColor;//COLOR_BG_WHITE;
         circleChart.userInteractionEnabled = NO;
         [self addSubview:circleChart];
         

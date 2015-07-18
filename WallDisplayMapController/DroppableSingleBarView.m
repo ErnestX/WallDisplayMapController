@@ -30,7 +30,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = COLOR_BG_WHITE;
+        self.backgroundColor = ClearColor;//COLOR_BG_WHITE;
         maxValue = 0.0;
         
         lblTitle = [[UILabel alloc] init];

@@ -132,10 +132,10 @@
 
 - (void)setSelected:(BOOL)selected {
     if (selected) {
-        
+        self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.5];
         
     } else {
-        
+        self.backgroundColor = COLOR_BG_WHITE;
     }
     
 }

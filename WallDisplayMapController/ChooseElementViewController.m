@@ -18,6 +18,8 @@
 #import "DroppableNumberView.h"
 #import "DroppableSingleBarView.h"
 
+const double BOTTOM_ALPHA = 0.3;
+
 @interface ChooseElementViewController () <JDDroppableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *arrData;
@@ -77,7 +79,7 @@
     
     widgetElementSideLength = self.view.frame.size.width;// * MASTER_VC_WIDTH_FRACTION;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    scrollView.backgroundColor = COLOR_BG_GREY;
+    scrollView.backgroundColor = COLOR_BG_WHITE;//COLOR_BG_GREY;
     scrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     scrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     scrollView.canCancelContentTouches = NO;
@@ -102,10 +104,14 @@
                      [evaluatedObject isKindOfClass:[NSDictionary class]]);
         }]];
         
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1)*widgetElementSideLength-0.5, widgetElementSideLength, 0.7)];
+        lineView.backgroundColor = [UIColor lightGrayColor];
+        [scrollView addSubview:lineView];
+        
         if ([chartType isEqualToString:CHART_TYPE_BAR]) {
             // build one single bar chart
             DroppableBarChart *bottomView = [[DroppableBarChart alloc] initWithFrame:chartFrame];
-            bottomView.alpha = 0.5;
+            bottomView.alpha = BOTTOM_ALPHA;
             bottomView.userInteractionEnabled = NO;
             [scrollView addSubview:bottomView];
             
@@ -130,7 +136,7 @@
             // build circle chart
             DroppableCircleChart *bottomView = [[DroppableCircleChart alloc] initWithFrame:chartFrame];
             bottomView.userInteractionEnabled = NO;
-            bottomView.alpha = 0.5;
+            bottomView.alpha = BOTTOM_ALPHA;
             [bottomView updateCircleChartWithCurrent:filteredValues[0] type:self.category icon:filteredKeys[0]];
             [scrollView addSubview:bottomView];
             
@@ -157,7 +163,7 @@
             // build number view
             
             DroppableNumberView *bottomView = [[DroppableNumberView alloc] initWithFrame:chartFrame];
-            bottomView.alpha = 0.5;
+            bottomView.alpha = BOTTOM_ALPHA;
             bottomView.userInteractionEnabled = NO;
             [scrollView addSubview:bottomView];
             
@@ -180,7 +186,7 @@
             
             DroppableSingleBarView *bottomView = [[DroppableSingleBarView alloc] initWithFrame:chartFrame];
             bottomView.userInteractionEnabled = NO;
-            bottomView.alpha = 0.5;
+            bottomView.alpha = BOTTOM_ALPHA;
             [bottomView updateWithArrayThresholds:data[@"thresholds"] current:data[@"current"] title:data[@"title"] type:self.category];
             [scrollView addSubview:bottomView];
             

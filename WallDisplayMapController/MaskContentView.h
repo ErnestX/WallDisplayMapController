@@ -10,6 +10,8 @@
 
 @interface MaskContentView : UIView
 
+@property NSInteger itemIndex;
+
 - (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)targetVC;
 - (void)showContent:(NSDictionary *)data;
 

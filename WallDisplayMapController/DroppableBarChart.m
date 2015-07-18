@@ -40,11 +40,11 @@
         barChart.labelMarginTop = 10.0;
         barChart.labelFont = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:15.0];
         barChart.labelTextColor = [UIColor lightGrayColor];
-        barChart.backgroundColor = COLOR_BG_WHITE;
+        barChart.backgroundColor = ClearColor;//COLOR_BG_WHITE;
         barChart.yLabelFormatter = ^NSString *(CGFloat yLabelValue) {
             return [NSString stringWithFormat:@"%d", (int)yLabelValue];
         };
-        barChart.barBackgroundColor = COLOR_BG_WHITE;
+        barChart.barBackgroundColor = ClearColor;//COLOR_BG_WHITE;
         [self addSubview:barChart];
     }
     return self;

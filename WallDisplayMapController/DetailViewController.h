@@ -12,5 +12,6 @@
 
 - (void)addElement:(UIView *)vElement;
 - (CGPoint)getCenterOfLastEmptyPosition;
+- (void)deselectCellWithIndex:(NSInteger)index;
 
 @end

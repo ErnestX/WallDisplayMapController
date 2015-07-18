@@ -209,6 +209,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 
 }
 
+- (void)deselectCellWithIndex:(NSInteger)index {
+    [gridView deselectItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] animated:YES];
+}
+
 #pragma mark RAReorderableLayout Datasource
 
 - (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath {
@@ -238,9 +242,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 #pragma mark RAReorderableLayout Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];
+    maskView.itemIndex = indexPath.item;
 
     [window addSubview:maskView];
     [UIView animateWithDuration:0.15

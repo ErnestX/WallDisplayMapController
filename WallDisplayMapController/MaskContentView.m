@@ -9,16 +9,20 @@
 #import "MaskContentView.h"
 #import "Masonry.h"
 #import "DroppableCircleChart.h"
+#import "DetailViewController.h"
 #import <Chameleon.h>
 
 @implementation MaskContentView {
+    DetailViewController *targetVC;
     UIView *contentView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)targetVC {
+- (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)tvc {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+        
+        targetVC = (DetailViewController *)tvc;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnMask:)];
         [self addGestureRecognizer:tap];
@@ -132,6 +136,7 @@
 
 - (void) handleTapOnMask:(UIPanGestureRecognizer*)recognizer {
     DEFINE_WEAK_SELF
+    [targetVC deselectCellWithIndex:self.itemIndex];
     [UIView animateWithDuration:0.15
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
