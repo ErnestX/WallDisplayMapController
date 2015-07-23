@@ -19,6 +19,8 @@
 @interface RabbitMQManager()
 
 @property amqp_connection_state_t conn;
+@property NSString *strIP;
+@property BOOL isConnectionOpen;
 
 @end
 
@@ -29,6 +31,7 @@
     static dispatch_once_t done;
     dispatch_once(&done,^{
         instance = [[RabbitMQManager alloc] init];
+        instance.isConnectionOpen = NO;
     });
     return instance;
 }
@@ -42,7 +45,7 @@
     amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
     
     // open socket
-    int socketopen = amqp_socket_open(socket, HOST_NAME, PORT_NUMBER);
+    int socketopen = amqp_socket_open(socket, [self.strIP UTF8String], PORT_NUMBER);
     if (socketopen == AMQP_STATUS_OK) {
         NSLog(@"SOCKET OPENED");
         
@@ -83,6 +86,7 @@
     amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONSUMER_THREAD_STARTED object:nil];
+    self.isConnectionOpen = YES;
     
 }
 
@@ -205,12 +209,23 @@
     amqp_status_enum code =  amqp_destroy_connection(_conn);
     if (code == AMQP_STATUS_OK) {
         NSLog(@"CLOSE CONNECTION SUCCESS");
+        self.isConnectionOpen = NO;
     } else {
         NSLog(@"CLOSE CONNECTION FAILED, error code is: %d", code);
     }
 }
 
-#pragma mark Helpers
+- (BOOL)connected {
+    return self.isConnectionOpen;
+}
 
+- (NSString *)getIPAddress {
+    return self.strIP;
+    
+}
+
+- (void)setIPAddress:(NSString *)ip {
+    self.strIP = ip;
+}
 
 @end

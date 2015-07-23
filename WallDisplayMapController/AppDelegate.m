@@ -11,6 +11,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "MapControlViewController.h"
+#import "SettingsViewController.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "UIColor+Extend.h"
 
@@ -46,9 +47,16 @@
     remoteVC.tabBarItem.image = [[UIImage imageNamed:@"remoteIcon_unselected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     remoteVC.tabBarItem.selectedImage = [UIImage imageNamed:@"remoteIcon.png"];
     
+    
+    // Settings viewController
+    SettingsViewController *settingsVC = [[SettingsViewController alloc] init];
+    settingsVC.title = @"Settings";
+    settingsVC.tabBarItem.image = [[UIImage imageNamed:@"gearIcon_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    settingsVC.tabBarItem.selectedImage = [UIImage imageNamed:@"gearIcon.png"];
+    
     // Set up TabBar viewController
     UITabBarController *tabVC = [[UITabBarController alloc] init];
-    tabVC.viewControllers = @[splitVC, remoteVC];
+    tabVC.viewControllers = @[splitVC, remoteVC,settingsVC];
     tabVC.tabBar.tintColor = [UIColor whiteColor];
     tabVC.tabBar.barTintColor = [UIColor colorFromHexString:@"#1ABC9C"];
     
@@ -56,7 +64,6 @@
                                              forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
                                              forState:UIControlStateSelected];
-    
     self.window.rootViewController = tabVC;
     [self.window makeKeyAndVisible];
         
@@ -81,12 +88,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        [[RabbitMQManager sharedInstance] openRMQConnection];
-        
-    });
-    
+    if ([[RabbitMQManager sharedInstance] getIPAddress]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            [[RabbitMQManager sharedInstance] openRMQConnection];
+            
+        });
+    }
 
 }
 

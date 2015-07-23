@@ -17,4 +17,8 @@
 - (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock;
 - (void)publishEarthControlWithBody:(NSString *)body;
 
+- (NSString *)getIPAddress;
+- (void)setIPAddress:(NSString *)ip;
+- (BOOL)connected;
+
 @end
