@@ -51,7 +51,8 @@
                                                       @"subtitle" : @"(km per person in a year)"}};
         
         NSDictionary *detail_info_mob1 = @{@"type" : @"desc",
-                                           @"data" : @{@"subtitle" : @"(People per hectare and mode thresholds)"}};
+                                           @"data" : @{@"subtitle" : @"(People per hectare and mode thresholds)",
+                                                       @"additional" : @[@"Active", @"Transit"]}};
         
         NSDictionary *detail_info_mob234 = @{@"type" : @"desc",
                                            @"data" : @{@"title" : @"Mode",
@@ -153,7 +154,8 @@
                                                         @"value" : self.modelDistrictEnergy.mobilityPercent}]};
         
         NSDictionary *detail_info_ec2 = @{@"type" : @"desc",
-                                          @"data" : @{@"subtitle" : @"(floor area per neighbourhood area)"}};
+                                          @"data" : @{@"subtitle" : @"(floor area per neighbourhood area)",
+                                                      @"additional" : @[@"DE"]}};
         
         
         NSDictionary *ec0 = @{@"ch_type" : CHART_TYPE_NUMBER,

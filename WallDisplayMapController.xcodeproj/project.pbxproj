@@ -48,6 +48,7 @@
 		AEB8A9521B615B78003C8A68 /* gearIcon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A9501B615B78003C8A68 /* gearIcon_selected.png */; };
 		AEB8A9531B615B78003C8A68 /* gearIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A9511B615B78003C8A68 /* gearIcon.png */; };
 		AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A96A1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m */; };
+		AEB8A96F1B62E598003C8A68 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A96E1B62E598003C8A68 /* line.png */; };
 		AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */; };
 		AED3B8021B55DEAC008292C4 /* DroppableSingleBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */; };
 		AED3B8061B55E233008292C4 /* heating_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AED3B8031B55E233008292C4 /* heating_icon.png */; };
@@ -156,6 +157,7 @@
 		AEB8A9511B615B78003C8A68 /* gearIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearIcon.png; sourceTree = "<group>"; };
 		AEB8A9691B62AE8A003C8A68 /* NSOperationQueue+Timeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+Timeout.h"; sourceTree = "<group>"; };
 		AEB8A96A1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+Timeout.m"; sourceTree = "<group>"; };
+		AEB8A96E1B62E598003C8A68 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		AED3B7FD1B558D0D008292C4 /* DroppableNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableNumberView.h; sourceTree = "<group>"; };
 		AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableNumberView.m; sourceTree = "<group>"; };
 		AED3B8001B55DEAC008292C4 /* DroppableSingleBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableSingleBarView.h; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		CA42E0E31B1CF55F0011726E /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				AEB8A96E1B62E598003C8A68 /* line.png */,
 				AEB8A9501B615B78003C8A68 /* gearIcon_selected.png */,
 				AEB8A9511B615B78003C8A68 /* gearIcon.png */,
 				AE2C30C21B59B0D0006A955E /* error_img2.png */,
@@ -538,6 +541,7 @@
 				AE3B9CF81B4B22630037AEF2 /* remoteIcon_unselected.png in Resources */,
 				AEB8A9531B615B78003C8A68 /* gearIcon.png in Resources */,
 				AED3B8061B55E233008292C4 /* heating_icon.png in Resources */,
+				AEB8A96F1B62E598003C8A68 /* line.png in Resources */,
 				AE6C04251B41D4C700A1D777 /* apart.png in Resources */,
 				AE2C30C31B59B0D0006A955E /* error_img2.png in Resources */,
 				CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */,

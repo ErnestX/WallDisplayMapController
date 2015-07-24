@@ -15,6 +15,8 @@
 @implementation MaskContentView {
     DetailViewController *targetVC;
     UIView *contentView;
+    
+    UIButton *btnSubmit;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)tvc {
@@ -114,15 +116,96 @@
             lblSub.lineBreakMode = NSLineBreakByWordWrapping;
             [contentView addSubview:lblSub];
             
-            [lblSub mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.equalTo(contentView);
-                make.width.lessThanOrEqualTo(@500);
-            }];
-            
-            [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(contentView);
-                make.bottom.equalTo(lblSub.mas_top).with.offset(-20.0f);
-            }];
+            NSArray *thresHolds = content[@"additional"];
+            if (thresHolds && [thresHolds count] > 0) {
+                
+                [lblSub mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.and.top.equalTo(contentView);
+                    make.width.lessThanOrEqualTo(@500);
+                }];
+                
+                
+                for (int i=0; i<[thresHolds count]; i++) {
+                    NSString *itemThreshold = thresHolds[i];
+                    NSString *strPlaceHolder = [NSString stringWithFormat:@"%@ Threshold:", itemThreshold];
+                    
+                    UILabel *lblTitle = [[UILabel alloc] init];
+                    lblTitle.attributedText = [[NSAttributedString alloc] initWithString:strPlaceHolder attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1.0 alpha:1.0],
+                                                                                                                     NSFontAttributeName :[UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f]}];
+
+                    [contentView addSubview:lblTitle];
+                    
+                    NSArray *currentThresholds = data[@"chart_content"][@"thresholds"];
+                    NSString *temp = [NSString stringWithFormat:@"Current: %@", [currentThresholds[i][@"thresh_value"] stringValue]];
+                    
+                    UILabel *lblCurrentValue = [[UILabel alloc] init];
+                    lblCurrentValue.attributedText = [[NSAttributedString alloc] initWithString:temp attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:0.7 alpha:0.7],
+                                                                                                                            NSFontAttributeName :[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]}];
+                    [contentView addSubview:lblCurrentValue];
+                    
+                    UITextField *tf = [[UITextField alloc] init];
+                    tf.textAlignment = NSTextAlignmentLeft;
+                    tf.tintColor = [UIColor lightGrayColor];
+                    tf.keyboardAppearance = UIKeyboardAppearanceDark;
+                    tf.keyboardType = UIKeyboardTypeDecimalPad;
+                    tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+                    tf.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
+                    tf.textColor = [UIColor whiteColor];
+                    [contentView addSubview:tf];
+                    
+                    UIView *line = [[UIView alloc] init];
+                    line.backgroundColor = [UIColor lightGrayColor];
+                    [contentView addSubview:line];
+                    
+                    [tf mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.centerX.equalTo(contentView).with.offset(35.0f);
+                        make.width.equalTo(contentView).multipliedBy(2.0f).dividedBy(3.0f);
+                        make.height.equalTo(@50.0);
+                        make.centerY.equalTo(contentView.mas_top).with.offset(65.0 + 50.0 * i);
+                    }];
+                    
+                    [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.trailing.equalTo(tf.mas_leading).with.offset(-10.0f);
+                        make.centerY.equalTo(tf);
+                    }];
+                    
+                    [lblCurrentValue mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.leading.equalTo(tf.mas_trailing).with.offset(5.0f);
+                        make.baseline.equalTo(lblTitle.mas_baseline);
+                    }];
+                    
+                    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.trailing.equalTo(lblCurrentValue);
+                        make.leading.equalTo(lblTitle);
+                        make.height.equalTo(@0.5);
+                        make.bottom.equalTo(tf);
+                    }];
+                    
+                    btnSubmit = [UIButton buttonWithType:UIButtonTypeCustom];
+                    [btnSubmit setTitle:@"Submit" forState:UIControlStateNormal];
+                    btnSubmit.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:18.0];
+                    [btnSubmit setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+//                    [btnSubmit addTarget:self action:@selector(submitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                    [contentView addSubview:btnSubmit];
+                    
+                    [btnSubmit mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.centerX.equalTo(contentView);
+                        make.centerY.equalTo(contentView).with.offset(-25.0);
+                    }];
+                    
+                }
+                
+            } else {
+                [lblSub mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.center.equalTo(contentView);
+                    make.width.lessThanOrEqualTo(@500);
+                }];
+                
+                [lblTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.equalTo(contentView);
+                    make.bottom.equalTo(lblSub.mas_top).with.offset(-20.0f);
+                }];
+            }
 
             
         }
@@ -135,17 +218,36 @@
 }
 
 - (void) handleTapOnMask:(UIPanGestureRecognizer*)recognizer {
-    DEFINE_WEAK_SELF
-    [targetVC deselectCellWithIndex:self.itemIndex];
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-                     }
-                     completion:^(BOOL finished) {
-                         [weakSelf removeFromSuperview];
-                     }];
+    
+    __block BOOL shouldHideMask = YES;
+    NSArray *subviews = [contentView subviews];
+    [subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UITextField class]]) {
+            UITextField *tf = obj;
+            if ([tf isFirstResponder]) {
+                [tf resignFirstResponder];
+                shouldHideMask = NO;
+                *stop = YES;
+                return;
+            }
+        }
+    }];
+    
+    if (shouldHideMask) {
+        DEFINE_WEAK_SELF
+        [targetVC deselectCellWithIndex:self.itemIndex];
+        [UIView animateWithDuration:0.15
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+                         }
+                         completion:^(BOOL finished) {
+                             weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+                             [weakSelf removeFromSuperview];
+                         }];
+    }
+
 }
 
 

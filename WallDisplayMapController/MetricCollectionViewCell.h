@@ -13,6 +13,5 @@
 - (void)updateWithData:(NSDictionary *)dict;
 - (void)startAnimatingWithTarget:(id)target;
 - (void)stopAnimating;
-- (void)changeBgColor:(UIColor *)color;
 
 @end

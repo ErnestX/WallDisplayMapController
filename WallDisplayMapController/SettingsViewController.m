@@ -41,6 +41,7 @@
     self.tfIP.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:25.0];
     self.tfIP.textColor = [UIColor darkTextColor];
     self.tfIP.textAlignment = NSTextAlignmentCenter;
+    self.tfIP.tintColor = [UIColor lightGrayColor];
     self.tfIP.delegate = self;
     [self.view addSubview:self.tfIP];
     

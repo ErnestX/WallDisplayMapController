@@ -45,57 +45,50 @@
     _conn = amqp_new_connection();
     amqp_socket_t *socket = amqp_tcp_socket_new(_conn);
     
-    DEFINE_WEAK_SELF
-    NSOperationQueue *opQ = [[NSOperationQueue alloc] init];
-    [opQ addOperationWithBlock:^(NSOperation *operation) {
-        // open socket
-        int socketopen = amqp_socket_open(socket, [weakSelf.strIP UTF8String], PORT_NUMBER);
-        if (socketopen == AMQP_STATUS_OK) {
-            NSLog(@"SOCKET OPENED");
-            sleep(2);
-            
-            // login to remote broker
-            amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
-            if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
-                NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
-                [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_OK object:nil];
-            } else {
-                NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
-                [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
-                return;
-            }
-            
-            // open channel
-            amqp_channel_open(_conn, 10);
-            amqp_get_rpc_reply(_conn);
-            
-            // declare exchange
-            amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
-            
-            // declare queue
-            amqp_queue_declare_ok_t *qEarth = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-            amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-            amqp_bytes_t queuenameEarth = amqp_bytes_malloc_dup(qEarth->queue);
-            amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
-            
-            // binding queue with exchange
-            amqp_queue_bind(_conn, 10, queuenameEarth, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
-            amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
-            
-            amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONSUMER_THREAD_STARTED object:nil];
-            self.isConnectionOpen = YES;
-            
+    // open socket
+    int socketopen = amqp_socket_open(socket, [self.strIP UTF8String], PORT_NUMBER);
+    if (socketopen == AMQP_STATUS_OK) {
+        NSLog(@"SOCKET OPENED");
+        sleep(2);
+        
+        // login to remote broker
+        amqp_rpc_reply_t arrt = amqp_login(_conn,VHOST_NAME,0,524288,0,AMQP_SASL_METHOD_PLAIN,USER_NAME,PASSWORD);
+        if (arrt.reply_type == AMQP_RESPONSE_NORMAL) {
+            NSLog(@"LOGIN TO REMOTE BROKER SUCCESSFUL");
+            [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_OK object:nil];
         } else {
-            NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
+            NSLog(@"LOGIN UNSUCCESSFUL: %d", arrt.reply_type);
             [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
             return;
         }
-    } timeout:5.0 timeoutBlock:^{
+        
+        // open channel
+        amqp_channel_open(_conn, 10);
+        amqp_get_rpc_reply(_conn);
+        
+        // declare exchange
+        amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+        
+        // declare queue
+        amqp_queue_declare_ok_t *qEarth = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+        amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+        amqp_bytes_t queuenameEarth = amqp_bytes_malloc_dup(qEarth->queue);
+        amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
+        
+        // binding queue with exchange
+        amqp_queue_bind(_conn, 10, queuenameEarth, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
+        amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
+        
+        amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_CONSUMER_THREAD_STARTED object:nil];
+        self.isConnectionOpen = YES;
+        
+    } else {
+        NSLog(@"SOCKET OPEN FAILED: %d", socketopen);
         [[NSNotificationCenter defaultCenter] postNotificationName:RMQ_OPEN_CONN_FAILED object:nil];
         return;
-    }];
+    }
     
 }
 
