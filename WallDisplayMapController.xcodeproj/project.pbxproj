@@ -47,6 +47,7 @@
 		AEB8A94F1B6152AB003C8A68 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A94E1B6152AB003C8A68 /* SettingsViewController.m */; };
 		AEB8A9521B615B78003C8A68 /* gearIcon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A9501B615B78003C8A68 /* gearIcon_selected.png */; };
 		AEB8A9531B615B78003C8A68 /* gearIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A9511B615B78003C8A68 /* gearIcon.png */; };
+		AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A96A1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m */; };
 		AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */; };
 		AED3B8021B55DEAC008292C4 /* DroppableSingleBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */; };
 		AED3B8061B55E233008292C4 /* heating_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AED3B8031B55E233008292C4 /* heating_icon.png */; };
@@ -153,6 +154,8 @@
 		AEB8A94E1B6152AB003C8A68 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		AEB8A9501B615B78003C8A68 /* gearIcon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearIcon_selected.png; sourceTree = "<group>"; };
 		AEB8A9511B615B78003C8A68 /* gearIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearIcon.png; sourceTree = "<group>"; };
+		AEB8A9691B62AE8A003C8A68 /* NSOperationQueue+Timeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+Timeout.h"; sourceTree = "<group>"; };
+		AEB8A96A1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+Timeout.m"; sourceTree = "<group>"; };
 		AED3B7FD1B558D0D008292C4 /* DroppableNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableNumberView.h; sourceTree = "<group>"; };
 		AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableNumberView.m; sourceTree = "<group>"; };
 		AED3B8001B55DEAC008292C4 /* DroppableSingleBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableSingleBarView.h; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 				CA1639461B0E4FBC00E4FC81 /* main.m */,
 				AE83C8CE1B3A32A70041E0C0 /* UIColor+Extend.h */,
 				AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */,
+				AEB8A9691B62AE8A003C8A68 /* NSOperationQueue+Timeout.h */,
+				AEB8A96A1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */,
 				AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */,
 				AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */,
+				AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,

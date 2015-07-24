@@ -8,17 +8,27 @@
 
 #import "SettingsViewController.h"
 #import "Masonry.h"
-#import "RabbitMQManager.h"s
+#import "RabbitMQManager.h"
 #import "UIColor+Extend.h"
 
 @interface SettingsViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *tfIP;
 @property (nonatomic, strong) UIButton *btnSubmit;
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
 
 @end
 
 @implementation SettingsViewController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rmqOpenFail) name:RMQ_OPEN_CONN_FAILED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rmqOpenSuccess) name:RMQ_OPEN_CONN_OK object:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +55,11 @@
     [self.btnSubmit addTarget:self action:@selector(submitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btnSubmit];
     
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.spinner.frame = CGRectMake(15, 0, 50.0, 50.0);
+    self.spinner.hidden = YES;
+    [self.btnSubmit addSubview:self.spinner];
+
     DEFINE_WEAK_SELF
     [self.tfIP mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.view);
@@ -69,18 +84,29 @@
 }
 
 - (void)submitButtonPressed:(UIButton *)sender {
-
-    [self.tfIP resignFirstResponder];
+    DEFINE_WEAK_SELF
+    [weakSelf.tfIP resignFirstResponder];
     
-    RabbitMQManager *mgr = [RabbitMQManager sharedInstance];
-    [mgr setIPAddress:self.tfIP.text];
+    [sender setTitle:@"" forState:UIControlStateNormal];
+    weakSelf.spinner.hidden = NO;
+    [weakSelf.spinner startAnimating];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        RabbitMQManager *mgr = [RabbitMQManager sharedInstance];
+        
+        [mgr setIPAddress:self.tfIP.text];
+        [mgr openRMQConnection];
 
-    if (![mgr connected]) {
-        [mgr openRMQConnection];
-    } else {
-        [mgr closeRMQConnection];
-        [mgr openRMQConnection];
-    }
+//
+//        if (![mgr connected]) {
+//            [mgr openRMQConnection];
+//        } else {
+//            [mgr closeRMQConnection];
+//            [mgr openRMQConnection];
+//        }
+    });
+    
+
 }
 
 #pragma mark UITextFieldDelegate
@@ -94,6 +120,40 @@
     BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
     
     return newLength <= maxLength || returnKey;
+}
+
+- (void)rmqOpenSuccess {
+    DEFINE_WEAK_SELF
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.spinner stopAnimating];
+        weakSelf.spinner.hidden = YES;
+        [weakSelf.btnSubmit setTitle:@"Submit" forState:UIControlStateNormal];
+    });
+
+}
+
+- (void)rmqOpenFail {
+    DEFINE_WEAK_SELF
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"RabbitMQ open connection failed.\n Please check your IP and try again." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   [alert dismissViewControllerAnimated:YES completion:nil];
+                               }];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        [weakSelf.spinner stopAnimating];
+        weakSelf.spinner.hidden = YES;
+        [weakSelf.btnSubmit setTitle:@"Submit" forState:UIControlStateNormal];
+    }];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

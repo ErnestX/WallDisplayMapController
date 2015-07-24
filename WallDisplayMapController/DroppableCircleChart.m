@@ -40,7 +40,7 @@ const CGFloat CIRCLE_EDGE_INSET = 40.0;
                       @"ind" : @"Industrial",
                       @"heating_icon.png" : @"Heating + Hot water",
                       @"lights_icon.png" : @"Lights + Appliances",
-                      @"mobility_icon.png" : @"Personal mobility"
+                      @"mobility_icon.png" : @"Personal Mobility"
                       };
         
         circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(CIRCLE_EDGE_INSET-10.0, CIRCLE_EDGE_INSET+10.0, sideLength, sideLength)
