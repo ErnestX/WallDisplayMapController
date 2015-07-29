@@ -14,6 +14,7 @@
 		AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */; };
 		AE23B94A1B34AE31009B0E2E /* LandUseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9491B34AE31009B0E2E /* LandUseView.m */; };
 		AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */; };
+		AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE26BB521B66A96400110615 /* ThresholdChangeRequest.m */; };
 		AE2C30BC1B57160A006A955E /* DE.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2C30BB1B57160A006A955E /* DE.png */; };
 		AE2C30BF1B585E49006A955E /* MaskContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2C30BE1B585E49006A955E /* MaskContentView.m */; };
 		AE2C30C31B59B0D0006A955E /* error_img2.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2C30C21B59B0D0006A955E /* error_img2.png */; };
@@ -101,6 +102,8 @@
 		AE23B9531B34C3BB009B0E2E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		AE23B9541B34DA6A009B0E2E /* RabbitMQManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RabbitMQManager.h; sourceTree = "<group>"; };
 		AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RabbitMQManager.m; sourceTree = "<group>"; };
+		AE26BB511B66A96400110615 /* ThresholdChangeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThresholdChangeRequest.h; sourceTree = "<group>"; };
+		AE26BB521B66A96400110615 /* ThresholdChangeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThresholdChangeRequest.m; sourceTree = "<group>"; };
 		AE2C30BB1B57160A006A955E /* DE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DE.png; sourceTree = "<group>"; };
 		AE2C30BD1B585E49006A955E /* MaskContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskContentView.h; sourceTree = "<group>"; };
 		AE2C30BE1B585E49006A955E /* MaskContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskContentView.m; sourceTree = "<group>"; };
@@ -332,6 +335,8 @@
 				CA16396D1B0E742200E4FC81 /* MapWallDisplayProtocal.h */,
 				AE869D401B0FEB07000900FF /* EarthControlRequest.h */,
 				AE869D411B0FEB07000900FF /* EarthControlRequest.m */,
+				AE26BB511B66A96400110615 /* ThresholdChangeRequest.h */,
+				AE26BB521B66A96400110615 /* ThresholdChangeRequest.m */,
 				CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */,
 				CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */,
 				CA16396E1B0E7AC000E4FC81 /* MapWallDisplayController.h */,
@@ -615,6 +620,7 @@
 				AE2C30BF1B585E49006A955E /* MaskContentView.m in Sources */,
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
+				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,

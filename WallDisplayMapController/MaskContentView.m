@@ -9,14 +9,17 @@
 #import "MaskContentView.h"
 #import "Masonry.h"
 #import "DroppableCircleChart.h"
+#import "RabbitMQManager.h"
 #import "DetailViewController.h"
+#import "ThresholdChangeRequest.h"
 #import <Chameleon.h>
 
 @implementation MaskContentView {
     DetailViewController *targetVC;
     UIView *contentView;
-    
     UIButton *btnSubmit;
+    NSMutableArray *arrKeys;
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame target:(UIViewController *)tvc {
@@ -33,6 +36,8 @@
         contentView.center = self.center;
         contentView.backgroundColor = ClearColor;
         [self addSubview:contentView];
+        
+        arrKeys = [NSMutableArray array];
 
     }
     return self;
@@ -93,7 +98,6 @@
                                                          icon:iconName];
                 });
                 
-                
             }];
 
         } else {
@@ -151,7 +155,11 @@
                     tf.clearButtonMode = UITextFieldViewModeWhileEditing;
                     tf.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
                     tf.textColor = [UIColor whiteColor];
+                    tf.tag = 10000+i;
+                    
                     [contentView addSubview:tf];
+                    
+                    [arrKeys addObject:[self getConstDictionary][itemThreshold]];
                     
                     UIView *line = [[UIView alloc] init];
                     line.backgroundColor = [UIColor lightGrayColor];
@@ -185,7 +193,8 @@
                     [btnSubmit setTitle:@"Submit" forState:UIControlStateNormal];
                     btnSubmit.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:18.0];
                     [btnSubmit setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-//                    [btnSubmit addTarget:self action:@selector(submitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                    [btnSubmit setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.3] forState:UIControlStateHighlighted];
+                    [btnSubmit addTarget:self action:@selector(submitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
                     [contentView addSubview:btnSubmit];
                     
                     [btnSubmit mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -217,6 +226,21 @@
 
 }
 
+- (void)submitButtonPressed:(UIButton *)sender {
+    [self hideMask];
+    ThresholdChangeRequest *req = [[ThresholdChangeRequest alloc] init];
+    
+    [arrKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UITextField *tf = (UITextField *)[contentView viewWithTag:10000+idx];
+        if (!tf.text || tf.text.length==0) return;
+        [req addKey:obj withValue:tf.text];
+    }];
+        
+    [[RabbitMQManager sharedInstance] publishThresholdChangeWithBody:req.toString];
+    
+    
+}
+
 - (void) handleTapOnMask:(UIPanGestureRecognizer*)recognizer {
     
     __block BOOL shouldHideMask = YES;
@@ -234,20 +258,32 @@
     }];
     
     if (shouldHideMask) {
-        DEFINE_WEAK_SELF
-        [targetVC deselectCellWithIndex:self.itemIndex];
-        [UIView animateWithDuration:0.15
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-                         }
-                         completion:^(BOOL finished) {
-                             weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-                             [weakSelf removeFromSuperview];
-                         }];
+        [self hideMask];
     }
 
+}
+
+- (void)hideMask {
+    DEFINE_WEAK_SELF
+    [targetVC deselectCellWithIndex:self.itemIndex];
+    [UIView animateWithDuration:0.15
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+                     }
+                     completion:^(BOOL finished) {
+                         weakSelf.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
+                         [weakSelf removeFromSuperview];
+                     }];
+
+}
+
+- (NSDictionary*)getConstDictionary {
+    NSDictionary *result = @{@"Active" : @"active_density_threshold",
+                             @"Transit" : @"transit_density_threshold",
+                             @"DE" : @"district_threshold_FAR"};
+    return result;
 }
 
 

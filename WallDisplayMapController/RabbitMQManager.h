@@ -16,6 +16,7 @@
 
 - (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock;
 - (void)publishEarthControlWithBody:(NSString *)body;
+- (void)publishThresholdChangeWithBody:(NSString *)body;
 
 - (NSString *)getIPAddress;
 - (void)setIPAddress:(NSString *)ip;
