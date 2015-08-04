@@ -13,6 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "UIColor+Extend.h"
 
 #endif
 
@@ -25,7 +26,7 @@
 #define COLOR_WATERMELON [UIColor flatWatermelonColor]
 #define COLOR_BG_GREY [UIColor lightGrayColor]
 
-#define DICT_COLOR_TYPE @{@"Mobility" : COLOR_LIGHT_BLUE, @"Land Use" : COLOR_WATERMELON, @"Energy & Carbon" : FlatOrange, @"Economy" : FlatYellow, @"Equity" : FlatLime, @"Well Being" : FlatMint}
+#define DICT_COLOR_TYPE @{@"Mobility" : COLOR_LIGHT_BLUE, @"Land Use" : COLOR_WATERMELON, @"Energy & Carbon" : [UIColor colorFromHexString:@"#9f79bb"], @"Economy" : FlatYellow, @"Equity" : FlatLime, @"Well Being" : FlatMint}
 
 /*** Fonts ***/
 
