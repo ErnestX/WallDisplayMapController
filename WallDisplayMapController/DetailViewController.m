@@ -215,6 +215,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
     if (arrData.count == 0) {
         [self.view addSubview:vHint];
+        [self widgetEndEditing];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WIDGET_DATA_UPDATED object:nil];
