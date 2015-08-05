@@ -24,7 +24,7 @@
 
 const NSInteger ELEMENTS_PER_ROW = 4;
 
-@interface DetailViewController ()<RAReorderableLayoutDataSource, RAReorderableLayoutDelegate>
+@interface DetailViewController ()<RAReorderableLayoutDataSource, RAReorderableLayoutDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end
 
@@ -32,6 +32,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     CGFloat visibleWidth;
     CGFloat gridSideLength;
     UICollectionView *gridView;
+    DroppableBarChart *fixedBars;
     
     NSMutableArray *arrData;
     BOOL isEditing;
@@ -71,6 +72,27 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 }
 
 - (void)configureCollectionView {
+    NSDictionary *dictPD = [[GlobalManager sharedInstance] getPeopleAndDwellings];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    data[@"chart_content"] = dictPD;
+    
+    NSArray *filteredKeys = [[dictPD allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return !([(NSString *)evaluatedObject isEqualToString:@"ch_key"] ||
+                 [(NSString *)evaluatedObject isEqualToString:@"detail_info"]);
+    }]] ;
+    NSArray *filteredValues = [[dictPD allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return !([evaluatedObject isKindOfClass:[NSString class]] ||
+                 [evaluatedObject isKindOfClass:[NSDictionary class]]);
+    }]];
+    
+    fixedBars = [[DroppableBarChart alloc] initWithFrame:CGRectMake(0, 0, gridSideLength, gridSideLength)];
+    fixedBars.isDraggable = NO;
+    for (UIGestureRecognizer *recognizer in fixedBars.gestureRecognizers) {
+        [fixedBars removeGestureRecognizer:recognizer];
+    }
+    [self.view addSubview:fixedBars];
+    [fixedBars updateBarChartWithValues: filteredValues labels:filteredKeys type:@"Land Use"];
+    
     // Set up CollectionView
     RAReorderableLayout *aFlowLayout = [[RAReorderableLayout alloc] init];
     [aFlowLayout setItemSize:CGSizeMake(gridSideLength, gridSideLength)];
@@ -78,7 +100,11 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     aFlowLayout.minimumInteritemSpacing = 0.0;
     aFlowLayout.minimumLineSpacing = 0.0;
     
-    gridView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0, 0.0, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0) collectionViewLayout:aFlowLayout];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, gridSideLength, visibleWidth, 1.0f)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:line];
+    
+    gridView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0)) collectionViewLayout:aFlowLayout];
     [gridView registerClass:[MetricCollectionViewCell class] forCellWithReuseIdentifier:@"testcell"];
     gridView.backgroundColor = ClearColor;
     gridView.tag = 100081;
@@ -86,17 +112,6 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     gridView.dataSource = self;
     gridView.delegate = self;
     [self.view addSubview:gridView];
-    
-    NSDictionary *dictPD = [[GlobalManager sharedInstance] getPeopleAndDwellings];
-    
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
-    data[@"chart_content"] = dictPD;
-    data[@"chart_type"] = CHART_TYPE_BAR;
-    data[@"chart_category"] = @"Land Use";
-    [arrData addObject:data];
-    
-    [gridView reloadData];
-    
     
 }
 
@@ -132,7 +147,13 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     data[@"chart_category"] = vElement.chartCategory;
     [arrData addObject:data];
     
-    [gridView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:arrData.count-1 inSection:0]]];
+
+    if (arrData.count == 1) {
+        [gridView reloadData];
+        return;
+    }
+    
+    [gridView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:arrData.count - 1 inSection:0]]];
     [self scrollToBottomAnimated:YES];
 
 }
@@ -191,19 +212,27 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 
 - (void)widgetDataUpdated {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
-        data[@"chart_content"] = [[GlobalManager sharedInstance] getPeopleAndDwellings];
-        data[@"chart_type"] = CHART_TYPE_BAR;
-        data[@"chart_category"] = @"Land Use";
-        [arrData replaceObjectAtIndex:0 withObject:data];
+        NSDictionary *data = [[GlobalManager sharedInstance] getPeopleAndDwellings];
+
+        NSArray *filteredKeys = [[data allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return !([(NSString *)evaluatedObject isEqualToString:@"ch_key"] ||
+                     [(NSString *)evaluatedObject isEqualToString:@"detail_info"]);
+        }]] ;
+        NSArray *filteredValues = [[data allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return !([evaluatedObject isKindOfClass:[NSString class]] ||
+                     [evaluatedObject isKindOfClass:[NSDictionary class]]);
+        }]];
+        
+        [fixedBars updateBarChartWithValues:filteredValues labels:filteredKeys type:@"Land Use"];
+        
         
         [arrData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            if (idx == 0) return;
             obj[@"chart_content"] = [[GlobalManager sharedInstance] getWidgetElementByCategory:obj[@"chart_category"] andKey:obj[@"chart_content"][@"ch_key"]][@"ch_data"];
             
         }];
         
         [gridView reloadData];
+        
 
     });
 
@@ -216,18 +245,18 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 #pragma mark RAReorderableLayout Datasource
 
 - (UICollectionViewCell * __nonnull)collectionView:(UICollectionView * __nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * __nonnull)indexPath {
-    
     MetricCollectionViewCell *cell = (MetricCollectionViewCell *)[collectionView  dequeueReusableCellWithReuseIdentifier:@"testcell" forIndexPath:indexPath];
     
     //update the cell's chart with the data in the array
     [cell updateWithData:[arrData objectAtIndex:indexPath.item]];
-    if (isEditing && indexPath.item != 0) {
+    if (isEditing) {
         [cell startAnimatingWithTarget:self];
     } else {
         [cell stopAnimating];
     }
     
     return cell;
+
 }
 
 -(NSInteger)collectionView:(UICollectionView * __nonnull)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -259,20 +288,6 @@ const NSInteger ELEMENTS_PER_ROW = 4;
                          maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
                      }];
     
-}
-
-- (BOOL)collectionView:(UICollectionView * __nonnull)collectionView allowMoveAtIndexPath:(NSIndexPath * __nonnull)indexPath {
-    
-    if (indexPath.item == 0) {
-        return NO;
-    } else return YES;
-    
-}
-
-- (BOOL)collectionView:(UICollectionView * __nonnull)collectionView atIndexPath:(NSIndexPath * __nonnull)atIndexPath canMoveToIndexPath:(NSIndexPath * __nonnull)canMoveToIndexPath {
-    if (canMoveToIndexPath.item == 0) {
-        return NO;
-    } else return YES;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {

@@ -57,12 +57,16 @@
     barChart.strokeColor = DICT_COLOR_TYPE[type];
     
     NSMutableArray *arrLabels = [NSMutableArray array];
-    [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *text = (NSString *)obj;
-        arrLabels[idx] = dictTitle[text];
-        
-    }];
-    
+//    [labels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSString *text = (NSString *)obj;
+//        arrLabels[idx] = dictTitle[text];
+//        
+//    }];
+//    
+    for (int i=0; i<labels.count; i++) {
+        arrLabels[i] = dictTitle[labels[i]];
+    }
+    barChart.showLabel = YES;
     [barChart setXLabels:arrLabels];
     barChart.showLabel = NO;
     [barChart setYValues:values];
@@ -83,17 +87,9 @@
         lblBar.font = [UIFont fontWithName:FONT_HELVETICA_NEUE_CONDENSEDBOLD size:16.0];
         lblBar.textColor = barChart.labelTextColor;
         lblBar.textAlignment = NSTextAlignmentCenter;
-        lblBar.alpha = 1.0;//0.2;
+        lblBar.alpha = 1.0;
         [barChart addSubview:lblBar];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:1.0
-                             animations:^{
-                                 lblBar.alpha = 1.0;
-                             }
-                             completion:nil];
-        
-        });
         
     }];
     
