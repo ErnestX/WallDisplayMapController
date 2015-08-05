@@ -31,6 +31,7 @@
 		AE6C04281B41D4C700A1D777 /* transit_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04221B41D4C700A1D777 /* transit_pct.png */; };
 		AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04231B41D4C700A1D777 /* vehicle_pct.png */; };
 		AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C042E1B42029400A1D777 /* DroppableChart.m */; };
+		AE78ADB11B729AC500780E26 /* HintView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE78ADB01B729AC500780E26 /* HintView.m */; };
 		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
 		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */; };
@@ -123,6 +124,8 @@
 		AE6C04231B41D4C700A1D777 /* vehicle_pct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vehicle_pct.png; sourceTree = "<group>"; };
 		AE6C042D1B42029400A1D777 /* DroppableChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppableChart.h; sourceTree = "<group>"; };
 		AE6C042E1B42029400A1D777 /* DroppableChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableChart.m; sourceTree = "<group>"; };
+		AE78ADAF1B729AC500780E26 /* HintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintView.h; sourceTree = "<group>"; };
+		AE78ADB01B729AC500780E26 /* HintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintView.m; sourceTree = "<group>"; };
 		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				AE2C30BE1B585E49006A955E /* MaskContentView.m */,
 				AE9E40341B320AE00085000D /* UnavailableView.h */,
 				AE9E40351B320AE00085000D /* UnavailableView.m */,
+				AE78ADAF1B729AC500780E26 /* HintView.h */,
+				AE78ADB01B729AC500780E26 /* HintView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				AEA1BF6F1B3C8A030079BD66 /* JDDroppableView.m in Sources */,
 				AEA1BF721B3DEA410079BD66 /* DroppableCircleChart.m in Sources */,
 				AE23B9561B34DA6B009B0E2E /* RabbitMQManager.m in Sources */,
+				AE78ADB11B729AC500780E26 /* HintView.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				AE2C30BF1B585E49006A955E /* MaskContentView.m in Sources */,
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,

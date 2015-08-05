@@ -20,6 +20,7 @@
 #import "WallDisplayMapController-Swift.h"
 #import "MetricCollectionViewCell.h"
 #import "GlobalManager.h"
+#import "HintView.h"
 #import "MaskContentView.h"
 
 const NSInteger ELEMENTS_PER_ROW = 4;
@@ -35,6 +36,9 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     DroppableBarChart *fixedBars;
     
     NSMutableArray *arrData;
+    
+    HintView *vHint;
+    
     BOOL isEditing;
     
 }
@@ -112,7 +116,9 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     gridView.dataSource = self;
     gridView.delegate = self;
     [self.view addSubview:gridView];
-    
+
+    vHint = [[HintView alloc] initWithFrame:CGRectMake(0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0))];
+    [self.view addSubview:vHint];
 }
 
 - (void)configureNavigationBarAppearance {
@@ -124,7 +130,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
     // Customize appearance of navigation bar title
     UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100.0, 40.0)];
-    lblTitle.text = @"City Plan Metrics";
+    lblTitle.text = @"City Plan Indicators";
     lblTitle.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
     lblTitle.textColor = COLOR_BG_WHITE;
     self.navigationItem.titleView = lblTitle;
@@ -149,6 +155,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
 
     if (arrData.count == 1) {
+        [vHint removeFromSuperview];
         [gridView reloadData];
         return;
     }
@@ -195,6 +202,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 }
 
 - (void)deleteElement:(id)sender {
+
     UIButton *btnDelete = (UIButton *)sender;
     NSIndexPath *indexPath = [gridView indexPathForItemAtPoint:[gridView convertPoint:btnDelete.center fromView:btnDelete.superview.superview]];
     
@@ -204,6 +212,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
     [arrData removeObjectAtIndex:indexPath.item];
     [gridView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.item inSection:0]]];
+    
+    if (arrData.count == 0) {
+        [self.view addSubview:vHint];
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WIDGET_DATA_UPDATED object:nil];
 
