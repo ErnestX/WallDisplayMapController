@@ -89,7 +89,12 @@ const NSInteger ELEMENTS_PER_ROW = 4;
                  [evaluatedObject isKindOfClass:[NSDictionary class]]);
     }]];
     
-    fixedBars = [[DroppableBarChart alloc] initWithFrame:CGRectMake(0, 0, gridSideLength, gridSideLength)];
+    
+    UIView *topContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, visibleWidth, gridSideLength)];
+    topContainer.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
+    [self.view addSubview:topContainer];
+    
+    fixedBars = [[DroppableBarChart alloc] initWithFrame:CGRectMake(10, 10, gridSideLength-20, gridSideLength-20)];
     fixedBars.isDraggable = NO;
     for (UIGestureRecognizer *recognizer in fixedBars.gestureRecognizers) {
         [fixedBars removeGestureRecognizer:recognizer];
