@@ -28,7 +28,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        arrCategories = @[@"Mobility", @"Land Use", @"Energy & Carbon", @"Economy", @"Equity", @"Well Being"];
+        arrCategories = @[@"Travel", @"Land Use", @"Energy & Carbon", @"Economy", @"Dwellings", @"Well Being"];
                 
         [[NSNotificationCenter defaultCenter] addObserver:[GlobalManager sharedInstance] selector:@selector(beginConsumingMetricsData) name:RMQ_CONSUMER_THREAD_STARTED object:nil];
         

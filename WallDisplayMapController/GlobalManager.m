@@ -44,7 +44,7 @@
 }
 
 - (NSArray *)getWidgetElementsByCategory:(NSString *)category {
-    if ([category isEqualToString:@"Mobility"] && self.modelDensity) {
+    if ([category isEqualToString:@"Travel"] && self.modelDensity) {
         
         NSDictionary *detail_info_mob0 = @{@"type" : @"desc",
                                           @"data" : @{@"title" : @"Distance",
@@ -194,7 +194,7 @@
         
         return @[];
         
-    } else if ([category isEqualToString:@"Equity"] && self.modelBuildings) {
+    } else if ([category isEqualToString:@"Dwellings"] && self.modelBuildings) {
         
         NSDictionary *detail_info_eq = @{@"type" : @"desc",
                                           @"data" : @{@"title" : @"Unit Type",

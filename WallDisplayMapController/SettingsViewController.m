@@ -71,7 +71,7 @@
     
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.centerX.equalTo(weakSelf.tfIP);
-        make.height.equalTo(@0.5);
+        make.height.equalTo(@1.0);
         make.top.equalTo(weakSelf.tfIP.mas_bottom).with.offset(10.0f);
     }];
     

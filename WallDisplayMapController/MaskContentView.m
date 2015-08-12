@@ -14,6 +14,10 @@
 #import "ThresholdChangeRequest.h"
 #import <Chameleon.h>
 
+@interface MaskContentView()<UITextFieldDelegate>
+
+@end
+
 @implementation MaskContentView {
     DetailViewController *targetVC;
     UIView *contentView;
@@ -148,9 +152,11 @@
                     [contentView addSubview:lblCurrentValue];
                     
                     UITextField *tf = [[UITextField alloc] init];
+                    tf.delegate = self;
                     tf.textAlignment = NSTextAlignmentLeft;
                     tf.tintColor = [UIColor lightGrayColor];
                     tf.keyboardAppearance = UIKeyboardAppearanceDark;
+                    tf.returnKeyType = i==thresHolds.count-1? UIReturnKeyDone:UIReturnKeyNext;
                     tf.keyboardType = UIKeyboardTypeDecimalPad;
                     tf.clearButtonMode = UITextFieldViewModeWhileEditing;
                     tf.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
@@ -185,7 +191,7 @@
                     [line mas_makeConstraints:^(MASConstraintMaker *make) {
                         make.trailing.equalTo(lblCurrentValue);
                         make.leading.equalTo(lblTitle);
-                        make.height.equalTo(@0.5);
+                        make.height.equalTo(@1.0);
                         make.bottom.equalTo(tf);
                     }];
                     
@@ -202,6 +208,9 @@
                         make.centerY.equalTo(contentView).with.offset(-25.0);
                     }];
                     
+                    
+                    [[self viewWithTag:10000] becomeFirstResponder];
+
                 }
                 
             } else {
@@ -286,5 +295,14 @@
     return result;
 }
 
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.returnKeyType == UIReturnKeyNext) {
+        [[self viewWithTag:textField.tag+1] becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 
 @end

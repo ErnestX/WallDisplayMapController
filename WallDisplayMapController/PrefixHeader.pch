@@ -26,7 +26,7 @@
 #define COLOR_WATERMELON [UIColor flatWatermelonColor]
 #define COLOR_BG_GREY [UIColor lightGrayColor]
 
-#define DICT_COLOR_TYPE @{@"Mobility" : COLOR_LIGHT_BLUE, @"Land Use" : COLOR_WATERMELON, @"Energy & Carbon" : [UIColor colorFromHexString:@"#9f79bb"], @"Economy" : FlatYellow, @"Equity" : FlatLime, @"Well Being" : FlatMint}
+#define DICT_COLOR_TYPE @{@"Travel" : COLOR_LIGHT_BLUE, @"Land Use" : COLOR_WATERMELON, @"Energy & Carbon" : [UIColor colorFromHexString:@"#9f79bb"], @"Economy" : FlatYellow, @"Dwellings" : FlatLime, @"Well Being" : FlatMint}
 
 /*** Fonts ***/
 

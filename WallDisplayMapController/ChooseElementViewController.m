@@ -93,7 +93,7 @@ const double BOTTOM_ALPHA = 0.3;
         NSDictionary *data = dict[@"ch_data"];
         NSString *key = data[@"ch_key"];
         BOOL isAvailable = [[GlobalManager sharedInstance] isWidgetAvailableForKey:key];
-        CGRect chartFrame = CGRectMake(1.0, i*widgetElementSideLength+0.5, widgetElementSideLength-2.0, widgetElementSideLength-1.0);
+        CGRect chartFrame = CGRectMake(1.0, i*widgetElementSideLength+1.0, widgetElementSideLength-2.0, widgetElementSideLength-2.0);
         
         NSArray *filteredKeys = [[data allKeys] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             return !([(NSString *)evaluatedObject isEqualToString:@"ch_key"] ||
@@ -104,7 +104,7 @@ const double BOTTOM_ALPHA = 0.3;
                      [evaluatedObject isKindOfClass:[NSDictionary class]]);
         }]];
         
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1)*widgetElementSideLength-0.5, widgetElementSideLength, 0.7)];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, (i+1)*widgetElementSideLength-1.0, widgetElementSideLength, 1.0)];
         lineView.backgroundColor = [UIColor lightGrayColor];
         [scrollView addSubview:lineView];
         
