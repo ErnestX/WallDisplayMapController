@@ -9,6 +9,7 @@
 #import "JDDroppableView.h"
 #import "WobbleAnimator.h"
 #import "DeleteButton.h"
+#import "InfoLabel.h"
 
 @interface DroppableChart : JDDroppableView
 
@@ -19,5 +20,6 @@
 @property WobbleAnimator *animator;
 
 @property DeleteButton *btnDelete;
+@property InfoLabel *lblInfo;
 
 @end

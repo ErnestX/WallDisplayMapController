@@ -119,6 +119,7 @@
                         action:@selector(deleteElement:)
               forControlEvents:UIControlEventTouchUpInside];
     chart.btnDelete.hidden = NO;
+    chart.lblInfo.hidden = YES;
     [chart bringSubviewToFront:chart.btnDelete];
     [chart.animator startAnimation];
 }
@@ -127,6 +128,8 @@
     DroppableChart *chart = (DroppableChart *)[self viewWithTag:33333];
     chart.btnDelete.hidden = YES;
     [chart.btnDelete removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    
+    chart.lblInfo.hidden = NO;
     [chart.animator stopAnimation];
 }
 

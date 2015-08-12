@@ -290,21 +290,26 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];
-    maskView.itemIndex = indexPath.item;
+    if (!isEditing) {
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+        MaskContentView *maskView = [[MaskContentView alloc] initWithFrame:window.bounds target:self];
+        maskView.itemIndex = indexPath.item;
+        
+        [window addSubview:maskView];
+        [UIView animateWithDuration:0.15
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
+                             [maskView showContent:[arrData objectAtIndex:indexPath.item]];
+                         }
+                         completion:^(BOOL finished) {
+                             maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
+                         }];
+    } else {
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    }
 
-    [window addSubview:maskView];
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
-                         [maskView showContent:[arrData objectAtIndex:indexPath.item]];
-                     }
-                     completion:^(BOOL finished) {
-                         maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.7];
-                     }];
     
 }
 

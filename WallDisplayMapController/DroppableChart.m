@@ -21,6 +21,11 @@
         self.btnDelete.hidden = YES;
         [self addSubview:self.btnDelete];
         
+        self.lblInfo = [[InfoLabel alloc] initWithFrame:CGRectMake(8.0, 25.0-10.0, BUTTON_SIZE, BUTTON_SIZE)];
+        self.lblInfo.hidden = YES;
+        [self addSubview:self.lblInfo];
+        
+        
     }
     return self;
 }

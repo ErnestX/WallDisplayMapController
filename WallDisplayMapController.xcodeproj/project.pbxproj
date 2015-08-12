@@ -32,6 +32,7 @@
 		AE6C04291B41D4C700A1D777 /* vehicle_pct.png in Resources */ = {isa = PBXBuildFile; fileRef = AE6C04231B41D4C700A1D777 /* vehicle_pct.png */; };
 		AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6C042E1B42029400A1D777 /* DroppableChart.m */; };
 		AE78ADB11B729AC500780E26 /* HintView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE78ADB01B729AC500780E26 /* HintView.m */; };
+		AE79D6AB1B7BEFDC00C4C3F5 /* InfoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE79D6AA1B7BEFDC00C4C3F5 /* InfoLabel.m */; };
 		AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */; };
 		AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CC1B3A09390041E0C0 /* DetailViewController.m */; };
 		AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = AE83C8CF1B3A32A70041E0C0 /* UIColor+Extend.m */; };
@@ -126,6 +127,8 @@
 		AE6C042E1B42029400A1D777 /* DroppableChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppableChart.m; sourceTree = "<group>"; };
 		AE78ADAF1B729AC500780E26 /* HintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintView.h; sourceTree = "<group>"; };
 		AE78ADB01B729AC500780E26 /* HintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintView.m; sourceTree = "<group>"; };
+		AE79D6A91B7BEFDC00C4C3F5 /* InfoLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoLabel.h; sourceTree = "<group>"; };
+		AE79D6AA1B7BEFDC00C4C3F5 /* InfoLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoLabel.m; sourceTree = "<group>"; };
 		AE83C8C81B3A091C0041E0C0 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		AE83C8C91B3A091C0041E0C0 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		AE83C8CB1B3A09390041E0C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				AED3B7FE1B558D0D008292C4 /* DroppableNumberView.m */,
 				AED3B8001B55DEAC008292C4 /* DroppableSingleBarView.h */,
 				AED3B8011B55DEAC008292C4 /* DroppableSingleBarView.m */,
+				AE79D6A91B7BEFDC00C4C3F5 /* InfoLabel.h */,
+				AE79D6AA1B7BEFDC00C4C3F5 /* InfoLabel.m */,
 			);
 			name = WidgetElementViews;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 				AE3BF0111B4C3F7300CB2B88 /* GlobalManager.m in Sources */,
 				AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */,
 				AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */,
+				AE79D6AB1B7BEFDC00C4C3F5 /* InfoLabel.m in Sources */,
 				AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
