@@ -14,21 +14,17 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
-    
     //// PaintCode Trial Version
     //// www.paintcodeapp.com
     
     //// General Declarations
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    //// Color Declarations
-    UIColor* color = [UIColor lightGrayColor];
-    
     //// Oval Drawing
     UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(0, 0, 20, 20)];
-    [color setFill];
-    [ovalPath fill];
+    [UIColor.lightGrayColor setStroke];
+    ovalPath.lineWidth = 2;
+    [ovalPath stroke];
     
     
     //// Text Drawing
@@ -38,7 +34,7 @@
         NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         textStyle.alignment = NSTextAlignmentCenter;
         
-        NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"HelveticaNeue-CondensedBold" size: 15], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: textStyle};
+        NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"AvenirNextCondensed-Bold" size: 15], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: textStyle};
         
         CGFloat textTextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: textFontAttributes context: nil].size.height;
         CGContextSaveGState(context);
