@@ -85,6 +85,8 @@ const double BOTTOM_ALPHA = 0.3;
     scrollView.canCancelContentTouches = NO;
     scrollView.contentSize = CGSizeMake(100.0, (self.arrData.count)*widgetElementSideLength);
     [self.view addSubview: scrollView];
+    [self.view bringSubviewToFront:scrollView];
+    [scrollView flashScrollIndicators];
     
     // Layout widget elements
     for (int i=0; i<[self.arrData count]; i++) {
@@ -237,7 +239,6 @@ const double BOTTOM_ALPHA = 0.3;
 }
 
 - (void)widgetDataUpdated {
-    
     DEFINE_WEAK_SELF
     dispatch_async(dispatch_get_main_queue(), ^{
         NSArray *newData = [[GlobalManager sharedInstance] getWidgetElementsByCategory:self.category];
@@ -250,6 +251,8 @@ const double BOTTOM_ALPHA = 0.3;
             [[scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [weakSelf reloadData];
         }
+        [self.view bringSubviewToFront:scrollView];
+        [scrollView flashScrollIndicators];
 
     });
     

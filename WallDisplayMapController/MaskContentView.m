@@ -48,6 +48,35 @@
 }
 
 - (void)showContent:(NSDictionary *)data {
+    DEFINE_WEAK_SELF
+    NSString *category = data[@"chart_category"];
+    if (category) {
+        
+        UIView *vLine = [[UIView alloc] init];
+        vLine.backgroundColor = DICT_COLOR_TYPE[category];
+        [self addSubview:vLine];
+        
+        [vLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.trailing.equalTo(weakSelf);
+            make.height.equalTo(@3.5);
+        }];
+        
+        UILabel *lblCategory = [[UILabel alloc] init];
+        lblCategory.backgroundColor = ClearColor;
+        lblCategory.text = [category uppercaseString];
+        lblCategory.font = [UIFont fontWithName:@"AvenirNextCondensed-Bold" size:20.0];
+        lblCategory.textAlignment = NSTextAlignmentLeft;
+        lblCategory.textColor = DICT_COLOR_TYPE[category];
+        [self addSubview:lblCategory];
+        
+       
+        [lblCategory mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(vLine).with.offset(1.5f);
+            make.leading.equalTo(weakSelf).with.offset(1.5f);
+            make.width.equalTo(weakSelf);
+        }];
+    }
+    
     if (!data[@"chart_content"][@"detail_info"]) {
         UILabel *lblNoInfo = [[UILabel alloc] init];
         lblNoInfo.textColor = COLOR_BG_WHITE;
