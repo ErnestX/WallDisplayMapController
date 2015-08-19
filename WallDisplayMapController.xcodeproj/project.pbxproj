@@ -485,6 +485,7 @@
 				TargetAttributes = {
 					CA1639401B0E4FBC00E4FC81 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 3295R5L6UR;
 					};
 					CA1639591B0E4FBC00E4FC81 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -753,11 +754,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WallDisplayMapController/PrefixHeader.pch;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -770,11 +774,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WallDisplayMapController/PrefixHeader.pch;
 				INFOPLIST_FILE = WallDisplayMapController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};

@@ -208,7 +208,7 @@
 
 - (float) convertScreenRotationToFacingDirection:(float) r
 {
-    return r;
+    return r*5; // hack: should modify sensitivity on table instead
 }
 
 - (float) convertScreenTranslationToPitch:(float) t
