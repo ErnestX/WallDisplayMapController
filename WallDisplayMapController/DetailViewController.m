@@ -198,7 +198,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     
 
     if (arrData.count == 1) {
-        [vHint removeFromSuperview];
+        vHint.hidden = YES;
         [gridView reloadData];
         return;
     }
@@ -259,7 +259,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     [gridView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.item inSection:0]]];
     
     if (arrData.count == 0) {
-        [self.view addSubview:vHint];
+        vHint.hidden = NO;
         [self widgetEndEditing];
     }
     
