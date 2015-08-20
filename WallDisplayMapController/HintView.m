@@ -17,6 +17,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         box = [[UIView alloc] initWithFrame:frame];
         
         CAShapeLayer *_border = [CAShapeLayer layer];

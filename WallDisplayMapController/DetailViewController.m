@@ -30,10 +30,14 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 @end
 
 @implementation DetailViewController {
+    UIView *topContainer;
     CGFloat visibleWidth;
     CGFloat gridSideLength;
     UICollectionView *gridView;
     DroppableBarChart *fixedBars;
+    UIButton *btnHide;
+    UIBarButtonItem *showBarButton;
+    UIBarButtonItem *editBarButton;
     
     NSMutableArray *arrData;
     
@@ -49,6 +53,15 @@ const NSInteger ELEMENTS_PER_ROW = 4;
         arrData = [NSMutableArray arrayWithCapacity:20];
         isEditing = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(widgetDataUpdated) name:WIDGET_DATA_UPDATED object:nil];
+        
+        UIButton *btnShow = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnShow setBackgroundImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
+        [btnShow setBackgroundImage:[UIImage imageNamed:@"down_pressed.png"] forState:UIControlStateHighlighted];
+        [btnShow addTarget:self action:@selector(showTopBarButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        btnShow.frame = CGRectMake(0, 0, 22.0, 22.0);
+        
+        showBarButton = [[UIBarButtonItem alloc] initWithCustomView:btnShow];
+        editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
     }
     return self;
 }
@@ -68,8 +81,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 - (void)viewWillAppear:(BOOL)animated {
     isEditing = NO;
     if (gridView && [arrData count] != 0) {
-        UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
-        self.navigationItem.rightBarButtonItem = editBarButton;
+
         [gridView reloadData];
 
     }
@@ -90,7 +102,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     }]];
     
     
-    UIView *topContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, visibleWidth, gridSideLength)];
+    topContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, visibleWidth, gridSideLength)];
     topContainer.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
     [self.view addSubview:topContainer];
     
@@ -105,10 +117,10 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     [lblFixed mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(topContainer).with.offset(-65.0f);
         make.baseline.equalTo(topContainer).with.offset(-10.0f);
-        make.width.lessThanOrEqualTo(@350.0);
+        make.width.lessThanOrEqualTo(@315.0);
     }];
     
-    UIButton *btnHide = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnHide = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnHide setBackgroundImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
     [btnHide setBackgroundImage:[UIImage imageNamed:@"up_pressed.png"] forState:UIControlStateHighlighted];
     [btnHide addTarget:self action:@selector(hideTopBarButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,7 +137,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     for (UIGestureRecognizer *recognizer in fixedBars.gestureRecognizers) {
         [fixedBars removeGestureRecognizer:recognizer];
     }
-    [self.view addSubview:fixedBars];
+    [topContainer addSubview:fixedBars];
     [fixedBars updateBarChartWithValues: filteredValues labels:filteredKeys type:@"Land Use"];
     
     // Set up CollectionView
@@ -136,6 +148,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     aFlowLayout.minimumLineSpacing = 0.0;
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, gridSideLength, visibleWidth, 1.0f)];
+    line.tag = 12345;
     line.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:line];
     
@@ -147,9 +160,9 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     gridView.dataSource = self;
     gridView.delegate = self;
     [self.view addSubview:gridView];
-
-    vHint = [[HintView alloc] initWithFrame:CGRectMake(0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0))];
-    [self.view addSubview:vHint];
+    
+    vHint = [[HintView alloc] initWithFrame:CGRectMake(0, 0, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0))];
+    [gridView addSubview:vHint];
 }
 
 - (void)configureNavigationBarAppearance {
@@ -167,8 +180,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     self.navigationItem.titleView = lblTitle;
     
     // Right navigation item
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
-    self.navigationItem.rightBarButtonItem = editBarButton;
+    self.navigationItem.rightBarButtonItems = @[editBarButton];
     
     UIViewController *masterVC = ((UIViewController *)[self.splitViewController.viewControllers objectAtIndex:0]).childViewControllers[0];
     CGFloat masterWidth = masterVC.view.frame.size.width;
@@ -218,16 +230,18 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 }
 
 - (void)widgetStartEditing {
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target: self action: @selector(widgetEndEditing)];
-    self.navigationItem.rightBarButtonItem = doneBarButton;
+    [editBarButton setTitle:@"Done"];
+    [editBarButton setTarget:self];
+    [editBarButton setAction:@selector(widgetEndEditing)];
     isEditing = YES;
     [gridView reloadData];
 
 }
 
 - (void)widgetEndEditing {
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target: self action: @selector(widgetStartEditing)];
-    self.navigationItem.rightBarButtonItem = editBarButton;
+    [editBarButton setTitle:@"Edit"];
+    [editBarButton setTarget:self];
+    [editBarButton setAction:@selector(widgetStartEditing)];
     isEditing = NO;
     [gridView reloadData];
 }
@@ -283,11 +297,38 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 }
 
 - (void)hideTopBarButtonPressed:(UIButton *)btn{
-    
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         topContainer.frame = CGRectMake(0, -gridSideLength, visibleWidth, gridSideLength);
+                         gridView.frame = CGRectMake(0.0, 0.0, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0);
+                         [self.view viewWithTag:12345].hidden = YES;
+                    
+                         
+                     }
+                     completion:^(BOOL finished) {
+
+                         self.navigationItem.rightBarButtonItems = @[showBarButton, editBarButton];
+                     }];
 }
 
 - (void)showTopBarButtonPressed:(UIButton *)btn {
-    
+    self.navigationItem.rightBarButtonItems = @[editBarButton];
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         gridView.frame = CGRectMake(0.0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0));
+                         topContainer.frame = CGRectMake(0, 0, visibleWidth, gridSideLength);
+
+                         
+                         
+                     }
+                     completion:^(BOOL finished) {
+                         [self.view viewWithTag:12345].hidden = NO;
+
+                     }];
 }
 
 - (void)deselectCellWithIndex:(NSInteger)index {
