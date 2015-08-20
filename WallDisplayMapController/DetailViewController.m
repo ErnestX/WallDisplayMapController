@@ -94,6 +94,20 @@ const NSInteger ELEMENTS_PER_ROW = 4;
     topContainer.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.3];
     [self.view addSubview:topContainer];
     
+    UILabel *lblFixed = [[UILabel alloc] init];
+    lblFixed.textAlignment = NSTextAlignmentRight;
+    lblFixed.textColor = [UIColor lightGrayColor];
+    lblFixed.numberOfLines = 0;
+    lblFixed.lineBreakMode = NSLineBreakByWordWrapping;
+    lblFixed.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    lblFixed.text = @"This area is intended to be non-customizable. You can hide it by pressing the up button.";
+    [topContainer addSubview:lblFixed];
+    [lblFixed mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(topContainer).with.offset(-65.0f);
+        make.baseline.equalTo(topContainer).with.offset(-10.0f);
+        make.width.lessThanOrEqualTo(@350.0);
+    }];
+    
     fixedBars = [[DroppableBarChart alloc] initWithFrame:CGRectMake(10, 10, gridSideLength-20, gridSideLength-20)];
     fixedBars.isDraggable = NO;
     for (UIGestureRecognizer *recognizer in fixedBars.gestureRecognizers) {
