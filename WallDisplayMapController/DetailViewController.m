@@ -108,6 +108,18 @@ const NSInteger ELEMENTS_PER_ROW = 4;
         make.width.lessThanOrEqualTo(@350.0);
     }];
     
+    UIButton *btnHide = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnHide setBackgroundImage:[UIImage imageNamed:@"up.png"] forState:UIControlStateNormal];
+    [btnHide setBackgroundImage:[UIImage imageNamed:@"up_pressed.png"] forState:UIControlStateHighlighted];
+    [btnHide addTarget:self action:@selector(hideTopBarButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [topContainer addSubview:btnHide];
+    
+    [btnHide mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(lblFixed.mas_trailing).with.offset(15.0f);
+        make.width.height.equalTo(@22.0f);
+        make.centerY.equalTo(lblFixed);
+    }];
+    
     fixedBars = [[DroppableBarChart alloc] initWithFrame:CGRectMake(10, 10, gridSideLength-20, gridSideLength-20)];
     fixedBars.isDraggable = NO;
     for (UIGestureRecognizer *recognizer in fixedBars.gestureRecognizers) {
@@ -268,6 +280,14 @@ const NSInteger ELEMENTS_PER_ROW = 4;
 
     });
 
+}
+
+- (void)hideTopBarButtonPressed:(UIButton *)btn{
+    
+}
+
+- (void)showTopBarButtonPressed:(UIButton *)btn {
+    
 }
 
 - (void)deselectCellWithIndex:(NSInteger)index {
