@@ -302,7 +302,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          topContainer.frame = CGRectMake(0, -gridSideLength, visibleWidth, gridSideLength);
-                         gridView.frame = CGRectMake(0.0, 0.0, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0);
+                         gridView.frame = CGRectMake(0.0, 0.0, visibleWidth, self.view.frame.size.height);
                          [self.view viewWithTag:12345].hidden = YES;
                     
                          
@@ -319,7 +319,7 @@ const NSInteger ELEMENTS_PER_ROW = 4;
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         gridView.frame = CGRectMake(0.0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-44.0-(gridSideLength+1.0));
+                         gridView.frame = CGRectMake(0.0, gridSideLength + 1.0f, visibleWidth, self.view.frame.size.height-(gridSideLength+1.0));
                          topContainer.frame = CGRectMake(0, 0, visibleWidth, gridSideLength);
 
                          
