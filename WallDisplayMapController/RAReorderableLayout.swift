@@ -38,7 +38,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         case toEnd
         case stay
         
-        private func scrollValue(#speedValue: CGFloat, percentage: CGFloat) -> CGFloat {
+        private func scrollValue(speedValue speedValue: CGFloat, percentage: CGFloat) -> CGFloat {
             var value: CGFloat = 0.0
             switch self {
             case toTop:
@@ -51,7 +51,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
                 return 0
             }
             
-            var proofedPercentage: CGFloat = max(min(1.0, percentage), 0)
+            let proofedPercentage: CGFloat = max(min(1.0, percentage), 0)
             return value * proofedPercentage
         }
     }
@@ -157,7 +157,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         }
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.configureObserver()
     }
@@ -190,11 +190,11 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         }
     }
     
-    override public func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
-        var attributesArray = super.layoutAttributesForElementsInRect(rect)
+    override public func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributesArray = super.layoutAttributesForElementsInRect(rect)
         if attributesArray != nil {
             for attribute in attributesArray! {
-                var layoutAttribute = attribute as! UICollectionViewLayoutAttributes
+                let layoutAttribute = attribute 
                 if layoutAttribute.representedElementCategory == .Cell {
                     if layoutAttribute.indexPath.isEqual(self.cellFakeView?.indexPath) {
                         var cellAlpha: CGFloat = 0
@@ -212,7 +212,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         return attributesArray
     }
     
-    override public func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "collectionView" {
             self.setUpGestureRecognizers()
         }else {
@@ -221,7 +221,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
     }
     
     private func configureObserver() {
-        self.addObserver(self, forKeyPath: "collectionView", options:.allZeros, context: nil)
+        self.addObserver(self, forKeyPath: "collectionView", options:[], context: nil)
     }
     
     private func setUpDisplayLink() {
@@ -297,8 +297,8 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         let attribute = self.layoutAttributesForItemAtIndexPath(toIndexPath!)
         self.collectionView!.performBatchUpdates({ () -> Void in
             self.cellFakeView!.indexPath = toIndexPath
-            self.cellFakeView!.cellFrame = attribute.frame
-            self.cellFakeView!.changeBoundsIfNeeded(attribute.bounds)
+            self.cellFakeView!.cellFrame = attribute!.frame
+            self.cellFakeView!.changeBoundsIfNeeded(attribute!.bounds)
             
             self.collectionView!.deleteItemsAtIndexPaths([atIndexPath!])
             self.collectionView!.insertItemsAtIndexPaths([toIndexPath!])
@@ -364,11 +364,11 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         var percentage: CGFloat = 0
         
         if self.continuousScrollDirection == .toTop {
-            if var fakeCellEdge = self.fakeCellTopEdge {
+            if let fakeCellEdge = self.fakeCellTopEdge {
                 percentage = 1.0 - ((fakeCellEdge - (offset + trigerPaddingTop)) / trigerInsetTop)
             }
         }else if self.continuousScrollDirection == .toEnd {
-            if var fakeCellEdge = self.fakeCellEndEdge {
+            if let fakeCellEdge = self.fakeCellEndEdge {
                 percentage = 1.0 - (((insetTop + offsetEnd - paddingEnd) - (fakeCellEdge + insetTop)) / trigerInsetEnd)
             }
         }
@@ -403,7 +403,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
         self.cancelDrag(toIndexPath: nil)
     }
 
-    private func cancelDrag(#toIndexPath: NSIndexPath!) {
+    private func cancelDrag(toIndexPath toIndexPath: NSIndexPath!) {
         if self.cellFakeView == nil {
             return
         }
@@ -452,7 +452,7 @@ public class RAReorderableLayout: UICollectionViewFlowLayout, UIGestureRecognize
             self.cellFakeView = RACellFakeView(cell: currentCell!)
             self.cellFakeView!.indexPath = indexPath
             self.cellFakeView!.originalCenter = currentCell?.center
-            self.cellFakeView!.cellFrame = self.layoutAttributesForItemAtIndexPath(indexPath!).frame
+            self.cellFakeView!.cellFrame = self.layoutAttributesForItemAtIndexPath(indexPath!)!.frame
             self.collectionView?.addSubview(self.cellFakeView!)
             
             self.fakeCellCenter = self.cellFakeView!.center
@@ -551,7 +551,7 @@ private class RACellFakeView: UIView {
     
     private var cellFrame: CGRect?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -568,11 +568,11 @@ private class RACellFakeView: UIView {
         
         self.cellFakeImageView = UIImageView(frame: self.bounds)
         self.cellFakeImageView?.contentMode = UIViewContentMode.ScaleAspectFill
-        self.cellFakeImageView?.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        self.cellFakeImageView?.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         
         self.cellFakeHightedView = UIImageView(frame: self.bounds)
         self.cellFakeHightedView?.contentMode = UIViewContentMode.ScaleAspectFill
-        self.cellFakeHightedView?.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        self.cellFakeHightedView?.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         
         cell.highlighted = true
         self.cellFakeHightedView?.image = getCellImage()
@@ -588,17 +588,17 @@ private class RACellFakeView: UIView {
             return
         }
         
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut | .BeginFromCurrentState, animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut, .BeginFromCurrentState], animations: { () -> Void in
             self.bounds = bounds
         }, completion: nil)
     }
     
     func pushFowardView() {
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut | .BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut, .BeginFromCurrentState], animations: {
             self.center = self.originalCenter!
             self.transform = CGAffineTransformMakeScale(1.1, 1.1)
             self.cellFakeHightedView!.alpha = 0;
-            var shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
+            let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
             shadowAnimation.fromValue = 0
             shadowAnimation.toValue = 0.7
             shadowAnimation.removedOnCompletion = false
@@ -610,10 +610,10 @@ private class RACellFakeView: UIView {
     }
     
     func pushBackView(completion: (()->Void)?) {
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut | .BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.3, delay: 0, options: [.CurveEaseInOut, .BeginFromCurrentState], animations: {
             self.transform = CGAffineTransformIdentity
             self.frame = self.cellFrame!
-            var shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
+            let shadowAnimation = CABasicAnimation(keyPath: "shadowOpacity")
             shadowAnimation.fromValue = 0.7
             shadowAnimation.toValue = 0
             shadowAnimation.removedOnCompletion = false
