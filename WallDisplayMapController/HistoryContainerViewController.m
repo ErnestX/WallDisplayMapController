@@ -22,9 +22,9 @@
     HistoryContainerView *historyContainerView = [[HistoryContainerView alloc] initWithFrame:self.view.bounds];
     UICollectionView *historyBar = [historyContainerView setUpAndReturnHistoryBar];
     
-    HistoryBarController *historyBarController = [[HistoryBarController alloc]initWithNibName:nil bundle:nil];
+    HistoryBarController *historyBarController = [[HistoryBarController alloc]initWithCollectionViewLayout:nil];
     [self addChildViewController:historyBarController];
-    historyBarController.view = historyBar;
+    historyBarController.collectionView = historyBar;
     
     self.view = historyContainerView;
 }

@@ -8,7 +8,6 @@
 
 #import "HistoryBarController.h"
 #import "HistoryBarView.h"
-#define BAR_HEIGHT 100
 
 @interface HistoryBarController ()
 

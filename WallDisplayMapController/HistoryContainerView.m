@@ -9,6 +9,8 @@
 #import "HistoryContainerView.h"
 #import "HistoryBarView.h"
 
+#define HISTORY_BAR_HEIGHT 150
+
 @implementation HistoryContainerView
 
 HistoryBarView* historyBarView;
@@ -27,7 +29,7 @@ HistoryBarView* historyBarView;
     historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(self.frame.origin.x,
                                                                      self.frame.origin.y,
                                                                      self.frame.size.width,
-                                                                     100)
+                                                                     HISTORY_BAR_HEIGHT)
                                      collectionViewLayout:flowLayout];
     [self addSubview:historyBarView];
     return historyBarView;
