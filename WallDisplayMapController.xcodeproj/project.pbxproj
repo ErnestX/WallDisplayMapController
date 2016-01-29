@@ -75,10 +75,6 @@
 		CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */; };
 		CA461A361B1E521B00534070 /* tiltGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */; };
 		CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */; };
-		CA4678FD1C5BEB5D00C4D7BB /* HistoryBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */; };
-		CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */; };
-		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
-		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -206,14 +202,6 @@
 		CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rotateGestureMovie.mp4; sourceTree = "<group>"; };
 		CA461A351B1E521B00534070 /* tiltGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiltGestureMovie.mp4; sourceTree = "<group>"; };
 		CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = zoomGestureMovie.mp4; sourceTree = "<group>"; };
-		CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarController.h; sourceTree = "<group>"; };
-		CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarController.m; sourceTree = "<group>"; };
-		CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarView.h; sourceTree = "<group>"; };
-		CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarView.m; sourceTree = "<group>"; };
-		CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerViewController.h; sourceTree = "<group>"; };
-		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
-		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
-		CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,7 +285,6 @@
 				AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */,
 				AEB8A94D1B6152AB003C8A68 /* SettingsViewController.h */,
 				AEB8A94E1B6152AB003C8A68 /* SettingsViewController.m */,
-				CA4678F91C5BE83C00C4D7BB /* HistoryViewControllers */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -409,7 +396,6 @@
 				AE9E40351B320AE00085000D /* UnavailableView.m */,
 				AE78ADAF1B729AC500780E26 /* HintView.h */,
 				AE78ADB01B729AC500780E26 /* HintView.m */,
-				CA4678FA1C5BE84900C4D7BB /* HistoryViews */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -447,28 +433,6 @@
 				CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */,
 			);
 			name = resources;
-			sourceTree = "<group>";
-		};
-		CA4678F91C5BE83C00C4D7BB /* HistoryViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */,
-				CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */,
-				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
-				CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */,
-			);
-			name = HistoryViewControllers;
-			sourceTree = "<group>";
-		};
-		CA4678FA1C5BE84900C4D7BB /* HistoryViews */ = {
-			isa = PBXGroup;
-			children = (
-				CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */,
-				CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */,
-				CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */,
-				CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */,
-			);
-			name = HistoryViews;
 			sourceTree = "<group>";
 		};
 		FEF783D47782776F3F6477CC /* Frameworks */ = {
@@ -664,9 +628,7 @@
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
-				CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
-				CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */,
 				AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
@@ -684,8 +646,6 @@
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
-				CA4678FD1C5BEB5D00C4D7BB /* HistoryBarController.m in Sources */,
-				CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */,
 				AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */,
 				AE83C8D01B3A32A70041E0C0 /* UIColor+Extend.m in Sources */,
 			);

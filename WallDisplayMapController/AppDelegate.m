@@ -12,7 +12,6 @@
 #import "DetailViewController.h"
 #import "MapControlViewController.h"
 #import "SettingsViewController.h"
-#import "HistoryContainerViewController.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "UIColor+Extend.h"
 
@@ -55,13 +54,9 @@
     settingsVC.tabBarItem.image = [[UIImage imageNamed:@"gearIcon_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     settingsVC.tabBarItem.selectedImage = [UIImage imageNamed:@"gearIcon.png"];
     
-    // History viewController
-    HistoryContainerViewController *historyVC = [[HistoryContainerViewController alloc] init];
-    historyVC.title = @"History";
-    
     // Set up TabBar viewController
     UITabBarController *tabVC = [[UITabBarController alloc] init];
-    tabVC.viewControllers = @[splitVC, historyVC, remoteVC, settingsVC];
+    tabVC.viewControllers = @[splitVC, remoteVC,settingsVC];
     tabVC.tabBar.tintColor = [UIColor whiteColor];
     tabVC.tabBar.barTintColor = [UIColor colorFromHexString:@"#1ABC9C"];
     
