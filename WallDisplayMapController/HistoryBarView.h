@@ -1,13 +1,13 @@
 //
-//  HistoryView.h
+//  HistoryBarView.h
 //  WallDisplayMapController
 //
-//  Created by Jialiang Xiang on 2016-01-27.
+//  Created by Jialiang Xiang on 2016-01-29.
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryView : UIView
+@interface HistoryBarView : UICollectionView
 
 @end

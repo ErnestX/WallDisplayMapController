@@ -12,7 +12,7 @@
 #import "DetailViewController.h"
 #import "MapControlViewController.h"
 #import "SettingsViewController.h"
-#import "HistoryViewController.h"
+#import "HistoryContainerViewController.h"
 #import <ChameleonFramework/Chameleon.h>
 #import "UIColor+Extend.h"
 
@@ -56,7 +56,7 @@
     settingsVC.tabBarItem.selectedImage = [UIImage imageNamed:@"gearIcon.png"];
     
     // History viewController
-    HistoryViewController *historyVC = [[HistoryViewController alloc] init];
+    HistoryContainerViewController *historyVC = [[HistoryContainerViewController alloc] init];
     historyVC.title = @"History";
     
     // Set up TabBar viewController

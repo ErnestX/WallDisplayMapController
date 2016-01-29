@@ -6,19 +6,27 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
-#import "HistoryViewController.h"
-#import "HistoryView.h"
+#import "HistoryContainerViewController.h"
+#import "HistoryContainerView.h"
+#import "HistoryBarController.h"
 
-@interface HistoryViewController ()
+@interface HistoryContainerViewController ()
 
 @end
 
-@implementation HistoryViewController
+@implementation HistoryContainerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    HistoryView *historyView = [[HistoryView alloc] initWithFrame:self.view.bounds];
-    self.view = historyView;
+    
+    HistoryContainerView *historyContainerView = [[HistoryContainerView alloc] initWithFrame:self.view.bounds];
+    UICollectionView *historyBar = [historyContainerView setUpAndReturnHistoryBar];
+    
+    HistoryBarController *historyBarController = [[HistoryBarController alloc]initWithNibName:nil bundle:nil];
+    [self addChildViewController:historyBarController];
+    historyBarController.view = historyBar;
+    
+    self.view = historyContainerView;
 }
 
 - (void)didReceiveMemoryWarning {
