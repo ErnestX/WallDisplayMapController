@@ -8,6 +8,7 @@
 
 #import "HistoryBarController.h"
 #import "HistoryBarView.h"
+#import "HistoryBarCell.h"
 
 @interface HistoryBarController ()
 
@@ -15,7 +16,17 @@
 
 @implementation HistoryBarController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString* const reuseIdentifier = @"Cell";
+
+// model for testing only
+NSMutableArray* datesArray;
+NSDateFormatter* dateFormatter;
+
+- (instancetype) init {
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init]; // TODO stub
+    self = [super initWithCollectionViewLayout:flowLayout];
+    return self;
+}
 
 - (HistoryBarView*) setUpAndReturnHistoryBar {
     UICollectionViewLayout *layout = self.collectionViewLayout;
@@ -29,10 +40,13 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // setup testing model
+    datesArray = [NSMutableArray array];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"hh:mm" options:0 locale:[NSLocale currentLocale]]];
+    
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

@@ -77,6 +77,7 @@
 		CA461A381B1E53CD00534070 /* zoomGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A371B1E53CD00534070 /* zoomGestureMovie.mp4 */; };
 		CA4678FD1C5BEB5D00C4D7BB /* HistoryBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */; };
 		CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */; };
+		CA4679031C62A4DB00C4D7BB /* HistoryBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */; };
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
@@ -210,6 +211,8 @@
 		CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarController.m; sourceTree = "<group>"; };
 		CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarView.h; sourceTree = "<group>"; };
 		CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarView.m; sourceTree = "<group>"; };
+		CA4679011C62A4DB00C4D7BB /* HistoryBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarCell.h; sourceTree = "<group>"; };
+		CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarCell.m; sourceTree = "<group>"; };
 		CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerViewController.h; sourceTree = "<group>"; };
 		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
 		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */,
 				CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */,
 				CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */,
+				CA4679011C62A4DB00C4D7BB /* HistoryBarCell.h */,
+				CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */,
 			);
 			name = HistoryViews;
 			sourceTree = "<group>";
@@ -669,6 +674,7 @@
 				CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */,
 				AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */,
 				CA16394A1B0E4FBC00E4FC81 /* AppDelegate.m in Sources */,
+				CA4679031C62A4DB00C4D7BB /* HistoryBarCell.m in Sources */,
 				CA16396C1B0E546300E4FC81 /* MapControlView.m in Sources */,
 				AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */,
 				AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */,
