@@ -17,6 +17,15 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
+- (HistoryBarView*) setUpAndReturnHistoryBar {
+    UICollectionViewLayout *layout = self.collectionViewLayout;
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+    
+    self.collectionView = historyBarView;
+    
+    return historyBarView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

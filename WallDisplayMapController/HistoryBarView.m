@@ -10,9 +10,11 @@
 
 @implementation HistoryBarView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
+    self = [super initWithFrame:frame collectionViewLayout:layout];
+    
     self.backgroundColor = [UIColor redColor];
+    
     return self;
 }
 

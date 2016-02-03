@@ -7,13 +7,12 @@
 //
 
 #import "HistoryContainerView.h"
-#import "HistoryBarView.h"
 
 #define HISTORY_BAR_HEIGHT 150
 
 @implementation HistoryContainerView
 
-HistoryBarView* historyBarView;
+UIView* historyBarView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -23,16 +22,17 @@ HistoryBarView* historyBarView;
     return self;
 }
 
-- (UICollectionView*) setUpAndReturnHistoryBar {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+- (void) setUpHistoryBar: (UIView *) historyBar {
+    NSLog(@"setting up historyBar");
     
-    historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(self.frame.origin.x,
-                                                                     self.frame.origin.y,
-                                                                     self.frame.size.width,
-                                                                     HISTORY_BAR_HEIGHT)
-                                     collectionViewLayout:flowLayout];
+    historyBarView = historyBar;
     [self addSubview:historyBarView];
-    return historyBarView;
+    
+    // init the history bar
+    historyBarView.frame = CGRectMake(self.frame.origin.x,
+                                      self.frame.origin.y,
+                                      self.frame.size.width,
+                                      HISTORY_BAR_HEIGHT);
 }
 
 @end

@@ -10,6 +10,10 @@
 
 @interface HistoryContainerView : UIView
 
-- (UICollectionView*) setUpAndReturnHistoryBar;
+/*
+ * given the historyBarView from the historyBarContainer, initialize the size of it and add it as a subview
+ */
+
+- (void) setUpHistoryBar: (UIView*) historyBar;
 
 @end

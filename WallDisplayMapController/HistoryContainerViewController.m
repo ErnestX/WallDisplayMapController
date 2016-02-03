@@ -19,14 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // create and init containerView
     HistoryContainerView *historyContainerView = [[HistoryContainerView alloc] initWithFrame:self.view.bounds];
-    UICollectionView *historyBar = [historyContainerView setUpAndReturnHistoryBar];
-    
-    HistoryBarController *historyBarController = [[HistoryBarController alloc]initWithCollectionViewLayout:nil];
-    [self addChildViewController:historyBarController];
-    historyBarController.collectionView = historyBar;
-    
     self.view = historyContainerView;
+    
+    // create and init historyBarController
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    HistoryBarController *historyBarController = [[HistoryBarController alloc]initWithCollectionViewLayout:flowLayout];
+    [self addChildViewController:historyBarController];
+    
+    // have the historyBarView created and set up by historyBarController
+    UICollectionView* historyBarView = [historyBarController setUpAndReturnHistoryBar];
+    
+    // give historyBarView to containerView to add it as subview and init the size
+    [historyContainerView setUpHistoryBar:historyBarView];
 }
 
 - (void)didReceiveMemoryWarning {
