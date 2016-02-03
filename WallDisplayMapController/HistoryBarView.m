@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     
-    self.backgroundColor = [UIColor redColor];
+    self.backgroundColor = [UIColor lightGrayColor];
     
     return self;
 }
