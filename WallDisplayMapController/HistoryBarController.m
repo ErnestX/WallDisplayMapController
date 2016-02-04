@@ -34,18 +34,10 @@ NSMutableArray* savesArray;
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [containerController historyBarViewLoaded];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (HistoryBarView*) setUpAndReturnHistoryBar {
-    // setup layout
+- (void)loadView {
+    [super loadView];
+    
+    // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(100, 100);
@@ -53,14 +45,20 @@ NSMutableArray* savesArray;
     HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     
     self.collectionView = historyBarView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     // Register cell classes
     [self.collectionView registerClass:[HistoryBarCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // add plans into the history bar
-    [self loadSaves];
-    
-    return historyBarView;
+    //    [self loadSaves];
+}
+
+- (HistoryBarView*) getHistoryBar {
+    return self.collectionView;
 }
 
 - (void)loadSaves {

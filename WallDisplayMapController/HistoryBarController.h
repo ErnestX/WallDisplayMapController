@@ -19,6 +19,6 @@
 /*
  * set up and init the history bar (except for size), set it as the collection view, and return it.
  */
-- (HistoryBarView*) setUpAndReturnHistoryBar;
+- (HistoryBarView*) getHistoryBar;
 
 @end
