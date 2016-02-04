@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
+#import "HistoryContainerViewController.h"
 #import "HistoryBarController.h"
 #import "HistoryBarView.h"
 #import "HistoryBarCell.h"
@@ -18,35 +19,24 @@
 
 static NSString* const reuseIdentifier = @"Cell";
 
-// model for testing only
-NSMutableArray* datesArray;
-NSDateFormatter* dateFormatter;
+HistoryContainerViewController* containerController;
 
-- (instancetype) init {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init]; // TODO stub
+NSMutableArray* savesArray;
+
+
+- (instancetype) initWithContainerController: (HistoryContainerViewController*) hcvc {
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
+    
+    containerController = hcvc;
+    savesArray = [NSMutableArray array];
+    
     return self;
-}
-
-- (HistoryBarView*) setUpAndReturnHistoryBar {
-    UICollectionViewLayout *layout = self.collectionViewLayout;
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
-    
-    self.collectionView = historyBarView;
-    
-    return historyBarView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // setup testing model
-    datesArray = [NSMutableArray array];
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"hh:mm" options:0 locale:[NSLocale currentLocale]]];
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [containerController historyBarViewLoaded];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,31 +44,48 @@ NSDateFormatter* dateFormatter;
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (HistoryBarView*) setUpAndReturnHistoryBar {
+    // setup layout
+    UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.itemSize = CGSizeMake(100, 100);
+    
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+    
+    self.collectionView = historyBarView;
+    
+    // Register cell classes
+    [self.collectionView registerClass:[HistoryBarCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    
+    // add plans into the history bar
+    [self loadSaves];
+    
+    return historyBarView;
 }
-*/
+
+- (void)loadSaves {
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+    } completion:nil];
+    
+}
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+//#warning Incomplete implementation, return the number of sections
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+//#warning Incomplete implementation, return the number of items
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
     

@@ -10,4 +10,10 @@
 
 @interface HistoryContainerViewController : UIViewController
 
+/*
+ * called by historyBarController upon viewDidLoad
+ */
+
+- (void)historyBarViewLoaded;
+
 @end

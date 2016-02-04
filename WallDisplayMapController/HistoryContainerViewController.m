@@ -16,6 +16,8 @@
 
 @implementation HistoryContainerViewController
 
+HistoryBarController* historyBarController;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -24,19 +26,22 @@
     self.view = historyContainerView;
     
     // create and init historyBarController
-    HistoryBarController *historyBarController = [[HistoryBarController alloc]init]; // init is overwritted
+    historyBarController = [[HistoryBarController alloc]initWithContainerController:self]; // init is overwritted
+    
     [self addChildViewController:historyBarController];
-    
-    // ask historyBarController to create, set up, and return historyBarView
-    UICollectionView* historyBarView = [historyBarController setUpAndReturnHistoryBar];
-    
-    // give historyBarView to containerView to add it as subview and init the size
-    [historyContainerView setUpHistoryBar:historyBarView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)historyBarViewLoaded {
+    // ask historyBarController to create, set up, and return historyBarView
+    UICollectionView* historyBarView = [historyBarController setUpAndReturnHistoryBar];
+    
+    // give historyBarView to containerView to add it as subview and init the size
+    [(HistoryContainerView*)self.view setUpHistoryBar:historyBarView];
 }
 
 /*
