@@ -54,7 +54,7 @@ NSMutableArray* savesArray;
     [self.collectionView registerClass:[HistoryBarCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // add plans into the history bar
-    //    [self loadSaves];
+    [self loadSaves];
 }
 
 - (HistoryBarView*) getHistoryBar {
@@ -62,8 +62,13 @@ NSMutableArray* savesArray;
 }
 
 - (void)loadSaves {
+    
+    // stub
     [self.collectionView performBatchUpdates:^{
-        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+        for (int i = 0; i < 5; i++) {
+            [savesArray insertObject:@"hello" atIndex:0];
+            [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+        }
     } completion:nil];
     
 }
@@ -71,18 +76,15 @@ NSMutableArray* savesArray;
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-//#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of items
-    return 1;
+    return savesArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell

@@ -23,8 +23,6 @@ UIView* historyBarView;
 }
 
 - (void) setUpHistoryBar: (UIView *) historyBar {
-    NSLog(@"setting up historyBar");
-    
     historyBarView = historyBar;
     [self addSubview:historyBarView];
     
