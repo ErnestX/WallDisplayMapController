@@ -11,6 +11,8 @@
 #import "HistoryBarView.h"
 #import "HistoryBarCell.h"
 
+#define CELL_WIDTH 100
+
 @interface HistoryBarController ()
 
 @end
@@ -40,7 +42,9 @@ NSMutableArray* savesArray;
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(100, 100);
+    layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
+    layout.sectionInset = UIEdgeInsetsMake(0, 500, 0, 500); // stub: let the left and right inset be 500
+    
     
     HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     
@@ -65,7 +69,7 @@ NSMutableArray* savesArray;
     
     // stub
     [self.collectionView performBatchUpdates:^{
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             [savesArray insertObject:@"hello" atIndex:0];
             [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
         }

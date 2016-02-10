@@ -31,6 +31,12 @@ UIView* historyBarView;
                                       self.frame.origin.y,
                                       self.frame.size.width,
                                       HISTORY_BAR_HEIGHT);
+    
+    // draw the selection pointer
+    UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
+    [self addSubview:pointer];
+    pointer.backgroundColor = [UIColor redColor];
+    pointer.center = CGPointMake(historyBarView.frame.size.width / 2, historyBarView.frame.size.height);
 }
 
 @end
