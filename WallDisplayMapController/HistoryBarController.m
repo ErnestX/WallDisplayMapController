@@ -44,6 +44,8 @@ NSMutableArray* savesArray;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
     layout.sectionInset = UIEdgeInsetsMake(0, 500, 0, 500); // stub: let the left and right inset be 500
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
     
     
     HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];

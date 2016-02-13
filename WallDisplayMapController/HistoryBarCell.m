@@ -13,6 +13,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor whiteColor];
+    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderWidth = 1.0; // this is inset
     return self;
 }
 

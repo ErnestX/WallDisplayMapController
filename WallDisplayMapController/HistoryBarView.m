@@ -37,7 +37,6 @@ NSTimer* timer;
     self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 20, 0);\
 }
 
-// this timer mechanism is not working properly. refactor using current system time. 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     NSLog(@"Dragging ends");
     
@@ -53,21 +52,6 @@ NSTimer* timer;
     } else {
         [self snapToClosestCell];
     }
-    
-//    if (decelerate) {
-////        [timer invalidate];
-//        lastScrollOffset = self.contentOffset; // init tracking var
-//        timer = [NSTimer scheduledTimerWithTimeInterval:SCROLL_SPEED_TRACKING_INTERVAL
-//                                                 target:self
-//                                               selector:@selector(speedTimerTick)
-//                                               userInfo:nil
-//                                                repeats:YES];
-//    } else {
-//        // else, snap.
-//        [timer invalidate];
-//        NSLog(@"not decelerating");
-//        [self snapToClosestCell];
-//    }
 }
 
 
@@ -86,46 +70,22 @@ NSTimer* timer;
  */
 - (void)trackSpeedAndSnap {
     if (trackingSpeed) {
-//        NSLog(@"tracking speed");
-//        if (self.decelerating) {
-            // measure speed
-            NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-            NSTimeInterval timeDiff = currentTime - lastTrackedTime;
-            float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
+        // measure speed
+        NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
+        NSTimeInterval timeDiff = currentTime - lastTrackedTime;
+        float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
             
-            if (timeDiff > 0.05 && distanceScrolled / timeDiff < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
-                // too slow: stop tracking
-                trackingSpeed = false;
-                // snap
-                [self snapToClosestCell];
-            }
-//        } else {
-//            NSLog(@"stopped");
-//            // stop tracking
-//            trackingSpeed = false;
-//            // snap
-//            [self snapToClosestCell];
-//        }
+        if (timeDiff > 0.05 && distanceScrolled / timeDiff < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
+            // too slow: stop tracking
+            trackingSpeed = false;
+            // snap
+            [self snapToClosestCell];
+        }
         
         lastScrollOffset = self.contentOffset;
         lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
     }
 }
-
-//- (void)speedTimerTick {
-//    CGPoint currentScrollOffset = self.contentOffset;
-//    float distanceScrolled = currentScrollOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
-//    NSLog(@"%f",distanceScrolled);
-//    if (fabsf(distanceScrolled) < MIN_SCROLL_SPEED_BEFORE_SNAPING * SCROLL_SPEED_TRACKING_INTERVAL) {
-//        // speed slow: snap
-//        [timer invalidate];
-//        [self snapToClosestCell];
-//    } else {
-//        // speed fast: update var and keep tracking
-//        lastScrollOffset = currentScrollOffset;
-//    }
-//    
-//}
 
 - (void)snapToClosestCell {
     NSLog(@"snapToClosestCell");
