@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryBarView : UICollectionView
+@interface HistoryBarView : UICollectionView <UICollectionViewDelegate>
 
 @end
