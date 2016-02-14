@@ -8,13 +8,12 @@
 
 #import "HistoryBarView.h"
 #define SCROLL_SPEED_TRACKING_INTERVAL 0.1
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 20
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 50
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
 bool trackingSpeed;
-NSTimer* timer;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -34,7 +33,7 @@ NSTimer* timer;
     [super setFrame:frame];
     
     // move the scroll bar to the top
-    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 20, 0);\
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 10, 0);\
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -60,6 +59,7 @@ NSTimer* timer;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSLog(@"end decelerating");
     [self snapToClosestCell];
 }
 
@@ -89,10 +89,22 @@ NSTimer* timer;
 
 - (void)snapToClosestCell {
     NSLog(@"snapToClosestCell");
-//    // for testing only
-//    [UIView animateWithDuration:3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-//        [self setContentOffset:CGPointMake(200, 0)];
-//    } completion:nil];
+
+    NSIndexPath* indexOfCenterCell = [self indexPathForItemAtPoint:CGPointMake(self.center.x + self.contentOffset.x,
+                                                                               self.center.y + self.contentOffset.y)];
+    
+    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
+    float realXPos = attributes.center.x - self.contentOffset.x;
+    float distanceToScroll = realXPos - self.center.x;
+
+//    NSLog(@"Section: %d, Row: %d", indexOfCenterCell.section, indexOfCenterCell.row);
+//    NSLog(@"%f", attributes.center.x);
+
+    CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
+    
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [self setContentOffset:newContentOffset];
+    } completion:nil];
 }
 
 @end

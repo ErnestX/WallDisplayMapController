@@ -79,6 +79,10 @@ NSMutableArray* savesArray;
     
 }
 
+- (float)getCellWidth {
+    return CELL_WIDTH;
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
