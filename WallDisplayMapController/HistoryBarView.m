@@ -7,8 +7,10 @@
 //
 
 #import "HistoryBarView.h"
-#define SCROLL_SPEED_TRACKING_INTERVAL 0.1
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 50
+#define SPEED_TRACK_INTERVAL 0.05
+#define SNAP_DURATION 0.8
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 150
+//#define DECELLERATION_RATE 300
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
@@ -19,7 +21,7 @@ bool trackingSpeed;
     self = [super initWithFrame:frame collectionViewLayout:layout];
     
     self.delegate = self;
-    self.decelerationRate = 100;
+    self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.backgroundColor = [UIColor lightGrayColor];
     
     lastScrollOffset = CGPointZero;
@@ -58,11 +60,6 @@ bool trackingSpeed;
     [self trackSpeedAndSnap];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"end decelerating");
-    [self snapToClosestCell];
-}
-
 /*
  * calc speed and decide whether the speed is low enough to snap
  * needs trackingSpeed = true to work
@@ -74,16 +71,22 @@ bool trackingSpeed;
         NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeDiff = currentTime - lastTrackedTime;
         float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
-            
-        if (timeDiff > 0.05 && distanceScrolled / timeDiff < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
-            // too slow: stop tracking
-            trackingSpeed = false;
-            // snap
-            [self snapToClosestCell];
-        }
+        float speed = distanceScrolled / timeDiff;
+        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
         
-        lastScrollOffset = self.contentOffset;
-        lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
+        if (timeDiff > SPEED_TRACK_INTERVAL) {
+            // check speed every SPEED_TRACK_INTERVAL secs
+            if (fabsf(speed) < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
+                // too slow: stop tracking
+                trackingSpeed = false;
+                // snap
+                NSLog(@"slow enough to snap");
+                [self snapToClosestCell];
+            }
+            // reset only after each speed check
+            lastScrollOffset = self.contentOffset;
+            lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
+        }
     }
 }
 
@@ -92,19 +95,30 @@ bool trackingSpeed;
 
     NSIndexPath* indexOfCenterCell = [self indexPathForItemAtPoint:CGPointMake(self.center.x + self.contentOffset.x,
                                                                                self.center.y + self.contentOffset.y)];
-    
+    if (!indexOfCenterCell) {
+        if (self.contentOffset.x < 0) {
+            indexOfCenterCell = [NSIndexPath indexPathForItem:0 inSection:0];
+        } else {
+            indexOfCenterCell = [NSIndexPath indexPathForItem:[self numberOfItemsInSection:0]-1 inSection:0];
+        }
+    }
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
-
-//    NSLog(@"Section: %d, Row: %d", indexOfCenterCell.section, indexOfCenterCell.row);
-//    NSLog(@"%f", attributes.center.x);
-
+        
+        //    NSLog(@"Section: %d, Row: %d", indexOfCenterCell.section, indexOfCenterCell.row);
+        //    NSLog(@"%f", attributes.center.x);
+        
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
-    
-    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [self setContentOffset:newContentOffset];
-    } completion:nil];
+
+        // stops the deceleration
+//        [self setContentOffset:self.contentOffset animated:NO];
+        
+        // animate snapping
+//    [UIView animateWithDuration:SNAP_DURATION delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+//        [UIView animateWithDuration:SNAP_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self setContentOffset:newContentOffset animated:YES];
+//    } completion:nil];
 }
 
 @end
