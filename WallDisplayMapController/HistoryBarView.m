@@ -8,9 +8,7 @@
 
 #import "HistoryBarView.h"
 #define SPEED_TRACK_INTERVAL 0.05
-#define SNAP_DURATION 0.8
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 150
-//#define DECELLERATION_RATE 300
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 40
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
@@ -21,7 +19,7 @@ bool trackingSpeed;
     self = [super initWithFrame:frame collectionViewLayout:layout];
     
     self.delegate = self;
-    self.decelerationRate = UIScrollViewDecelerationRateFast;
+    self.decelerationRate = UIScrollViewDecelerationRateNormal;
     self.backgroundColor = [UIColor lightGrayColor];
     
     lastScrollOffset = CGPointZero;
@@ -35,7 +33,7 @@ bool trackingSpeed;
     [super setFrame:frame];
     
     // move the scroll bar to the top
-    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 10, 0);\
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 6, 0);\
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -72,7 +70,7 @@ bool trackingSpeed;
         NSTimeInterval timeDiff = currentTime - lastTrackedTime;
         float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
         float speed = distanceScrolled / timeDiff;
-        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
+//        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
         
         if (timeDiff > SPEED_TRACK_INTERVAL) {
             // check speed every SPEED_TRACK_INTERVAL secs
@@ -102,23 +100,18 @@ bool trackingSpeed;
             indexOfCenterCell = [NSIndexPath indexPathForItem:[self numberOfItemsInSection:0]-1 inSection:0];
         }
     }
+    
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
         
-        //    NSLog(@"Section: %d, Row: %d", indexOfCenterCell.section, indexOfCenterCell.row);
-        //    NSLog(@"%f", attributes.center.x);
-        
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
 
-        // stops the deceleration
-//        [self setContentOffset:self.contentOffset animated:NO];
-        
-        // animate snapping
-//    [UIView animateWithDuration:SNAP_DURATION delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-//        [UIView animateWithDuration:SNAP_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self setContentOffset:newContentOffset animated:YES];
-//    } completion:nil];
+    [self setContentOffset:newContentOffset animated:YES];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    // TODO
 }
 
 @end
