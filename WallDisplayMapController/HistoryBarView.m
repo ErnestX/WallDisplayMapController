@@ -7,17 +7,13 @@
 //
 
 #import "HistoryBarView.h"
-#define SPEED_TRACK_INTERVAL 0.05 // sampling frequency for speed calculation. Free to modify
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 100
-#define SNAP_RANGE 5
+#define SPEED_TRACK_INTERVAL 0.05
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 40
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
 bool trackingSpeed;
-bool snapping;
-float cellWidth;
-float sectionInsetLeft;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -26,14 +22,9 @@ float sectionInsetLeft;
     self.decelerationRate = UIScrollViewDecelerationRateNormal;
     self.backgroundColor = [UIColor lightGrayColor];
     
-    // TODO: refactor, get these from the controller
-    cellWidth = 100;
-    sectionInsetLeft = 500;
-    
     lastScrollOffset = CGPointZero;
     lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
     trackingSpeed = false;
-    snapping = false;
     
     return self;
 }
@@ -43,10 +34,6 @@ float sectionInsetLeft;
     
     // move the scroll bar to the top
     self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 6, 0);\
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    snapping = false;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -68,18 +55,7 @@ float sectionInsetLeft;
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (snapping) {
-        // to improve performance, use the dimension info instead of doing hit test
-        float positionWithinCenterCell = fmodf((scrollView.contentOffset.x - sectionInsetLeft), cellWidth);
-        if (positionWithinCenterCell < cellWidth/2 + SNAP_RANGE && positionWithinCenterCell > cellWidth/2 - SNAP_RANGE) {
-            // within range, snap
-            NSLog(@"snapppp!");
-            snapping = false;
-            [scrollView setContentOffset:scrollView.contentOffset animated:NO];
-        }
-    } else {
-        [self trackSpeedAndSnap];
-    }
+    [self trackSpeedAndSnap];
 }
 
 /*
@@ -94,7 +70,7 @@ float sectionInsetLeft;
         NSTimeInterval timeDiff = currentTime - lastTrackedTime;
         float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
         float speed = distanceScrolled / timeDiff;
-        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
+//        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
         
         if (timeDiff > SPEED_TRACK_INTERVAL) {
             // check speed every SPEED_TRACK_INTERVAL secs
@@ -103,8 +79,7 @@ float sectionInsetLeft;
                 trackingSpeed = false;
                 // snap
                 NSLog(@"slow enough to snap");
-                snapping = true;
-//                [self snapToClosestCell];
+                [self snapToClosestCell];
             }
             // reset only after each speed check
             lastScrollOffset = self.contentOffset;
