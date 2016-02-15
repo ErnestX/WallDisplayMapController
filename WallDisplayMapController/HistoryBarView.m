@@ -9,15 +9,15 @@
 #import "HistoryBarView.h"
 #import <pop/POP.h>
 
-#define SPEED_TRACK_INTERVAL 0.05
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 40
+#define SPEED_TRACK_INTERVAL 0.03
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 80
 
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
 bool readyToSnap;
-POPBasicAnimation* snappingAnimaiton;
+POPSpringAnimation* snappingAnimaiton;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -179,11 +179,14 @@ POPBasicAnimation* snappingAnimaiton;
 }
 
 - (void)snapToOffset:(CGPoint)offset {
-    snappingAnimaiton = [POPBasicAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
-    snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-    snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
+    snappingAnimaiton = [POPSpringAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
+    //snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    //snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
     snappingAnimaiton.toValue = [NSValue valueWithCGPoint:offset];
-    snappingAnimaiton.duration = 1.2;
+    snappingAnimaiton.springBounciness = 0;
+    snappingAnimaiton.springSpeed = 1;
+    snappingAnimaiton.velocity = [NSValue valueWithCGPoint:CGPointMake(MIN_SCROLL_SPEED_BEFORE_SNAPING, 0)];
+//    snappingAnimaiton.duration = 1.2;
     [self pop_addAnimation:snappingAnimaiton forKey:@"snap"];
 }
 
