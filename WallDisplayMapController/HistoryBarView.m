@@ -10,13 +10,13 @@
 #import <pop/POP.h>
 
 #define SPEED_TRACK_INTERVAL 0.05
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 30
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 50
 
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
-bool trackingSpeed;
+bool readyToSnap;
 POPBasicAnimation* snappingAnimaiton;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
@@ -28,7 +28,7 @@ POPBasicAnimation* snappingAnimaiton;
     
     lastScrollOffset = CGPointZero;
     lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
-    trackingSpeed = false;
+    readyToSnap = false;
     
     return self;
 }
@@ -49,7 +49,7 @@ POPBasicAnimation* snappingAnimaiton;
         lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
         
         // start speed tracking
-        trackingSpeed = true;
+        readyToSnap = true;
         
         [self trackSpeedAndSnap];
     } else {
@@ -68,7 +68,7 @@ POPBasicAnimation* snappingAnimaiton;
  * also needs initialization of lastTrackedTime and lastScrollOffset before being called and after the deceleration taking place
  */
 - (void)trackSpeedAndSnap {
-    if (trackingSpeed) {
+    if (readyToSnap) {
         // measure speed
         NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeDiff = currentTime - lastTrackedTime;
@@ -80,7 +80,7 @@ POPBasicAnimation* snappingAnimaiton;
             // check speed every SPEED_TRACK_INTERVAL secs
             if (fabsf(speed) < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
                 // too slow: stop tracking
-                trackingSpeed = false;
+                readyToSnap = false;
                 // snap
                 NSLog(@"slow enough to snap");
                 [self snapToClosestCell];
@@ -89,6 +89,18 @@ POPBasicAnimation* snappingAnimaiton;
             lastScrollOffset = self.contentOffset;
             lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
         }
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSLog(@"touches began");
+    readyToSnap = false;
+    [snappingAnimaiton pop_removeAllAnimations];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (readyToSnap) {
+        [self snapToClosestCell];
     }
 }
 
@@ -105,27 +117,24 @@ POPBasicAnimation* snappingAnimaiton;
         }
     }
     
-    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
+    [self snapToCellAtIndexPath:indexOfCenterCell];
+}
+
+- (void)snapToCellAtIndexPath:(NSIndexPath*) index {
+    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:index];
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
     
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
-    
+    [self snapToOffset:newContentOffset];
+}
+
+- (void)snapToOffset:(CGPoint)offset {
     snappingAnimaiton = [POPBasicAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
     snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
-    snappingAnimaiton.toValue = [NSValue valueWithCGPoint:newContentOffset];
+    snappingAnimaiton.toValue = [NSValue valueWithCGPoint:offset];
     [self pop_addAnimation:snappingAnimaiton forKey:@"snap"];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSLog(@"touches began");
-    trackingSpeed = false;
-    [snappingAnimaiton pop_removeAllAnimations];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    // TODO
 }
 
 @end
