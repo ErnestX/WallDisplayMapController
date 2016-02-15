@@ -10,7 +10,7 @@
 #import <pop/POP.h>
 
 #define SPEED_TRACK_INTERVAL 0.05
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 50
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 80
 
 
 @implementation HistoryBarView
@@ -83,7 +83,11 @@ POPBasicAnimation* snappingAnimaiton;
                 readyToSnap = false;
                 // snap
                 NSLog(@"slow enough to snap");
-                [self snapToClosestCell];
+                if (speed > 0) {
+                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
+                } else {
+                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
+                }
             }
             // reset only after each speed check
             lastScrollOffset = self.contentOffset;
@@ -95,29 +99,73 @@ POPBasicAnimation* snappingAnimaiton;
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSLog(@"touches began");
     readyToSnap = false;
-    [snappingAnimaiton pop_removeAllAnimations];
+    [self pop_removeAllAnimations];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (readyToSnap) {
+        NSLog(@"ended decelerating and snap");
         [self snapToClosestCell];
     }
 }
 
-- (void)snapToClosestCell {
-    NSLog(@"snapToClosestCell");
+- (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight {
+    NSLog(@"snapToNextCell");
+    NSIndexPath* indexOfNextCell;
+    NSIndexPath* indexOfCenterCell = [self getIndexPathOfCenterCell];
+    
+    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
+    float realXPos = attributes.center.x - self.contentOffset.x;
+    float distance = realXPos - self.center.x;
 
+    if (scrollingRight) {
+        if (distance < 0) {
+            // already past the center. go next
+            indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item + 1 inSection:indexOfCenterCell.section];
+        } else {
+            indexOfNextCell = indexOfCenterCell;
+        }
+    } else {
+        if (distance > 0) {
+            // already past the center. go next
+            indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item - 1 inSection:indexOfCenterCell.section];
+        } else {
+            indexOfNextCell = indexOfCenterCell;
+        }
+    }
+    
+    // make sure the index is valid
+    if (indexOfNextCell.item > [self numberOfItemsInSection:0] - 1 || indexOfNextCell.item < 0) {
+        // the center cell is the last/first cell!
+        indexOfNextCell = indexOfCenterCell;
+    }
+    NSAssert(indexOfNextCell, @"indexOfNextCell is nil");
+    
+    [self snapToCellAtIndexPath:indexOfNextCell];
+}
+
+- (void)snapToClosestCell {
+    [self snapToCellAtIndexPath:[self getIndexPathOfCenterCell]];
+}
+
+/*
+ * return the index path for the cell at the center of the collection view by hit testing
+ * guaranteed to return a valid cell except there's no cell in the collection view
+ */
+- (NSIndexPath*)getIndexPathOfCenterCell {
+    NSLog(@"snapToClosestCell");
     NSIndexPath* indexOfCenterCell = [self indexPathForItemAtPoint:CGPointMake(self.center.x + self.contentOffset.x,
                                                                                self.center.y + self.contentOffset.y)];
-    if (!indexOfCenterCell) {
-        if (self.contentOffset.x < 0) {
+    if (!indexOfCenterCell && [self numberOfItemsInSection:0]!= 0) {
+        if (self.contentOffset.x <= 0) {
             indexOfCenterCell = [NSIndexPath indexPathForItem:0 inSection:0];
         } else {
             indexOfCenterCell = [NSIndexPath indexPathForItem:[self numberOfItemsInSection:0]-1 inSection:0];
         }
     }
+    NSAssert(indexOfCenterCell, @"indexOfCenterCell is nil");
     
-    [self snapToCellAtIndexPath:indexOfCenterCell];
+    return indexOfCenterCell;
 }
 
 - (void)snapToCellAtIndexPath:(NSIndexPath*) index {
@@ -134,6 +182,7 @@ POPBasicAnimation* snappingAnimaiton;
     snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
     snappingAnimaiton.toValue = [NSValue valueWithCGPoint:offset];
+    snappingAnimaiton.duration = 0.8;
     [self pop_addAnimation:snappingAnimaiton forKey:@"snap"];
 }
 
