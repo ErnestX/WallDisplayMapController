@@ -7,8 +7,11 @@
 //
 
 #import "HistoryBarView.h"
+#import <pop/POP.h>
+
 #define SPEED_TRACK_INTERVAL 0.05
 #define MIN_SCROLL_SPEED_BEFORE_SNAPING 40
+
 
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
