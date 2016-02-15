@@ -107,10 +107,16 @@ bool trackingSpeed;
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
-        
+    
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
+    
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    anim.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
+    anim.toValue = [NSValue valueWithCGPoint:newContentOffset];
+    [self pop_addAnimation:anim forKey:@"snap"];
 
-    [self setContentOffset:newContentOffset animated:YES];
+//    [self setContentOffset:newContentOffset animated:YES];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
