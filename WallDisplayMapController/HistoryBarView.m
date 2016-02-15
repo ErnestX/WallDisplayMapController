@@ -10,7 +10,7 @@
 #import <pop/POP.h>
 
 #define SPEED_TRACK_INTERVAL 0.05
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 80
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 40
 
 
 @implementation HistoryBarView
@@ -83,11 +83,12 @@ POPBasicAnimation* snappingAnimaiton;
                 readyToSnap = false;
                 // snap
                 NSLog(@"slow enough to snap");
-                if (speed > 0) {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
-                } else {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
-                }
+//                if (speed > 0) {
+//                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
+//                } else {
+//                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
+//                }
+                [self snapToClosestCell];
             }
             // reset only after each speed check
             lastScrollOffset = self.contentOffset;
@@ -179,10 +180,10 @@ POPBasicAnimation* snappingAnimaiton;
 
 - (void)snapToOffset:(CGPoint)offset {
     snappingAnimaiton = [POPBasicAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
-    snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
     snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
     snappingAnimaiton.toValue = [NSValue valueWithCGPoint:offset];
-    snappingAnimaiton.duration = 0.8;
+    snappingAnimaiton.duration = 1.2;
     [self pop_addAnimation:snappingAnimaiton forKey:@"snap"];
 }
 
