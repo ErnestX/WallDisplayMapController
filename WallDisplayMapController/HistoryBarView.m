@@ -53,7 +53,7 @@ POPCustomAnimation* snappingAnimaiton;
         
         [self trackSpeedAndSnap];
     } else {
-        [self snapToClosestCell];
+        [self snapToClosestCellWithInitialAbsSpeed:MIN_SCROLL_SPEED_BEFORE_SNAPING];
     }
 }
 
@@ -84,9 +84,9 @@ POPCustomAnimation* snappingAnimaiton;
                 // snap
                 NSLog(@"slow enough to snap");
                 if (speed > 0) {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
+                    [self snapToNextCellWithCurrentScrollDirectionRight:YES withInitialAbsSpeed:fabsf(speed)];
                 } else {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
+                    [self snapToNextCellWithCurrentScrollDirectionRight:NO withInitialAbsSpeed:fabsf(speed)];
                 }
 //                [self snapToClosestCell];
             }
@@ -106,11 +106,11 @@ POPCustomAnimation* snappingAnimaiton;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (readyToSnap) {
         NSLog(@"ended decelerating and snap");
-        [self snapToClosestCell];
+        [self snapToClosestCellWithInitialAbsSpeed:MIN_SCROLL_SPEED_BEFORE_SNAPING];
     }
 }
 
-- (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight {
+- (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight withInitialAbsSpeed:(float) speed {
     NSLog(@"snapToNextCell");
     NSIndexPath* indexOfNextCell;
     NSIndexPath* indexOfCenterCell = [self getIndexPathOfCenterCell];
@@ -142,11 +142,11 @@ POPCustomAnimation* snappingAnimaiton;
     }
     NSAssert(indexOfNextCell, @"indexOfNextCell is nil");
     
-    [self snapToCellAtIndexPath:indexOfNextCell];
+    [self snapToCellAtIndexPath:indexOfNextCell withInitialAbsSpeed:speed];
 }
 
-- (void)snapToClosestCell {
-    [self snapToCellAtIndexPath:[self getIndexPathOfCenterCell]];
+- (void)snapToClosestCellWithInitialAbsSpeed:(float)speed {
+    [self snapToCellAtIndexPath:[self getIndexPathOfCenterCell] withInitialAbsSpeed:speed];
 }
 
 /*
@@ -169,28 +169,25 @@ POPCustomAnimation* snappingAnimaiton;
     return indexOfCenterCell;
 }
 
-- (void)snapToCellAtIndexPath:(NSIndexPath*) index {
+- (void)snapToCellAtIndexPath:(NSIndexPath*) index withInitialAbsSpeed:(float) speed {
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:index];
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
     
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
-    [self snapToOffset:newContentOffset];
+    [self snapToOffset:newContentOffset withInitialAbsSpeed:speed];
 }
 
-- (void)snapToOffset:(CGPoint)offset {
+- (void)snapToOffset:(CGPoint)offset withInitialAbsSpeed:(float) originalSpeed {
     // stop scrolling animaiton
     [self setContentOffset:self.contentOffset animated:NO];
     
+    originalSpeed = fabsf(originalSpeed);
     float distance = offset.x - self.contentOffset.x;
-    __block float originalSpeed;
-    if (distance > 0) {
-        // cell move to the right
-        originalSpeed = MIN_SCROLL_SPEED_BEFORE_SNAPING;
-    } else if (distance != 0) {
-        originalSpeed = -1 * MIN_SCROLL_SPEED_BEFORE_SNAPING;
-    } else {
-        // distance = 0
+    if (distance < 0) {
+        // cell move to the left
+        originalSpeed = -1 * originalSpeed;
+    } else if(distance == 0) {
         return;
     }
     __block float v = originalSpeed;
