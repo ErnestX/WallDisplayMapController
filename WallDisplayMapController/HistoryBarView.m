@@ -179,8 +179,11 @@ POPCustomAnimation* snappingAnimaiton;
 }
 
 - (void)snapToOffset:(CGPoint)offset {
-    __block float originalSpeed;
+    // stop scrolling animaiton
+    [self setContentOffset:self.contentOffset animated:NO];
+    
     float distance = offset.x - self.contentOffset.x;
+    __block float originalSpeed;
     if (distance > 0) {
         // cell move to the right
         originalSpeed = MIN_SCROLL_SPEED_BEFORE_SNAPING;
@@ -193,12 +196,7 @@ POPCustomAnimation* snappingAnimaiton;
     __block float v = originalSpeed;
     
     // acceleration should be of the opposite sign to speed
-    __block float acc;
-//    if (v > 0) {
-        acc = -1 * powf(v, 2.0) / (2 * distance);
-//    } else {
-//        acc = powf(v, 2.0) / (2 * distance);
-//    }
+    __block float acc = -1 * powf(v, 2.0) / (2 * distance);
 
     __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
     
