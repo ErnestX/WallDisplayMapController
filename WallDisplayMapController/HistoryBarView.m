@@ -9,6 +9,7 @@
 #import "HistoryBarView.h"
 #import <pop/POP.h>
 
+#define SCROLL_BAR_POS_FROM_TOP 6
 #define SPEED_TRACK_INTERVAL 0.03
 #define MIN_SCROLL_SPEED_BEFORE_SNAPING 85
 
@@ -39,7 +40,7 @@ POPCustomAnimation* snappingAnimaiton;
     [super setFrame:frame];
     
     // move the scroll bar to the top
-    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 6, 0);\
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - SCROLL_BAR_POS_FROM_TOP, 0);
 }
 
 #pragma mark - Scrolling Control
