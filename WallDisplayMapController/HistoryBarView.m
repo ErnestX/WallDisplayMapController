@@ -10,7 +10,7 @@
 #import <pop/POP.h>
 
 #define SPEED_TRACK_INTERVAL 0.03
-#define MIN_SCROLL_SPEED_BEFORE_SNAPING 80
+#define MIN_SCROLL_SPEED_BEFORE_SNAPING 85
 
 
 @implementation HistoryBarView
@@ -198,12 +198,11 @@ POPCustomAnimation* snappingAnimaiton;
     __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
     
     snappingAnimaiton = [POPCustomAnimation animationWithBlock:^BOOL(id obj, POPCustomAnimation *animation) {
-        NSLog(@"speed: %f", v);
-        
         NSTimeInterval currentTimeStamp = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
         
         float distanceThisFrame = timeLapse * v;
+        NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
         
         // update content offset
         self.contentOffset = CGPointMake(self.contentOffset.x + distanceThisFrame, 0);
