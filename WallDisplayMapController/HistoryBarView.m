@@ -179,6 +179,11 @@ POPCustomAnimation* snappingAnimaiton;
     float realXPos = attributes.center.x - self.contentOffset.x;
     float distanceToScroll = realXPos - self.center.x;
     
+    if ((index.item == 0 && distanceToScroll > 0) ||
+        (index.item == [self numberOfItemsInSection:0]-1 && distanceToScroll < 0)) {
+        // don't scroll from the edges. Will interefere with built-in rubber band animaiton
+        return;
+    }
     CGPoint newContentOffset = CGPointMake(self.contentOffset.x + distanceToScroll, 0);
     [self snapToOffset:newContentOffset withInitialAbsSpeed:speed];
 }
