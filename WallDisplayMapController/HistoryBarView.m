@@ -11,7 +11,6 @@
 
 #define SPEED_TRACK_INTERVAL 0.03
 #define MIN_SCROLL_SPEED_BEFORE_SNAPING 85
-#define DECAY_CONST 0.90
 
 
 @implementation HistoryBarView
@@ -194,33 +193,27 @@ POPCustomAnimation* snappingAnimaiton;
     __block float v = originalSpeed;
     
     // acceleration should be of the opposite sign to speed
-//    __block float acc = -1 * powf(v, 2.0) / (2 * distance);
-    
-    __block float decayConst = powf(10, originalSpeed/distance);
-    NSLog(@"decay const: %f", decayConst);
-    
-    __block NSTimeInterval initialTimeStamp = [NSDate timeIntervalSinceReferenceDate];
-    __block NSTimeInterval lastTimeStamp = initialTimeStamp;
+    __block float acc = -1 * powf(v, 2.0) / (2 * distance);
+
+    __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
     
     snappingAnimaiton = [POPCustomAnimation animationWithBlock:^BOOL(id obj, POPCustomAnimation *animation) {
         NSTimeInterval currentTimeStamp = [NSDate timeIntervalSinceReferenceDate];
-        NSTimeInterval timeLapseSinceBeginning = currentTimeStamp - initialTimeStamp;
-        NSTimeInterval timeLapseThisFrame = currentTimeStamp - lastTimeStamp;
+        NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
         
-        // update speed
-        v = originalSpeed * powf(decayConst, -1 * timeLapseSinceBeginning);
-        
-        float distanceThisFrame = timeLapseThisFrame * v;
+        float distanceThisFrame = timeLapse * v;
         NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
         
         // update content offset
         self.contentOffset = CGPointMake(self.contentOffset.x + distanceThisFrame, 0);
         
+        // decelerate speed
+        v += acc * timeLapse;
         // update time stamp
         lastTimeStamp = currentTimeStamp;
         
-        if (fabsf(v) < 2) {
-            // animation stop
+        if (v * originalSpeed <= 0) {
+            // sign changed. animation stopped
             return NO;
         } else {
             // not there yet
