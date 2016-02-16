@@ -17,7 +17,7 @@
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
 bool readyToSnap;
-POPSpringAnimation* snappingAnimaiton;
+POPCustomAnimation* snappingAnimaiton;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -83,12 +83,12 @@ POPSpringAnimation* snappingAnimaiton;
                 readyToSnap = false;
                 // snap
                 NSLog(@"slow enough to snap");
-//                if (speed > 0) {
-//                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
-//                } else {
-//                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
-//                }
-                [self snapToClosestCell];
+                if (speed > 0) {
+                    [self snapToNextCellWithCurrentScrollDirectionRight:YES];
+                } else {
+                    [self snapToNextCellWithCurrentScrollDirectionRight:NO];
+                }
+//                [self snapToClosestCell];
             }
             // reset only after each speed check
             lastScrollOffset = self.contentOffset;
@@ -179,14 +179,56 @@ POPSpringAnimation* snappingAnimaiton;
 }
 
 - (void)snapToOffset:(CGPoint)offset {
-    snappingAnimaiton = [POPSpringAnimation animationWithPropertyNamed:kPOPCollectionViewContentOffset];
-    //snappingAnimaiton.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-    //snappingAnimaiton.fromValue = [NSValue valueWithCGPoint:self.contentOffset];
-    snappingAnimaiton.toValue = [NSValue valueWithCGPoint:offset];
-    snappingAnimaiton.springBounciness = 0;
-    snappingAnimaiton.springSpeed = 1;
-    snappingAnimaiton.velocity = [NSValue valueWithCGPoint:CGPointMake(MIN_SCROLL_SPEED_BEFORE_SNAPING, 0)];
-//    snappingAnimaiton.duration = 1.2;
+    __block float originalSpeed;
+    float distance = offset.x - self.contentOffset.x;
+    if (distance > 0) {
+        // cell move to the right
+        originalSpeed = MIN_SCROLL_SPEED_BEFORE_SNAPING;
+    } else if (distance != 0) {
+        originalSpeed = -1 * MIN_SCROLL_SPEED_BEFORE_SNAPING;
+    } else {
+        // distance = 0
+        return;
+    }
+    __block float v = originalSpeed;
+    
+    // acceleration should be of the opposite sign to speed
+    __block float acc;
+//    if (v > 0) {
+        acc = -1 * powf(v, 2.0) / (2 * distance);
+//    } else {
+//        acc = powf(v, 2.0) / (2 * distance);
+//    }
+
+    __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
+    
+    snappingAnimaiton = [POPCustomAnimation animationWithBlock:^BOOL(id obj, POPCustomAnimation *animation) {
+        NSLog(@"speed: %f", v);
+        
+        NSTimeInterval currentTimeStamp = [NSDate timeIntervalSinceReferenceDate];
+        NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
+        
+        float distanceThisFrame = timeLapse * v;
+        
+        // update content offset
+        self.contentOffset = CGPointMake(self.contentOffset.x + distanceThisFrame, 0);
+        
+        // decelerate speed
+        v += acc * timeLapse;
+        // update time stamp
+        lastTimeStamp = currentTimeStamp;
+        
+        if (v * originalSpeed <= 0) {
+            // sign changed. animation stopped
+            return NO;
+        } else {
+            // not there yet
+            return YES;
+        }
+    }];
+    
+    [snappingAnimaiton setCompletionBlock:nil]; // TODO
+
     [self pop_addAnimation:snappingAnimaiton forKey:@"snap"];
 }
 
