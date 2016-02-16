@@ -15,6 +15,8 @@
 
 
 @implementation HistoryBarView
+
+id<HistoryBarViewMyDelegate> myDelegate;
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
 BOOL readyToSnap;
@@ -22,10 +24,11 @@ POPCustomAnimation* snappingAnimaiton;
 
 #pragma mark - Init & Setter
 
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)d {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     
     self.delegate = self;
+    myDelegate = d;
     self.decelerationRate = UIScrollViewDecelerationRateNormal;
     self.backgroundColor = [UIColor lightGrayColor];
     
@@ -65,6 +68,8 @@ POPCustomAnimation* snappingAnimaiton;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self trackSpeedAndSnap];
+    
+    [myDelegate cellCenteredByIndex:[self getIndexPathOfCenterCell]];
 }
 
 /*
@@ -152,6 +157,7 @@ POPCustomAnimation* snappingAnimaiton;
 }
 
 - (void)snapToClosestCellWithInitialAbsSpeed:(float)speed {
+    NSLog(@"snapToClosestCell");
     NSIndexPath* index = [self getIndexPathOfCenterCell];
     if (index) {
         [self snapToCellAtIndexPath:index withInitialAbsSpeed:speed];
@@ -159,11 +165,10 @@ POPCustomAnimation* snappingAnimaiton;
 }
 
 /*
- * return the index path for the cell at the center of the collection view by hit testing
+ * return the index path for the cell at the center of the collection view
  * returns nil if all the cells are at one side of the view, or there's no cell on the view
  */
 - (NSIndexPath*)getIndexPathOfCenterCell {
-    NSLog(@"snapToClosestCell");
     NSIndexPath* indexOfCenterCell = [self indexPathForItemAtPoint:CGPointMake(self.center.x + self.contentOffset.x,
                                                                                self.center.y + self.contentOffset.y)];
     return indexOfCenterCell;
@@ -202,7 +207,7 @@ POPCustomAnimation* snappingAnimaiton;
         NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
         
         float distanceThisFrame = timeLapse * v;
-        NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
+//        NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
         
         // update content offset
         self.contentOffset = CGPointMake(self.contentOffset.x + distanceThisFrame, 0);

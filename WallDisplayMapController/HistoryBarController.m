@@ -6,9 +6,7 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
-#import "HistoryContainerViewController.h"
 #import "HistoryBarController.h"
-#import "HistoryBarView.h"
 #import "HistoryBarCell.h"
 
 #define CELL_WIDTH 100
@@ -49,7 +47,7 @@ NSMutableArray* savesArray;
     layout.minimumLineSpacing = 0;
     
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -73,16 +71,21 @@ NSMutableArray* savesArray;
     // stub
     [self.collectionView performBatchUpdates:^{
         for (int i = 0; i < 50; i++) {
-            [savesArray insertObject:@"hello" atIndex:0];
+            [savesArray insertObject:@"arrayFiller" atIndex:0];
             [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
         }
     } completion:nil];
     
 }
 
-- (float)getCellWidth {
-    return CELL_WIDTH;
+- (void)cellCenteredByIndex:(NSIndexPath*) index {
+    NSLog(@"cell centered: #%d", index.item);
+    
 }
+
+//- (float)getCellWidth {
+//    return CELL_WIDTH;
+//}
 
 #pragma mark <UICollectionViewDataSource>
 

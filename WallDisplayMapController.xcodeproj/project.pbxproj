@@ -285,6 +285,7 @@
 		CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarView.m; sourceTree = "<group>"; };
 		CA4679011C62A4DB00C4D7BB /* HistoryBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarCell.h; sourceTree = "<group>"; };
 		CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarCell.m; sourceTree = "<group>"; };
+		CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarViewMyDelegate.h; sourceTree = "<group>"; };
 		CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerViewController.h; sourceTree = "<group>"; };
 		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
 		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
@@ -534,6 +535,7 @@
 				CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */,
 				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
 				CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */,
+				CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */,
 			);
 			name = HistoryViewControllers;
 			sourceTree = "<group>";

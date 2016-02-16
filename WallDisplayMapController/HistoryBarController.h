@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "HistoryBarView.h"
+#import "HistoryContainerViewController.h"
+#import "HistoryBarViewMyDelegate.h"
 
-@interface HistoryBarController : UICollectionViewController
+@interface HistoryBarController : UICollectionViewController <HistoryBarViewMyDelegate>
 
 /*
  * custom initializer
@@ -21,6 +23,6 @@
  */
 - (HistoryBarView*) getHistoryBar;
 
-- (float)getCellWidth;
+//- (float)getCellWidth;
 
 @end
