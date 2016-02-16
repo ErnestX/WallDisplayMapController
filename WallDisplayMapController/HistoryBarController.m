@@ -43,7 +43,8 @@ NSMutableArray* savesArray;
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
-    layout.sectionInset = UIEdgeInsetsMake(0, 500, 0, 500); // stub: let the left and right inset be 500
+    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2;
+    layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset); // stub: let the left and right inset be 500
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
     

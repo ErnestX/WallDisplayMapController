@@ -16,8 +16,10 @@
 @implementation HistoryBarView
 CGPoint lastScrollOffset;
 NSTimeInterval lastTrackedTime;
-bool readyToSnap;
+BOOL readyToSnap;
 POPCustomAnimation* snappingAnimaiton;
+
+#pragma mark - Init & Setter
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -39,6 +41,8 @@ POPCustomAnimation* snappingAnimaiton;
     // move the scroll bar to the top
     self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - 6, 0);\
 }
+
+#pragma mark - Scrolling Control
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     NSLog(@"Dragging ends");
@@ -114,58 +118,53 @@ POPCustomAnimation* snappingAnimaiton;
     NSLog(@"snapToNextCell");
     NSIndexPath* indexOfNextCell;
     NSIndexPath* indexOfCenterCell = [self getIndexPathOfCenterCell];
-    
-    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
-    float realXPos = attributes.center.x - self.contentOffset.x;
-    float distance = realXPos - self.center.x;
-
-    if (scrollingRight) {
-        if (distance < 0) {
-            // already past the center. go next
-            indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item + 1 inSection:indexOfCenterCell.section];
+    if (indexOfCenterCell) {
+        UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
+        float realXPos = attributes.center.x - self.contentOffset.x;
+        float distance = realXPos - self.center.x;
+        
+        if (scrollingRight) {
+            if (distance < 0) {
+                // already past the center. go next
+                indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item + 1 inSection:indexOfCenterCell.section];
+            } else {
+                indexOfNextCell = indexOfCenterCell;
+            }
         } else {
+            if (distance > 0) {
+                // already past the center. go next
+                indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item - 1 inSection:indexOfCenterCell.section];
+            } else {
+                indexOfNextCell = indexOfCenterCell;
+            }
+        }
+        
+        // make sure the index is valid
+        if (indexOfNextCell.item > [self numberOfItemsInSection:0] - 1 || indexOfNextCell.item < 0) {
+            // the center cell is the last/first cell!
             indexOfNextCell = indexOfCenterCell;
         }
-    } else {
-        if (distance > 0) {
-            // already past the center. go next
-            indexOfNextCell = [NSIndexPath indexPathForItem:indexOfCenterCell.item - 1 inSection:indexOfCenterCell.section];
-        } else {
-            indexOfNextCell = indexOfCenterCell;
-        }
+        NSAssert(indexOfNextCell, @"indexOfNextCell is nil");
+        
+        [self snapToCellAtIndexPath:indexOfNextCell withInitialAbsSpeed:speed];
     }
-    
-    // make sure the index is valid
-    if (indexOfNextCell.item > [self numberOfItemsInSection:0] - 1 || indexOfNextCell.item < 0) {
-        // the center cell is the last/first cell!
-        indexOfNextCell = indexOfCenterCell;
-    }
-    NSAssert(indexOfNextCell, @"indexOfNextCell is nil");
-    
-    [self snapToCellAtIndexPath:indexOfNextCell withInitialAbsSpeed:speed];
 }
 
 - (void)snapToClosestCellWithInitialAbsSpeed:(float)speed {
-    [self snapToCellAtIndexPath:[self getIndexPathOfCenterCell] withInitialAbsSpeed:speed];
+    NSIndexPath* index = [self getIndexPathOfCenterCell];
+    if (index) {
+        [self snapToCellAtIndexPath:index withInitialAbsSpeed:speed];
+    }
 }
 
 /*
  * return the index path for the cell at the center of the collection view by hit testing
- * guaranteed to return a valid cell except there's no cell in the collection view
+ * returns nil if all the cells are at one side of the view, or there's no cell on the view
  */
 - (NSIndexPath*)getIndexPathOfCenterCell {
     NSLog(@"snapToClosestCell");
     NSIndexPath* indexOfCenterCell = [self indexPathForItemAtPoint:CGPointMake(self.center.x + self.contentOffset.x,
                                                                                self.center.y + self.contentOffset.y)];
-    if (!indexOfCenterCell && [self numberOfItemsInSection:0]!= 0) {
-        if (self.contentOffset.x <= 0) {
-            indexOfCenterCell = [NSIndexPath indexPathForItem:0 inSection:0];
-        } else {
-            indexOfCenterCell = [NSIndexPath indexPathForItem:[self numberOfItemsInSection:0]-1 inSection:0];
-        }
-    }
-    NSAssert(indexOfCenterCell, @"indexOfCenterCell is nil");
-    
     return indexOfCenterCell;
 }
 
