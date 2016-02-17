@@ -17,19 +17,17 @@
 @end
 
 @implementation HistoryBarController
-
+{
+    UIViewController* containerController;
+    NSMutableArray* savesArray;
+}
 static NSString* const reuseIdentifier = @"Cell";
 
-HistoryContainerViewController* containerController;
-
-NSMutableArray* savesArray;
-
-
-- (instancetype) initWithContainerController: (HistoryContainerViewController*) hcvc {
+- (instancetype) initWithContainerController: (UIViewController*) hcvc {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
     
-    containerController = hcvc;
+//    containerController = hcvc;
     savesArray = [NSMutableArray array];
     
     return self;
@@ -67,12 +65,11 @@ NSMutableArray* savesArray;
     [self loadSaves];
 }
 
-- (HistoryBarView*) getHistoryBar {
-    return self.collectionView;
-}
+//- (HistoryBarView*) getHistoryBar {
+//    return self.collectionView;
+//}
 
 - (void)loadSaves {
-    
     // stub
     [self.collectionView performBatchUpdates:^{
         for (int i = 0; i < 50; i++) {
@@ -80,7 +77,6 @@ NSMutableArray* savesArray;
             [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
         }
     } completion:nil];
-    
 }
 
 - (void)setHistoryBarHeight:(float)height {

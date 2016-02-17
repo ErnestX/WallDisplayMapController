@@ -13,11 +13,12 @@
 #define TAG_VIEW_SIDE_MARGIN 2
 
 @implementation HistoryBarCell
-
-UIView* timeStampLabel;
-UIView* greyLineView;
-UIView* tagView;
-NSMutableArray <UIView*>* metricViews;
+{
+    UIView* timeStampLabel;
+    UIView* greyLineView;
+    UIView* tagView;
+    NSMutableArray <UIView*>* metricViews;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

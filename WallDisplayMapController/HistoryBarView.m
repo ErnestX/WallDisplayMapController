@@ -17,12 +17,13 @@
 
 
 @implementation HistoryBarView
-
-id<HistoryBarViewMyDelegate> myDelegate;
-CGPoint lastScrollOffset;
-NSTimeInterval lastTrackedTime;
-BOOL readyToSnap;
-POPCustomAnimation* snappingAnimaiton;
+{
+    id<HistoryBarViewMyDelegate> myDelegate;
+    CGPoint lastScrollOffset;
+    NSTimeInterval lastTrackedTime;
+    BOOL readyToSnap;
+    POPCustomAnimation* snappingAnimaiton;
+}
 
 #pragma mark - Init & Setter
 

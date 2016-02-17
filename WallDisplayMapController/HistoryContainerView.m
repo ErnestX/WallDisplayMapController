@@ -9,9 +9,10 @@
 #import "HistoryContainerView.h"
 
 @implementation HistoryContainerView
-
-UICollectionView* historyBarView;
-float historyBarOriginalHeight;
+{
+    HistoryBarController* historyBarController;
+    float historyBarOriginalHeight;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -32,28 +33,28 @@ float historyBarOriginalHeight;
 - (void)testButtonPressed:(id)sender {
     NSLog(@"test button pressed");
 //    [UIView animateWithDuration:0.5 animations:^(void){
-        historyBarView.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 500);
+    [historyBarController setHistoryBarHeight:500];
 //    }];
 }
 
 - (void)testButtonReleased:(id)sender {
 //    [UIView animateWithDuration:0.5 animations:^(void){
-        historyBarView.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 150);
+    [historyBarController setHistoryBarHeight:historyBarOriginalHeight];
 //    }];
 }
 
-- (void) setUpHistoryBar: (UICollectionView *) historyBar {
-    historyBarView = historyBar;
-    [self addSubview:historyBarView];
+- (void) setUpHistoryBar: (HistoryBarController *) hbc {
+    historyBarController = hbc;
+    [self addSubview:historyBarController.collectionView];
     
     // remeber the original height of the history bar
-    historyBarOriginalHeight = historyBar.frame.size.height;
+    historyBarOriginalHeight = historyBarController.collectionView.frame.size.height;
     
     // draw the selection pointer
     UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
     [self addSubview:pointer];
     pointer.backgroundColor = [UIColor redColor];
-    pointer.center = CGPointMake(historyBarView.frame.size.width / 2, historyBarView.frame.size.height);
+    pointer.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, historyBarOriginalHeight);
 }
 
 @end
