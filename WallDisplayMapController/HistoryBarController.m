@@ -41,7 +41,7 @@ NSMutableArray* savesArray;
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
-    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2;
+    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
     layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
@@ -102,6 +102,7 @@ NSMutableArray* savesArray;
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
+    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:nil];
     
     return cell;
 }
