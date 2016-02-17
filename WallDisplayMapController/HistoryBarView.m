@@ -8,7 +8,6 @@
 
 #import "HistoryBarView.h"
 #import <pop/POP.h>
-#import "HistoryBarViewAnimationController.h"
 
 #define CELL_WIDTH 100
 
