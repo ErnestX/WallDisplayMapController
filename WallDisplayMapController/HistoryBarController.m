@@ -47,8 +47,10 @@ NSMutableArray* savesArray;
 //    layout.minimumLineSpacing = 0;
     
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout myDelegate:self];
-    
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 150) collectionViewLayout:layout myDelegate:self];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 150)];
+    view.backgroundColor = [UIColor clearColor];
+    self.view = view;
     self.collectionView = historyBarView;
 }
 
@@ -79,7 +81,7 @@ NSMutableArray* savesArray;
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
-    NSLog(@"cell centered: #%d", index.item);
+//    NSLog(@"cell centered: #%d", index.item);
 }
 
 #pragma mark <UICollectionViewDataSource>

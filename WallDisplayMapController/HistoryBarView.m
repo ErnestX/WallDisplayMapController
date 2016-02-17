@@ -59,7 +59,7 @@ POPCustomAnimation* snappingAnimaiton;
 
 - (void)resetLayoutItemSizeAndInset {
     // adjust the size of all cells
-    ((UICollectionViewFlowLayout*)self.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, self.frame.size.height - 20);
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, self.frame.size.height);
     float sideInset = self.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
     ((UICollectionViewFlowLayout*)self.collectionViewLayout).sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
 }
