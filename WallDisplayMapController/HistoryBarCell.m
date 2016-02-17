@@ -27,14 +27,14 @@ NSMutableArray <UIView*>* metricViews;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     // add the grey line
-    greyLineView = [[UIView alloc]initWithFrame:CGRectMake(self.center.x - GREY_LINE_THICKNESS/2, 0, GREY_LINE_THICKNESS, self.frame.size.height)];
+    greyLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentView.center.x - GREY_LINE_THICKNESS/2, 0, GREY_LINE_THICKNESS, self.contentView.frame.size.height)];
     greyLineView.backgroundColor = [UIColor lightGrayColor];
-    [self addSubview:greyLineView];
+    [self.contentView addSubview:greyLineView];
     
     // add the tag view
-    tagView = [[UIView alloc]initWithFrame:CGRectMake(TAG_VIEW_SIDE_MARGIN, self.frame.size.height - TIMESTAMP_HEIGHT - TAG_VIEW_HEIGHT, self.frame.size.width - TAG_VIEW_SIDE_MARGIN*2, TAG_VIEW_HEIGHT)];
+    tagView = [[UIView alloc]initWithFrame:CGRectMake(TAG_VIEW_SIDE_MARGIN, self.contentView.frame.size.height - TIMESTAMP_HEIGHT - TAG_VIEW_HEIGHT, self.contentView.frame.size.width - TAG_VIEW_SIDE_MARGIN*2, TAG_VIEW_HEIGHT)];
     tagView.backgroundColor = [UIColor lightGrayColor];
-    [self addSubview:tagView];
+    [self.contentView addSubview:tagView];
     
     return self;
 }
