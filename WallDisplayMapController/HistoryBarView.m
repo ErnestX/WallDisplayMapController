@@ -9,6 +9,8 @@
 #import "HistoryBarView.h"
 #import <pop/POP.h>
 
+#define CELL_WIDTH 100
+
 #define SCROLL_BAR_POS_FROM_TOP 6
 #define SPEED_TRACK_INTERVAL 0.03
 #define MIN_SCROLL_SPEED_BEFORE_SNAPING 85 // for some reason this seems to slighly affect the centering of the mark
@@ -27,6 +29,13 @@ POPCustomAnimation* snappingAnimaiton;
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)d {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, self.frame.size.height);
+    float sideInset = self.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).minimumInteritemSpacing = 0;
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).minimumLineSpacing = 0;
+    
     self.delegate = self;
     myDelegate = d;
     self.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -41,10 +50,19 @@ POPCustomAnimation* snappingAnimaiton;
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    NSLog(@"frame set to %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     
+    // adjust the size of all cells
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, frame.size.height);
+    float sideInset = self.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
+    // update layout
+    [self performBatchUpdates:nil completion:nil];
     // move the scroll bar to the top
     self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - SCROLL_BAR_POS_FROM_TOP, 0);
 }
+
+
 
 #pragma mark - Scrolling Control
 

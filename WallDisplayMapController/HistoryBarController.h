@@ -23,6 +23,4 @@
  */
 - (HistoryBarView*) getHistoryBar;
 
-//- (float)getCellWidth;
-
 @end

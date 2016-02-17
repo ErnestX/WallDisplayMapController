@@ -9,7 +9,7 @@
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
 
-#define CELL_WIDTH 100
+//#define CELL_WIDTH 100
 
 @interface HistoryBarController ()
 
@@ -39,12 +39,12 @@ NSMutableArray* savesArray;
     
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
-    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
-    layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
-    layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 0;
+//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
+//    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+//    layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
+//    layout.minimumInteritemSpacing = 0;
+//    layout.minimumLineSpacing = 0;
     
     
     HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectZero collectionViewLayout:layout myDelegate:self];
@@ -80,12 +80,7 @@ NSMutableArray* savesArray;
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
     NSLog(@"cell centered: #%d", index.item);
-    
 }
-
-//- (float)getCellWidth {
-//    return CELL_WIDTH;
-//}
 
 #pragma mark <UICollectionViewDataSource>
 
