@@ -31,9 +31,6 @@
     
     [self addChildViewController:historyBarController];
     
-//    // ask historyBarController to create, set up, and return historyBarView
-//    UICollectionView* historyBarView = [historyBarController getHistoryBar];
-    
     // give historyBarView to containerView to add it as subview and init the size
     [(HistoryContainerView*)self.view setUpHistoryBar:historyBarController];
 }

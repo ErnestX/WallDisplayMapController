@@ -32,15 +32,15 @@
 
 - (void)testButtonPressed:(id)sender {
     NSLog(@"test button pressed");
-//    [UIView animateWithDuration:0.5 animations:^(void){
-    [historyBarController setHistoryBarHeight:500];
-//    }];
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [historyBarController setHistoryBarHeight:500];
+    }];
 }
 
 - (void)testButtonReleased:(id)sender {
-//    [UIView animateWithDuration:0.5 animations:^(void){
-    [historyBarController setHistoryBarHeight:historyBarOriginalHeight];
-//    }];
+    [UIView animateWithDuration:0.5 animations:^(void){
+        [historyBarController setHistoryBarHeight:historyBarOriginalHeight];
+    }];
 }
 
 - (void) setUpHistoryBar: (HistoryBarController *) hbc {

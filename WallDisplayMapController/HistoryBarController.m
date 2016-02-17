@@ -27,7 +27,7 @@ static NSString* const reuseIdentifier = @"Cell";
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
     
-//    containerController = hcvc;
+    containerController = hcvc;
     savesArray = [NSMutableArray array];
     
     return self;
@@ -64,10 +64,6 @@ static NSString* const reuseIdentifier = @"Cell";
     // add plans into the history bar
     [self loadSaves];
 }
-
-//- (HistoryBarView*) getHistoryBar {
-//    return self.collectionView;
-//}
 
 - (void)loadSaves {
     // stub

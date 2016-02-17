@@ -18,11 +18,6 @@
  */
 - (instancetype) initWithContainerController: (UIViewController*) hcvc;
 
-/*
- * set up and init the history bar (except for size), set it as the collection view, and return it.
- */
-//- (HistoryBarView*) getHistoryBar;
-
 - (void)setHistoryBarHeight:(float)height;
 
 @end
