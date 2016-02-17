@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HistoryBarViewMyDelegate.h"
 
-@interface HistoryBarView : UICollectionView <UICollectionViewDelegate>
+@interface HistoryBarView : UICollectionView <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)hbc;
 
