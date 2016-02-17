@@ -92,7 +92,7 @@ POPCustomAnimation* snappingAnimaiton;
 
 /*
  * calc speed and decide whether the speed is low enough to snap
- * needs trackingSpeed = true to work
+ * needs readyToSnap = true to work
  * also needs initialization of lastTrackedTime and lastScrollOffset before being called and after the deceleration taking place
  */
 - (void)trackSpeedAndSnap {

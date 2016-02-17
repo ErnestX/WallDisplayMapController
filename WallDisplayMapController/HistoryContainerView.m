@@ -8,12 +8,10 @@
 
 #import "HistoryContainerView.h"
 
-//#define CELL_WIDTH 100
-#define HISTORY_BAR_HEIGHT 150
-
 @implementation HistoryContainerView
 
 UICollectionView* historyBarView;
+float historyBarOriginalHeight;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -48,17 +46,14 @@ UICollectionView* historyBarView;
     historyBarView = historyBar;
     [self addSubview:historyBarView];
     
-    // init the history bar
-    historyBarView.frame = CGRectMake(self.frame.origin.x,
-                                      self.frame.origin.y,
-                                      self.frame.size.width,
-                                      HISTORY_BAR_HEIGHT);
-//    ((UICollectionViewFlowLayout*)historyBarView.collectionViewLayout).scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//    ((UICollectionViewFlowLayout*)historyBarView.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, historyBarView.frame.size.height);
-//    float sideInset = historyBarView.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
-//    ((UICollectionViewFlowLayout*)historyBarView.collectionViewLayout).sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
-//    ((UICollectionViewFlowLayout*)historyBarView.collectionViewLayout).minimumInteritemSpacing = 0;
-//    ((UICollectionViewFlowLayout*)historyBarView.collectionViewLayout).minimumLineSpacing = 0;
+    // remeber the original height of the history bar
+    historyBarOriginalHeight = historyBar.frame.size.height;
+    
+//    // init the history bar
+//    historyBarView.frame = CGRectMake(self.frame.origin.x,
+//                                      self.frame.origin.y,
+//                                      self.frame.size.width,
+//                                      HISTORY_BAR_HEIGHT);
     
     // draw the selection pointer
     UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];

@@ -10,6 +10,7 @@
 #import "HistoryBarCell.h"
 
 //#define CELL_WIDTH 100
+#define HISTORY_BAR_ORIGINAL_HEIGHT 150
 
 @interface HistoryBarController ()
 
@@ -47,8 +48,8 @@ NSMutableArray* savesArray;
 //    layout.minimumLineSpacing = 0;
     
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 150) collectionViewLayout:layout myDelegate:self];
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 150)];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT) collectionViewLayout:layout myDelegate:self];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT)];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     self.collectionView = historyBarView;
