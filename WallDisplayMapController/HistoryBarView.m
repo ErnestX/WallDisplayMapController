@@ -193,18 +193,17 @@ POPCustomAnimation* snappingAnimaiton;
     [self setContentOffset:self.contentOffset animated:NO];
     
     originalSpeed = fabsf(originalSpeed);
-    float originalDistance = offset.x - self.contentOffset.x;
-    if (originalDistance < 0) {
+    float distance = offset.x - self.contentOffset.x;
+    if (distance < 0) {
         // cell move to the left
         originalSpeed = -1 * originalSpeed;
-    } else if(originalDistance == 0) {
+    } else if(distance == 0) {
         return;
     }
     __block float v = originalSpeed;
-    __block float s = originalDistance;
     
     // acceleration should be of the opposite sign to speed
-    __block float acc;
+    __block float acc = -1 * powf(v, 2.0) / (2 * distance);
 
     __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
     
@@ -212,24 +211,18 @@ POPCustomAnimation* snappingAnimaiton;
         NSTimeInterval currentTimeStamp = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
         
-        // calculate acceleration
-        acc = -1 * powf(v, 2.0) / (2 * s);
-        // decelerate speed
-        v += acc * timeLapse;
-        
         float distanceThisFrame = timeLapse * v;
 //        NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
         
         // update content offset
         self.contentOffset = CGPointMake(self.contentOffset.x + distanceThisFrame, 0);
         
-
+        // decelerate speed
+        v += acc * timeLapse;
         // update time stamp
         lastTimeStamp = currentTimeStamp;
-        // update distance
-        s = s - distanceThisFrame;
         
-        if (s * originalDistance <= 0) {
+        if (v * originalSpeed <= 0) {
             // sign changed. animation stopped
             return NO;
         } else {
