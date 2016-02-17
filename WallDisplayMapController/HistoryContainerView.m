@@ -49,12 +49,6 @@ float historyBarOriginalHeight;
     // remeber the original height of the history bar
     historyBarOriginalHeight = historyBar.frame.size.height;
     
-//    // init the history bar
-//    historyBarView.frame = CGRectMake(self.frame.origin.x,
-//                                      self.frame.origin.y,
-//                                      self.frame.size.width,
-//                                      HISTORY_BAR_HEIGHT);
-    
     // draw the selection pointer
     UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
     [self addSubview:pointer];

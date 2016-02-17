@@ -9,7 +9,7 @@
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
 
-//#define CELL_WIDTH 100
+#define CELL_WIDTH 100
 #define HISTORY_BAR_ORIGINAL_HEIGHT 150
 
 @interface HistoryBarController ()
@@ -38,20 +38,22 @@ NSMutableArray* savesArray;
 - (void)loadView {
     [super loadView];
     
-    // setup history bar
-    UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
-//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//    layout.itemSize = CGSizeMake(CELL_WIDTH, self.collectionView.frame.size.height);
-//    float sideInset = self.view.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
-//    layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
-//    layout.minimumInteritemSpacing = 0;
-//    layout.minimumLineSpacing = 0;
-    
-    
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT) collectionViewLayout:layout myDelegate:self];
     UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT)];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
+    
+    // setup history bar
+    UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
+    
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT) collectionViewLayout:layout myDelegate:self];
+    
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.itemSize = CGSizeMake(CELL_WIDTH, HISTORY_BAR_ORIGINAL_HEIGHT);
+    float sideInset = [UIScreen mainScreen].bounds.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    
     self.collectionView = historyBarView;
 }
 
@@ -79,6 +81,17 @@ NSMutableArray* savesArray;
         }
     } completion:nil];
     
+}
+
+- (void)setHistoryBarHeight:(float)height {
+    // set cell height
+    ((UICollectionViewFlowLayout*)self.collectionViewLayout).itemSize = CGSizeMake(CELL_WIDTH, height);
+    [self.collectionView performBatchUpdates:nil completion:nil];
+    // set bar height
+    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
+                                           self.collectionView.frame.origin.y,
+                                           self.collectionView.frame.size.width,
+                                           height);
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
