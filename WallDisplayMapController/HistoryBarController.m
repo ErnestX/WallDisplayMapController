@@ -8,7 +8,7 @@
 
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
-#import "HistoryBarFlowLayout.h"
+#import "HistoryBarLayout.h"
 
 //#define CELL_WIDTH 100
 #define HISTORY_BAR_ORIGINAL_HEIGHT 150
@@ -25,7 +25,7 @@
 static NSString* const reuseIdentifier = @"Cell";
 
 - (instancetype) initWithContainerController: (UIViewController*) hcvc {
-    HistoryBarFlowLayout *flowLayout = [[HistoryBarFlowLayout alloc]init];
+    HistoryBarLayout *flowLayout = [[HistoryBarLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
     
     containerController = hcvc;

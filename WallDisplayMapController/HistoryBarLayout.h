@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryBarFlowLayout : UICollectionViewFlowLayout
+@interface HistoryBarLayout : UICollectionViewLayout
 
 @end
