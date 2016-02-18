@@ -8,6 +8,7 @@
 
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
+#import "HistoryBarFlowLayout.h"
 
 #define CELL_WIDTH 100
 #define HISTORY_BAR_ORIGINAL_HEIGHT 150
@@ -24,7 +25,7 @@
 static NSString* const reuseIdentifier = @"Cell";
 
 - (instancetype) initWithContainerController: (UIViewController*) hcvc {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    HistoryBarFlowLayout *flowLayout = [[HistoryBarFlowLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
     
     containerController = hcvc;
@@ -45,12 +46,12 @@ static NSString* const reuseIdentifier = @"Cell";
     
     HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT) collectionViewLayout:layout myDelegate:self];
     
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(CELL_WIDTH, HISTORY_BAR_ORIGINAL_HEIGHT);
     float sideInset = [UIScreen mainScreen].bounds.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
     layout.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
-    layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 0;
+//    layout.minimumInteritemSpacing = 0;
+//    layout.minimumLineSpacing = 0;
     
     self.collectionView = historyBarView;
 }
