@@ -85,8 +85,8 @@
         // measure speed
         NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeDiff = currentTime - lastTrackedTime;
-        float distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
-        float speed = distanceScrolled / timeDiff;
+        CGFloat distanceScrolled = self.contentOffset.x - lastScrollOffset.x; // positive: scrolled right; negiative: scrolled left
+        CGFloat speed = distanceScrolled / timeDiff;
 //        NSLog(@"timeDiff: %f, speed: %f", timeDiff, speed);
         
         if (timeDiff > SPEED_TRACK_INTERVAL) {
@@ -123,14 +123,14 @@
     }
 }
 
-- (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight withInitialAbsSpeed:(float) speed {
+- (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight withInitialAbsSpeed:(CGFloat) speed {
     NSLog(@"snapToNextCell");
     NSIndexPath* indexOfNextCell;
     NSIndexPath* indexOfCenterCell = [self getIndexPathOfCenterCell];
     if (indexOfCenterCell) {
         UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexOfCenterCell];
-        float realXPos = attributes.center.x - self.contentOffset.x;
-        float distance = realXPos - self.center.x;
+        CGFloat realXPos = attributes.center.x - self.contentOffset.x;
+        CGFloat distance = realXPos - self.center.x;
         
         if (scrollingRight) {
             if (distance < 0) {
@@ -159,7 +159,7 @@
     }
 }
 
-- (void)snapToClosestCellWithInitialAbsSpeed:(float)speed {
+- (void)snapToClosestCellWithInitialAbsSpeed:(CGFloat)speed {
     NSLog(@"snapToClosestCell");
     NSIndexPath* index = [self getIndexPathOfCenterCell];
     if (index) {
@@ -177,10 +177,10 @@
     return indexOfCenterCell;
 }
 
-- (void)snapToCellAtIndexPath:(NSIndexPath*) index withInitialAbsSpeed:(float) speed {
+- (void)snapToCellAtIndexPath:(NSIndexPath*) index withInitialAbsSpeed:(CGFloat) speed {
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:index];
-    float realXPos = attributes.center.x - self.contentOffset.x;
-    float distanceToScroll = realXPos - self.center.x;
+    CGFloat realXPos = attributes.center.x - self.contentOffset.x;
+    CGFloat distanceToScroll = realXPos - self.center.x;
     
     if ((index.item == 0 && distanceToScroll > 0) ||
         (index.item == [self numberOfItemsInSection:0]-1 && distanceToScroll < 0)) {
@@ -191,22 +191,22 @@
     [self snapToOffset:newContentOffset withInitialAbsSpeed:speed];
 }
 
-- (void)snapToOffset:(CGPoint)offset withInitialAbsSpeed:(float) originalSpeed {
+- (void)snapToOffset:(CGPoint)offset withInitialAbsSpeed:(CGFloat) originalSpeed {
     // stop scrolling animaiton
     [self setContentOffset:self.contentOffset animated:NO];
     
     originalSpeed = fabsf(originalSpeed);
-    float distance = offset.x - self.contentOffset.x;
+    CGFloat distance = offset.x - self.contentOffset.x;
     if (distance < 0) {
         // cell move to the left
         originalSpeed = -1 * originalSpeed;
     } else if(distance == 0) {
         return;
     }
-    __block float v = originalSpeed;
+    __block CGFloat v = originalSpeed;
     
     // acceleration should be of the opposite sign to speed
-    __block float acc = -1 * powf(v, 2.0) / (2 * distance);
+    __block CGFloat acc = -1 * powf(v, 2.0) / (2 * distance);
 
     __block NSTimeInterval lastTimeStamp = [NSDate timeIntervalSinceReferenceDate];
     
@@ -214,7 +214,7 @@
         NSTimeInterval currentTimeStamp = [NSDate timeIntervalSinceReferenceDate];
         NSTimeInterval timeLapse = currentTimeStamp - lastTimeStamp;
         
-        float distanceThisFrame = timeLapse * v;
+        CGFloat distanceThisFrame = timeLapse * v;
 //        NSLog(@"speed: %f, distance: %f", v, distanceThisFrame);
         
         // update content offset

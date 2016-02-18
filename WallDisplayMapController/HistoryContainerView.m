@@ -11,7 +11,7 @@
 @implementation HistoryContainerView
 {
     HistoryBarController* historyBarController;
-    float historyBarOriginalHeight;
+    CGFloat historyBarOriginalHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {

@@ -68,7 +68,7 @@ static NSString* const reuseIdentifier = @"Cell";
     } completion:nil];
 }
 
-- (void)setHistoryBarHeight:(float)height {
+- (void)setHistoryBarHeight:(CGFloat)height {
     // set bar height
     self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
                                            self.collectionView.frame.origin.y,
