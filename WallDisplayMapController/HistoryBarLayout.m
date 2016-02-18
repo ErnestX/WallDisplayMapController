@@ -23,7 +23,8 @@
 //        self.minimumInteritemSpacing = 0;
 //        self.minimumLineSpacing = 0;
         
-        sideInset = self.collectionView.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+//        sideInset = self.collectionView.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+//        NSLog(@"width: %f", self.collectionView.frame.size.width);
 //        self.sectionInset = UIEdgeInsetsMake(0, sideInset, 0, sideInset);
 
     }
@@ -35,6 +36,9 @@
 
 - (void)prepareLayout {
     [super prepareLayout];
+    
+    sideInset = self.collectionView.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    NSLog(@"width: %f", self.collectionView.frame.size.width);
     
     cellCount = [self.collectionView numberOfItemsInSection:0];
 }
