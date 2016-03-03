@@ -28,7 +28,6 @@
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     // add the grey line
-//    greyLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentView.center.x - GREY_LINE_THICKNESS/2, 0, GREY_LINE_THICKNESS, self.contentView.frame.size.height)];
     greyLineView = [UIView new];
     greyLineView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -46,10 +45,17 @@
     [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
                                                                 attribute:NSLayoutAttributeWidth
                                                                 relatedBy:NSLayoutRelationEqual
-                                                                   toItem:self
-                                                                attribute:NSLayoutAttributeWidth
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
                                                                multiplier:1.0
                                                                  constant:GREY_LINE_THICKNESS]];
+    [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0]];
     [NSLayoutConstraint activateConstraints:greyLineConstraints];
     
     // add the tag view
