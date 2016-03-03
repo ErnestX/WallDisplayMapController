@@ -11,8 +11,8 @@
 #define TIME_LABEL_BUTTON_MARGIN 3
 #define GREY_LINE_THICKNESS 2
 #define TIMESTAMP_HEIGHT 5
-#define TAG_VIEW_HEIGHT 40
-#define TAG_VIEW_WIDTH 60
+#define TAG_VIEW_HEIGHT 30
+#define TAG_VIEW_WIDTH 68
 
 @implementation HistoryBarCell
 {
@@ -26,8 +26,8 @@
     self = [super initWithFrame:frame];
     
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderColor = [UIColor grayColor].CGColor;
-    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
+//    self.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     // add the time stamp label
     timeStampLabel = [UILabel new];
