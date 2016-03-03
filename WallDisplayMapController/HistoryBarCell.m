@@ -11,8 +11,8 @@
 #define TIME_LABEL_BUTTON_MARGIN 3
 #define GREY_LINE_THICKNESS 2
 #define TIMESTAMP_HEIGHT 5
-#define TAG_VIEW_HEIGHT 50
-#define TAG_VIEW_WIDTH 90
+#define TAG_VIEW_HEIGHT 40
+#define TAG_VIEW_WIDTH 60
 
 @implementation HistoryBarCell
 {

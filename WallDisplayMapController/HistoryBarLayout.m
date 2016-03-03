@@ -8,7 +8,7 @@
 
 #import "HistoryBarLayout.h"
 
-#define CELL_WIDTH 100
+#define CELL_WIDTH 70
 
 @implementation HistoryBarLayout
 {
