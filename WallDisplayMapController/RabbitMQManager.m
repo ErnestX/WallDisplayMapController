@@ -69,15 +69,20 @@
         // declare exchange
         amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
         
+        amqp_exchange_declare(_conn, 10, amqp_cstring_bytes("amqp.fanout"), amqp_cstring_bytes("fanout"), 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+        
         // declare queue
         amqp_queue_declare_ok_t *qEarth = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
-        amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, QUEUE_NAME_WIDGET, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
+        
+        const char * widgetQname = [[UIDevice currentDevice].identifierForVendor.UUIDString UTF8String];
+        
+        amqp_queue_declare_ok_t *qWidget = amqp_queue_declare(_conn, 10, amqp_cstring_bytes(widgetQname), 0, 0, 0, 1, AMQP_EMPTY_TABLE);
         amqp_bytes_t queuenameEarth = amqp_bytes_malloc_dup(qEarth->queue);
         amqp_bytes_t queuenameWidget = amqp_bytes_malloc_dup(qWidget->queue);
         
         // binding queue with exchange
         amqp_queue_bind(_conn, 10, queuenameEarth, EXCHANGE_NAME, ROUTING_KEY_EARTH, AMQP_EMPTY_TABLE);
-        amqp_queue_bind(_conn, 10, queuenameWidget, EXCHANGE_NAME, ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
+        amqp_queue_bind(_conn, 10, queuenameWidget, amqp_cstring_bytes("amq.fanout"), ROUTING_KEY_WIDGET, AMQP_EMPTY_TABLE);
         
         amqp_basic_consume(_conn, 10, queuenameWidget, amqp_empty_bytes, 0, 1, 0, AMQP_EMPTY_TABLE);
         
