@@ -78,7 +78,7 @@ static NSString* const reuseIdentifier = @"Cell";
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
-    NSLog(@"cell centered: #%d", index.item);
+//    NSLog(@"cell centered: #%d", index.item);
 }
 
 #pragma mark <UICollectionViewDataSource>
