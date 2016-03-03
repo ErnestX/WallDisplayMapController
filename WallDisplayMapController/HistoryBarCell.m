@@ -9,8 +9,9 @@
 #import "HistoryBarCell.h"
 #define GREY_LINE_THICKNESS 2
 #define TIMESTAMP_HEIGHT 5
-#define TAG_VIEW_HEIGHT 10
-#define TAG_VIEW_SIDE_MARGIN 2
+#define TAG_VIEW_HEIGHT 50
+//#define TAG_VIEW_SIDE_MARGIN 2
+#define TAG_VIEW_WIDTH 90
 
 @implementation HistoryBarCell
 {
@@ -30,18 +31,24 @@
     // add the grey line
     greyLineView = [UIView new];
     greyLineView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     greyLineView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:greyLineView];
     
     NSMutableArray <NSLayoutConstraint*>* greyLineConstraints = [[NSMutableArray alloc]init];
     [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
-                                                                attribute:NSLayoutAttributeHeight
+                                                                attribute:NSLayoutAttributeTop
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:self
-                                                                attribute:NSLayoutAttributeHeight
+                                                                attribute:NSLayoutAttributeTop
                                                                multiplier:1.0
                                                                  constant:0]];
+    [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:-1*TIMESTAMP_HEIGHT]]; //TODO refactor after drawing time lable first
     [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
                                                                 attribute:NSLayoutAttributeWidth
                                                                 relatedBy:NSLayoutRelationEqual
@@ -59,9 +66,41 @@
     [NSLayoutConstraint activateConstraints:greyLineConstraints];
     
     // add the tag view
-    tagView = [[UIView alloc]initWithFrame:CGRectMake(TAG_VIEW_SIDE_MARGIN, self.contentView.frame.size.height - TIMESTAMP_HEIGHT - TAG_VIEW_HEIGHT, self.contentView.frame.size.width - TAG_VIEW_SIDE_MARGIN*2, TAG_VIEW_HEIGHT)];
+//    tagView = [[UIView alloc]initWithFrame:CGRectMake(TAG_VIEW_SIDE_MARGIN, self.contentView.frame.size.height - TIMESTAMP_HEIGHT - TAG_VIEW_HEIGHT, self.contentView.frame.size.width - TAG_VIEW_SIDE_MARGIN*2, TAG_VIEW_HEIGHT)];
+    tagView = [UIView new];
+    tagView.translatesAutoresizingMaskIntoConstraints = NO;
     tagView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:tagView];
+    NSMutableArray <NSLayoutConstraint*>* tagViewConstraints = [[NSMutableArray alloc]init];
+    [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1.0
+                                                                constant:TAG_VIEW_WIDTH]];
+    [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
+                                                               attribute:NSLayoutAttributeHeight
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1.0
+                                                                constant:TAG_VIEW_HEIGHT]];
+    [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
+                                                               attribute:NSLayoutAttributeCenterX
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self
+                                                               attribute:NSLayoutAttributeCenterX
+                                                              multiplier:1.0
+                                                                constant:0]];
+    [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
+                                                               attribute:NSLayoutAttributeBottom
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:greyLineView
+                                                               attribute:NSLayoutAttributeBottom
+                                                              multiplier:1.0
+                                                                constant:0]];
+    [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
     return self;
 }
