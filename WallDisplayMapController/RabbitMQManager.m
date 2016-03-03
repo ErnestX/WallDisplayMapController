@@ -68,8 +68,7 @@
         
         // declare exchange
         amqp_exchange_declare(_conn, 10, EXCHANGE_NAME, EXCHANGE_TYPE, 0, 1, 0, 0, AMQP_EMPTY_TABLE);
-        
-        amqp_exchange_declare(_conn, 10, amqp_cstring_bytes("amqp.fanout"), amqp_cstring_bytes("fanout"), 0, 1, 0, 0, AMQP_EMPTY_TABLE);
+
         
         // declare queue
         amqp_queue_declare_ok_t *qEarth = amqp_queue_declare(_conn, 10, QUEUE_NAME_EARTH, 0, 0, 0, 1, AMQP_EMPTY_TABLE);
