@@ -23,8 +23,20 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showConnectingMessage) name:@"rmq_connection_about_to_open" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideConnectingMessage) name:@"rmq_open_connection_ok" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(showConnectingMessage)
+                                                     name:@"rmq_connection_about_to_open"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(hideConnectingMessage)
+                                                     name:@"rmq_open_connection_ok"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(hideConnectingMessage)
+                                                     name:@"rmq_open_connection_fail"
+                                                   object:nil];
     }
     return self;
 }
