@@ -59,8 +59,8 @@
     [vMapControl addSubview:btnHelp];
     DEFINE_WEAK_SELF
     [btnHelp mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(weakSelf.view).with.offset(30.0f);
-        make.bottom.equalTo(weakSelf.view).with.offset(-20.0f);
+        make.trailing.equalTo(weakSelf.view).with.offset(38.0f);
+        make.bottom.equalTo(weakSelf.view).with.offset(-14.0f);
         make.width.equalTo(@200);
         make.height.equalTo(@100);
     }];
