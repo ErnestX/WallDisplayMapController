@@ -70,6 +70,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self trackSpeedAndSnap];
     
+//    self.showsHorizontalScrollIndicator = YES;
+    
     [myDelegate cellCenteredByIndex:[self getIndexPathOfCenterCell]];
 }
 
@@ -112,6 +114,12 @@
     NSLog(@"touches began");
     readyToSnap = false;
     [self pop_removeAllAnimations];
+    
+    self.showsHorizontalScrollIndicator = YES;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.showsHorizontalScrollIndicator = YES;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -176,6 +184,8 @@
 }
 
 - (void)snapToCellAtIndexPath:(NSIndexPath*) index withInitialAbsSpeed:(CGFloat) speed {
+    self.showsHorizontalScrollIndicator = NO;
+    
     UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:index];
     CGFloat realXPos = attributes.center.x - self.contentOffset.x;
     CGFloat distanceToScroll = realXPos - self.center.x;
