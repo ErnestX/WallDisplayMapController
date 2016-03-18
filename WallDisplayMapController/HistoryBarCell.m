@@ -94,6 +94,7 @@
                                                                  constant:0]];
     [NSLayoutConstraint activateConstraints:greyLineConstraints];
     
+    
     // add the tag view
     tagView = [UIView new];
     tagView.backgroundColor = [UIColor lightGrayColor];
@@ -130,12 +131,16 @@
                                                                 constant:0]];
     [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
+    
+    // add metric views
+    
+    
     return self;
 }
 
 - (void)initForReuseWithTimeStamp:(NSDate*) time tag:(NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(NSDictionary*) metricData {
     
-    // add the timeStamp label
+    // set the timeStamp label
     
     // add the graph views, one for each metric, overlapping on top of each other
     
@@ -147,6 +152,8 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
+    
+    // remove the graphs
 }
 
 @end

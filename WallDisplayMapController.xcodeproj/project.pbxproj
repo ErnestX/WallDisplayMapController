@@ -79,6 +79,7 @@
 		CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */; };
 		CA4679031C62A4DB00C4D7BB /* HistoryBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */; };
 		CA4A35951C75938C00656118 /* HistoryBarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4A35941C75938C00656118 /* HistoryBarLayout.m */; };
+		CA4E04921C9B5A3A00E2B60D /* MetricView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4E04911C9B5A3A00E2B60D /* MetricView.m */; };
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		CAFC10A41C71A74600523617 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; };
@@ -289,6 +290,8 @@
 		CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarViewMyDelegate.h; sourceTree = "<group>"; };
 		CA4A35931C75938C00656118 /* HistoryBarLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarLayout.h; sourceTree = "<group>"; };
 		CA4A35941C75938C00656118 /* HistoryBarLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarLayout.m; sourceTree = "<group>"; };
+		CA4E04901C9B5A3A00E2B60D /* MetricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricView.h; sourceTree = "<group>"; };
+		CA4E04911C9B5A3A00E2B60D /* MetricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricView.m; sourceTree = "<group>"; };
 		CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerViewController.h; sourceTree = "<group>"; };
 		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
 		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 				CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */,
 				CA4679011C62A4DB00C4D7BB /* HistoryBarCell.h */,
 				CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */,
+				CA4E04901C9B5A3A00E2B60D /* MetricView.h */,
+				CA4E04911C9B5A3A00E2B60D /* MetricView.m */,
 			);
 			name = HistoryViews;
 			sourceTree = "<group>";
@@ -826,6 +831,7 @@
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
 				CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */,
+				CA4E04921C9B5A3A00E2B60D /* MetricView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */,
 				AE6C042F1B42029400A1D777 /* DroppableChart.m in Sources */,
