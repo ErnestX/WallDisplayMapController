@@ -31,12 +31,6 @@
     
     // add the time stamp label
     timeStampLabel = [UILabel new];
-    NSDateFormatter* formatter;
-    formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-    timeStampLabel.text = [formatter stringFromDate:[NSDate date]];
-    timeStampLabel.font = [timeStampLabel.font fontWithSize:TIME_LABEL_FONT_SIZE];
-    [timeStampLabel sizeToFit];
     [self.contentView addSubview:timeStampLabel];
     
     timeStampLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -132,21 +126,23 @@
     [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
     
-    // add metric views
-    
-    
     return self;
 }
 
 - (void)initForReuseWithTimeStamp:(NSDate*) time tag:(NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(NSDictionary*) metricData {
     
     // set the timeStamp label
+    NSDateFormatter* formatter;
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm"];
+    timeStampLabel.text = [formatter stringFromDate:time];
+    timeStampLabel.font = [timeStampLabel.font fontWithSize:TIME_LABEL_FONT_SIZE];
+    [timeStampLabel sizeToFit];
     
-    // add the graph views, one for each metric, overlapping on top of each other
-    
-    // add the lines in each graph view
-    
-    // add the dots and icons in each graph view
+    // add the metric views, one for each metric, overlapping on top of each other
+//    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+//        NSLog(@"%@ => %@", key, value);
+//    }];
     
 }
 
