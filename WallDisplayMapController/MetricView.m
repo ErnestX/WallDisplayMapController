@@ -12,6 +12,7 @@
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
     self = [self initWithMetricName:m position:p color:c];
+    NSAssert(self, @"init failed");
     
     // TODO
     
@@ -20,6 +21,7 @@
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd {
     self = [self initWithMetricName:m position:p color:c];
+    NSAssert(self, @"init failed");
     
     // TODO
     
@@ -28,6 +30,7 @@
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
     self = [self initWithMetricName:m position:p color:c];
+    NSAssert(self, @"init failed");
     
     // TODO
     

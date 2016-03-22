@@ -11,6 +11,6 @@
 
 @interface HistoryBarView : UICollectionView <UICollectionViewDelegate>
 
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)hbc;
+- (nullable instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)hbc;
 
 @end

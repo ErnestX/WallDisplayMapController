@@ -27,12 +27,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)d {
     self = [super initWithFrame:frame collectionViewLayout:layout];
+    NSAssert(self, @"init failed");
     
     self.delegate = self;
     myDelegate = d;
     self.decelerationRate = UIScrollViewDecelerationRateNormal;
     self.backgroundColor = [UIColor lightGrayColor];
-    
+        
     lastScrollOffset = CGPointZero;
     lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
     readyToSnap = false;

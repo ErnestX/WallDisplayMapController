@@ -26,6 +26,7 @@ static NSString* const reuseIdentifier = @"Cell";
 - (instancetype) initWithContainerController: (UIViewController*) hcvc {
     HistoryBarLayout *flowLayout = [[HistoryBarLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
+    NSAssert(self, @"init failed");
     
     containerController = hcvc;
     savesArray = [NSMutableArray array];
@@ -76,7 +77,7 @@ static NSString* const reuseIdentifier = @"Cell";
                                                self.collectionView.frame.size.width,
                                                height);
         [self.collectionView performBatchUpdates:nil completion:nil];
-        [self.collectionView performBatchUpdates:nil completion:nil]; // I really don't know why I need to call this twice for the animation to work correctly...
+        [self.collectionView performBatchUpdates:nil completion:nil]; // I couldn't figure out why I need to call this twice for the animation to work correctly...
     }];
 }
 

@@ -26,6 +26,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    NSAssert(self, @"init failed");
     
     self.backgroundColor = [UIColor whiteColor];
 //    self.layer.borderColor = [UIColor grayColor].CGColor;

@@ -16,6 +16,7 @@
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    NSAssert(self, @"init failed");
     
     self.backgroundColor = [UIColor darkGrayColor];
     

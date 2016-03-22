@@ -13,7 +13,7 @@
 @interface HistoryBarController : UICollectionViewController <HistoryBarViewMyDelegate>
 
 /**
-  custom initializer
+  calls designated initializer
  */
 - (instancetype) initWithContainerController: (UIViewController*) hcvc;
 
