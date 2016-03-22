@@ -149,6 +149,14 @@
     timeStampLabel.font = [timeStampLabel.font fontWithSize:TIME_LABEL_FONT_SIZE];
     [timeStampLabel sizeToFit];
     
+    // TODO set the tag
+    
+    // remove old metric views
+    for (int i=[metricViews count]-1; i>=0; i--) { 
+        [[metricViews objectAtIndex:i]removeFromSuperview];
+        [metricViews removeObjectAtIndex:i];
+    }
+    
     // add the metric views, one for each metric, overlapping on top of each other
     for (NSString* key in metricData) {
         id value = [metricData objectForKey:key];
@@ -206,11 +214,6 @@
         // add the MetricView to the array
         [metricViews addObject:mv];
     }
-    
-//    // enumerate the MetricView array and add them one by one as subview
-//    for (int i=0; i<[metricViews count]; i++) {
-//        [self addSubview:[metricViews objectAtIndex:i]];
-//    }
 }
 
 - (void)prepareForReuse {
