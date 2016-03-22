@@ -8,6 +8,9 @@
 
 #import "MetricView.h"
 
+#define MIN_RENDER_POSITION 0.1
+#define MAX_RENDER_POSITION 0.9
+
 @implementation MetricView
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
@@ -37,11 +40,49 @@
     return self;
 }
 
-- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c  {
-    // draw dot
-    UIView* testView = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 10, 10)];
-    testView.backgroundColor = c;
-    [self addSubview:testView];
+- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+    // map the position to a different range for rendering
+    CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
+    
+    // draw the data point (each metric view contains only one data point)
+    UIView* dataPointView = [UIView new];
+    NSAssert(dataPointView, @"init failed");
+    
+    dataPointView.backgroundColor = c;
+    
+    [self addSubview:dataPointView];
+    
+    dataPointView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSMutableArray <NSLayoutConstraint*>* dataPointViewConstraints = [[NSMutableArray alloc]init];
+    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeCenterY // can't use height, so will use centerY and multiply by 2.0
+                                                                 multiplier:2.0 * renderPos // set center y
+                                                                   constant:0.0]];
+    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:10.0]];
+    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:10.0]];
+    [NSLayoutConstraint activateConstraints:dataPointViewConstraints];
     
     self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)

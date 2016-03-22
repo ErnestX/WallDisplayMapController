@@ -36,6 +36,7 @@
     
     // add the time stamp label
     timeStampLabel = [UILabel new];
+    NSAssert(timeStampLabel, @"init failed");
     [self.contentView addSubview:timeStampLabel];
     
     timeStampLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -59,6 +60,7 @@
     
     // add the grey line
     greyLineView = [UIView new];
+    NSAssert(greyLineView, @"init failed");
     greyLineView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:greyLineView];
     greyLineView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -96,6 +98,7 @@
     
     // add the tag view
     tagView = [UIView new];
+    NSAssert(tagView, @"init failed");
     tagView.backgroundColor = [UIColor lightGrayColor];
     [self.contentView addSubview:tagView];
     tagView.translatesAutoresizingMaskIntoConstraints = NO;
