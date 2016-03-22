@@ -40,10 +40,11 @@
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c  {
     // draw dot
     UIView* testView = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 10, 10)];
-    testView.backgroundColor = [UIColor blueColor];
+    testView.backgroundColor = c;
     [self addSubview:testView];
     
-    self.backgroundColor = [UIColor redColor];
+    self.layer.borderColor = [UIColor grayColor].CGColor;
+    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     return self;
 }

@@ -164,8 +164,10 @@
         UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         
         MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
+        [self addSubview:mv];
         
         // set auto layout with percentage in height for the expanding view
+        mv.translatesAutoresizingMaskIntoConstraints = NO;
         NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeCenterX
@@ -188,22 +190,24 @@
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeWidth
                                                                      multiplier:1.0
-                                                                       constant:100.0]];
+                                                                       constant:0.0]];
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeHeight
                                                                      multiplier:1.0
-                                                                       constant:100.0]];
+                                                                       constant:0.0]];
+        [NSLayoutConstraint activateConstraints:metricViewConstraints];
+        
         // add the MetricView to the array
         [metricViews addObject:mv];
     }
     
-    // enumerate the MetricView array and add them one by one as subview
-    for (int i=0; i<[metricViews count]; i++) {
-        [self addSubview:[metricViews objectAtIndex:i]];
-    }
+//    // enumerate the MetricView array and add them one by one as subview
+//    for (int i=0; i<[metricViews count]; i++) {
+//        [self addSubview:[metricViews objectAtIndex:i]];
+//    }
 }
 
 - (void)prepareForReuse {
