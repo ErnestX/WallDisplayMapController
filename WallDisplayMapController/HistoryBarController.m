@@ -68,13 +68,16 @@ static NSString* const reuseIdentifier = @"Cell";
     } completion:nil];
 }
 
-- (void)setHistoryBarHeight:(CGFloat)height {
+- (void)setHistoryBarHeight:(CGFloat)height withAnimationDuration:(CGFloat)d {
     // set bar height
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
-                                           self.collectionView.frame.origin.y,
-                                           self.collectionView.frame.size.width,
-                                           height);
-    [self.collectionView performBatchUpdates:nil completion:nil];
+    [UIView animateWithDuration:d animations:^(void){
+        self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
+                                               self.collectionView.frame.origin.y,
+                                               self.collectionView.frame.size.width,
+                                               height);
+        [self.collectionView performBatchUpdates:nil completion:nil];
+        [self.collectionView performBatchUpdates:nil completion:nil]; // I really don't know why I need to call this twice for the animation to work correctly...
+    }];
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {

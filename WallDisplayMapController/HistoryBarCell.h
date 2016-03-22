@@ -10,8 +10,8 @@
 
 @interface HistoryBarCell : UICollectionViewCell
 
-/*
- * notice for the metricsData, the position in the dictionary should range from 0 to 1
+/**
+ @param metricData the position in the dictionary should range from 0 to 1
  */
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*) time tag:(nonnull NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(nonnull NSDictionary*) metricData;
 

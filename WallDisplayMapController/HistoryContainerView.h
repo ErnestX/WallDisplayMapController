@@ -11,10 +11,9 @@
 
 @interface HistoryContainerView : UIView
 
-/*
- * given the historyBarView from the historyBarContainer, initialize the size of it and add it as a subview
+/**
+  given the historyBarView from the historyBarContainer, initialize the size of it and add it as a subview
  */
-
 - (void) setUpHistoryBar: (HistoryBarController*) hbc;
 
 @end

@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "HistoryBarView.h"
-//#import "HistoryContainerViewController.h"
 #import "HistoryBarViewMyDelegate.h"
 
 @interface HistoryBarController : UICollectionViewController <HistoryBarViewMyDelegate>
 
-/*
- * custom initializer
+/**
+  custom initializer
  */
 - (instancetype) initWithContainerController: (UIViewController*) hcvc;
 
-- (void)setHistoryBarHeight:(CGFloat)height;
+- (void)setHistoryBarHeight:(CGFloat)height withAnimationDuration:(CGFloat)d;
 
 @end

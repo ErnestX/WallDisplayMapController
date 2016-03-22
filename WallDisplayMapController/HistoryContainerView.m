@@ -31,18 +31,11 @@
 }
 
 - (void)testButtonPressed:(id)sender {
-    NSLog(@"test button pressed");
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [historyBarController setHistoryBarHeight:500];
-        [historyBarController.collectionView performBatchUpdates:nil completion:nil];
-    }];
+    [historyBarController setHistoryBarHeight:500 withAnimationDuration:0.5];
 }
 
 - (void)testButtonReleased:(id)sender {
-    [UIView animateWithDuration:0.5 animations:^(void){
-        [historyBarController setHistoryBarHeight:historyBarOriginalHeight];
-        [historyBarController.collectionView performBatchUpdates:nil completion:nil];
-    }];
+   [historyBarController setHistoryBarHeight:historyBarOriginalHeight withAnimationDuration:0.5];
 }
 
 - (void) setUpHistoryBar: (HistoryBarController *) hbc {
