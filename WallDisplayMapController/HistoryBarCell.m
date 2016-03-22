@@ -28,6 +28,8 @@
     self = [super initWithFrame:frame];
     NSAssert(self, @"init failed");
     
+    metricViews = [[NSMutableArray alloc]init];
+    
     self.backgroundColor = [UIColor whiteColor];
 //    self.layer.borderColor = [UIColor grayColor].CGColor;
 //    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -145,7 +147,9 @@
     [timeStampLabel sizeToFit];
     
     // add the metric views, one for each metric, overlapping on top of each other
-    [metricData enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+    for (NSString* key in metricData) {
+        id value = [metricData objectForKey:key];
+        
         // validate key and value
         NSAssert([key isKindOfClass:[NSString class]], @"key is not a string"); // TODO: check if name is valid
         NSAssert([value isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
@@ -159,7 +163,7 @@
         CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
         UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         
-        MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color];
+        MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
         
         // set auto layout with percentage in height for the expanding view
         NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
@@ -184,18 +188,18 @@
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeWidth
                                                                      multiplier:1.0
-                                                                       constant:0.0]];
+                                                                       constant:100.0]];
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeHeight
                                                                      multiplier:1.0
-                                                                       constant:0.0]];
+                                                                       constant:100.0]];
         // add the MetricView to the array
         [metricViews addObject:mv];
-        
-    }];
+    }
+    
     // enumerate the MetricView array and add them one by one as subview
     for (int i=0; i<[metricViews count]; i++) {
         [self addSubview:[metricViews objectAtIndex:i]];

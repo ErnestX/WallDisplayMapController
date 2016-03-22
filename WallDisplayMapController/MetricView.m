@@ -38,8 +38,12 @@
 }
 
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c  {
-    
     // draw dot
+    UIView* testView = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 10, 10)];
+    testView.backgroundColor = [UIColor blueColor];
+    [self addSubview:testView];
+    
+    self.backgroundColor = [UIColor redColor];
     
     return self;
 }
