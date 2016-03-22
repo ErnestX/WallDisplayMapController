@@ -10,31 +10,50 @@
 
 @implementation MetricView
 
-- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c  {
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
+    self = [self initWithMetricName:m position:p color:c];
     
-    // draw left line
-    
-    // draw right line
-    
-    // draw dot
-    
+    // TODO
     
     return self;
 }
 
-- (void)showLeftLine:(BOOL)b {
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd {
+    self = [self initWithMetricName:m position:p color:c];
+    
+    // TODO
+    
+    return self;
+}
+
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
+    self = [self initWithMetricName:m position:p color:c];
+    
+    // TODO
+    
+    return self;
+}
+
+- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c  {
+    
+    // draw dot
+    
+    return self;
+}
+
+- (void)hideLeftLine {
     
 }
 
-- (void)showRightLine:(BOOL)b {
+- (void)hideRightLine {
     
 }
 
-- (void)setLeftLineAngle:(CGFloat)a {
+- (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     
 }
 
-- (void)setrightLineAngle:(CGFloat)a {
+- (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     
 }
 

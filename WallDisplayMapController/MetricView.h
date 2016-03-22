@@ -10,18 +10,45 @@
 
 @interface MetricView : UIView
 
-/*
- * the metric name must match the one in the dictionary
+/**
+  @brief init with both left and right lines
+  @param m the metric name must match the one in the dictionary
+  @param p position must range from 0 to 1
+  @warning does not call designated initializer
  */
-- (id)initWithMetricName:(NSString*)m position:(float)p color:(UIColor*)c;
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
-- (void)showLeftLine:(BOOL)b;
+/**
+  @brief init without the right line
+  @param m the metric name must match the one in the dictionary
+  @param p position must range from 0 to 1
+  @warning does not call designated initializer
+ */
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd;
 
-- (void)showRightLine:(BOOL)b;
+/**
+ @brief init without the left line
+ @param m the metric name must match the one in the dictionary
+ @param p position must range from 0 to 1
+ @warning does not call designated initializer
+ */
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
-- (void)setLeftLineAngle:(CGFloat)a;
+/**
+ @brief init with neither of the left or right line
+ @param m the metric name must match the one in the dictionary
+ @param p position must range from 0 to 1
+ @warning does not call designated initializer
+ */
+- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c;
 
-- (void)setrightLineAngle:(CGFloat)a;
+- (void)hideLeftLine;
+
+- (void)hideRightLine;
+
+- (void)showLeftLineWithPrevDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
+
+- (void)showRightLineWithNextDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
 
 - (void) showIcons;
 
