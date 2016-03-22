@@ -13,6 +13,6 @@
 /*
  * notice for the metricsData, the position in the dictionary should range from 0 to 1
  */
-- (void)initForReuseWithTimeStamp:(NSDate*) time tag:(NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(NSDictionary*) metricData;
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*) time tag:(nonnull NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(nonnull NSDictionary*) metricData;
 
 @end

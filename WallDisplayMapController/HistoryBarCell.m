@@ -7,6 +7,8 @@
 //
 
 #import "HistoryBarCell.h"
+#import "MetricView.h"
+
 #define TIME_LABEL_FONT_SIZE 10
 #define TIME_LABEL_BUTTON_MARGIN 3
 #define GREY_LINE_THICKNESS 2
@@ -48,7 +50,7 @@
                                                                    toItem:self
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:0]];
+                                                                 constant:0.0]];
     [NSLayoutConstraint activateConstraints:timeStampConstraints];
     
     
@@ -64,14 +66,14 @@
                                                                    toItem:self
                                                                 attribute:NSLayoutAttributeTop
                                                                multiplier:1.0
-                                                                 constant:0]];
+                                                                 constant:0.0]];
     [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
                                                                 attribute:NSLayoutAttributeBottom
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:timeStampLabel
                                                                 attribute:NSLayoutAttributeTop
                                                                multiplier:1.0
-                                                                 constant:0]];
+                                                                 constant:0.0]];
     [greyLineConstraints addObject:[NSLayoutConstraint constraintWithItem:greyLineView
                                                                 attribute:NSLayoutAttributeWidth
                                                                 relatedBy:NSLayoutRelationEqual
@@ -85,7 +87,7 @@
                                                                    toItem:self
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:0]];
+                                                                 constant:0.0]];
     [NSLayoutConstraint activateConstraints:greyLineConstraints];
     
     
@@ -115,35 +117,88 @@
                                                                   toItem:self
                                                                attribute:NSLayoutAttributeCenterX
                                                               multiplier:1.0
-                                                                constant:0]];
+                                                                constant:0.0]];
     [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
                                                                attribute:NSLayoutAttributeBottom
                                                                relatedBy:NSLayoutRelationEqual
                                                                   toItem:greyLineView
                                                                attribute:NSLayoutAttributeBottom
                                                               multiplier:1.0
-                                                                constant:0]];
+                                                                constant:0.0]];
     [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
     
     return self;
 }
 
-- (void)initForReuseWithTimeStamp:(NSDate*) time tag:(NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(NSDictionary*) metricData {
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*) time tag:(nonnull NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(nonnull NSDictionary*) metricData {
     
     // set the timeStamp label
     NSDateFormatter* formatter;
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
+    
+    NSAssert(timeStampLabel,@"timeStampLabel is nil");
     timeStampLabel.text = [formatter stringFromDate:time];
     timeStampLabel.font = [timeStampLabel.font fontWithSize:TIME_LABEL_FONT_SIZE];
     [timeStampLabel sizeToFit];
     
     // add the metric views, one for each metric, overlapping on top of each other
-//    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
-//        NSLog(@"%@ => %@", key, value);
-//    }];
-    
+    [metricData enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+        // validate key and value
+        NSAssert([key isKindOfClass:[NSString class]], @"key is not a string"); // TODO: check if name is valid
+        NSAssert([value isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
+        
+        CGFloat floatV = [(NSNumber*)value floatValue];
+        NSAssert(floatV >= 0.0 && floatV <= 1.0, @"value smaller than 0 or greater than 1");
+        
+        // create a new MetricView, init with key and value
+        CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+        
+        MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color];
+        
+        // set auto layout with percentage in height for the expanding view
+        NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
+        [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                     multiplier:1.0
+                                                                       constant:0.0]];
+        [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                      attribute:NSLayoutAttributeCenterY
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeCenterY // TODO
+                                                                     multiplier:1.0 // TODO
+                                                                       constant:0.0]]; // TODO
+        
+        [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                     multiplier:1.0
+                                                                       constant:0.0]];
+        [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                     multiplier:1.0
+                                                                       constant:0.0]];
+        // add the MetricView to the array
+        [metricViews addObject:mv];
+        
+    }];
+    // enumerate the MetricView array and add them one by one as subview
+    for (int i=0; i<[metricViews count]; i++) {
+        [self addSubview:[metricViews objectAtIndex:i]];
+    }
 }
 
 - (void)prepareForReuse {

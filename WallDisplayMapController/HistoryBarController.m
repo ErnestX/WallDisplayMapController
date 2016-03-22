@@ -96,7 +96,8 @@ static NSString* const reuseIdentifier = @"Cell";
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:nil];
+    NSDictionary* dic = [NSDictionary dictionaryWithObject:@0.5 forKey:@"testing metric"]; // stub
+    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:dic];
     
     return cell;
 }
