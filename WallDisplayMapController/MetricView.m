@@ -10,6 +10,7 @@
 
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
+#define DATA_POINT_DIAMETER 10
 
 @implementation MetricView
 
@@ -74,14 +75,14 @@
                                                                      toItem:nil
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1.0
-                                                                   constant:10.0]];
+                                                                   constant:DATA_POINT_DIAMETER]];
     [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
                                                                   attribute:NSLayoutAttributeHeight
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:nil
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1.0
-                                                                   constant:10.0]];
+                                                                   constant:DATA_POINT_DIAMETER]];
     [NSLayoutConstraint activateConstraints:dataPointViewConstraints];
     
     self.layer.borderColor = [UIColor grayColor].CGColor;
