@@ -177,9 +177,11 @@
         MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
         [self addSubview:mv];
         
-        // set auto layout with percentage in height for the expanding view
+        // set auto layout
         mv.translatesAutoresizingMaskIntoConstraints = NO;
         NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
+        
+        // set auto layout: align center X
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeCenterX
                                                                       relatedBy:NSLayoutRelationEqual
@@ -187,7 +189,8 @@
                                                                       attribute:NSLayoutAttributeCenterX
                                                                      multiplier:1.0
                                                                        constant:0.0]];
-
+        
+        // set auto layout: evenly distribute the bottoms of metric views along height of the cell: the height of the cell is divided into the same number of chunks evenly. Then, the second to the last dividing points are assigned as the bottom of the metric views. This creates the problem that the tops of all the metric views except the last one goes above the cell, while the top of the last metric view aligns perfectly with that of the cell. This problem is solved by using the next constraint on top of this one.
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeBottom
                                                                       relatedBy:NSLayoutRelationEqual
@@ -198,8 +201,9 @@
                                                                                       + TAG_VIEW_HEIGHT
                                                                                       + TIME_LABEL_BUTTON_MARGIN)
                                                                                    * (1.0/metricData.count) * ([metricViews count]+1)]];
-        [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default
+        [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
         
+        // set auto layout: the top cannot be above that of the cell. This constraint acts on top of the previous one (of higher priority)
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeTop
                                                                       relatedBy:NSLayoutRelationGreaterThanOrEqual
@@ -208,6 +212,7 @@
                                                                      multiplier:1.0
                                                                        constant:0.0]];
         
+        // set auto layout: width equal to that of the cell
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeWidth
                                                                       relatedBy:NSLayoutRelationEqual
@@ -215,6 +220,7 @@
                                                                       attribute:NSLayoutAttributeWidth
                                                                      multiplier:1.0
                                                                        constant:0.0]];
+        // set auto layout: height equal to that of the cell
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
