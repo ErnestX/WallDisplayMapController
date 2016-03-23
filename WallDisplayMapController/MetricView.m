@@ -11,6 +11,7 @@
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
 #define DATA_POINT_DIAMETER 10
+#define LINE_WIDTH 2
 
 @implementation MetricView
 {
@@ -112,6 +113,20 @@
 - (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     if (!leftLineView) {
         // alloc new
+        leftLineView = [UIView new];
+        leftLineView.layer.anchorPoint = CGPointMake(1.0, 0.5); // rotates relative to the center of the right edge
+        
+        // auto layout
+        leftLineView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSMutableArray <NSLayoutConstraint*>* leftLineViewConstraints = [[NSMutableArray alloc]init];
+        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
+                                                                         attribute:NSLayoutAttributeRight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:dataPointView
+                                                                         attribute:NSLayoutAttributeCenterX
+                                                                        multiplier:1.0
+                                                                          constant:0.0]];
+        
     }
     // init
 }

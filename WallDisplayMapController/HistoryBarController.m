@@ -104,7 +104,7 @@ static NSString* const reuseIdentifier = @"Cell";
                          [NSNumber numberWithFloat:drand48()], @"metric1",
                          [NSNumber numberWithFloat:drand48()], @"metric2",
                          [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
-
+    
     [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:dic];
     
     return cell;
