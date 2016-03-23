@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h> 
 #import "HistoryBarController.h"
 
 @interface HistoryContainerView : UIView

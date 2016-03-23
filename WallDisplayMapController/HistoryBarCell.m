@@ -11,7 +11,7 @@
 #import "HistoryBarGlobalManager.h"
 
 #define TIME_LABEL_FONT_SIZE 10
-#define TIME_LABEL_BUTTON_MARGIN 3
+#define TIME_LABEL_BUTTON_MARGIN 2.5
 #define GREY_LINE_THICKNESS 2
 #define TAG_VIEW_HEIGHT 30
 #define TAG_VIEW_WIDTH 68
@@ -152,12 +152,6 @@
     
     // TODO set the tag
     
-    // remove old metric views
-    for (int i=[metricViews count]-1; i>=0; i--) {
-        [[metricViews objectAtIndex:i]removeFromSuperview];
-        [metricViews removeObjectAtIndex:i];
-    }
-    
     // add the metric views, one for each metric, overlapping on top of each other
     for (NSString* key in metricData) {
         id value = [metricData objectForKey:key];
@@ -242,7 +236,11 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
-    // remove the graphs
+    // remove the old metric views
+    for (int i=[metricViews count]-1; i>=0; i--) {
+        [[metricViews objectAtIndex:i]removeFromSuperview];
+        [metricViews removeObjectAtIndex:i];
+    }
 }
 
 @end
