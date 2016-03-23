@@ -8,6 +8,7 @@
 
 #import "HistoryBarCell.h"
 #import "MetricView.h"
+#import "HistoryBarGlobalManager.h"
 
 #define TIME_LABEL_FONT_SIZE 10
 #define TIME_LABEL_BUTTON_MARGIN 3
@@ -227,9 +228,10 @@
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:self.frame.size.height -1 * (timeStampLabel.frame.size.height
-                                                                                                             + TAG_VIEW_HEIGHT
-                                                                                                             + TIME_LABEL_BUTTON_MARGIN)]];
+                                                                       constant:[HistoryBarGlobalManager getHistoryBarOriginalHeight]
+                                                                                - 1 * (timeStampLabel.frame.size.height
+                                                                                      + TAG_VIEW_HEIGHT
+                                                                                      + TIME_LABEL_BUTTON_MARGIN)]];
         [NSLayoutConstraint activateConstraints:metricViewConstraints];
         
         // add the MetricView to the array

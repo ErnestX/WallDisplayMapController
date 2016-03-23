@@ -9,8 +9,7 @@
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
-
-#define HISTORY_BAR_ORIGINAL_HEIGHT 160
+#import "HistoryBarGlobalManager.h"
 
 @interface HistoryBarController ()
 
@@ -37,14 +36,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT)];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryBarGlobalManager getHistoryBarOriginalHeight])];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_ORIGINAL_HEIGHT) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryBarGlobalManager getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
