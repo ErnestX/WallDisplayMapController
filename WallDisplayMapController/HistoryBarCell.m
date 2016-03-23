@@ -12,7 +12,6 @@
 #define TIME_LABEL_FONT_SIZE 10
 #define TIME_LABEL_BUTTON_MARGIN 3
 #define GREY_LINE_THICKNESS 2
-//#define TIMESTAMP_HEIGHT 5
 #define TAG_VIEW_HEIGHT 30
 #define TAG_VIEW_WIDTH 68
 
@@ -188,15 +187,26 @@
                                                                       attribute:NSLayoutAttributeCenterX
                                                                      multiplier:1.0
                                                                        constant:0.0]];
+
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                      attribute:NSLayoutAttributeCenterY
+                                                                      attribute:NSLayoutAttributeBottom
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self
-                                                                      attribute:NSLayoutAttributeCenterY // TODO
-                                                                     multiplier:1.0 // TODO
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                     multiplier:(1.0/metricData.count) * ([metricViews count]+1)
                                                                        constant:-1 * (timeStampLabel.frame.size.height
                                                                                       + TAG_VIEW_HEIGHT
-                                                                                      + TIME_LABEL_BUTTON_MARGIN) * 0.5]];
+                                                                                      + TIME_LABEL_BUTTON_MARGIN)
+                                                                                   * (1.0/metricData.count) * ([metricViews count]+1)]];
+        [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default
+        
+        [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0
+                                                                       constant:0.0]];
         
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeWidth
@@ -208,12 +218,12 @@
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
-                                                                         toItem:self
-                                                                      attribute:NSLayoutAttributeHeight
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:-1 * (timeStampLabel.frame.size.height
-                                                                                      + TAG_VIEW_HEIGHT
-                                                                                      + TIME_LABEL_BUTTON_MARGIN)]];
+                                                                       constant:self.frame.size.height -1 * (timeStampLabel.frame.size.height
+                                                                                                             + TAG_VIEW_HEIGHT
+                                                                                                             + TIME_LABEL_BUTTON_MARGIN)]];
         [NSLayoutConstraint activateConstraints:metricViewConstraints];
         
         // add the MetricView to the array

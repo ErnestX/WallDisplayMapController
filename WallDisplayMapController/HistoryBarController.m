@@ -10,7 +10,7 @@
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
 
-#define HISTORY_BAR_ORIGINAL_HEIGHT 150
+#define HISTORY_BAR_ORIGINAL_HEIGHT 160
 
 @interface HistoryBarController ()
 
@@ -101,7 +101,11 @@ static NSString* const reuseIdentifier = @"Cell";
     
     // Configure the cell
     srand48(arc4random());
-    NSDictionary* dic = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:drand48()] forKey:@"testing metric"]; // stub
+    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [NSNumber numberWithFloat:drand48()], @"metric1",
+                         [NSNumber numberWithFloat:drand48()], @"metric2",
+                         [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
+
     [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:dic];
     
     return cell;

@@ -32,7 +32,7 @@
 }
 
 - (void)testButtonPressed:(id)sender {
-    [historyBarController setHistoryBarHeight:500 withAnimationDuration:0.5];
+    [historyBarController setHistoryBarHeight:450 withAnimationDuration:0.5];
 }
 
 - (void)testButtonReleased:(id)sender {
