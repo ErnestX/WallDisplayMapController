@@ -13,12 +13,18 @@
 #define DATA_POINT_DIAMETER 10
 
 @implementation MetricView
+{
+    UIView* dataPointView;
+    UIView* leftLineView;
+    UIView* rightLineView;
+}
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
     self = [self initWithMetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
-    // TODO
+    [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
+    [self showRightLineWithNextDataPointHeight:nh absHorizontalDistance:nd];
     
     return self;
 }
@@ -27,7 +33,7 @@
     self = [self initWithMetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
-    // TODO
+    [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
     
     return self;
 }
@@ -36,7 +42,7 @@
     self = [self initWithMetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
-    // TODO
+    [self showRightLineWithNextDataPointHeight:nh absHorizontalDistance:nd];
     
     return self;
 }
@@ -46,7 +52,7 @@
     CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     
     // draw the data point (each metric view contains only one data point)
-    UIView* dataPointView = [UIView new];
+    dataPointView = [UIView new];
     NSAssert(dataPointView, @"init failed");
     
     dataPointView.backgroundColor = c;
@@ -92,19 +98,29 @@
 }
 
 - (void)hideLeftLine {
-    
+    if (leftLineView) {
+        leftLineView.hidden = true;
+    }
 }
 
 - (void)hideRightLine {
-    
+    if (rightLineView) {
+        rightLineView.hidden = true;
+    }
 }
 
 - (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
-    
+    if (!leftLineView) {
+        // alloc new
+    }
+    // init
 }
 
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
-    
+    if (!rightLineView) {
+        // alloc new
+    }
+    // init
 }
 
 - (void)showIcons {

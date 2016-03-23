@@ -50,6 +50,7 @@
 
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
 
+// use notification center to send the message to show icons system wise in order to avoid complex passing mechanism
 - (void) showIcons;
 
 @end
