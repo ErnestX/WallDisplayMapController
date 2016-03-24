@@ -126,7 +126,7 @@
                                                                          attribute:NSLayoutAttributeCenterX
                                                                         multiplier:1.0
                                                                           constant:0.0]];
-        
+        // TODO: incomplete! Need to figure out how to deal with transformaiton in auto layout
     }
     // init
 }

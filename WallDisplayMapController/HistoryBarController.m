@@ -28,7 +28,7 @@ static NSString* const reuseIdentifier = @"Cell";
     NSAssert(self, @"init failed");
     
     containerController = hcvc;
-    savesArray = [NSMutableArray array];
+    savesArray = [[NSMutableArray alloc]init];
     
     return self;
 }
@@ -59,12 +59,23 @@ static NSString* const reuseIdentifier = @"Cell";
 }
 
 - (void)loadSaves {
-    // stub
     [self.collectionView performBatchUpdates:^{
+        
+        // get save files and save them into saveArray (stub)
+        srand48(arc4random()); // set random seed
+        NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < 50; i++) {
-            [savesArray insertObject:@"arrayFiller" atIndex:0];
-            [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+            NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithFloat:drand48()], @"metric1",
+                                 [NSNumber numberWithFloat:drand48()], @"metric2",
+                                 [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
+            [savesArray insertObject:dic atIndex:i];
+            [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
+        
+        // insert cells
+        [self.collectionView insertItemsAtIndexPaths:indexPaths];
+        
     } completion:nil];
 }
 
@@ -99,13 +110,7 @@ static NSString* const reuseIdentifier = @"Cell";
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    srand48(arc4random());
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:drand48()], @"metric1",
-                         [NSNumber numberWithFloat:drand48()], @"metric2",
-                         [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
-    
-    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:dic];
+    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:[savesArray objectAtIndex:indexPath.row]];
     
     return cell;
 }
