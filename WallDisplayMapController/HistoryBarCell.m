@@ -136,13 +136,95 @@
     return self;
 }
 
+- (void)initForReuseWithTimeStamp:(NSDate *)time
+                              tag:(NSString *)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
+      prevMetricNamePositionPairs:(nonnull NSDictionary *)prevMetricData
+        prevAbsHorizontalDistance:(CGFloat)pd
+      nextMetricNamePositionPairs:(nonnull NSDictionary *)nextMetricData
+        nextAbsHorizontalDistance:(CGFloat)nd {
+    
+    [self initForReuseWithTimeStamp:time
+                                tag:tag
+                          flagOrNot:flag
+        thisMetricNamePositionPairs:thisMetricData
+                      prevCellExist:YES
+        prevMetricNamePositionPairs:prevMetricData
+          prevAbsHorizontalDistance:pd
+                      nextCellExist:YES
+        nextMetricNamePositionPairs:nextMetricData
+          nextAbsHorizontalDistance:nd];
+    
+}
+
+- (void)initForReuseWithTimeStamp:(NSDate *)time
+                              tag:(NSString *)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
+      prevMetricNamePositionPairs:(nonnull NSDictionary *)prevMetricData
+        prevAbsHorizontalDistance:(CGFloat)pd {
+    
+    [self initForReuseWithTimeStamp:time
+                                tag:tag
+                          flagOrNot:flag
+        thisMetricNamePositionPairs:thisMetricData
+                      prevCellExist:YES
+        prevMetricNamePositionPairs:prevMetricData
+          prevAbsHorizontalDistance:pd
+                      nextCellExist:NO
+        nextMetricNamePositionPairs:nil
+          nextAbsHorizontalDistance:NAN];
+    
+}
+
+- (void)initForReuseWithTimeStamp:(NSDate *)time
+                              tag:(NSString *)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
+      nextMetricNamePositionPairs:(NSDictionary *)nextMetricData
+        nextAbsHorizontalDistance:(CGFloat)nd {
+    
+    [self initForReuseWithTimeStamp:time
+                                tag:tag
+                          flagOrNot:flag
+        thisMetricNamePositionPairs:thisMetricData
+                      prevCellExist:NO
+        prevMetricNamePositionPairs:nil
+          prevAbsHorizontalDistance:NAN
+                      nextCellExist:YES
+        nextMetricNamePositionPairs:nextMetricData
+          nextAbsHorizontalDistance:nd];
+    
+}
+
+- (void)initForReuseWithTimeStamp:(NSDate *)time
+                              tag:(NSString *)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(NSDictionary *)thisMetricData {
+    
+    [self initForReuseWithTimeStamp:time
+                                tag:tag
+                          flagOrNot:flag
+        thisMetricNamePositionPairs:thisMetricData
+                      prevCellExist:NO
+        prevMetricNamePositionPairs:nil
+          prevAbsHorizontalDistance:NAN
+                      nextCellExist:NO
+        nextMetricNamePositionPairs:nil
+          nextAbsHorizontalDistance:NAN];
+    
+}
+
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
-      prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
+                    prevCellExist:(BOOL)pe
+      prevMetricNamePositionPairs:(nullable NSDictionary*)prevMetricData
         prevAbsHorizontalDistance:(CGFloat)pd
-      nextMetricNamePositionPairs:(nonnull NSDictionary*)nextMetricData
+                    nextCellExist:(BOOL)ne
+      nextMetricNamePositionPairs:(nullable NSDictionary*)nextMetricData
         nextAbsHorizontalDistance:(CGFloat)nd {
     
     // set the timeStamp label
@@ -177,7 +259,8 @@
         
         
         MetricView* mv;
-//        if (prevMetricData && nextMetricData) {
+        
+        if (pe && ne) {
             mv = [[MetricView new]initWithMetricName:key
                                             position:floatV
                                                color:color
@@ -185,7 +268,24 @@
                                absHorizontalDistance:pd
                                  nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
                                absHorizontalDistance:nd];
-//        }
+        } else if (pe) {
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:pd];
+        } else if (ne) {
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:nd];
+        } else {
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color];
+        }
+        
         mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
         
         [self addSubview:mv];
