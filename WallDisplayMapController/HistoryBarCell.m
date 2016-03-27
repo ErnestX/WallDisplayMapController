@@ -133,11 +133,17 @@
                                                                 constant:0.0]];
     [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
-    
     return self;
 }
 
-- (void)initForReuseWithTimeStamp:(nonnull NSDate*) time tag:(nonnull NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(nonnull NSDictionary*) metricData {
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
+                              tag:(nonnull NSString*)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
+      prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
+        prevAbsHorizontalDistance:(CGFloat)pd
+      nextMetricNamePositionPairs:(nonnull NSDictionary*)nextMetricData
+        nextAbsHorizontalDistance:(CGFloat)nd {
     
     // set the timeStamp label
     NSDateFormatter* formatter;
@@ -153,8 +159,8 @@
     // TODO set the tag
     
     // add the metric views, one for each metric, overlapping on top of each other
-    for (NSString* key in metricData) {
-        id value = [metricData objectForKey:key];
+    for (NSString* key in thisMetricData) {
+        id value = [thisMetricData objectForKey:key];
         
         // validate key and value
         NSAssert([key isKindOfClass:[NSString class]], @"key is not a string"); // TODO: check if name is valid
@@ -169,7 +175,19 @@
         CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
         UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         
-        MetricView* mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
+        
+        MetricView* mv;
+//        if (prevMetricData && nextMetricData) {
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:pd
+                                 nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:nd];
+//        }
+        mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
+        
         [self addSubview:mv];
         
         // set auto layout
@@ -191,11 +209,11 @@
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeBottom
-                                                                     multiplier:(1.0/metricData.count) * ([metricViews count]+1)
+                                                                     multiplier:(1.0/thisMetricData.count) * ([metricViews count]+1)
                                                                        constant:-1 * (timeStampLabel.frame.size.height
                                                                                       + TAG_VIEW_HEIGHT
                                                                                       + TIME_LABEL_BUTTON_MARGIN)
-                                                                                   * (1.0/metricData.count) * ([metricViews count]+1)]];
+                                                                                   * (1.0/thisMetricData.count) * ([metricViews count]+1)]];
         [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
         
         // set auto layout: the top cannot be above that of the cell. This constraint acts on top of the previous one (of higher priority)

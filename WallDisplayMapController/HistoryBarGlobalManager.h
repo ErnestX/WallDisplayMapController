@@ -11,5 +11,6 @@
 @interface HistoryBarGlobalManager : NSObject
 
 + (CGFloat)getHistoryBarOriginalHeight;
++ (CGFloat)getCellDefaultWidth;
 
 @end

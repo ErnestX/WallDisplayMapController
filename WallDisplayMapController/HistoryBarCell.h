@@ -11,8 +11,51 @@
 @interface HistoryBarCell : UICollectionViewCell
 
 /**
- @param metricData the position in the dictionary should range from 0 to 1
+ @param thisMetricData the position in the dictionary should range from 0 to 1
+ @param prevMetricData the position in the dictionary should range from 0 to 1
+ @param nextMetricData the position in the dictionary should range from 0 to 1
  */
-- (void)initForReuseWithTimeStamp:(nonnull NSDate*) time tag:(nonnull NSString*)tag flagOrNot:(BOOL)flag metricNamePositionPairs:(nonnull NSDictionary*) metricData;
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
+                              tag:(nonnull NSString*)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
+      prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
+            prevAbsHorizontalDistance:(CGFloat)pd
+      nextMetricNamePositionPairs:(nonnull NSDictionary*)nextMetricData
+            nextAbsHorizontalDistance:(CGFloat)nd;
+
+/**
+ @param thisMetricData the position in the dictionary should range from 0 to 1
+ @param prevMetricData the position in the dictionary should range from 0 to 1
+ @param nextMetricData the position in the dictionary should range from 0 to 1
+ */
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
+                              tag:(nonnull NSString*)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
+      prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
+        prevAbsHorizontalDistance:(CGFloat)pd;
+
+/**
+ @param thisMetricData the position in the dictionary should range from 0 to 1
+ @param prevMetricData the position in the dictionary should range from 0 to 1
+ @param nextMetricData the position in the dictionary should range from 0 to 1 
+ */
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
+                              tag:(nonnull NSString*)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
+      nextMetricNamePositionPairs:(nonnull NSDictionary*)nextMetricData
+        nextAbsHorizontalDistance:(CGFloat)nd;
+
+/**
+ @param thisMetricData the position in the dictionary should range from 0 to 1
+ @param prevMetricData the position in the dictionary should range from 0 to 1
+ @param nextMetricData the position in the dictionary should range from 0 to 1
+ */
+- (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
+                              tag:(nonnull NSString*)tag
+                        flagOrNot:(BOOL)flag
+      thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData;
 
 @end

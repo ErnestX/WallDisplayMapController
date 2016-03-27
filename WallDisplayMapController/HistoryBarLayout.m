@@ -7,8 +7,9 @@
 //
 
 #import "HistoryBarLayout.h"
+#import "HistoryBarGlobalManager.h"
 
-#define CELL_WIDTH 70
+//#define CELL_WIDTH 70
 
 @implementation HistoryBarLayout
 {
@@ -19,18 +20,18 @@
 - (void)prepareLayout {
     [super prepareLayout];
     
-    sideInset = self.collectionView.frame.size.width/2 - CELL_WIDTH/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    sideInset = self.collectionView.frame.size.width/2 - [HistoryBarGlobalManager getCellDefaultWidth]/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
     cellCount = [self.collectionView numberOfItemsInSection:0];
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(cellCount * CELL_WIDTH + sideInset*2, self.collectionView.frame.size.height);
+    return CGSizeMake(cellCount * [HistoryBarGlobalManager getCellDefaultWidth] + sideInset*2, self.collectionView.frame.size.height);
 }
 
 - (UICollectionViewLayoutAttributes*)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes* attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
-    attributes.frame = CGRectMake(sideInset + CELL_WIDTH*(indexPath.item), 0.0, CELL_WIDTH, self.collectionView.frame.size.height);
+    attributes.frame = CGRectMake(sideInset + [HistoryBarGlobalManager getCellDefaultWidth]*(indexPath.item), 0.0, [HistoryBarGlobalManager getCellDefaultWidth], self.collectionView.frame.size.height);
     
     return attributes;
 }

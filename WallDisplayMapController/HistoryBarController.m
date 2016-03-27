@@ -66,8 +66,8 @@ static NSString* const reuseIdentifier = @"Cell";
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < 50; i++) {
             NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithFloat:drand48()], @"metric1",
-                                 [NSNumber numberWithFloat:drand48()], @"metric2",
+                                 [NSNumber numberWithFloat:i/50.0], @"metric1",
+                                 [NSNumber numberWithFloat:i/60.0], @"metric2",
                                  [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
             [savesArray insertObject:dic atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
@@ -110,7 +110,13 @@ static NSString* const reuseIdentifier = @"Cell";
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    [cell initForReuseWithTimeStamp:[NSDate date] tag:@"tag" flagOrNot:NO metricNamePositionPairs:[savesArray objectAtIndex:indexPath.row]];
+    NSInteger thisIndex = indexPath.row;
+    [cell initForReuseWithTimeStamp:[NSDate date]
+                                tag:@"tag"
+                          flagOrNot:NO
+        thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
+        prevMetricNamePositionPairs:(thisIndex-1 < 0 ? nil : [savesArray objectAtIndex: thisIndex - 1])
+        nextMetricNamePositionPairs:(thisIndex+1 > savesArray.count-1 ? nil : [savesArray objectAtIndex: thisIndex + 1])];
     
     return cell;
 }

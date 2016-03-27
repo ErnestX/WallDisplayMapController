@@ -92,15 +92,15 @@
         
         if (timeDiff > SPEED_TRACK_INTERVAL) {
             // check speed every SPEED_TRACK_INTERVAL secs
-            if (fabsf(speed) < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
+            if (fabs(speed) < MIN_SCROLL_SPEED_BEFORE_SNAPING) {
                 // too slow: stop tracking
                 readyToSnap = false;
                 // snap
                 NSLog(@"slow enough to snap");
                 if (speed > 0) {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:YES withInitialAbsSpeed:fabsf(speed)];
+                    [self snapToNextCellWithCurrentScrollDirectionRight:YES withInitialAbsSpeed:fabs(speed)];
                 } else {
-                    [self snapToNextCellWithCurrentScrollDirectionRight:NO withInitialAbsSpeed:fabsf(speed)];
+                    [self snapToNextCellWithCurrentScrollDirectionRight:NO withInitialAbsSpeed:fabs(speed)];
                 }
 //                [self snapToClosestCell];
             }
