@@ -286,7 +286,6 @@
                                                color:color];
         }
         
-        mv = [[MetricView new]initWithMetricName:key position:floatV color:color]; // TODO not testing lines yet
         
         [self addSubview:mv];
         

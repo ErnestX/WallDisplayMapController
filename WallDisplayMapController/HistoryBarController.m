@@ -111,12 +111,40 @@ static NSString* const reuseIdentifier = @"Cell";
     
     // Configure the cell
     NSInteger thisIndex = indexPath.row;
-    [cell initForReuseWithTimeStamp:[NSDate date]
-                                tag:@"tag"
-                          flagOrNot:NO
-        thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
-        prevMetricNamePositionPairs:(thisIndex-1 < 0 ? nil : [savesArray objectAtIndex: thisIndex - 1])
-        nextMetricNamePositionPairs:(thisIndex+1 > savesArray.count-1 ? nil : [savesArray objectAtIndex: thisIndex + 1])];
+    
+    if (thisIndex > 0 && thisIndex < savesArray.count-1) {
+        // have both prev cell and next cell
+        [cell initForReuseWithTimeStamp:[NSDate date]
+                                    tag:@"test tag"
+                              flagOrNot:NO // TODO not testing flag yet
+            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
+            prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
+              prevAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
+            nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
+              nextAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+    } else if (thisIndex > 0) {
+        // prev cell only
+        [cell initForReuseWithTimeStamp:[NSDate date]
+                                    tag:@"test tag"
+                              flagOrNot:NO // TODO not testing flag yet
+            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
+            prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
+              prevAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+    } else if (thisIndex < savesArray.count-1) {
+        // next cell only
+        [cell initForReuseWithTimeStamp:[NSDate date]
+                                    tag:@"test tag"
+                              flagOrNot:NO // TODO not testing flag yet
+            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
+            nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
+              nextAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+    } else {
+        // only one cell
+        [cell initForReuseWithTimeStamp:[NSDate date]
+                                    tag:@"test tag"
+                              flagOrNot:NO // TODO not testing flag yet
+            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]];
+    }
     
     return cell;
 }
