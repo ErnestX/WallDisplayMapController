@@ -11,6 +11,7 @@
 @interface HistoryBarCell : UICollectionViewCell
 
 /**
+ @brief use this method to init if the cell is in the middle of two cells
  @param thisMetricData the position in the dictionary should range from 0 to 1
  @param prevMetricData the position in the dictionary should range from 0 to 1
  @param nextMetricData the position in the dictionary should range from 0 to 1
@@ -25,9 +26,9 @@
             nextAbsHorizontalDistance:(CGFloat)nd;
 
 /**
+ @brief use this method to init if the cell is the first cell from the right
  @param thisMetricData the position in the dictionary should range from 0 to 1
  @param prevMetricData the position in the dictionary should range from 0 to 1
- @param nextMetricData the position in the dictionary should range from 0 to 1
  */
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
@@ -37,9 +38,9 @@
         prevAbsHorizontalDistance:(CGFloat)pd;
 
 /**
+ @brief use this method to init if the cell is the first cell from the left
  @param thisMetricData the position in the dictionary should range from 0 to 1
- @param prevMetricData the position in the dictionary should range from 0 to 1
- @param nextMetricData the position in the dictionary should range from 0 to 1 
+ @param nextMetricData the position in the dictionary should range from 0 to 1
  */
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
@@ -49,9 +50,8 @@
         nextAbsHorizontalDistance:(CGFloat)nd;
 
 /**
+ @brief use this method to init if the cell is the only cell in the graph
  @param thisMetricData the position in the dictionary should range from 0 to 1
- @param prevMetricData the position in the dictionary should range from 0 to 1
- @param nextMetricData the position in the dictionary should range from 0 to 1
  */
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag

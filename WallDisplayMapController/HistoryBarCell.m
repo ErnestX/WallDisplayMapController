@@ -31,8 +31,6 @@
     metricViews = [[NSMutableArray alloc]init];
     
     self.backgroundColor = [UIColor whiteColor];
-//    self.layer.borderColor = [UIColor grayColor].CGColor;
-//    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     // add the time stamp label
     timeStampLabel = [UILabel new];
@@ -302,7 +300,13 @@
                                                                      multiplier:1.0
                                                                        constant:0.0]];
         
-        // set auto layout: evenly distribute the bottoms of metric views along height of the cell: the height of the cell is divided into the same number of chunks evenly. Then, the second to the last dividing points are assigned as the bottom of the metric views. This creates the problem that the tops of all the metric views except the last one goes above the cell, while the top of the last metric view aligns perfectly with that of the cell. This problem is solved by using the next constraint on top of this one.
+        /* set auto layout: evenly distribute the bottoms of metric views along height of the cell: 
+         the height of the cell is divided into the same number of chunks evenly. 
+         Then, the second to the last dividing points are assigned as the bottom of the metric views. 
+         This creates the problem that the tops of all the metric views except the last one goes above the cell, 
+         while the top of the last metric view aligns perfectly with that of the cell. 
+         This problem is solved by using the next constraint on top of this one.
+         */
         [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
                                                                       attribute:NSLayoutAttributeBottom
                                                                       relatedBy:NSLayoutRelationEqual
