@@ -23,6 +23,8 @@
         }
         
         self.backgroundColor = color; // TODO gradient
+        
+        self.layer.allowsEdgeAntialiasing = YES;
     }
     return self;
 }

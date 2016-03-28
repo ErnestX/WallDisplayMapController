@@ -113,8 +113,8 @@
     }
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+- (void)layoutSubviews {
+    [super layoutSubviews];
     NSLog(@"set frame");
     
     if (leftLineView) {
@@ -138,7 +138,7 @@
                             connectedToDataPointWithHeight:prevH
                                      absHorizontalDistance:prevD anchorPointOnRight:YES];
 //        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
-        [self updateLeftLineAccordingToFrame];
+//        [self updateLeftLineAccordingToFrame];
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
         
