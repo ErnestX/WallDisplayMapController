@@ -124,14 +124,14 @@
 
 - (void)updateExistingLinesAccordingToFrameHeight:(CGFloat)h {
     if (leftLineView) {
-        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight) * h
+        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight) * h * (MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / leftLineView.absHorizontalDistance);
 //        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, leftLineView.connectedToDataPointWithHeight, self.frame.size.height, leftLineView.absHorizontalDistance);
         leftLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
     }
     
     if (rightLineView) {
-        CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition) * h
+        CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition) * h * (MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / rightLineView.absHorizontalDistance);
 //        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, rightLineView.connectedToDataPointWithHeight, h, rightLineView.absHorizontalDistance);
         rightLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
@@ -170,7 +170,7 @@
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                                         multiplier:1.0
-                                                                          constant:30]];
+                                                                          constant:70]];
         [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
                                                                          attribute:NSLayoutAttributeHeight
                                                                          relatedBy:NSLayoutRelationEqual
@@ -216,7 +216,7 @@
                                                                            toItem:nil
                                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                                        multiplier:1.0
-                                                                         constant:30]];
+                                                                         constant:70]];
         [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationEqual
