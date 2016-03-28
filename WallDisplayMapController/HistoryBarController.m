@@ -67,7 +67,7 @@ static NSString* const reuseIdentifier = @"Cell";
         for (int i = 0; i < 50; i++) {
             NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithFloat:i/50.0], @"metric1",
-                                 [NSNumber numberWithFloat:i/60.0], @"metric2",
+                                 [NSNumber numberWithFloat:(50-i)/50.0], @"metric2",
                                  [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
             [savesArray insertObject:dic atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];

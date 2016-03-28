@@ -150,8 +150,8 @@
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                                         multiplier:1.0
-                                                                          constant:DATA_POINT_DIAMETER]];
-    [NSLayoutConstraint activateConstraints:leftLineViewConstraints];
+                                                                          constant:LINE_WIDTH]];
+        [NSLayoutConstraint activateConstraints:leftLineViewConstraints];
     }
     // init
 }
@@ -159,6 +159,45 @@
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     if (!rightLineView) {
         // alloc new
+        rightLineView = [UIView new];
+        rightLineView.layer.anchorPoint = CGPointMake(0.0, 0.5); // rotates relative to the center of the right edge
+        rightLineView.layer.transform = CATransform3DMakeRotation(-0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+        rightLineView.backgroundColor = [UIColor redColor];
+        [self addSubview:rightLineView];
+        [self sendSubviewToBack:rightLineView];
+        
+        // auto layout
+        rightLineView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSMutableArray <NSLayoutConstraint*>* rightLineViewConstraints = [[NSMutableArray alloc]init];
+        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:dataPointView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:dataPointView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:30]];
+        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:LINE_WIDTH]];
+        [NSLayoutConstraint activateConstraints:rightLineViewConstraints];
     }
     // init
 }
