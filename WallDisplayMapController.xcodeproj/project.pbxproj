@@ -83,6 +83,7 @@
 		CA4E04921C9B5A3A00E2B60D /* MetricView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4E04911C9B5A3A00E2B60D /* MetricView.m */; };
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
+		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
 		CAFC10A41C71A74600523617 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; };
 		CAFC10A51C71A74600523617 /* pop.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
@@ -299,6 +300,8 @@
 		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
 		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
 		CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerView.m; sourceTree = "<group>"; };
+		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
+		CAD0C8071CA9D0480022B67B /* GraphLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphLineView.m; sourceTree = "<group>"; };
 		CAFC108C1C71A73800523617 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = "pop-master/pop.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -564,6 +567,8 @@
 				CA4679021C62A4DB00C4D7BB /* HistoryBarCell.m */,
 				CA4E04901C9B5A3A00E2B60D /* MetricView.h */,
 				CA4E04911C9B5A3A00E2B60D /* MetricView.m */,
+				CAD0C8061CA9D0480022B67B /* GraphLineView.h */,
+				CAD0C8071CA9D0480022B67B /* GraphLineView.m */,
 			);
 			name = HistoryViews;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
 				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
+				CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */,
 				CA4678FD1C5BEB5D00C4D7BB /* HistoryBarController.m in Sources */,
 				CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */,
 				AE83C8CD1B3A09390041E0C0 /* DetailViewController.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "MetricView.h"
+#import "GraphLineView.h"
 
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
@@ -15,8 +16,9 @@
 
 @implementation MetricView
 {
+    CGFloat dataPointPosition;
     UIView* dataPointView;
-    UIView* leftLineView;
+    GraphLineView* leftLineView;
     UIView* rightLineView;
 }
 
@@ -49,6 +51,7 @@
 }
 
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+    dataPointPosition = p;
     // map the position to a different range for rendering
     CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     
@@ -110,13 +113,32 @@
     }
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    NSLog(@"set frame");
+    
+    if (leftLineView) {
+        [self updateLeftLineAccordingToFrame];
+    }
+}
+
+- (void)updateLeftLineAccordingToFrame {
+    if (leftLineView) {
+        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight)*self.frame.size.height
+                             / leftLineView.absHorizontalDistance);
+        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, leftLineView.connectedToDataPointWithHeight, self.frame.size.height, leftLineView.absHorizontalDistance);
+        leftLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+    }
+}
+
 - (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     if (!leftLineView) {
         // alloc new
-        leftLineView = [UIView new];
-        leftLineView.layer.anchorPoint = CGPointMake(1.0, 0.5); // rotates relative to the center of the right edge
-        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
-        leftLineView.backgroundColor = [UIColor redColor];
+        leftLineView = [[GraphLineView alloc]initWithColor:[UIColor redColor]
+                            connectedToDataPointWithHeight:prevH
+                                     absHorizontalDistance:prevD anchorPointOnRight:YES];
+//        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+        [self updateLeftLineAccordingToFrame];
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
         
