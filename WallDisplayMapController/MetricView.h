@@ -16,7 +16,7 @@
   @param p position must range from 0 to 1
   @warning does not call designated initializer
  */
-- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
 /**
   @brief init without the right line
@@ -24,7 +24,7 @@
   @param p position must range from 0 to 1
   @warning does not call designated initializer
  */
-- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd;
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd;
 
 /**
  @brief init without the left line
@@ -32,7 +32,7 @@
  @param p position must range from 0 to 1
  @warning does not call designated initializer
  */
-- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
+- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
 /**
  @brief init with neither of the left or right line
@@ -40,7 +40,7 @@
  @param p position must range from 0 to 1
  @warning does not call designated initializer
  */
-- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c;
+- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c;
 
 - (void)hideLeftLine;
 

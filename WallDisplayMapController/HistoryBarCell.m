@@ -255,41 +255,33 @@
         CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
         UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         
-        CGFloat frameHeight = [HistoryBarGlobalManager getHistoryBarOriginalHeight]
-                - 1 * (timeStampLabel.frame.size.height
-                       + TAG_VIEW_HEIGHT
-                       + TIME_LABEL_BUTTON_MARGIN);
         
         MetricView* mv;
         
         if (pe && ne) {
-            mv = [[MetricView new]initWithFrameHeight:frameHeight
-                                           MetricName:key
-                                             position:floatV
-                                                color:color
-                                  prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
-                                absHorizontalDistance:pd
-                                  nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
-                                absHorizontalDistance:nd];
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:pd
+                                 nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:nd];
         } else if (pe) {
-            mv = [[MetricView new]initWithFrameHeight:frameHeight
-                                           MetricName:key
-                                             position:floatV
-                                                color:color
-                                  prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
-                                absHorizontalDistance:pd];
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 prevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:pd];
         } else if (ne) {
-            mv = [[MetricView new]initWithFrameHeight:frameHeight
-                                           MetricName:key
-                                             position:floatV
-                                                color:color
-                                  nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
-                                absHorizontalDistance:nd];
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color
+                                 nextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+                               absHorizontalDistance:nd];
         } else {
-            mv = [[MetricView new]initWithFrameHeight:frameHeight
-                                           MetricName:key
-                                             position:floatV
-                                                color:color];
+            mv = [[MetricView new]initWithMetricName:key
+                                            position:floatV
+                                               color:color];
         }
         
         
@@ -351,7 +343,10 @@
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:frameHeight]];
+                                                                       constant:[HistoryBarGlobalManager getHistoryBarOriginalHeight]
+                                                                                - 1 * (timeStampLabel.frame.size.height
+                                                                                      + TAG_VIEW_HEIGHT
+                                                                                      + TIME_LABEL_BUTTON_MARGIN)]];
         [NSLayoutConstraint activateConstraints:metricViewConstraints];
         
         // add the MetricView to the array
