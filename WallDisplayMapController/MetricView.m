@@ -15,13 +15,15 @@
 
 @implementation MetricView
 {
+    CGFloat dataPointPosition;
+
     UIView* dataPointView;
     UIView* leftLineView;
     UIView* rightLineView;
 }
 
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
-    self = [self initWithMetricName:m position:p color:c];
+- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
+    self = [self initWithFrameHeight:h MetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
     [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
@@ -30,8 +32,8 @@
     return self;
 }
 
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd {
-    self = [self initWithMetricName:m position:p color:c];
+- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd {
+    self = [self initWithFrameHeight:h MetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
     [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
@@ -39,8 +41,8 @@
     return self;
 }
 
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
-    self = [self initWithMetricName:m position:p color:c];
+- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
+    self = [self initWithFrameHeight:h MetricName:m position:p color:c];
     NSAssert(self, @"init failed");
     
     [self showRightLineWithNextDataPointHeight:nh absHorizontalDistance:nd];
@@ -48,7 +50,9 @@
     return self;
 }
 
-- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+- (id)initWithFrameHeight:(CGFloat)h MetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+    dataPointPosition = p;
+    
     // map the position to a different range for rendering
     CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     
@@ -114,9 +118,17 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [UIView new];
+        
+        // set angle
         leftLineView.layer.anchorPoint = CGPointMake(1.0, 0.5); // rotates relative to the center of the right edge
-        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+        
+        CGFloat a = atan((dataPointPosition-prevH)*self.frame.size.height/prevD);
+        NSLog(@"%f, %f, %f, %f, %f",dataPointPosition, prevH, self.frame.size.height, prevD, a);
+        leftLineView.layer.transform = CATransform3DMakeRotation(a, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+        
+        // render
         leftLineView.backgroundColor = [UIColor redColor];
+        
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
         
@@ -153,12 +165,11 @@
                                                                           constant:LINE_WIDTH]];
         [NSLayoutConstraint activateConstraints:leftLineViewConstraints];
     }
-    // init
 }
 
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     if (!rightLineView) {
-        // alloc new
+        // alloc new and init
         rightLineView = [UIView new];
         rightLineView.layer.anchorPoint = CGPointMake(0.0, 0.5); // rotates relative to the center of the right edge
         rightLineView.layer.transform = CATransform3DMakeRotation(-0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
