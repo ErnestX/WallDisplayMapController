@@ -115,18 +115,43 @@
         // alloc new
         leftLineView = [UIView new];
         leftLineView.layer.anchorPoint = CGPointMake(1.0, 0.5); // rotates relative to the center of the right edge
+        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+        leftLineView.backgroundColor = [UIColor redColor];
+        [self addSubview:leftLineView];
+        [self sendSubviewToBack:leftLineView];
         
         // auto layout
         leftLineView.translatesAutoresizingMaskIntoConstraints = NO;
         NSMutableArray <NSLayoutConstraint*>* leftLineViewConstraints = [[NSMutableArray alloc]init];
         [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
-                                                                         attribute:NSLayoutAttributeRight
+                                                                         attribute:NSLayoutAttributeCenterX
                                                                          relatedBy:NSLayoutRelationEqual
                                                                             toItem:dataPointView
                                                                          attribute:NSLayoutAttributeCenterX
                                                                         multiplier:1.0
                                                                           constant:0.0]];
-        // TODO: incomplete! Need to figure out how to deal with transformaiton in auto layout
+        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:dataPointView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1.0
+                                                                          constant:30]];
+        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1.0
+                                                                          constant:DATA_POINT_DIAMETER]];
+    [NSLayoutConstraint activateConstraints:leftLineViewConstraints];
     }
     // init
 }
