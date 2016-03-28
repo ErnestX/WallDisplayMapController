@@ -16,10 +16,11 @@
 
 @implementation MetricView
 {
+    CGRect oldFrame;
     CGFloat dataPointPosition;
     UIView* dataPointView;
     GraphLineView* leftLineView;
-    UIView* rightLineView;
+    GraphLineView* rightLineView;
 }
 
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
@@ -115,19 +116,25 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"set frame");
-    
-    if (leftLineView) {
-        [self updateLeftLineAccordingToFrame];
+    if (self.frame.size.height != oldFrame.size.height) {
+        [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
+        oldFrame = self.frame;
     }
 }
 
-- (void)updateLeftLineAccordingToFrame {
+- (void)updateExistingLinesAccordingToFrameHeight:(CGFloat)h {
     if (leftLineView) {
-        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight)*self.frame.size.height
+        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight) * h
                              / leftLineView.absHorizontalDistance);
-        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, leftLineView.connectedToDataPointWithHeight, self.frame.size.height, leftLineView.absHorizontalDistance);
+//        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, leftLineView.connectedToDataPointWithHeight, self.frame.size.height, leftLineView.absHorizontalDistance);
         leftLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
+    }
+    
+    if (rightLineView) {
+        CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition) * h
+                             / rightLineView.absHorizontalDistance);
+//        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, rightLineView.connectedToDataPointWithHeight, h, rightLineView.absHorizontalDistance);
+        rightLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
     }
 }
 
@@ -137,8 +144,6 @@
         leftLineView = [[GraphLineView alloc]initWithColor:[UIColor redColor]
                             connectedToDataPointWithHeight:prevH
                                      absHorizontalDistance:prevD anchorPointOnRight:YES];
-//        leftLineView.layer.transform = CATransform3DMakeRotation(0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
-//        [self updateLeftLineAccordingToFrame];
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
         
@@ -181,10 +186,10 @@
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     if (!rightLineView) {
         // alloc new
-        rightLineView = [UIView new];
-        rightLineView.layer.anchorPoint = CGPointMake(0.0, 0.5); // rotates relative to the center of the right edge
-        rightLineView.layer.transform = CATransform3DMakeRotation(-0.5, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
-        rightLineView.backgroundColor = [UIColor redColor];
+        rightLineView = [[GraphLineView alloc]initWithColor:[UIColor redColor]
+                             connectedToDataPointWithHeight:nextH
+                                      absHorizontalDistance:nextD
+                                         anchorPointOnRight:NO];
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
         
