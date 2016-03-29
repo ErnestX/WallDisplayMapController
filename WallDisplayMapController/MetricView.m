@@ -55,8 +55,6 @@
 
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
     dataPointPosition = p;
-    // map the position to a different range for rendering
-//    CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     
     // draw the data point (each metric view contains only one data point)
     if (!dataPointView) {
@@ -97,6 +95,7 @@
 }
 
 - (void)updateDataPointAccoridngToFrameSize:(CGSize)size {
+    // map the position to a different range for rendering
     CGFloat renderPos = dataPointPosition * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     dataPointView.center = CGPointMake(size.width/2.0, size.height * renderPos);
 }
@@ -128,6 +127,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     }
+    leftLineView.hidden = NO;
 }
 
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
@@ -141,6 +141,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     }
+    rightLineView.hidden = NO;
 }
 
 - (void)showIcons {
