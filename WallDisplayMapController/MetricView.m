@@ -106,9 +106,12 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView.connectedToDataPointWithHeight = prevH;
-        leftLineView.absHorizontalDistance = prevD;
+        leftLineView = [leftLineView initWithColor:[UIColor redColor]
+                    connectedToDataPointWithHeight:prevH
+                             absHorizontalDistance:prevD
+                                anchorPointOnRight:YES];
     }
+    
     [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
 }
 
@@ -123,9 +126,12 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView.connectedToDataPointWithHeight = nextH;
-        rightLineView.absHorizontalDistance = nextD;
+        rightLineView = [rightLineView initWithColor:[UIColor redColor]
+                      connectedToDataPointWithHeight:nextH
+                               absHorizontalDistance:nextD
+                                  anchorPointOnRight:NO];
     }
+    
     [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
 }
 

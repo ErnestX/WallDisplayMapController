@@ -8,6 +8,11 @@
 
 #import "GraphLineView.h"
 
+@interface GraphLineView()
+@property (readwrite) CGFloat connectedToDataPointWithHeight;
+@property (readwrite) CGFloat absHorizontalDistance;
+@end
+
 @implementation GraphLineView
 
 - (id)initWithColor:(UIColor*)color connectedToDataPointWithHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d anchorPointOnRight:(BOOL)onRight{

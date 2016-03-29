@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface GraphLineView : UIView
-@property CGFloat connectedToDataPointWithHeight;
-@property CGFloat absHorizontalDistance;
+@property (readonly) CGFloat connectedToDataPointWithHeight;
+@property (readonly) CGFloat absHorizontalDistance;
 
+/**
+ can be called multiple times to rewrite previous settings
+ */
 - (id)initWithColor:(UIColor*)color connectedToDataPointWithHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d anchorPointOnRight:(BOOL)onRight;
 
 @end
