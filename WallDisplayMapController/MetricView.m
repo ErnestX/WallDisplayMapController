@@ -41,7 +41,7 @@
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     [self updateDataPointAccoridngToFrameSize:self.frame.size];
-    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
+//    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
     
     return self;
 }
@@ -98,12 +98,18 @@
         // alloc new
         leftLineView = [[[GraphLineView alloc]
                          initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:[UIColor redColor] connectedToDataPointWithHeight:prevH absHorizontalDistance:prevD anchorPointOnRight:YES];
+                        initWithColor:[UIColor redColor]
+                        connectedToDataPointWithHeight:prevH
+                        absHorizontalDistance:prevD
+                        anchorPointOnRight:YES];
     
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
+    } else {
+        leftLineView.connectedToDataPointWithHeight = prevH;
+        leftLineView.absHorizontalDistance = prevD;
     }
-//    leftLineView.hidden = NO;
+    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
 }
 
 - (void)addRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
@@ -116,8 +122,11 @@
                          anchorPointOnRight:NO];
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
+    } else {
+        rightLineView.connectedToDataPointWithHeight = nextH;
+        rightLineView.absHorizontalDistance = nextD;
     }
-//    rightLineView.hidden = NO;
+    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
 }
 
 - (void)showIcons {
