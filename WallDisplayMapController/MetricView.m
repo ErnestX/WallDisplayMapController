@@ -40,6 +40,9 @@
     self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
+    [self updateDataPointAccoridngToFrameSize:self.frame.size];
+    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
+    
     return self;
 }
 

@@ -245,6 +245,7 @@
             [metricViews removeLastObject];
         }
     }
+    
     // add the metric views, one for each metric, overlapping on top of each other
     int i = 0;
     for (NSString* key in thisMetricData) {
