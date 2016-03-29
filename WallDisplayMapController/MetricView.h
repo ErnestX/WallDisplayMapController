@@ -11,7 +11,7 @@
 @interface MetricView : UIView
 
 /**
-  @brief init with both left and right lines
+  @brief init with both left and right lines. Can be called multiple times to rewirte previous settings
   @param m the metric name must match the one in the dictionary
   @param p position must range from 0 to 1
   @warning does not call designated initializer
@@ -19,7 +19,7 @@
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
 /**
-  @brief init without the right line
+  @brief init without the right line. Can be called multiple times to rewirte previous settings
   @param m the metric name must match the one in the dictionary
   @param p position must range from 0 to 1
   @warning does not call designated initializer
@@ -27,7 +27,7 @@
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd;
 
 /**
- @brief init without the left line
+ @brief init without the left line. Can be called multiple times to rewirte previous settings
  @param m the metric name must match the one in the dictionary
  @param p position must range from 0 to 1
  @warning does not call designated initializer
@@ -35,7 +35,7 @@
 - (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd;
 
 /**
- @brief init with neither of the left or right line
+ @brief init with neither of the left or right line. Can be called multiple times to rewirte previous settings
  @param m the metric name must match the one in the dictionary
  @param p position must range from 0 to 1
  @warning does not call designated initializer

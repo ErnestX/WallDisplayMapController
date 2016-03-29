@@ -15,7 +15,7 @@
 }
 
 + (CGFloat)getCellDefaultWidth {
-    return 70.0;
+    return 75.0;
 }
 
 @end

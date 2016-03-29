@@ -13,12 +13,14 @@
 #define MAX_RENDER_POSITION 0.9
 #define DATA_POINT_DIAMETER 10
 #define LINE_WIDTH 2
+#define LINE_LENGTH 40
 
 @implementation MetricView
 {
     CGRect oldFrame;
     CGFloat dataPointPosition;
     UIView* dataPointView;
+    NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
 }
@@ -54,47 +56,17 @@
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
     dataPointPosition = p;
     // map the position to a different range for rendering
-    CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
+//    CGFloat renderPos = p * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
     
     // draw the data point (each metric view contains only one data point)
-    dataPointView = [UIView new];
-    NSAssert(dataPointView, @"init failed");
+    if (!dataPointView) {
+//        dataPointView = [UIView new];
+        dataPointView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)];
+        NSAssert(dataPointView, @"init failed");
+        [self addSubview:dataPointView];
+    }
     
     dataPointView.backgroundColor = c;
-    
-    [self addSubview:dataPointView];
-    
-    dataPointView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSMutableArray <NSLayoutConstraint*>* dataPointViewConstraints = [[NSMutableArray alloc]init];
-    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
-                                                                  attribute:NSLayoutAttributeCenterX
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self
-                                                                  attribute:NSLayoutAttributeCenterX
-                                                                 multiplier:1.0
-                                                                   constant:0.0]];
-    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
-                                                                  attribute:NSLayoutAttributeCenterY
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self
-                                                                  attribute:NSLayoutAttributeCenterY // can't use height, so will use centerY and multiply by 2.0
-                                                                 multiplier:2.0 * renderPos // set center y
-                                                                   constant:0.0]];
-    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1.0
-                                                                   constant:DATA_POINT_DIAMETER]];
-    [dataPointViewConstraints addObject:[NSLayoutConstraint constraintWithItem:dataPointView
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1.0
-                                                                   constant:DATA_POINT_DIAMETER]];
-    [NSLayoutConstraint activateConstraints:dataPointViewConstraints];
     
     self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -116,24 +88,32 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.frame.size.height != oldFrame.size.height) {
+    
+    if (!CGSizeEqualToSize(self.frame.size, oldFrame.size)) {
+        [self updateDataPointAccoridngToFrameSize:self.frame.size];
         [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
         oldFrame = self.frame;
     }
 }
 
+- (void)updateDataPointAccoridngToFrameSize:(CGSize)size {
+    CGFloat renderPos = dataPointPosition * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
+    dataPointView.center = CGPointMake(size.width/2.0, size.height * renderPos);
+}
+
 - (void)updateExistingLinesAccordingToFrameHeight:(CGFloat)h {
     if (leftLineView) {
-        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight) * h * (MAX_RENDER_POSITION - MIN_RENDER_POSITION)
+        leftLineView.center = dataPointView.center;
+        CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight)
+                             * h*(MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / leftLineView.absHorizontalDistance);
-//        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, leftLineView.connectedToDataPointWithHeight, self.frame.size.height, leftLineView.absHorizontalDistance);
         leftLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
     }
-    
     if (rightLineView) {
-        CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition) * h * (MAX_RENDER_POSITION - MIN_RENDER_POSITION)
+        rightLineView.center = dataPointView.center;
+        CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition)
+                             * h*(MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / rightLineView.absHorizontalDistance);
-//        NSLog(@"%f, %f, %f, %f, %f", angle, dataPointPosition, rightLineView.connectedToDataPointWithHeight, h, rightLineView.absHorizontalDistance);
         rightLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
     }
 }
@@ -141,92 +121,26 @@
 - (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     if (!leftLineView) {
         // alloc new
-        leftLineView = [[GraphLineView alloc]initWithColor:[UIColor redColor]
-                            connectedToDataPointWithHeight:prevH
-                                     absHorizontalDistance:prevD anchorPointOnRight:YES];
+        leftLineView = [[[GraphLineView alloc]
+                         initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
+                        initWithColor:[UIColor redColor] connectedToDataPointWithHeight:prevH absHorizontalDistance:prevD anchorPointOnRight:YES];
+    
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
-        
-        // auto layout
-        leftLineView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSMutableArray <NSLayoutConstraint*>* leftLineViewConstraints = [[NSMutableArray alloc]init];
-        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
-                                                                         attribute:NSLayoutAttributeCenterX
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:dataPointView
-                                                                         attribute:NSLayoutAttributeCenterX
-                                                                        multiplier:1.0
-                                                                          constant:0.0]];
-        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:dataPointView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                       multiplier:1.0
-                                                                         constant:0.0]];
-        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
-                                                                         attribute:NSLayoutAttributeWidth
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0
-                                                                          constant:70]];
-        [leftLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:leftLineView
-                                                                         attribute:NSLayoutAttributeHeight
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0
-                                                                          constant:LINE_WIDTH]];
-        [NSLayoutConstraint activateConstraints:leftLineViewConstraints];
     }
-    // init
 }
 
 - (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     if (!rightLineView) {
         // alloc new
-        rightLineView = [[GraphLineView alloc]initWithColor:[UIColor redColor]
-                             connectedToDataPointWithHeight:nextH
-                                      absHorizontalDistance:nextD
-                                         anchorPointOnRight:NO];
+        rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
+                         initWithColor:[UIColor redColor]
+                         connectedToDataPointWithHeight:nextH
+                         absHorizontalDistance:nextD
+                         anchorPointOnRight:NO];
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
-        
-        // auto layout
-        rightLineView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSMutableArray <NSLayoutConstraint*>* rightLineViewConstraints = [[NSMutableArray alloc]init];
-        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:dataPointView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0]];
-        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:dataPointView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                       multiplier:1.0
-                                                                         constant:0.0]];
-        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
-                                                                        attribute:NSLayoutAttributeWidth
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:nil
-                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                       multiplier:1.0
-                                                                         constant:70]];
-        [rightLineViewConstraints addObject:[NSLayoutConstraint constraintWithItem:rightLineView
-                                                                        attribute:NSLayoutAttributeHeight
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:nil
-                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                       multiplier:1.0
-                                                                         constant:LINE_WIDTH]];
-        [NSLayoutConstraint activateConstraints:rightLineViewConstraints];
     }
-    // init
 }
 
 - (void)showIcons {

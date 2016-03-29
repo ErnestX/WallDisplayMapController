@@ -11,10 +11,10 @@
 #import "HistoryBarGlobalManager.h"
 
 #define TIME_LABEL_FONT_SIZE 10
-#define TIME_LABEL_BUTTON_MARGIN 2.5
+#define TIME_LABEL_BUTTON_MARGIN 2
 #define GREY_LINE_THICKNESS 2
 #define TAG_VIEW_HEIGHT 30
-#define TAG_VIEW_WIDTH 68
+#define TAG_VIEW_WIDTH 70
 
 @implementation HistoryBarCell
 {
