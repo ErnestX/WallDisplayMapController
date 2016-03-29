@@ -25,40 +25,11 @@
     GraphLineView* rightLineView;
 }
 
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
-    self = [self initWithMetricName:m position:p color:c];
-    NSAssert(self, @"init failed");
-    
-    [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
-    [self showRightLineWithNextDataPointHeight:nh absHorizontalDistance:nd];
-    
-    return self;
-}
-
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c prevDataPointHeight:(CGFloat)ph absHorizontalDistance:(CGFloat)pd {
-    self = [self initWithMetricName:m position:p color:c];
-    NSAssert(self, @"init failed");
-    
-    [self showLeftLineWithPrevDataPointHeight:ph absHorizontalDistance:pd];
-    
-    return self;
-}
-
-- (id)initWithMetricName:(NSString *)m position:(float)p color:(UIColor *)c nextDataPointHeight:(CGFloat)nh absHorizontalDistance:(CGFloat)nd {
-    self = [self initWithMetricName:m position:p color:c];
-    NSAssert(self, @"init failed");
-    
-    [self showRightLineWithNextDataPointHeight:nh absHorizontalDistance:nd];
-    
-    return self;
-}
-
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
     dataPointPosition = p;
     
     // draw the data point (each metric view contains only one data point)
     if (!dataPointView) {
-//        dataPointView = [UIView new];
         dataPointView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)];
         NSAssert(dataPointView, @"init failed");
         [self addSubview:dataPointView];
