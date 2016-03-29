@@ -43,15 +43,17 @@
     return self;
 }
 
-- (void)hideLeftLine {
+- (void)removeLeftLine {
     if (leftLineView) {
-        leftLineView.hidden = true;
+        [leftLineView removeFromSuperview];
+        leftLineView = nil;
     }
 }
 
-- (void)hideRightLine {
+- (void)removeRightLine {
     if (rightLineView) {
-        rightLineView.hidden = true;
+        [rightLineView removeFromSuperview];
+        rightLineView = nil;
     }
 }
 
@@ -88,7 +90,7 @@
     }
 }
 
-- (void)showLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
+- (void)addLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]
@@ -98,10 +100,10 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     }
-    leftLineView.hidden = NO;
+//    leftLineView.hidden = NO;
 }
 
-- (void)showRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
+- (void)addRightLineWithNextDataPointHeight:(CGFloat)nextH absHorizontalDistance:(CGFloat)nextD {
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
@@ -112,7 +114,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     }
-    rightLineView.hidden = NO;
+//    rightLineView.hidden = NO;
 }
 
 - (void)showIcons {

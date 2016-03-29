@@ -345,21 +345,21 @@
         
         // set up lines of applies
         if (pe && ne) {
-            [mv showLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
                               absHorizontalDistance:pd];
-            [mv showRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
                                absHorizontalDistance:nd];
         } else if (pe) {
-            [mv showLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
                               absHorizontalDistance:pd];
-            [mv hideRightLine];
+            [mv removeRightLine];
         } else if (ne) {
-            [mv showRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
                                absHorizontalDistance:nd];
-            [mv hideLeftLine];
+            [mv removeLeftLine];
         } else {
-            [mv hideLeftLine];
-            [mv hideRightLine];
+            [mv removeLeftLine];
+            [mv removeRightLine];
         }
         
         i++;
@@ -368,12 +368,6 @@
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-    
-    // remove the old metric views
-//    for (int i=[metricViews count]-1; i>=0; i--) {
-//        [[metricViews objectAtIndex:i]removeFromSuperview];
-//        [metricViews removeObjectAtIndex:i];
-//    }
 }
 
 @end

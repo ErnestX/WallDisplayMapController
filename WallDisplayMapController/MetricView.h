@@ -18,13 +18,13 @@
  */
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c;
 
-- (void)hideLeftLine;
+- (void)removeLeftLine;
 
-- (void)hideRightLine;
+- (void)removeRightLine;
 
-- (void)showLeftLineWithPrevDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
+- (void)addLeftLineWithPrevDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
 
-- (void)showRightLineWithNextDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
+- (void)addRightLineWithNextDataPointHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d;
 
 // use notification center to send the message to show icons system wise in order to avoid complex passing mechanism
 - (void) showIcons;
