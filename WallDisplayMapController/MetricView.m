@@ -26,7 +26,7 @@
 }
 
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
-    self.layer.shouldRasterize = YES;
+    self.layer.shouldRasterize = YES; // When a view is rasterized, it's rasterized image is cached instead of rerending it every time. The downside is that if the view need to change, the cache needs to be updated
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     dataPointPosition = p;
@@ -44,7 +44,6 @@
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     [self updateDataPointAccoridngToFrameSize:self.frame.size];
-//    [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
     
     return self;
 }
@@ -99,8 +98,7 @@
 - (void)addLeftLineWithPrevDataPointHeight:(CGFloat)prevH absHorizontalDistance:(CGFloat)prevD {
     if (!leftLineView) {
         // alloc new
-        leftLineView = [[[GraphLineView alloc]
-                         initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
+        leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
                         initWithColor:[UIColor redColor]
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
@@ -126,6 +124,7 @@
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
+        
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
