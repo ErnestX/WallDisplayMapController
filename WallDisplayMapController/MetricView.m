@@ -26,6 +26,9 @@
 }
 
 - (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+    self.layer.shouldRasterize = YES;
+    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     dataPointPosition = p;
     
     // draw the data point (each metric view contains only one data point)
