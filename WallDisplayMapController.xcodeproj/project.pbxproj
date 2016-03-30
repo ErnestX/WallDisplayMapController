@@ -84,6 +84,7 @@
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
+		CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */; };
 		CAFC10A41C71A74600523617 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; };
 		CAFC10A51C71A74600523617 /* pop.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
@@ -302,6 +303,9 @@
 		CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerView.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
 		CAD0C8071CA9D0480022B67B /* GraphLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphLineView.m; sourceTree = "<group>"; };
+		CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsHistoryDataCenter.h; sourceTree = "<group>"; };
+		CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsHistoryDataCenter.m; sourceTree = "<group>"; };
+		CAD0C8141CAC74FC0022B67B /* MetricNameTypeDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricNameTypeDef.h; sourceTree = "<group>"; };
 		CAFC108C1C71A73800523617 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = "pop-master/pop.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,6 +374,7 @@
 				AE6477501B2BA43C006E8925 /* WidgetModel.m */,
 				AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */,
 				AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */,
+				CAD0C8091CAC69A80022B67B /* History */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -571,6 +576,16 @@
 				CAD0C8071CA9D0480022B67B /* GraphLineView.m */,
 			);
 			name = HistoryViews;
+			sourceTree = "<group>";
+		};
+		CAD0C8091CAC69A80022B67B /* History */ = {
+			isa = PBXGroup;
+			children = (
+				CAD0C8141CAC74FC0022B67B /* MetricNameTypeDef.h */,
+				CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */,
+				CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */,
+			);
+			name = History;
 			sourceTree = "<group>";
 		};
 		CAFC108D1C71A73800523617 /* Products */ = {
@@ -827,6 +842,7 @@
 				CA16394D1B0E4FBC00E4FC81 /* MapControlViewController.m in Sources */,
 				CA1639701B0E7AC000E4FC81 /* MapWallDisplayController.m in Sources */,
 				AEB8A94F1B6152AB003C8A68 /* SettingsViewController.m in Sources */,
+				CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */,
 				CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */,
 				AE64774B1B2BA33B006E8925 /* EnergyModel.m in Sources */,
 				AEB81D941B43113300EA1450 /* WobbleAnimator.m in Sources */,
