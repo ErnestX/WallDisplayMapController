@@ -20,6 +20,7 @@
     CGRect oldFrame;
     CGFloat dataPointPosition;
     UIView* dataPointView;
+    UIColor* color;
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
@@ -30,6 +31,7 @@
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     dataPointPosition = p;
+    color = c;
     
     // draw the data point (each metric view contains only one data point)
     if (!dataPointView) {
@@ -38,7 +40,7 @@
         [self addSubview:dataPointView];
     }
     
-    dataPointView.backgroundColor = c;
+    dataPointView.backgroundColor = color;
     
     self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -64,6 +66,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    // finished auto layout: update graphics in this view!
     
     if (!CGSizeEqualToSize(self.frame.size, oldFrame.size)) {
         [self updateDataPointAccoridngToFrameSize:self.frame.size];
@@ -99,7 +102,7 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:[UIColor redColor]
+                        initWithColor:color
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
                         anchorPointOnRight:YES];
@@ -107,7 +110,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView = [leftLineView initWithColor:[UIColor redColor]
+        leftLineView = [leftLineView initWithColor:color
                     connectedToDataPointWithHeight:prevH
                              absHorizontalDistance:prevD
                                 anchorPointOnRight:YES];
@@ -120,7 +123,7 @@
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                         initWithColor:[UIColor redColor]
+                         initWithColor:color
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
@@ -128,7 +131,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView = [rightLineView initWithColor:[UIColor redColor]
+        rightLineView = [rightLineView initWithColor:color
                       connectedToDataPointWithHeight:nextH
                                absHorizontalDistance:nextD
                                   anchorPointOnRight:NO];

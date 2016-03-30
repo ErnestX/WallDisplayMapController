@@ -6,9 +6,12 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
-#import "HistoryBarGlobalManager.h"
+#import "HistoryRenderRef.h"
 
-@implementation HistoryBarGlobalManager
+@implementation HistoryRenderRef {
+    NSDictionary* metricsIconDic;
+    NSMutableDictionary* metricsColorDic;
+}
 
 + (CGFloat)getHistoryBarOriginalHeight {
     return 160.0;

@@ -9,8 +9,6 @@
 #import "MetricsHistoryDataCenter.h"
 
 @implementation MetricsHistoryDataCenter {
-    NSDictionary* metricsIconDic;
-    NSMutableDictionary* metricsColorDic;
     NSMutableArray<NSDictionary*>* metricsData;
 }
 

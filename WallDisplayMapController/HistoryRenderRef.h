@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MetricNameTypeDef.h"
 
-@interface HistoryBarGlobalManager : NSObject
+@interface HistoryRenderRef : NSObject
 
++ (UIImage*)getIconForMetric:(MetricName)m;
++ (UIColor*)getColorForMetric:(MetricName)m;
 + (CGFloat)getHistoryBarOriginalHeight;
 + (CGFloat)getCellDefaultWidth;
 

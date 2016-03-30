@@ -11,8 +11,6 @@
 
 @interface MetricsHistoryDataCenter : NSObject
 
-- (UIImage*)getIconForMetric:(MetricName)m;
-- (UIColor*)getColorForMetric:(MetricName)m;
 - (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index;
 
 @end

@@ -9,7 +9,7 @@
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
-#import "HistoryBarGlobalManager.h"
+#import "HistoryRenderRef.h"
 
 @interface HistoryBarController ()
 
@@ -36,14 +36,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryBarGlobalManager getHistoryBarOriginalHeight])];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryRenderRef getHistoryBarOriginalHeight])];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryBarGlobalManager getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryRenderRef getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -119,9 +119,9 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
+              prevAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -129,7 +129,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+              prevAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
     } else if (thisIndex < savesArray.count-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -137,7 +137,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[HistoryBarGlobalManager getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]

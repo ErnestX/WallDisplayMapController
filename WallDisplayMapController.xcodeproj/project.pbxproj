@@ -70,7 +70,7 @@
 		CA2631651B4712E300A74FB7 /* remoteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631631B4712E300A74FB7 /* remoteIcon.png */; };
 		CA2631661B4712E300A74FB7 /* remoteIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */; };
 		CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */; };
-		CA330F631CA22FAC001159D0 /* HistoryBarGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA330F621CA22FAC001159D0 /* HistoryBarGlobalManager.m */; };
+		CA330F631CA22FAC001159D0 /* HistoryRenderRef.m in Sources */ = {isa = PBXBuildFile; fileRef = CA330F621CA22FAC001159D0 /* HistoryRenderRef.m */; };
 		CA43FB831B17CBB800736FC3 /* MethodIntervalCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */; };
 		CA461A301B1E4C3700534070 /* dragGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */; };
 		CA461A341B1E4FCC00534070 /* rotateGestureMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA461A331B1E4FCC00534070 /* rotateGestureMovie.mp4 */; };
@@ -278,8 +278,8 @@
 		CA2631641B4712E300A74FB7 /* remoteIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remoteIcon@2x.png"; sourceTree = "<group>"; };
 		CA2D53ED1B1C1F9F00B975B6 /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
 		CA2D53EE1B1C1F9F00B975B6 /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
-		CA330F611CA22FAC001159D0 /* HistoryBarGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBarGlobalManager.h; sourceTree = "<group>"; };
-		CA330F621CA22FAC001159D0 /* HistoryBarGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBarGlobalManager.m; sourceTree = "<group>"; };
+		CA330F611CA22FAC001159D0 /* HistoryRenderRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRenderRef.h; sourceTree = "<group>"; };
+		CA330F621CA22FAC001159D0 /* HistoryRenderRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRenderRef.m; sourceTree = "<group>"; };
 		CA43FB811B17CBB800736FC3 /* MethodIntervalCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodIntervalCaller.h; sourceTree = "<group>"; };
 		CA43FB821B17CBB800736FC3 /* MethodIntervalCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodIntervalCaller.m; sourceTree = "<group>"; };
 		CA461A2F1B1E4C3700534070 /* dragGestureMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = dragGestureMovie.mp4; sourceTree = "<group>"; };
@@ -448,8 +448,6 @@
 				AE23B9551B34DA6B009B0E2E /* RabbitMQManager.m */,
 				AEB81D921B43113300EA1450 /* WobbleAnimator.h */,
 				AEB81D931B43113300EA1450 /* WobbleAnimator.m */,
-				CA330F611CA22FAC001159D0 /* HistoryBarGlobalManager.h */,
-				CA330F621CA22FAC001159D0 /* HistoryBarGlobalManager.m */,
 				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
@@ -564,6 +562,8 @@
 		CA4678FA1C5BE84900C4D7BB /* HistoryViews */ = {
 			isa = PBXGroup;
 			children = (
+				CA330F611CA22FAC001159D0 /* HistoryRenderRef.h */,
+				CA330F621CA22FAC001159D0 /* HistoryRenderRef.m */,
 				CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */,
 				CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */,
 				CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */,
@@ -873,7 +873,7 @@
 				AE3BF0111B4C3F7300CB2B88 /* GlobalManager.m in Sources */,
 				CA4A35951C75938C00656118 /* HistoryBarLayout.m in Sources */,
 				AE20E3F21B3B1C950066BBFE /* ChooseElementViewController.m in Sources */,
-				CA330F631CA22FAC001159D0 /* HistoryBarGlobalManager.m in Sources */,
+				CA330F631CA22FAC001159D0 /* HistoryRenderRef.m in Sources */,
 				AEB81D971B43490900EA1450 /* DeleteButton.m in Sources */,
 				AE79D6AB1B7BEFDC00C4C3F5 /* InfoLabel.m in Sources */,
 				AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */,
