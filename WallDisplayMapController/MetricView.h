@@ -17,7 +17,7 @@
  @param p position must range from 0 to 1
  @warning does not call designated initializer
  */
-- (id)initWithMetricName:(MetricName)m position:(CGFloat)p color:(UIColor*)c;
+- (id)initWithMetricName:(MetricName)m position:(CGFloat)p;
 
 - (void)removeLeftLine;
 

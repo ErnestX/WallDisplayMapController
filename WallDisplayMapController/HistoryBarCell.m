@@ -8,6 +8,7 @@
 
 #import "HistoryBarCell.h"
 #import "MetricView.h"
+#import "MetricNameTypeDef.h"
 #import "HistoryRenderRef.h"
 
 #define TIME_LABEL_FONT_SIZE 10
@@ -258,8 +259,6 @@
         CGFloat floatV = [(NSNumber*)value floatValue];
         NSAssert(floatV >= 0.0 && floatV <= 1.0, @"value smaller than 0 or greater than 1");
         
-        UIColor* color = [HistoryRenderRef getColorForMetric:metricName];
-        
         MetricView* mv;
         
         // alloc metric view if needed
@@ -267,11 +266,11 @@
             // have enough metricViews so far
             mv = [metricViews objectAtIndex:i];
             NSAssert(mv, @"mv is nil");
-            mv = [mv initWithMetricName:(MetricName)metricName position:floatV color:color];
+            mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
         } else {
             NSLog(@"alloc new metric view");
             // alloc new
-            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV color:color];
+            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
             [self addSubview:mv];
             
             // set auto layout

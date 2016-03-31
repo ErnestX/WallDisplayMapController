@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MetricNameTypeDef.h"
 
 @interface MetricsHistoryDataCenter : NSObject
 

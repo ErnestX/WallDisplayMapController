@@ -8,6 +8,7 @@
 
 #import "MetricView.h"
 #import "GraphLineView.h"
+#import "HistoryRenderRef.h"
 
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
@@ -21,19 +22,17 @@
     CGRect oldFrame;
     CGFloat dataPointPosition;
     UIView* dataPointView;
-    UIColor* color;
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
 }
 
-- (id)initWithMetricName:(MetricName)m position:(CGFloat)p color:(UIColor*)c {
+- (id)initWithMetricName:(MetricName)m position:(CGFloat)p {
     self.layer.shouldRasterize = YES; // When a view is rasterized, it's rasterized image is cached instead of rerending it every time. The downside is that if the view need to change, the cache needs to be updated
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     metricName = m;
     dataPointPosition = p;
-    color = c;
     
     // draw the data point (each metric view contains only one data point)
     if (!dataPointView) {
@@ -42,7 +41,7 @@
         [self addSubview:dataPointView];
     }
     
-    dataPointView.backgroundColor = color;
+    dataPointView.backgroundColor = [HistoryRenderRef getColorForMetric:metricName];
     
     self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -104,7 +103,7 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:color
+                        initWithColor:[HistoryRenderRef getColorForMetric:metricName]
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
                         anchorPointOnRight:YES];
@@ -112,7 +111,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView = [leftLineView initWithColor:color
+        leftLineView = [leftLineView initWithColor:[HistoryRenderRef getColorForMetric:metricName]
                     connectedToDataPointWithHeight:prevH
                              absHorizontalDistance:prevD
                                 anchorPointOnRight:YES];
@@ -125,7 +124,7 @@
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                         initWithColor:color
+                         initWithColor:[HistoryRenderRef getColorForMetric:metricName]
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
@@ -133,7 +132,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView = [rightLineView initWithColor:color
+        rightLineView = [rightLineView initWithColor:[HistoryRenderRef getColorForMetric:metricName]
                       connectedToDataPointWithHeight:nextH
                                absHorizontalDistance:nextD
                                   anchorPointOnRight:NO];
