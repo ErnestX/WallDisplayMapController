@@ -17,6 +17,7 @@
 
 @implementation MetricView
 {
+    MetricName metricName;
     CGRect oldFrame;
     CGFloat dataPointPosition;
     UIView* dataPointView;
@@ -26,10 +27,11 @@
     GraphLineView* rightLineView;
 }
 
-- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c {
+- (id)initWithMetricName:(MetricName)m position:(CGFloat)p color:(UIColor*)c {
     self.layer.shouldRasterize = YES; // When a view is rasterized, it's rasterized image is cached instead of rerending it every time. The downside is that if the view need to change, the cache needs to be updated
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
+    metricName = m;
     dataPointPosition = p;
     color = c;
     

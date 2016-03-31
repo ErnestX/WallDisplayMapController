@@ -248,21 +248,17 @@
     
     // add the metric views, one for each metric, overlapping on top of each other
     int i = 0;
-    for (NSString* key in thisMetricData) {
-
+    for (NSNumber* key in thisMetricData) {
+        
+        MetricName metricName = [key integerValue];
         id value = [thisMetricData objectForKey:key];
-        
-        // validate key and value
-        NSAssert([key isKindOfClass:[NSString class]], @"key is not a string"); // TODO: check if name is valid
+
+        // validate value
         NSAssert([value isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
-        
         CGFloat floatV = [(NSNumber*)value floatValue];
         NSAssert(floatV >= 0.0 && floatV <= 1.0, @"value smaller than 0 or greater than 1");
         
-        CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+        UIColor* color = [HistoryRenderRef getColorForMetric:metricName];
         
         MetricView* mv;
         
@@ -271,11 +267,11 @@
             // have enough metricViews so far
             mv = [metricViews objectAtIndex:i];
             NSAssert(mv, @"mv is nil");
-            mv = [mv initWithMetricName:key position:floatV color:color];
+            mv = [mv initWithMetricName:(MetricName)metricName position:floatV color:color];
         } else {
             NSLog(@"alloc new metric view");
             // alloc new
-            mv = [[MetricView new]initWithMetricName:key position:floatV color:color];
+            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV color:color];
             [self addSubview:mv];
             
             // set auto layout

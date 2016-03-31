@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MetricNameTypeDef.h"
+#import "HistoryRenderRef.h"
 
 @interface HistoryBarCell : UICollectionViewCell
 

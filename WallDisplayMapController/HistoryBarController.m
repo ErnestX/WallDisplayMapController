@@ -10,6 +10,7 @@
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
 #import "HistoryRenderRef.h"
+#import "MetricNameTypeDef.h"
 
 @interface HistoryBarController ()
 
@@ -66,9 +67,9 @@ static NSString* const reuseIdentifier = @"Cell";
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < 50; i++) {
             NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithFloat:i/50.0], @"metric1",
-                                 [NSNumber numberWithFloat:(50-i)/50.0], @"metric2",
-                                 [NSNumber numberWithFloat:drand48()], @"metric3", nil]; // stub
+                                 [NSNumber numberWithFloat:i/50.0], [NSNumber numberWithInteger:people],
+                                 [NSNumber numberWithFloat:(50-i)/50.0], [NSNumber numberWithInteger:dwelling],
+                                 [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil]; // stub
             [savesArray insertObject:dic atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }

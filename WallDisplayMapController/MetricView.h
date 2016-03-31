@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MetricNameTypeDef.h"
 
 @interface MetricView : UIView
 
@@ -16,7 +17,7 @@
  @param p position must range from 0 to 1
  @warning does not call designated initializer
  */
-- (id)initWithMetricName:(NSString*)m position:(CGFloat)p color:(UIColor*)c;
+- (id)initWithMetricName:(MetricName)m position:(CGFloat)p color:(UIColor*)c;
 
 - (void)removeLeftLine;
 
