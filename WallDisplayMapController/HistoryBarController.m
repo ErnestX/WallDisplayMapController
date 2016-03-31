@@ -11,6 +11,7 @@
 #import "HistoryBarLayout.h"
 #import "HistoryRenderRef.h"
 #import "MetricNameTypeDef.h"
+#import "MetricsHistoryDataCenter.h"
 
 @interface HistoryBarController ()
 
@@ -62,15 +63,10 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadSaves {
     [self.collectionView performBatchUpdates:^{
         
-        // get save files and save them into saveArray (stub)
-        srand48(arc4random()); // set random seed
+        // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-        for (int i = 0; i < 50; i++) {
-            NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithFloat:i/50.0], [NSNumber numberWithInteger:people],
-                                 [NSNumber numberWithFloat:(50-i)/50.0], [NSNumber numberWithInteger:dwelling],
-                                 [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil]; // stub
-            [savesArray insertObject:dic atIndex:i];
+        for (int i = 0; i < [[MetricsHistoryDataCenter sharedInstance] getTotalNumberOfData]; i++) {
+            [savesArray insertObject:[[MetricsHistoryDataCenter sharedInstance] getMetricsDataAtTimeIndex:i] atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         

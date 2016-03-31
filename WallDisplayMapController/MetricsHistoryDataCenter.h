@@ -10,6 +10,12 @@
 
 @interface MetricsHistoryDataCenter : NSObject
 
+/**
+ this is a singleton class
+ */
++ (MetricsHistoryDataCenter *)sharedInstance;
+
+- (NSInteger)getTotalNumberOfData;
 - (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index;
 
 @end
