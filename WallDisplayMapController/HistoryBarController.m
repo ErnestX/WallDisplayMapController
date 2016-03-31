@@ -38,14 +38,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef instance] getHistoryBarOriginalHeight])];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.0)];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
-    // setup history bar
+    // setup history bar (height is set by HistoryContainerView later) 
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef instance] getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.0) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -76,16 +76,14 @@ static NSString* const reuseIdentifier = @"Cell";
     } completion:nil];
 }
 
-- (void)setHistoryBarHeight:(CGFloat)height withAnimationDuration:(CGFloat)d {
+- (void)setHistoryBarHeight:(CGFloat)height {
     // set bar height
-    [UIView animateWithDuration:d animations:^(void){
-        self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
-                                               self.collectionView.frame.origin.y,
-                                               self.collectionView.frame.size.width,
-                                               height);
-        [self.collectionView performBatchUpdates:nil completion:nil];
-        [self.collectionView performBatchUpdates:nil completion:nil]; // I couldn't figure out why I need to call this twice for the animation to work correctly...
-    }];
+    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
+                                           self.collectionView.frame.origin.y,
+                                           self.collectionView.frame.size.width,
+                                           height);
+    [self.collectionView performBatchUpdates:nil completion:nil];
+    [self.collectionView performBatchUpdates:nil completion:nil]; // I couldn't figure out why I need to call this twice for the animation to work correctly...
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {

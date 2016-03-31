@@ -7,11 +7,12 @@
 //
 
 #import "HistoryContainerView.h"
+#import "HistoryRenderRef.h"
 
 @implementation HistoryContainerView
 {
     HistoryBarController* historyBarController;
-    CGFloat historyBarOriginalHeight;
+    UIView* pointerView;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -32,25 +33,34 @@
 }
 
 - (void)testButtonPressed:(id)sender {
-    [historyBarController setHistoryBarHeight:450 withAnimationDuration:0.35];
+    [UIView animateWithDuration:0.35 animations:^(void){
+        [historyBarController setHistoryBarHeight:450];
+        pointerView.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, 450);
+    }];
 }
 
 - (void)testButtonReleased:(id)sender {
-   [historyBarController setHistoryBarHeight:historyBarOriginalHeight withAnimationDuration:0.35];
+    [UIView animateWithDuration:0.35 animations:^(void){
+        [historyBarController setHistoryBarHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight]];
+        pointerView.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);
+    }];
 }
 
 - (void) setUpHistoryBar: (HistoryBarController *) hbc {
     historyBarController = hbc;
     [self addSubview:historyBarController.collectionView];
     
-    // remeber the original height of the history bar
-    historyBarOriginalHeight = historyBarController.collectionView.frame.size.height;
+    // set history bar height without animation
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    [historyBarController setHistoryBarHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight]];
+    [CATransaction commit];
     
     // draw the selection pointer
-    UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
-    [self addSubview:pointer];
-    pointer.backgroundColor = [UIColor redColor];
-    pointer.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, historyBarOriginalHeight);
+    pointerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
+    [self addSubview:pointerView];
+    pointerView.backgroundColor = [UIColor redColor];
+    pointerView.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);
 }
 
 @end
