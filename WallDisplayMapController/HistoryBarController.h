@@ -19,4 +19,6 @@
 
 - (void)setHistoryBarHeight:(CGFloat)height withAnimationDuration:(CGFloat)d;
 
+- (void)restoreHistoryBarOriginalHeightWithAnimationDuration:(CGFloat)d;
+
 @end

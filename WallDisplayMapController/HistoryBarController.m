@@ -88,6 +88,10 @@ static NSString* const reuseIdentifier = @"Cell";
     }];
 }
 
+- (void)restoreHistoryBarOriginalHeightWithAnimationDuration:(CGFloat)d {
+    [self setHistoryBarHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight] withAnimationDuration:d];
+}
+
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
 //    NSLog(@"cell centered: #%d", index.item);
 }

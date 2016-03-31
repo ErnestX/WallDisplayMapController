@@ -11,7 +11,6 @@
 @implementation HistoryContainerView
 {
     HistoryBarController* historyBarController;
-    CGFloat historyBarOriginalHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -36,21 +35,50 @@
 }
 
 - (void)testButtonReleased:(id)sender {
-   [historyBarController setHistoryBarHeight:historyBarOriginalHeight withAnimationDuration:0.35];
+   [historyBarController restoreHistoryBarOriginalHeightWithAnimationDuration:0.35];
 }
 
-- (void) setUpHistoryBar: (HistoryBarController *) hbc {
+- (void)setUpHistoryBar: (HistoryBarController *) hbc {
     historyBarController = hbc;
     [self addSubview:historyBarController.collectionView];
     
-    // remeber the original height of the history bar
-    historyBarOriginalHeight = historyBarController.collectionView.frame.size.height;
-    
     // draw the selection pointer
-    UIView* pointer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
+    UIView* pointer = [UIView new];
     [self addSubview:pointer];
     pointer.backgroundColor = [UIColor redColor];
-    pointer.center = CGPointMake(historyBarController.collectionView.frame.size.width / 2, historyBarOriginalHeight);
+    pointer.translatesAutoresizingMaskIntoConstraints = NO;
+    NSMutableArray <NSLayoutConstraint*>* pointerViewConstraints = [[NSMutableArray alloc]init];
+    [pointerViewConstraints addObject:[NSLayoutConstraint constraintWithItem:pointer
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1.0
+                                                                constant:5.0]];
+    [pointerViewConstraints addObject:[NSLayoutConstraint constraintWithItem:pointer
+                                                               attribute:NSLayoutAttributeHeight
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1.0
+                                                                constant:20.0]];
+    [pointerViewConstraints addObject:[NSLayoutConstraint constraintWithItem:pointer
+                                                               attribute:NSLayoutAttributeCenterX
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:historyBarController.collectionView
+                                                               attribute:NSLayoutAttributeCenterX
+                                                              multiplier:1.0
+                                                                constant:0.0]];
+    [pointerViewConstraints addObject:[NSLayoutConstraint constraintWithItem:pointer
+                                                               attribute:NSLayoutAttributeCenterY
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:historyBarController.collectionView
+                                                               attribute:NSLayoutAttributeBottom
+                                                              multiplier:1.0
+                                                                constant:0.0]];
+    [NSLayoutConstraint activateConstraints:pointerViewConstraints];
 }
+
+
 
 @end
