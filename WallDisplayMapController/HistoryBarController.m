@@ -38,14 +38,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryRenderRef getHistoryBarOriginalHeight])];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef sharedInstance] getHistoryBarOriginalHeight])];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [HistoryRenderRef getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef sharedInstance] getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -116,9 +116,9 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
+              prevAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -126,7 +126,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
+              prevAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
     } else if (thisIndex < savesArray.count-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -134,7 +134,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[HistoryRenderRef getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]

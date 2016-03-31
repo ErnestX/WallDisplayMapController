@@ -13,14 +13,25 @@
     NSMutableDictionary* metricsColorDic;
 }
 
-+ (UIColor*)getColorForMetric:(MetricName)m {
++ (HistoryRenderRef *)sharedInstance {
+    static HistoryRenderRef *instance = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
+        instance = [[self alloc] init];
+        //TODO init self
+    });
+    
+    return instance;
+}
+
+- (UIColor*)getColorForMetric:(MetricName)m {
 
 //    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
 //    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
 //    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
 //    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     
-    //TODO: hard-coded for debug purpose. Randomly assign in the future
+    //TODO: hard-coded for debug purpose. Maybe randomly assign in the future
     UIColor* color;
     
     switch (m) {
@@ -41,11 +52,11 @@
     return color;
 }
 
-+ (CGFloat)getHistoryBarOriginalHeight {
+- (CGFloat)getHistoryBarOriginalHeight {
     return 160.0;
 }
 
-+ (CGFloat)getCellDefaultWidth {
+- (CGFloat)getCellDefaultWidth {
     return 75.0;
 }
 

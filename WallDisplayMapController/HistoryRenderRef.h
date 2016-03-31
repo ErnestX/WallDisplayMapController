@@ -11,9 +11,14 @@
 
 @interface HistoryRenderRef : NSObject
 
-+ (UIImage*)getIconForMetric:(MetricName)m;
-+ (UIColor*)getColorForMetric:(MetricName)m;
-+ (CGFloat)getHistoryBarOriginalHeight;
-+ (CGFloat)getCellDefaultWidth;
+/**
+ this is a singleton class
+ */
++ (HistoryRenderRef *)sharedInstance;
+
+- (UIImage*)getIconForMetric:(MetricName)m;
+- (UIColor*)getColorForMetric:(MetricName)m;
+- (CGFloat)getHistoryBarOriginalHeight;
+- (CGFloat)getCellDefaultWidth;
 
 @end

@@ -329,7 +329,7 @@
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
-                                                                           constant:[HistoryRenderRef getHistoryBarOriginalHeight]
+                                                                           constant:[[HistoryRenderRef sharedInstance] getHistoryBarOriginalHeight]
                                               - 1 * (timeStampLabel.frame.size.height
                                                      + TAG_VIEW_HEIGHT
                                                      + TIME_LABEL_BUTTON_MARGIN)]];
