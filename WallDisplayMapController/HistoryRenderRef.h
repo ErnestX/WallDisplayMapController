@@ -14,7 +14,7 @@
 /**
  this is a singleton class
  */
-+ (HistoryRenderRef *)sharedInstance;
++ (HistoryRenderRef *)instance;
 
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;

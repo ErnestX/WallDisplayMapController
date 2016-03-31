@@ -20,18 +20,18 @@
 - (void)prepareLayout {
     [super prepareLayout];
     
-    sideInset = self.collectionView.frame.size.width/2 - [[HistoryRenderRef sharedInstance] getCellDefaultWidth]/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
+    sideInset = self.collectionView.frame.size.width/2 - [[HistoryRenderRef instance] getCellDefaultWidth]/2; // so that at the left/right edge, the middle of the first/last cell is at the center of the screen
     cellCount = [self.collectionView numberOfItemsInSection:0];
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(cellCount * [[HistoryRenderRef sharedInstance] getCellDefaultWidth] + sideInset*2, self.collectionView.frame.size.height);
+    return CGSizeMake(cellCount * [[HistoryRenderRef instance] getCellDefaultWidth] + sideInset*2, self.collectionView.frame.size.height);
 }
 
 - (UICollectionViewLayoutAttributes*)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes* attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
-    attributes.frame = CGRectMake(sideInset + [[HistoryRenderRef sharedInstance] getCellDefaultWidth]*(indexPath.item), 0.0, [[HistoryRenderRef sharedInstance] getCellDefaultWidth], self.collectionView.frame.size.height);
+    attributes.frame = CGRectMake(sideInset + [[HistoryRenderRef instance] getCellDefaultWidth]*(indexPath.item), 0.0, [[HistoryRenderRef instance] getCellDefaultWidth], self.collectionView.frame.size.height);
     
     return attributes;
 }

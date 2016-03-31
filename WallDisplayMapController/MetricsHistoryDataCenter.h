@@ -13,7 +13,7 @@
 /**
  this is a singleton class
  */
-+ (MetricsHistoryDataCenter *)sharedInstance;
++ (MetricsHistoryDataCenter *)instance;
 
 - (NSInteger)getTotalNumberOfData;
 - (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index;

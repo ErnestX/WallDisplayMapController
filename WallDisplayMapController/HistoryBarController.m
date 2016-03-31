@@ -38,14 +38,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef sharedInstance] getHistoryBarOriginalHeight])];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef instance] getHistoryBarOriginalHeight])];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
     // setup history bar
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef sharedInstance] getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [[HistoryRenderRef instance] getHistoryBarOriginalHeight]) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -65,8 +65,8 @@ static NSString* const reuseIdentifier = @"Cell";
         
         // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-        for (int i = 0; i < [[MetricsHistoryDataCenter sharedInstance] getTotalNumberOfData]; i++) {
-            [savesArray insertObject:[[MetricsHistoryDataCenter sharedInstance] getMetricsDataAtTimeIndex:i] atIndex:i];
+        for (int i = 0; i < [[MetricsHistoryDataCenter instance] getTotalNumberOfData]; i++) {
+            [savesArray insertObject:[[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:i] atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         
@@ -116,9 +116,9 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
+              prevAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -126,7 +126,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
+              prevAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
     } else if (thisIndex < savesArray.count-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -134,7 +134,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[[HistoryRenderRef sharedInstance] getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]

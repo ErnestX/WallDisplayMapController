@@ -13,7 +13,7 @@
     NSMutableArray<NSDictionary*>* metricsData;
 }
 
-+ (MetricsHistoryDataCenter *)sharedInstance {
++ (MetricsHistoryDataCenter *)instance {
     static MetricsHistoryDataCenter *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
