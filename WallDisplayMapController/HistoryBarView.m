@@ -48,6 +48,16 @@
     self.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, frame.size.height - SCROLL_BAR_POS_FROM_TOP, 0);
 }
 
+- (void)setHeight:(CGFloat)height {
+    // set bar height
+    self.frame = CGRectMake(self.frame.origin.x,
+                                           self.frame.origin.y,
+                                           self.frame.size.width,
+                                           height);
+    [self performBatchUpdates:nil completion:nil];
+    [self performBatchUpdates:nil completion:nil]; // I couldn't figure out why I need to call this twice for the animation to work correctly...
+}
+
 #pragma mark - Scrolling Control
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

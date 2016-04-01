@@ -13,6 +13,8 @@
 #import "MetricNameTypeDef.h"
 #import "MetricsHistoryDataCenter.h"
 
+#define HISTORY_BAR_INIT_HEIGHT 50.0 // this have nothing to do with the height displayed, since it will be reset by the HistoryContainerView. However, this value should be high enough so that the initalization (especially auto-layout) can succeed
+
 @interface HistoryBarController ()
 
 @end
@@ -38,14 +40,14 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)loadView {
     [super loadView];
     
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.0)];
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_INIT_HEIGHT)];
     view.backgroundColor = [UIColor clearColor];
     self.view = view;
     
-    // setup history bar (height is set by HistoryContainerView later) 
+    // setup history bar (height is set by HistoryContainerView later)
     UICollectionViewFlowLayout* layout = (UICollectionViewFlowLayout*) self.collectionViewLayout;
     
-    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0.0) collectionViewLayout:layout myDelegate:self];
+    HistoryBarView* historyBarView = [[HistoryBarView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, HISTORY_BAR_INIT_HEIGHT) collectionViewLayout:layout myDelegate:self];
     
     self.collectionView = historyBarView;
 }
@@ -74,16 +76,6 @@ static NSString* const reuseIdentifier = @"Cell";
         [self.collectionView insertItemsAtIndexPaths:indexPaths];
         
     } completion:nil];
-}
-
-- (void)setHistoryBarHeight:(CGFloat)height {
-    // set bar height
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
-                                           self.collectionView.frame.origin.y,
-                                           self.collectionView.frame.size.width,
-                                           height);
-    [self.collectionView performBatchUpdates:nil completion:nil];
-    [self.collectionView performBatchUpdates:nil completion:nil]; // I couldn't figure out why I need to call this twice for the animation to work correctly...
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {

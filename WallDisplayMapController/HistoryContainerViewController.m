@@ -32,7 +32,7 @@
     [self addChildViewController:historyBarController];
     
     // give historyBarView to containerView to add it as subview and init the size
-    [(HistoryContainerView*)self.view setUpHistoryBar:historyBarController];
+    [(HistoryContainerView*)self.view setUpHistoryBar:historyBarController.collectionView];
 }
 
 /*

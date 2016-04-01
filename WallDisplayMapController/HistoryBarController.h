@@ -17,6 +17,4 @@
  */
 - (instancetype) initWithContainerController: (UIViewController*) hcvc;
 
-- (void)setHistoryBarHeight:(CGFloat)height;
-
 @end

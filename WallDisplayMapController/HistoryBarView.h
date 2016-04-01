@@ -13,4 +13,6 @@
 
 - (nullable instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout myDelegate:(nonnull id<HistoryBarViewMyDelegate>)hbc;
 
+- (void)setHeight:(CGFloat)height;
+
 @end
