@@ -8,10 +8,13 @@
 
 #import "HistoryContainerView.h"
 #import "HistoryRenderRef.h"
+#import "HistoryBarView.h"
+#import "HistoryPreviewView.h"
 
 @implementation HistoryContainerView
 {
     HistoryBarView* historyBarView;
+    HistoryPreviewView* historyPreviewView;
     UIView* pointerView;
 }
 
@@ -69,6 +72,14 @@
     [self addSubview:pointerView];
     pointerView.backgroundColor = [UIColor redColor];
     pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);
+}
+
+- (void)setUpPreivewView: (nonnull HistoryPreviewView*) hpv {
+    historyPreviewView = hpv;
+    [self addSubview:historyPreviewView];
+    
+    historyPreviewView.frame = [UIScreen mainScreen].bounds;
+    [self sendSubviewToBack:historyPreviewView];
 }
 
 @end

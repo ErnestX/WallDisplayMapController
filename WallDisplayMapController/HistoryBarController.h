@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HistoryBarView.h"
 #import "HistoryBarViewMyDelegate.h"
+@class HistoryContainerViewController;
 
 @interface HistoryBarController : UICollectionViewController <HistoryBarViewMyDelegate>
 
 /**
   calls designated initializer
  */
-- (instancetype) initWithContainerController: (UIViewController*) hcvc;
+- (instancetype) initWithContainerController: (HistoryContainerViewController*) hcvc;
 
 @end

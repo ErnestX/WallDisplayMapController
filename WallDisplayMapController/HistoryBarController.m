@@ -12,6 +12,8 @@
 #import "HistoryRenderRef.h"
 #import "MetricNameTypeDef.h"
 #import "MetricsHistoryDataCenter.h"
+#import "HistoryBarView.h"
+#import "HistoryContainerViewController.h"
 
 #define HISTORY_BAR_INIT_HEIGHT 50.0 // this have nothing to do with the actual height displayed, since it will be reset by the HistoryContainerView. However, this value should be large enough so that the initalization (especially auto-layout) can succeed
 
@@ -21,12 +23,12 @@
 
 @implementation HistoryBarController
 {
-    UIViewController* containerController;
+    HistoryContainerViewController* containerController;
     NSMutableArray* savesArray;
 }
 static NSString* const reuseIdentifier = @"Cell";
 
-- (instancetype) initWithContainerController: (UIViewController*) hcvc {
+- (instancetype) initWithContainerController: (HistoryContainerViewController*) hcvc {
     HistoryBarLayout *flowLayout = [[HistoryBarLayout alloc]init];
     self = [super initWithCollectionViewLayout:flowLayout];
     NSAssert(self, @"init failed");
