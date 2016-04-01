@@ -13,7 +13,7 @@
 #import "MetricNameTypeDef.h"
 #import "MetricsHistoryDataCenter.h"
 
-#define HISTORY_BAR_INIT_HEIGHT 50.0 // this have nothing to do with the height displayed, since it will be reset by the HistoryContainerView. However, this value should be high enough so that the initalization (especially auto-layout) can succeed
+#define HISTORY_BAR_INIT_HEIGHT 50.0 // this have nothing to do with the actual height displayed, since it will be reset by the HistoryContainerView. However, this value should be large enough so that the initalization (especially auto-layout) can succeed
 
 @interface HistoryBarController ()
 

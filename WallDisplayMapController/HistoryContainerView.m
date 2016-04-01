@@ -33,13 +33,21 @@
 }
 
 - (void)testButtonPressed:(id)sender {
+    [self expandGraph];
+}
+
+- (void)testButtonReleased:(id)sender {
+    [self collapseGraph];
+}
+
+- (void)expandGraph {
     [UIView animateWithDuration:0.35 animations:^(void){
         [historyBarView setHeight:450];
         pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, 450);
     }];
 }
 
-- (void)testButtonReleased:(id)sender {
+- (void)collapseGraph {
     [UIView animateWithDuration:0.35 animations:^(void){
         [historyBarView setHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight]];
         pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);

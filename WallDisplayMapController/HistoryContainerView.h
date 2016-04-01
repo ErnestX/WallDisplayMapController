@@ -14,6 +14,10 @@
 /**
   given the historyBarView from the historyBarContainer, initialize the size of it and add it as a subview
  */
-- (void) setUpHistoryBar: (nonnull HistoryBarView*) hbv;
+- (void)setUpHistoryBar: (nonnull HistoryBarView*) hbv;
+
+- (void)expandGraph;
+
+- (void)collapseGraph;
 
 @end
