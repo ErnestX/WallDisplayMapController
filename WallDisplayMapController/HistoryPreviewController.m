@@ -13,6 +13,7 @@
 @implementation HistoryPreviewController {
     HistoryContainerViewController* containerController;
     NSInteger oldIndex;
+    NSMutableArray <UIImage*>* testImagesArray;
 }
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc {
@@ -20,6 +21,18 @@
     NSAssert(self, @"init failed");
     
     containerController = hcvc;
+    
+    testImagesArray = [NSMutableArray array];
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    for (int i=0; i<50; i++) {
+        UIImage* currentImage;
+        if (i%2) {
+            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"]];
+        } else {
+            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"]];
+        }
+        [testImagesArray addObject:currentImage];
+    }
     
     return self;
 }
@@ -34,17 +47,7 @@
 
 - (void)showPreviewAtIndex:(NSInteger)index {
     if (index != oldIndex) {
-        NSLog(@"showing image");
-        NSBundle *mainBundle = [NSBundle mainBundle];
-        UIImage* currentImage;
-        if (index %2) {
-            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"]];
-        } else {
-            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"]];
-        }
-        
-        [(HistoryPreviewView*)self.view showImage:currentImage];
-        
+        [(HistoryPreviewView*)self.view showImage:[testImagesArray objectAtIndex:index]];
         oldIndex = index;
     }
 }
