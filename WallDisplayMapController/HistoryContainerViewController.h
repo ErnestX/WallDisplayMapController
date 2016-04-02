@@ -10,4 +10,6 @@
 
 @interface HistoryContainerViewController : UIViewController
 
+- (void)showPreviewForIndex:(NSInteger)index;
+
 @end

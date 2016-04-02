@@ -10,4 +10,6 @@
 
 @interface HistoryPreviewView : UIView
 
+- (void)showImage:(UIImage*)image;
+
 @end

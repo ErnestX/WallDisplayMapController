@@ -12,6 +12,7 @@
 
 @implementation HistoryPreviewController {
     HistoryContainerViewController* containerController;
+    NSInteger oldIndex;
 }
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc {
@@ -29,6 +30,23 @@
     // create and init preview view
     HistoryPreviewView* previewView = [[HistoryPreviewView alloc]initWithFrame:CGRectMake(0.0, 0.0, 100, 100)];
     self.view = previewView;
+}
+
+- (void)showPreviewAtIndex:(NSInteger)index {
+    if (index != oldIndex) {
+        NSLog(@"showing image");
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        UIImage* currentImage;
+        if (index %2) {
+            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"]];
+        } else {
+            currentImage = [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"]];
+        }
+        
+        [(HistoryPreviewView*)self.view showImage:currentImage];
+        
+        oldIndex = index;
+    }
 }
 
 @end

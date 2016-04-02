@@ -8,15 +8,28 @@
 
 #import "HistoryPreviewView.h"
 
-@implementation HistoryPreviewView
+@implementation HistoryPreviewView {
+    UIImageView* imageView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor blackColor];
+        
+        
     }
     
     return self;
+}
+
+- (void)showImage:(UIImage *)image {
+    if (!imageView) {
+        imageView = [[UIImageView alloc]initWithImage:image];
+        [self addSubview:imageView];
+    } else {
+        imageView.image = image;
+    }
 }
 
 @end

@@ -82,6 +82,7 @@ static NSString* const reuseIdentifier = @"Cell";
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
 //    NSLog(@"cell centered: #%d", index.item);
+    [containerController showPreviewForIndex:index.item];
 }
 
 #pragma mark <UICollectionViewDataSource>

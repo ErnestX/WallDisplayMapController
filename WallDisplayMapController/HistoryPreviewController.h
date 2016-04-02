@@ -13,4 +13,6 @@
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc;
 
+- (void)showPreviewAtIndex:(NSInteger)index;
+
 @end

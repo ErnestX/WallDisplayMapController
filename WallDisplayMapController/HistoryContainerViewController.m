@@ -47,6 +47,10 @@
     [(HistoryContainerView*)self.view setUpHistoryBar:(HistoryBarView*)historyBarController.collectionView];
 }
 
+- (void)showPreviewForIndex:(NSInteger)index {
+    [historyPreviewController showPreviewAtIndex:index];
+}
+
 /*
 #pragma mark - Navigation
 
