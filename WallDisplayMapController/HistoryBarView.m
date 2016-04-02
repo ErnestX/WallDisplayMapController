@@ -106,7 +106,7 @@
                 // too slow: stop tracking
                 readyToSnap = false;
                 // snap
-                NSLog(@"slow enough to snap");
+//                NSLog(@"slow enough to snap");
                 if (speed > 0) {
                     [self snapToNextCellWithCurrentScrollDirectionRight:YES withInitialAbsSpeed:fabs(speed)];
                 } else {
@@ -122,7 +122,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSLog(@"touches began");
+//    NSLog(@"touches began");
     readyToSnap = false;
     [self pop_removeAllAnimations];
     
@@ -135,13 +135,13 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (readyToSnap) {
-        NSLog(@"ended decelerating and snap");
+//        NSLog(@"ended decelerating and snap");
         [self snapToClosestCellWithInitialAbsSpeed:MIN_SCROLL_SPEED_BEFORE_SNAPING];
     }
 }
 
 - (void)snapToNextCellWithCurrentScrollDirectionRight:(BOOL)scrollingRight withInitialAbsSpeed:(CGFloat) speed {
-    NSLog(@"snapToNextCell");
+//    NSLog(@"snapToNextCell");
     NSIndexPath* indexOfNextCell;
     NSIndexPath* indexOfCenterCell = [self getIndexPathOfCenterCell];
     if (indexOfCenterCell) {
@@ -177,7 +177,7 @@
 }
 
 - (void)snapToClosestCellWithInitialAbsSpeed:(CGFloat)speed {
-    NSLog(@"snapToClosestCell");
+//    NSLog(@"snapToClosestCell");
     NSIndexPath* index = [self getIndexPathOfCenterCell];
     if (index) {
         [self snapToCellAtIndexPath:index withInitialAbsSpeed:speed];

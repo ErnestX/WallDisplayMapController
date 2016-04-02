@@ -37,6 +37,10 @@
     return self;
 }
 
+- (void)didReceiveMemoryWarning {
+    NSLog(@"MEMORY WARNING RECEIVED");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

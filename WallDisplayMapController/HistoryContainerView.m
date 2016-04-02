@@ -11,6 +11,8 @@
 #import "HistoryBarView.h"
 #import "HistoryPreviewView.h"
 
+#define TAB_BAR_HEIGHT 49
+
 @implementation HistoryContainerView
 {
     HistoryBarView* historyBarView;
@@ -78,7 +80,10 @@
     historyPreviewView = hpv;
     [self addSubview:historyPreviewView];
     
-    historyPreviewView.frame = [UIScreen mainScreen].bounds;
+    historyPreviewView.frame = CGRectMake(0.0,
+                                          [[HistoryRenderRef instance]getHistoryBarOriginalHeight],
+                                          self.frame.size.width,
+                                          self.frame.size.height - [[HistoryRenderRef instance]getHistoryBarOriginalHeight] - TAB_BAR_HEIGHT);
     [self sendSubviewToBack:historyPreviewView];
 }
 
