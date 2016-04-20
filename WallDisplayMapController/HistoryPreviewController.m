@@ -34,6 +34,8 @@
         [testImagesArray addObject:currentImage];
     }
     
+    oldIndex = NAN; // if you init it to 0, the first preview won't show because it thought the index hasn't changed
+    
     return self;
 }
 

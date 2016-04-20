@@ -15,10 +15,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.backgroundColor = [UIColor blackColor];
-        
-        self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 5.0; // the border is within the bound (inset)
+//        self.layer.borderColor = [UIColor whiteColor].CGColor;
+//        self.layer.borderWidth = 5.0; // the border is within the bound (inset)
         
         imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;

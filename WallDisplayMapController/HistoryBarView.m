@@ -38,6 +38,8 @@
     lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
     readyToSnap = false;
     
+    [myDelegate cellCenteredByIndex:[self getIndexPathOfCenterCell]];
+    
     return self;
 }
 
@@ -61,7 +63,7 @@
 #pragma mark - Scrolling Control
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    NSLog(@"Dragging ends");
+//    NSLog(@"Dragging ends");
     
     if (decelerate) {
         // initialize speed tracking vars
