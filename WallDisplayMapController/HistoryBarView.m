@@ -32,7 +32,7 @@
     self.delegate = self;
     myDelegate = d;
     self.decelerationRate = UIScrollViewDecelerationRateNormal;
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor whiteColor];
         
     lastScrollOffset = CGPointZero;
     lastTrackedTime = [NSDate timeIntervalSinceReferenceDate];
