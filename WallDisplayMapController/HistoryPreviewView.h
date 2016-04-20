@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryPreviewView : UIView
+@interface HistoryPreviewView : UIView <UIScrollViewDelegate>
 
 - (void)showImage:(UIImage*)image;
 
