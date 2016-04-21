@@ -270,6 +270,10 @@
 {
     NSLog(@"showing label");
     [CATransaction begin];
+    if (connectingLabel != nil) {
+        [connectingLabel removeFromSuperview];
+    }
+    
     if (instructionLabel != nil) {
         instructionLabel.hidden = YES;
     }
