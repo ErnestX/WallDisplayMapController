@@ -61,8 +61,12 @@
     return 160.0;
 }
 
+- (CGFloat)getHistoryBarExpandedHeight {
+    return (160 - 40) * 3 + 40;
+}
+
 - (CGFloat)getCellDefaultWidth {
-    return 75.0;
+    return 65.0;
 }
 
 @end

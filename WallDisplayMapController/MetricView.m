@@ -13,7 +13,7 @@
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
 #define DATA_POINT_DIAMETER 10
-#define LINE_WIDTH 2
+#define LINE_WIDTH 1
 #define LINE_LENGTH 50
 
 @implementation MetricView
@@ -43,8 +43,8 @@
     
     dataPointView.backgroundColor = [[HistoryRenderRef instance] getColorForMetric:metricName];
     
-    self.layer.borderColor = [UIColor grayColor].CGColor;
-    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
+//    self.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     [self updateDataPointAccoridngToFrameSize:self.frame.size];
     

@@ -47,8 +47,8 @@
 
 - (void)expandGraph {
     [UIView animateWithDuration:0.35 animations:^(void){
-        [historyBarView setHeight:450];
-        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, 450);
+        [historyBarView setHeight:[[HistoryRenderRef instance]getHistoryBarExpandedHeight]];
+        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarExpandedHeight]);
     }];
 }
 

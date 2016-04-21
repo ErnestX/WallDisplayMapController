@@ -19,6 +19,7 @@
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
 - (CGFloat)getHistoryBarOriginalHeight;
+- (CGFloat)getHistoryBarExpandedHeight;
 - (CGFloat)getCellDefaultWidth;
 
 @end
