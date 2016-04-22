@@ -6,15 +6,15 @@
 //  Copyright © 2016 Jialiang. All rights reserved.
 //
 
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 
-@implementation HistoryRenderRef {
+@implementation GlobalLayoutRef {
     NSDictionary* metricsIconDic;
     NSMutableDictionary* metricsColorDic;
 }
 
-+ (HistoryRenderRef *)instance {
-    static HistoryRenderRef *instance = nil;
++ (GlobalLayoutRef *)instance {
+    static GlobalLayoutRef *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
         instance = [[self alloc] init];

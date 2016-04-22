@@ -7,7 +7,7 @@
 //
 
 #import "HistoryContainerView.h"
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 #import "HistoryBarView.h"
 #import "HistoryPreviewView.h"
 
@@ -47,15 +47,15 @@
 
 - (void)expandGraph {
     [UIView animateWithDuration:0.35 animations:^(void){
-        [historyBarView setHeight:[[HistoryRenderRef instance]getHistoryBarExpandedHeight]];
-        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarExpandedHeight]);
+        [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarExpandedHeight]];
+        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarExpandedHeight]);
     }];
 }
 
 - (void)collapseGraph {
     [UIView animateWithDuration:0.35 animations:^(void){
-        [historyBarView setHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight]];
-        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);
+        [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarOriginalHeight]];
+        pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarOriginalHeight]);
     }];
 }
 
@@ -66,14 +66,14 @@
     // set history bar height without animation
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-    [historyBarView setHeight:[[HistoryRenderRef instance]getHistoryBarOriginalHeight]];
+    [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarOriginalHeight]];
     [CATransaction commit];
     
     // draw the selection pointer
     pointerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 20)];
     [self addSubview:pointerView];
     pointerView.backgroundColor = [UIColor redColor];
-    pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[HistoryRenderRef instance]getHistoryBarOriginalHeight]);
+    pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarOriginalHeight]);
 }
 
 - (void)setUpPreivewView: (nonnull HistoryPreviewView*) hpv {
@@ -81,9 +81,9 @@
     [self addSubview:historyPreviewView];
     
     historyPreviewView.frame = CGRectMake(0.0,
-                                          [[HistoryRenderRef instance]getHistoryBarOriginalHeight],
+                                          [[GlobalLayoutRef instance]getHistoryBarOriginalHeight],
                                           self.frame.size.width,
-                                          self.frame.size.height - [[HistoryRenderRef instance]getHistoryBarOriginalHeight] - TAB_BAR_HEIGHT);
+                                          self.frame.size.height - [[GlobalLayoutRef instance]getHistoryBarOriginalHeight] - TAB_BAR_HEIGHT);
     [self sendSubviewToBack:historyPreviewView];
 }
 

@@ -9,7 +9,7 @@
 #import "HistoryBarCell.h"
 #import "MetricView.h"
 #import "MetricNameTypeDef.h"
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 
 #define TIME_LABEL_FONT_SIZE 10
 #define TIME_LABEL_BUTTON_MARGIN 2
@@ -329,7 +329,7 @@
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
-                                                                           constant:[[HistoryRenderRef instance] getHistoryBarOriginalHeight]
+                                                                           constant:[[GlobalLayoutRef instance] getHistoryBarOriginalHeight]
                                               - 1 * (timeStampLabel.frame.size.height
                                                      + TAG_VIEW_HEIGHT
                                                      + TIME_LABEL_BUTTON_MARGIN)]];

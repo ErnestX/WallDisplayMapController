@@ -9,7 +9,7 @@
 #import "HistoryBarController.h"
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 #import "MetricNameTypeDef.h"
 #import "HistoryBarView.h"
 #import "HistoryContainerViewController.h"
@@ -108,9 +108,9 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
+              prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -118,7 +118,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
-              prevAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
+              prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else if (thisIndex < savesArray.count-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
@@ -126,7 +126,7 @@ static NSString* const reuseIdentifier = @"Cell";
                               flagOrNot:NO // TODO not testing flag yet
             thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
             nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
-              nextAbsHorizontalDistance:[[HistoryRenderRef instance] getCellDefaultWidth]];
+              nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]

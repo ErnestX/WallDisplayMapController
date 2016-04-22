@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MetricNameTypeDef.h"
 
-@interface HistoryRenderRef : NSObject
+@interface GlobalLayoutRef : NSObject
 
 /**
  this is a singleton class
  */
-+ (HistoryRenderRef *)instance;
++ (GlobalLayoutRef *)instance;
 
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;

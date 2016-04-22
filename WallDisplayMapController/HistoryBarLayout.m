@@ -7,7 +7,7 @@
 //
 
 #import "HistoryBarLayout.h"
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 
 //#define CELL_WIDTH 70
 
@@ -25,7 +25,7 @@
 }
 
 - (CGSize)collectionViewContentSize {
-    return CGSizeMake(cellCount * [[HistoryRenderRef instance] getCellDefaultWidth] + sideInset*2, self.collectionView.frame.size.height);
+    return CGSizeMake(cellCount * [[GlobalLayoutRef instance] getCellDefaultWidth] + sideInset*2, self.collectionView.frame.size.height);
 }
 
 - (UICollectionViewLayoutAttributes*)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -8,7 +8,7 @@
 
 #import "MetricView.h"
 #import "GraphLineView.h"
-#import "HistoryRenderRef.h"
+#import "GlobalLayoutRef.h"
 
 #define MIN_RENDER_POSITION 0.1
 #define MAX_RENDER_POSITION 0.9
@@ -41,7 +41,7 @@
         [self addSubview:dataPointView];
     }
     
-    dataPointView.backgroundColor = [[HistoryRenderRef instance] getColorForMetric:metricName];
+    dataPointView.backgroundColor = [[GlobalLayoutRef instance] getColorForMetric:metricName];
     
 //    self.layer.borderColor = [UIColor grayColor].CGColor;
 //    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -103,7 +103,7 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:[[HistoryRenderRef instance] getColorForMetric:metricName]
+                        initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
                         anchorPointOnRight:YES];
@@ -111,7 +111,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView = [leftLineView initWithColor:[[HistoryRenderRef instance] getColorForMetric:metricName]
+        leftLineView = [leftLineView initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
                     connectedToDataPointWithHeight:prevH
                              absHorizontalDistance:prevD
                                 anchorPointOnRight:YES];
@@ -124,7 +124,7 @@
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                         initWithColor:[[HistoryRenderRef instance] getColorForMetric:metricName]
+                         initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
@@ -132,7 +132,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView = [rightLineView initWithColor:[[HistoryRenderRef instance] getColorForMetric:metricName]
+        rightLineView = [rightLineView initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
                       connectedToDataPointWithHeight:nextH
                                absHorizontalDistance:nextD
                                   anchorPointOnRight:NO];
