@@ -11,7 +11,6 @@
 #import "HistoryBarLayout.h"
 #import "HistoryRenderRef.h"
 #import "MetricNameTypeDef.h"
-#import "MetricsHistoryDataCenter.h"
 #import "HistoryBarView.h"
 #import "HistoryContainerViewController.h"
 
@@ -69,8 +68,8 @@ static NSString* const reuseIdentifier = @"Cell";
         
         // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-        for (int i = 0; i < [[MetricsHistoryDataCenter instance] getTotalNumberOfData]; i++) {
-            [savesArray insertObject:[[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:i] atIndex:i];
+        for (int i = 0; i < [containerController getTotalNumberOfData]; i++) {
+            [savesArray insertObject:[containerController getMetricsDataAtTimeIndex:i] atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         

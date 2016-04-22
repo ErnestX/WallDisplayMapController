@@ -10,6 +10,7 @@
 #import "HistoryContainerView.h"
 #import "HistoryBarController.h"
 #import "HistoryPreviewController.h"
+#import "MetricsHistoryDataCenter.h"
 
 @interface HistoryContainerViewController ()
 
@@ -47,18 +48,26 @@
     [(HistoryContainerView*)self.view setUpHistoryBar:(HistoryBarView*)historyBarController.collectionView];
 }
 
+- (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index {
+    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index];
+}
+
+- (NSInteger)getTotalNumberOfData {
+    return [[MetricsHistoryDataCenter instance] getTotalNumberOfData];
+}
+
+- (UIImage*)getPreviewForIndex:(NSInteger)index {
+    // stub
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    if (index%2) {
+        return [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"]];
+    } else {
+        return [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"]];
+    }
+}
+
 - (void)showPreviewForIndex:(NSInteger)index {
     [historyPreviewController showPreviewAtIndex:index];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

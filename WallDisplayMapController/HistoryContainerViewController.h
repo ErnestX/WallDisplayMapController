@@ -10,6 +10,15 @@
 
 @interface HistoryContainerViewController : UIViewController
 
+- (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index;
+
+- (NSInteger)getTotalNumberOfData;
+
+/*
+ Reads the image from disk. Very slow.
+ */
+- (UIImage*)getPreviewForIndex:(NSInteger)index;
+
 - (void)showPreviewForIndex:(NSInteger)index;
 
 @end
