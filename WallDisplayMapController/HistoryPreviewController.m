@@ -49,6 +49,7 @@
 
 - (void)showPreviewAtIndex:(NSInteger)index {
     if (index != oldIndex && index >= 0 && index < [containerController getTotalNumberOfData]) {
+        //TODO: if image is not in cache, fetch it from container controller
         [(HistoryPreviewView*)self.view showImage:[imagesCache objectAtIndex:index]];
         oldIndex = index;
     }

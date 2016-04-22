@@ -89,6 +89,7 @@
 		CAD0C8221CAEF63F0022B67B /* HistoryPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */; };
 		CAD0C8251CAF8C8A0022B67B /* testScreenShot1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C8231CAF8C8A0022B67B /* testScreenShot1.jpg */; };
 		CAD0C8261CAF8C8A0022B67B /* testScreenShot2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C8241CAF8C8A0022B67B /* testScreenShot2.jpg */; };
+		CAE3F4761CCA9A7300D89F75 /* MetricsDataEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */; };
 		CAFC10A41C71A74600523617 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; };
 		CAFC10A51C71A74600523617 /* pop.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAFC10991C71A73800523617 /* pop.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D38A9265F06F710B6C109543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EB0F574A27F24236C46473 /* libPods.a */; };
@@ -316,6 +317,8 @@
 		CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryPreviewView.m; sourceTree = "<group>"; };
 		CAD0C8231CAF8C8A0022B67B /* testScreenShot1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testScreenShot1.jpg; sourceTree = "<group>"; };
 		CAD0C8241CAF8C8A0022B67B /* testScreenShot2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testScreenShot2.jpg; sourceTree = "<group>"; };
+		CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsDataEntry.h; sourceTree = "<group>"; };
+		CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsDataEntry.m; sourceTree = "<group>"; };
 		CAFC108C1C71A73800523617 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = "pop-master/pop.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -600,6 +603,8 @@
 				CAD0C8141CAC74FC0022B67B /* MetricNameTypeDef.h */,
 				CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */,
 				CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */,
+				CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */,
+				CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -886,6 +891,7 @@
 				AEA1BF751B3E09740079BD66 /* DroppableBarChart.m in Sources */,
 				AE83C8CA1B3A091C0041E0C0 /* MasterViewController.m in Sources */,
 				AE869D421B0FEB07000900FF /* EarthControlRequest.m in Sources */,
+				CAE3F4761CCA9A7300D89F75 /* MetricsDataEntry.m in Sources */,
 				AE0E803F1B46F8EA0047AD80 /* RAReorderableLayout.swift in Sources */,
 				AED3B8021B55DEAC008292C4 /* DroppableSingleBarView.m in Sources */,
 				CA1639471B0E4FBC00E4FC81 /* main.m in Sources */,
