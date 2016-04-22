@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MetricsDataEntry : NSObject
+@interface MetricsDataEntry : NSObject <NSCopying>
 
 @property (readonly, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
 @property (readonly, nonnull) NSString* previewImagePath;

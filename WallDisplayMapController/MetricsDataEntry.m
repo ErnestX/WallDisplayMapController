@@ -26,4 +26,10 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:self.metricsValues
+                                                               previewImagePath:self.previewImagePath];
+    return newEntry;
+}
+
 @end

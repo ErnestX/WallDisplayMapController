@@ -11,6 +11,7 @@
 @class MetricsDataEntry;
 
 @interface MetricsHistoryDataCenter : NSObject
+@property (readonly) NSMutableArray<MetricsDataEntry*>* metricsData;
 
 /**
  this is a singleton class
