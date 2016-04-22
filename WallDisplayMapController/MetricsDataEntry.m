@@ -9,8 +9,8 @@
 #import "MetricsDataEntry.h"
 
 @interface MetricsDataEntry()
-@property (nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
-@property (nonnull) NSString* previewImagePath;
+@property (readwrite, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
+@property (readwrite, nonnull) NSString* previewImagePath;
 @end
 
 @implementation MetricsDataEntry

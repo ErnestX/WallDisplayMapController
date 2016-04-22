@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @class MetricsDataEntry;
 
 @interface MetricsHistoryDataCenter : NSObject
-@property (readonly) NSMutableArray<MetricsDataEntry*>* metricsData;
+
+/*
+ this property is readonly and immutable
+ */
+@property (readonly) NSArray<MetricsDataEntry*>* metricsData;
 
 /**
  this is a singleton class

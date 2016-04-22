@@ -10,8 +10,8 @@
 #import "MetricsConfigs.h"
 #import "MetricsDataEntry.h"
 
-@interface MetricsDataEntry ()
-@property (readwrite) NSMutableArray<MetricsDataEntry*>* metricsData;
+@interface MetricsHistoryDataCenter()
+@property (readwrite) NSArray<MetricsDataEntry*>* metricsData;
 @end
 
 @implementation MetricsHistoryDataCenter
@@ -24,9 +24,10 @@
         //init instance
         if (instance) {
             // init properties
-            instance->_metricsData = [NSMutableArray array]; // a trick I do not fully understand yet to access readonly property from here.
+            NSMutableArray* tempArray = [NSMutableArray array];
+            
+            // stub for testing
             for (int i=0; i<50; i++) {
-                // stub for testing
                 srand48(arc4random()); // set random seed
                 NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                      [NSNumber numberWithFloat:i/50.0], [NSNumber numberWithInteger:people],
@@ -43,8 +44,9 @@
                 }
                 
                 MetricsDataEntry* entry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:path];
-                [instance.metricsData addObject:entry];
+                [tempArray addObject:entry];
             }
+            instance.metricsData = [tempArray copy];
         }
     });
     
@@ -57,6 +59,13 @@
 
 - (MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index {
     return [self.metricsData objectAtIndex:index];
+}
+
+- (void)addNewEntry:(MetricsDataEntry*)entry {
+    // stub
+    NSMutableArray* tempArray = [self.metricsData mutableCopy];
+    // TODO: modify tempArray
+    self.metricsData = [tempArray copy];
 }
 
 @end
