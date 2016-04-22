@@ -8,6 +8,7 @@
 
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsConfigs.h"
+#import "MetricsDataEntry.h"
 
 @implementation MetricsHistoryDataCenter {
     NSMutableArray<NSDictionary*>* metricsData;
@@ -31,8 +32,8 @@
     return 50;
 }
 
-- (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index {
-    //    return [metricsData objectAtIndex:index]; // the right thing to do
+- (MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index {
+    //    return [metricsData objectAtIndex:index]; // the right thing to do (don't forget to copy the object instead of using the original reference) 
     
     // stub for testing
     srand48(arc4random()); // set random seed
@@ -40,7 +41,19 @@
                          [NSNumber numberWithFloat:index/50.0], [NSNumber numberWithInteger:people],
                          [NSNumber numberWithFloat:(50-index)/50.0], [NSNumber numberWithInteger:dwelling],
                          [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
-    return dic;
+    
+    NSString* path;
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    // TODO: stub
+    if (index%2) {
+        path = [mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"];
+    } else {
+        path = [mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"];
+    }
+    
+    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:path];
+    
+    return newEntry;
 }
 
 @end

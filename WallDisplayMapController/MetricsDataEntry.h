@@ -10,7 +10,10 @@
 
 @interface MetricsDataEntry : NSObject
 
-@property NSDictionary<NSNumber*, NSNumber*>* metricsValues;
-@property UIImage* previewImage;
+@property (readonly, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
+@property (readonly, nonnull) NSString* previewImagePath;
+
+- (nullable instancetype)initWithMetricsValues:(nonnull NSDictionary<NSNumber*, NSNumber*>*)dic
+                     previewImagePath:(nonnull NSString*)path;
 
 @end

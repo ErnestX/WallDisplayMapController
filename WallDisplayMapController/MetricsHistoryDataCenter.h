@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class MetricsDataEntry;
+
 @interface MetricsHistoryDataCenter : NSObject
 
 /**
@@ -16,6 +18,6 @@
 + (MetricsHistoryDataCenter *)instance;
 
 - (NSInteger)getTotalNumberOfData;
-- (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index;
+- (MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
 
 @end

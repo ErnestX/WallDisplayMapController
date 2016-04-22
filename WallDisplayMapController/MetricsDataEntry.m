@@ -8,6 +8,22 @@
 
 #import "MetricsDataEntry.h"
 
+@interface MetricsDataEntry()
+@property (nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
+@property (nonnull) NSString* previewImagePath;
+@end
+
 @implementation MetricsDataEntry
+
+- (nullable instancetype)initWithMetricsValues:(nonnull NSDictionary<NSNumber *,NSNumber *> *)dic
+                              previewImagePath:(nonnull NSString *)path {
+    self = [super init];
+    if (self) {
+        self.metricsValues = dic;
+        self.previewImagePath = path;
+    }
+    
+    return self;
+}
 
 @end

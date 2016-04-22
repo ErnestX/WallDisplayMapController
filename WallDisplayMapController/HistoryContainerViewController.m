@@ -11,6 +11,7 @@
 #import "HistoryBarController.h"
 #import "HistoryPreviewController.h"
 #import "MetricsHistoryDataCenter.h"
+#import "MetricsDataEntry.h"
 
 @interface HistoryContainerViewController ()
 
@@ -48,22 +49,16 @@
     [(HistoryContainerView*)self.view setUpHistoryBar:(HistoryBarView*)historyBarController.collectionView];
 }
 
-- (NSDictionary*)getMetricsDataAtTimeIndex:(NSInteger)index {
-    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index];
-}
-
 - (NSInteger)getTotalNumberOfData {
     return [[MetricsHistoryDataCenter instance] getTotalNumberOfData];
 }
 
-- (UIImage*)getPreviewForIndex:(NSInteger)index {
-    // stub
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    if (index%2) {
-        return [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"]];
-    } else {
-        return [UIImage imageWithContentsOfFile:[mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"]];
-    }
+- (NSDictionary*)getMetricsValueAtTimeIndex:(NSInteger)index {
+    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
+}
+
+- (NSString*)getPreviewImagePathForIndex:(NSInteger)index {
+    return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].previewImagePath;
 }
 
 - (void)showPreviewForIndex:(NSInteger)index {

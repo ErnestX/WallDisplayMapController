@@ -1,5 +1,5 @@
 //
-//  MetricsConfigurations.m
+//  MetricsConfigs.m
 //  WallDisplayMapController
 //
 //  Created by Jialiang Xiang on 2016-04-22.

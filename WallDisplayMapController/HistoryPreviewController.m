@@ -25,7 +25,8 @@
     // load all available preview images into cache
     imagesCache = [NSMutableArray array];
     for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
-        UIImage* currentImage = [containerController getPreviewForIndex:i];
+        // read image file from disk
+        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
         [imagesCache addObject:currentImage];
     }
     

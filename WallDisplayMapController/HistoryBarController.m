@@ -69,7 +69,7 @@ static NSString* const reuseIdentifier = @"Cell";
         // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < [containerController getTotalNumberOfData]; i++) {
-            [savesArray insertObject:[containerController getMetricsDataAtTimeIndex:i] atIndex:i];
+            [savesArray insertObject:[containerController getMetricsValueAtTimeIndex:i] atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         
