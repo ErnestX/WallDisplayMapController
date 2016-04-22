@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MetricNameTypeDef.h"
+#import "MetricsConfigs.h"
 
 @interface MetricView : UIView
 

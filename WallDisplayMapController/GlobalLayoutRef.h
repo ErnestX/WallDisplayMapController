@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MetricNameTypeDef.h"
+#import "MetricsConfigs.h"
 
 @interface GlobalLayoutRef : NSObject
 
@@ -16,8 +16,6 @@
  */
 + (GlobalLayoutRef *)instance;
 
-- (UIImage*)getIconForMetric:(MetricName)m;
-- (UIColor*)getColorForMetric:(MetricName)m;
 - (CGFloat)getHistoryBarOriginalHeight;
 - (CGFloat)getHistoryBarExpandedHeight;
 - (CGFloat)getCellDefaultWidth;

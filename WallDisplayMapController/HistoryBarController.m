@@ -10,7 +10,7 @@
 #import "HistoryBarCell.h"
 #import "HistoryBarLayout.h"
 #import "GlobalLayoutRef.h"
-#import "MetricNameTypeDef.h"
+#import "MetricsConfigs.h"
 #import "HistoryBarView.h"
 #import "HistoryContainerViewController.h"
 

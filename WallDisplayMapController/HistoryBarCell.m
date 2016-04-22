@@ -8,7 +8,7 @@
 
 #import "HistoryBarCell.h"
 #import "MetricView.h"
-#import "MetricNameTypeDef.h"
+#import "MetricsConfigs.h"
 #import "GlobalLayoutRef.h"
 
 #define TIME_LABEL_FONT_SIZE 10

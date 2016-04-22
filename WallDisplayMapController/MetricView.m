@@ -41,7 +41,7 @@
         [self addSubview:dataPointView];
     }
     
-    dataPointView.backgroundColor = [[GlobalLayoutRef instance] getColorForMetric:metricName];
+    dataPointView.backgroundColor = [[MetricsConfigs instance] getColorForMetric:metricName];
     
 //    self.layer.borderColor = [UIColor grayColor].CGColor;
 //    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -103,7 +103,7 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
+                        initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
                         anchorPointOnRight:YES];
@@ -111,7 +111,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView = [leftLineView initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
+        leftLineView = [leftLineView initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
                     connectedToDataPointWithHeight:prevH
                              absHorizontalDistance:prevD
                                 anchorPointOnRight:YES];
@@ -124,7 +124,7 @@
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                         initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
+                         initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
@@ -132,7 +132,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView = [rightLineView initWithColor:[[GlobalLayoutRef instance] getColorForMetric:metricName]
+        rightLineView = [rightLineView initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
                       connectedToDataPointWithHeight:nextH
                                absHorizontalDistance:nextD
                                   anchorPointOnRight:NO];

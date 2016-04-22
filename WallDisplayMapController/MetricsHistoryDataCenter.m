@@ -7,7 +7,7 @@
 //
 
 #import "MetricsHistoryDataCenter.h"
-#import "MetricNameTypeDef.h"
+#import "MetricsConfigs.h"
 
 @implementation MetricsHistoryDataCenter {
     NSMutableArray<NSDictionary*>* metricsData;
