@@ -250,7 +250,7 @@
     DEFINE_WEAK_SELF
     
     RabbitMQManager *rmqManager = [RabbitMQManager sharedInstance];
-    [rmqManager beginConsumingWidgetsWithCallbackBlock:^(NSString *msg) {
+    [rmqManager beginConsumingWithWidgetCallbackBlock:^(NSString *msg) {
         // parse xml into a dictionary
         NSDictionary *dictTemp = [NSDictionary dictionaryWithXMLString:[msg stringByReplacingOccurrencesOfString:@"d2p1:" withString:@""]];
         NSArray *attributes = dictTemp[@"ResultDict"][@"KeyValueOfstringstring"];
@@ -315,6 +315,8 @@
         
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:WIDGET_DATA_UPDATED object:nil]];
         NSLog(@"message: %@", msg);
+        
+        // Ernest TODO: save the metrics values into the data centre.
     }];
 }
 

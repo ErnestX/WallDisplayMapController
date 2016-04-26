@@ -319,6 +319,7 @@
 		CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryPreviewView.m; sourceTree = "<group>"; };
 		CAD0C8231CAF8C8A0022B67B /* testScreenShot1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testScreenShot1.jpg; sourceTree = "<group>"; };
 		CAD0C8241CAF8C8A0022B67B /* testScreenShot2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testScreenShot2.jpg; sourceTree = "<group>"; };
+		CADCFE171CCF24210085BD94 /* MetricsHistoryDataCenterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricsHistoryDataCenterDelegate.h; sourceTree = "<group>"; };
 		CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsDataEntry.h; sourceTree = "<group>"; };
 		CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsDataEntry.m; sourceTree = "<group>"; };
 		CAFC108C1C71A73800523617 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = "pop-master/pop.xcodeproj"; sourceTree = "<group>"; };
@@ -608,6 +609,7 @@
 				CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */,
 				CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */,
 				CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */,
+				CADCFE171CCF24210085BD94 /* MetricsHistoryDataCenterDelegate.h */,
 			);
 			name = History;
 			sourceTree = "<group>";

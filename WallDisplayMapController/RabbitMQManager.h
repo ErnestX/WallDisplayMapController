@@ -14,7 +14,7 @@
 - (void)openRMQConnection;
 - (void)closeRMQConnection;
 
-- (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock;
+- (void)beginConsumingWithWidgetCallbackBlock:(void (^)(NSString *message))widgetCallbackBlock;
 - (void)publishEarthControlWithBody:(NSString *)body;
 - (void)publishThresholdChangeWithBody:(NSString *)body;
 

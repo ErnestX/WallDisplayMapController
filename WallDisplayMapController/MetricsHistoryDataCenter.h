@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MetricsHistoryDataCenterDelegate.h"
+
 @class MetricsDataEntry;
 
 @interface MetricsHistoryDataCenter : NSObject
@@ -21,7 +23,9 @@
  */
 + (MetricsHistoryDataCenter *)instance;
 
+- (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)delegate;
 - (NSInteger)getTotalNumberOfData;
 - (MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
+- (void)addNewEntry:(MetricsDataEntry*)entry;
 
 @end

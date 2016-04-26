@@ -96,7 +96,7 @@
     
 }
 
-- (void)beginConsumingWidgetsWithCallbackBlock:(void (^)(NSString *message))callbackBlock {
+- (void)beginConsumingWithWidgetCallbackBlock:(void (^)(NSString *message))widgetCallbackBlock {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
@@ -177,8 +177,15 @@
                                                                length:envelope.message.body.len
                                                              encoding:NSUTF8StringEncoding
                                                          freeWhenDone:YES];
-                if (callbackBlock) {
-                    callbackBlock(msg);
+                if (msg == NULL) {
+                    NSLog(@"not a widget message, must be a screenshot");
+                    UIImage *img = [UIImage imageWithData:[NSData dataWithBytesNoCopy:envelope.message.body.bytes
+                                                                               length:envelope.message.body.len]];
+                    
+                } else {
+                    if (widgetCallbackBlock) {
+                        widgetCallbackBlock(msg);
+                    }
                 }
 
             }
