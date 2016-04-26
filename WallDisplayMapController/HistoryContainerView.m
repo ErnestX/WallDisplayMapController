@@ -39,6 +39,7 @@
 
 - (void)testButtonPressed:(id)sender {
     [self expandGraph];
+    [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
 }
 
 - (void)testButtonReleased:(id)sender {

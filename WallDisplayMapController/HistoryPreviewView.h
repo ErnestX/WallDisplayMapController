@@ -10,6 +10,6 @@
 
 @interface HistoryPreviewView : UIView <UIScrollViewDelegate>
 
-- (void)showImage:(UIImage*)image;
+- (void)showImage:(nonnull UIImage*)image;
 
 @end

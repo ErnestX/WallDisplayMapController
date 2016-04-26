@@ -24,20 +24,22 @@
     
     // load all available preview images into cache
     imagesCache = [NSMutableArray array];
-    for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
-        // read image file from disk
-        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
-        [imagesCache addObject:currentImage];
-    }
+//    for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
+//        // read image file from disk
+//        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
+//        [imagesCache addObject:currentImage];
+//    }
     
-    oldIndex = NAN; // if you init it to 0, the first preview won't show because it thought the index hasn't changed
-    
+    oldIndex = -1; // if you init it to 0, the first preview won't show because it thought the index hasn't changed
     return self;
 }
 
 - (void)didReceiveMemoryWarning {
     NSLog(@"MEMORY WARNING RECEIVED");
-    //TODO: clear cache
+    //clear cache
+    for (int i = 0; i<imagesCache.count; i++) {
+        [imagesCache replaceObjectAtIndex:i withObject:(UIImage*)[NSNull null]];
+    }
 }
 
 - (void)viewDidLoad {
@@ -50,9 +52,42 @@
 
 - (void)showPreviewAtIndex:(NSInteger)index {
     if (index != oldIndex && index >= 0 && index < [containerController getTotalNumberOfData]) {
-        //TODO: if image is not in cache, fetch it from container controller
+        // the index is new and valid
+        [self fetchEntryIntoCacheIfNeeded:index];
+        
         [(HistoryPreviewView*)self.view showImage:[imagesCache objectAtIndex:index]];
         oldIndex = index;
+    }
+}
+
+- (void)fetchEntryIntoCacheIfNeeded:(NSInteger)index {
+    if (index >= 0 && index < [containerController getTotalNumberOfData]) {
+        // the index is valid
+        
+        if (imagesCache.count < index + 1) {
+            // the cache is not large enough
+            NSInteger numOfEntriesNeeded = index - imagesCache.count + 1;
+            // fill the array with NSNull
+            for (int i=0; i<numOfEntriesNeeded; i++) {
+                [imagesCache addObject:(UIImage*)[NSNull null]];
+            }
+        }
+        
+        if ([[imagesCache objectAtIndex:index] isEqual:[NSNull null]]) {
+            // the image requested is not in the cache.
+            // Fetch image path from container controller, read the file from disk and add to the cache
+            UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:index]];
+            [imagesCache replaceObjectAtIndex:index withObject:currentImage];
+        }
+    }
+}
+
+- (void)refreshCacheAtIndex:(NSInteger)index {
+    if (imagesCache.count >= index + 1 && ![[imagesCache objectAtIndex:index] isEqual:[NSNull null]]) {
+        // the entry exists in the cache
+        // Fetch image path from container controller, read the file from disk and add to the cache
+        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:index]];
+        [imagesCache replaceObjectAtIndex:index withObject:currentImage];
     }
 }
 

@@ -40,7 +40,8 @@
     scrollView.frame = [self.superview convertRect:frame toView:self]; //convert frame from superview's coord to self's coord
 }
 
-- (void)showImage:(UIImage *)image {
+- (void)showImage:(nonnull UIImage *)image {
+    NSAssert(![image isEqual:[NSNull null]], @"argument is NSNull");
     scrollView.contentSize = imageView.frame.size;
     if (imageView.image == nil) {
         // if this is the first image displayed, set frame and center the image
