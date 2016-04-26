@@ -16,16 +16,16 @@
 /*
  this property is readonly and immutable
  */
-@property (readonly) NSArray<MetricsDataEntry*>* metricsData;
+@property (readonly, nonnull) NSArray<MetricsDataEntry*>* metricsData;
 
 /**
  this is a singleton class
  */
-+ (MetricsHistoryDataCenter *)instance;
++ (nonnull MetricsHistoryDataCenter *)instance;
 
-- (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)delegate;
+- (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)d;
 - (NSInteger)getTotalNumberOfData;
-- (MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
-- (void)addNewEntry:(MetricsDataEntry*)entry;
+- (nullable MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
+- (void)addNewEntry:(nonnull MetricsDataEntry*)entry;
 
 @end

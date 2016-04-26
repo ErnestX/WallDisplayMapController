@@ -23,6 +23,15 @@
     HistoryPreviewController* historyPreviewController;
 }
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        NSLog(@"init");
+        [[MetricsHistoryDataCenter instance] setDelegate:self];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -63,6 +72,10 @@
 
 - (void)showPreviewForIndex:(NSInteger)index {
     [historyPreviewController showPreviewAtIndex:index];
+}
+
+- (void)updateEntryAtIndex:(NSInteger)index {
+    // TODO
 }
 
 @end

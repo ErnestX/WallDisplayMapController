@@ -20,14 +20,14 @@
 
 + (MetricsHistoryDataCenter *)instance {
     static MetricsHistoryDataCenter *instance = nil;
-//    static dispatch_once_t oncePredicate;
-//    dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
-//        instance = [[self alloc] init];
-//        if (instance) {
-//            // init properties
-//            NSMutableArray* tempArray = [NSMutableArray array];
-//            
-//            // stub for testing
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
+        instance = [[self alloc] init];
+        if (instance) {
+            // init properties
+            NSMutableArray* tempArray = [NSMutableArray array];
+            
+            // stub for testing
 //            for (int i=0; i<50; i++) {
 //                srand48(arc4random()); // set random seed
 //                NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -46,14 +46,15 @@
 //                MetricsDataEntry* entry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:path];
 //                [tempArray addObject:entry];
 //            }
-//            instance.metricsData = [tempArray copy];
-//        }
-//    });
+            instance.metricsData = [tempArray copy];
+        }
+    });
     return instance;
 }
 
-- (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)delegate {
-    myDelegate = delegate;
+- (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)d {
+    NSLog(@"data center delegate set");
+    myDelegate = d;
 }
 
 - (NSInteger)getTotalNumberOfData {

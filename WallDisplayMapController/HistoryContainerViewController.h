@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MetricsHistoryDataCenterDelegate.h"
 
-@interface HistoryContainerViewController : UIViewController
+@interface HistoryContainerViewController : UIViewController <MetricsHistoryDataCenterDelegate>
 
 - (NSInteger)getTotalNumberOfData;
 
