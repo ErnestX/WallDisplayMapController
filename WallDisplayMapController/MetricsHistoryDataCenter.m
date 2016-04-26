@@ -71,4 +71,33 @@
     [myDelegate updateEntryAtIndex:self.metricsData.count-1];
 }
 
+- (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
+    // save image to disk as png file
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* fileName = [NSString stringWithFormat:@"%d.png", self.metricsData.count];
+    NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
+    
+    // add new entry
+    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [NSNumber numberWithFloat:self.metricsData.count/50.0], [NSNumber numberWithInteger:people],
+                         [NSNumber numberWithFloat:(50-self.metricsData.count)/50.0], [NSNumber numberWithInteger:dwelling],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
+    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:filePath];
+    [self addNewEntry:newEntry];
+}
+
+- (void)wipeAllDataFromDisk {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = paths.firstObject;
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:basePath error:&error]) {
+        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", basePath, file] error:&error];
+        if (!success || error) {
+            // it failed.
+        }
+    }
+}
+
 @end

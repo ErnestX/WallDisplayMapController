@@ -15,6 +15,8 @@
 /**
   calls designated initializer
  */
-- (instancetype) initWithContainerController: (HistoryContainerViewController*) hcvc;
+- (nullable instancetype) initWithContainerController: (nonnull HistoryContainerViewController*) hcvc;
+
+- (void)addNewEntryAtIndex:(NSInteger)index;
 
 @end

@@ -59,11 +59,7 @@ static NSString* const reuseIdentifier = @"Cell";
     // Register cell classes
     [self.collectionView registerClass:[HistoryBarCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    // add plans into the history bar
-    [self loadSaves];
-}
-
-- (void)loadSaves {
+    // add all existing plans into the history bar
     [self.collectionView performBatchUpdates:^{
         
         // get save files and save them into saveArray
@@ -82,6 +78,15 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
 //    NSLog(@"cell centered: #%d", index.item);
     [containerController showPreviewForIndex:index.item];
+}
+
+- (void)addNewEntryAtIndex:(NSInteger)index {
+    [self.collectionView performBatchUpdates:^{
+        NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
+        [savesArray addObject:[containerController getMetricsValueAtTimeIndex:index]];
+        [indexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+        [self.collectionView insertItemsAtIndexPaths:indexPaths];
+    } completion:nil];
 }
 
 #pragma mark <UICollectionViewDataSource>

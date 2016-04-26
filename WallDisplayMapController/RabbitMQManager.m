@@ -16,6 +16,7 @@
 #import "amqp_tcp_socket.h"
 #import "NSOperationQueue+Timeout.h"
 #import "XMLDictionary.h"
+#import "MetricsHistoryDataCenter.h"
 
 @interface RabbitMQManager()
 
@@ -181,6 +182,7 @@
                     NSLog(@"not a widget message, must be a screenshot");
                     UIImage *img = [UIImage imageWithData:[NSData dataWithBytesNoCopy:envelope.message.body.bytes
                                                                                length:envelope.message.body.len]];
+                    [[MetricsHistoryDataCenter instance]addNewEntryWithScreenshot:img];
                     
                 } else {
                     if (widgetCallbackBlock) {

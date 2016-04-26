@@ -24,11 +24,11 @@
     
     // load all available preview images into cache
     imagesCache = [NSMutableArray array];
-//    for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
-//        // read image file from disk
-//        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
-//        [imagesCache addObject:currentImage];
-//    }
+    for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
+        // read image file from disk
+        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
+        [imagesCache addObject:currentImage];
+    }
     
     oldIndex = -1; // if you init it to 0, the first preview won't show because it thought the index hasn't changed
     return self;

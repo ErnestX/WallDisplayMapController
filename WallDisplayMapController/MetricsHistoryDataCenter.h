@@ -26,6 +26,9 @@
 - (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)d;
 - (NSInteger)getTotalNumberOfData;
 - (nullable MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
-- (void)addNewEntry:(nonnull MetricsDataEntry*)entry;
+
+- (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss;
+
+- (void)wipeAllDataFromDisk;
 
 @end
