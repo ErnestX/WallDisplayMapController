@@ -29,6 +29,8 @@
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss;
 
-- (void)wipeAllDataFromDisk;
+//- (void)wipeAllDataFromDisk;
+
+- (void)addNewDummyEntry;
 
 @end

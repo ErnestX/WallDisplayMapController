@@ -11,6 +11,8 @@
 #import "HistoryBarView.h"
 #import "HistoryPreviewView.h"
 
+#import "MetricsHistoryDataCenter.h" // this is for test button 2 only!
+
 #define TAB_BAR_HEIGHT 49
 
 @implementation HistoryContainerView
@@ -34,16 +36,27 @@
     [testButton addTarget:self action:@selector(testButtonReleased:) forControlEvents:UIControlEventTouchUpOutside];
     [self addSubview:testButton];
     
+    UIButton* testButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [testButton2 setTitle:@"addTestEntry" forState:UIControlStateNormal];
+    testButton2.frame = CGRectMake(600, 500, 150, 50);
+    [testButton2 addTarget:self action:@selector(test2ButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:testButton2];
+    
     return self;
 }
 
 - (void)testButtonPressed:(id)sender {
     [self expandGraph];
-//    [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)]; 
+//    [[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
 }
 
 - (void)testButtonReleased:(id)sender {
     [self collapseGraph];
+}
+
+- (void)test2ButtonPressed:(id)sender {
+    // use the data centre for this test button only in this class!
+    [[MetricsHistoryDataCenter instance]addNewDummyEntry];
 }
 
 - (void)expandGraph {

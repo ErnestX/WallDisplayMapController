@@ -51,8 +51,10 @@
 }
 
 - (void)showPreviewAtIndex:(NSInteger)index {
-    if (index != oldIndex && index >= 0 && index < [containerController getTotalNumberOfData]) {
-        // the index is new and valid
+    if (index != oldIndex) {
+        // the index is new
+        NSAssert(index >= 0 && index < [containerController getTotalNumberOfData], @"PreviewController: invalid index");
+        
         [self fetchEntryIntoCacheIfNeeded:index];
         
         [(HistoryPreviewView*)self.view showImage:[imagesCache objectAtIndex:index]];
@@ -63,7 +65,7 @@
 - (void)fetchEntryIntoCacheIfNeeded:(NSInteger)index {
     if (index >= 0 && index < [containerController getTotalNumberOfData]) {
         // the index is valid
-        
+        NSLog(@"imagesCache.count = %lu", (unsigned long)imagesCache.count);
         if (imagesCache.count < index + 1) {
             // the cache is not large enough
             NSInteger numOfEntriesNeeded = index - imagesCache.count + 1;

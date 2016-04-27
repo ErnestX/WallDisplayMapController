@@ -76,8 +76,10 @@ static NSString* const reuseIdentifier = @"Cell";
 }
 
 - (void)cellCenteredByIndex:(NSIndexPath*) index {
-//    NSLog(@"cell centered: #%d", index.item);
-    [containerController showPreviewForIndex:index.item];
+    if (index) { // index would be nil if no cell applies
+        //    NSLog(@"cell centered: #%d", index.item);
+        [containerController showPreviewForIndex:index.item];
+    }
 }
 
 - (void)appendNewEntry {

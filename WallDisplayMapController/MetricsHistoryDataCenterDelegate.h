@@ -14,7 +14,7 @@
 @protocol MetricsHistoryDataCenterDelegate <NSObject>
 
 @required
-- (void)updateEntryAtIndex:(NSInteger)index;
+- (void)appendNewEntry;
 
 @end
 

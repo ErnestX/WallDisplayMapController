@@ -180,9 +180,12 @@
                                                          freeWhenDone:YES];
                 if (msg == NULL) {
                     NSLog(@"not a widget message, must be a screenshot");
-                    UIImage *img = [UIImage imageWithData:[NSData dataWithBytesNoCopy:envelope.message.body.bytes
-                                                                               length:envelope.message.body.len]];
-                    [[MetricsHistoryDataCenter instance]addNewEntryWithScreenshot:img];
+                    // use main thread to update UI
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        UIImage *img = [UIImage imageWithData:[NSData dataWithBytesNoCopy:envelope.message.body.bytes
+                                                                                   length:envelope.message.body.len]];
+                        [[MetricsHistoryDataCenter instance]addNewEntryWithScreenshot:img];
+                    });
                     
                 } else {
                     if (widgetCallbackBlock) {

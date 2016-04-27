@@ -74,8 +74,8 @@
     [historyPreviewController showPreviewAtIndex:index];
 }
 
-- (void)updateEntryAtIndex:(NSInteger)index {
-    [historyPreviewController refreshCacheAtIndex:index];
+- (void)appendNewEntry {
+//    [historyPreviewController refreshCacheAtIndex:index];
     [historyBarController appendNewEntry];
 }
 
