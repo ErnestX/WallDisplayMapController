@@ -80,13 +80,19 @@ static NSString* const reuseIdentifier = @"Cell";
     [containerController showPreviewForIndex:index.item];
 }
 
-- (void)addNewEntryAtIndex:(NSInteger)index {
+- (void)appendNewEntry {
+    NSInteger newIndex = savesArray.count;
+    
     [self.collectionView performBatchUpdates:^{
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-        [savesArray addObject:[containerController getMetricsValueAtTimeIndex:index]];
-        [indexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+        [savesArray addObject:[containerController getMetricsValueAtTimeIndex:newIndex]];
+        [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
         [self.collectionView insertItemsAtIndexPaths:indexPaths];
-    } completion:nil];
+    } completion:^(BOOL b){
+        [self.collectionView reloadData];
+//        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:newIndex inSection:0],
+//                                                       [NSIndexPath indexPathForItem:newIndex-1 inSection:0]]];
+    }];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -104,7 +110,7 @@ static NSString* const reuseIdentifier = @"Cell";
     HistoryBarCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    NSInteger thisIndex = indexPath.row;
+    NSInteger thisIndex = indexPath.item;
     
     if (thisIndex > 0 && thisIndex < savesArray.count-1) {
         // have both prev cell and next cell

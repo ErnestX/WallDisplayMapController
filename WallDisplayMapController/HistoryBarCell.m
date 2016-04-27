@@ -29,6 +29,8 @@
     self = [super initWithFrame:frame];
     NSAssert(self, @"init failed");
     
+    self.backgroundColor = [UIColor blueColor];
+    
     metricViews = [[NSMutableArray alloc]init];
     
     self.backgroundColor = [UIColor whiteColor];

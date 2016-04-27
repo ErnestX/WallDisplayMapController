@@ -80,24 +80,24 @@
     
     // add new entry
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:self.metricsData.count/50.0], [NSNumber numberWithInteger:people],
-                         [NSNumber numberWithFloat:(50-self.metricsData.count)/50.0], [NSNumber numberWithInteger:dwelling],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:people],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:dwelling],
                          [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
     MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:filePath];
     [self addNewEntry:newEntry];
 }
 
 - (void)wipeAllDataFromDisk {
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = paths.firstObject;
-    NSError *error = nil;
-    for (NSString *file in [fm contentsOfDirectoryAtPath:basePath error:&error]) {
-        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", basePath, file] error:&error];
-        if (!success || error) {
-            // it failed.
-        }
-    }
+//    NSFileManager *fm = [NSFileManager defaultManager];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *basePath = paths.firstObject;
+//    NSError *error = nil;
+//    for (NSString *file in [fm contentsOfDirectoryAtPath:basePath error:&error]) {
+//        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", basePath, file] error:&error];
+//        if (!success || error) {
+//            // it failed.
+//        }
+//    }
 }
 
 @end

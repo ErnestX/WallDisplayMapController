@@ -17,6 +17,6 @@
  */
 - (nullable instancetype) initWithContainerController: (nonnull HistoryContainerViewController*) hcvc;
 
-- (void)addNewEntryAtIndex:(NSInteger)index;
+- (void)appendNewEntry;
 
 @end
