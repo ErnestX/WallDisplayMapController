@@ -94,4 +94,62 @@
     return color;
 }
 
+- (NSString*)getDisplayNameForMetric:(MetricName)m {
+    NSString* name;
+    
+    switch (m) {
+        case density_densityMetric: name = @"population density"; break;
+//        case density_modelVKT:
+//        case density_CEEIKVT:
+        case density_modelActiveTripsPercent: name = @"active"; break;
+        case density_modelTransitTripsPercent: name = @"transit"; break;
+        case density_modelVehicleTripsPercent: name = @"vehicle"; break;
+            
+//        case energy_mobilityPercent:
+//        case energy_heatingAndHotWaterPercent:
+//        case energy_lightsAndAppliancesPercent:
+//
+//        case energy_propaneIn:
+//        case energy_heatingoilIn:
+//        case energy_woodIn:
+//        case energy_electricityIn:
+//        case energy_dieselIn:
+//        case energy_gasolineIn:
+//
+//        case energy_propaneOut:
+//        case energy_heatingoilOut:
+//        case energy_woodOut:
+//        case energy_electricityOut:
+//        case energy_dieselOut:
+//        case energy_gasolineOut:
+            
+        case building_people: name = @"people"; break;
+        case building_dwellings: name = @"dwellings"; break;
+            
+        case building_detachedPercent: name = @"detached"; break;
+        case building_attachedPercent: name = @"rowhouse"; break;
+        case building_stackedPercent: name = @"apartment"; break;
+            
+        case building_rezPercent: name = @"residential"; break;
+        case building_commPercent: name = @"commercial"; break;
+        case building_civicPercent: name = @"civic"; break;
+        case building_indPercent: name = @"industrial"; break;
+            
+            //        case building_far:
+            
+            //        case  districtEnergy_far:
+            
+//        case districtEnergy_heatingPercent:
+//        case districtEnergy_lightsPercent:
+//        case districtEnergy_mobilityPercent:
+        case districtEnergy_emissionsPerCapita: name = @"CO2 per capita"; break;
+        case districtEnergy_energyHouseholdIncome: name = @"household annual energy cost"; break;
+            
+        default:
+            name = @"untitled";
+    }
+    
+    return name;
+}
+
 @end

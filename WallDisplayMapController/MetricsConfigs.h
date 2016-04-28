@@ -90,5 +90,6 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
+- (NSString*)getDisplayNameForMetric:(MetricName)m;
 
 @end

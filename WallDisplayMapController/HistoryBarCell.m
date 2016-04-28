@@ -268,7 +268,7 @@
             NSAssert(mv, @"mv is nil");
             mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
         } else {
-            NSLog(@"alloc new metric view");
+//            NSLog(@"alloc new metric view");
             // alloc new
             mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
             [self addSubview:mv];
