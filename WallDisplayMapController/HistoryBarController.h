@@ -17,6 +17,6 @@
  */
 - (nullable instancetype) initWithContainerController: (nonnull HistoryContainerViewController*) hcvc;
 
-- (void)appendNewEntry;
+- (void)appendNewEntryIfAvailable;
 
 @end

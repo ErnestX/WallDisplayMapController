@@ -82,19 +82,21 @@ static NSString* const reuseIdentifier = @"Cell";
     }
 }
 
-- (void)appendNewEntry {
-    NSInteger newIndex = savesArray.count;
-    
-    [self.collectionView performBatchUpdates:^{
-        NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-        [savesArray addObject:[containerController getMetricsValueAtTimeIndex:newIndex]];
-        [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
-        [self.collectionView insertItemsAtIndexPaths:indexPaths];
-    } completion:^(BOOL b){
-        if (newIndex > 0) {
-            [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:newIndex-1 inSection:0]]];
-        }
-    }];
+- (void)appendNewEntryIfAvailable {
+    if([containerController getTotalNumberOfData] > savesArray.count) {
+        NSInteger newIndex = savesArray.count;
+        
+        [self.collectionView performBatchUpdates:^{
+            NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
+            [savesArray addObject:[containerController getMetricsValueAtTimeIndex:newIndex]];
+            [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
+            [self.collectionView insertItemsAtIndexPaths:indexPaths];
+        } completion:^(BOOL b){
+            if (newIndex > 0) {
+                [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:newIndex-1 inSection:0]]];
+            }
+        }];
+    }
 }
 
 #pragma mark <UICollectionViewDataSource>

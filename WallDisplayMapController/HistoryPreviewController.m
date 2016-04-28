@@ -82,7 +82,6 @@
 - (void)fetchEntryIntoCache:(NSInteger)index overwriteExistingEntry:(BOOL)oee {
     if (index >= 0 && index < [containerController getTotalNumberOfData]) {
         // the index is valid
-        NSLog(@"imagesCache.count = %lu", (unsigned long)imagesCache.count);
         if (imagesCache.count < index + 1) {
             // the cache is not large enough
             NSInteger numOfEntriesNeeded = index - imagesCache.count + 1;
