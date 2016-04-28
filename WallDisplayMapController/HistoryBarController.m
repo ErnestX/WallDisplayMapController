@@ -91,9 +91,9 @@ static NSString* const reuseIdentifier = @"Cell";
         [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
         [self.collectionView insertItemsAtIndexPaths:indexPaths];
     } completion:^(BOOL b){
-        [self.collectionView reloadData];
-//        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:newIndex inSection:0],
-//                                                       [NSIndexPath indexPathForItem:newIndex-1 inSection:0]]];
+        if (newIndex > 0) {
+            [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:newIndex-1 inSection:0]]];
+        }
     }];
 }
 
