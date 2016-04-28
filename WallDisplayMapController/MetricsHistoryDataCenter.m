@@ -70,7 +70,7 @@
     [tempArray addObjectsFromArray:entries];
     self.metricsData = [tempArray copy];
     for (int i=0; i<entries.count; i++) {
-        [myDelegate appendNewEntry];
+        [myDelegate newEntryAppendedInDataCenter];
     }
 }
 
@@ -78,7 +78,7 @@
     NSMutableArray* tempArray = [self.metricsData mutableCopy];
     [tempArray addObject:entry];
     self.metricsData = [tempArray copy];
-    [myDelegate appendNewEntry];
+    [myDelegate newEntryAppendedInDataCenter];
     NSLog(@"adding new entry");
 }
 

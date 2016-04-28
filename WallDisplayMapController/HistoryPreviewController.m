@@ -10,9 +10,12 @@
 #import "HistoryPreviewView.h"
 #import "HistoryContainerViewController.h"
 
+@interface HistoryPreviewController()
+@property (readwrite) NSInteger currentIndex;
+@end
+
 @implementation HistoryPreviewController {
     HistoryContainerViewController* containerController;
-    NSInteger oldIndex;
     NSMutableArray <UIImage*>* imagesCache;
 }
 
@@ -30,7 +33,7 @@
         [imagesCache addObject:currentImage];
     }
     
-    oldIndex = -1; // if you init it to 0, the first preview won't show because it thought the index hasn't changed
+    self.currentIndex = 0;
     return self;
 }
 
@@ -51,18 +54,32 @@
 }
 
 - (void)showPreviewAtIndex:(NSInteger)index {
-    if (index != oldIndex) {
-        // the index is new
-        NSAssert(index >= 0 && index < [containerController getTotalNumberOfData], @"PreviewController: invalid index");
-        
-        [self fetchEntryIntoCacheIfNeeded:index];
+    [self showPreviewAtIndex:index forceRefetchImageFromCache:NO];
+}
+
+- (void)showPreviewAtIndex:(NSInteger)index forceRefetchImageFromCache:(BOOL)frifc {
+    NSAssert(index >= 0 && index < [containerController getTotalNumberOfData], @"PreviewController: invalid index");
+    
+    BOOL condition;
+    if (frifc) {
+        condition = YES;
+    } else {
+        condition = (index != self.currentIndex); // the index is new
+    }
+    
+    if (condition) {
+        [self fetchEntryIntoCache:index overwriteExistingEntry:NO];
         
         [(HistoryPreviewView*)self.view showImage:[imagesCache objectAtIndex:index]];
-        oldIndex = index;
+        
+        self.currentIndex = index;
     }
 }
 
-- (void)fetchEntryIntoCacheIfNeeded:(NSInteger)index {
+/*
+ may be much slower if use the overwrite option
+ */
+- (void)fetchEntryIntoCache:(NSInteger)index overwriteExistingEntry:(BOOL)oee {
     if (index >= 0 && index < [containerController getTotalNumberOfData]) {
         // the index is valid
         NSLog(@"imagesCache.count = %lu", (unsigned long)imagesCache.count);
@@ -75,8 +92,14 @@
             }
         }
         
-        if ([[imagesCache objectAtIndex:index] isEqual:[NSNull null]]) {
-            // the image requested is not in the cache.
+        BOOL condition;
+        if (oee) {
+            condition = YES;
+        } else {
+            condition = [[imagesCache objectAtIndex:index] isEqual:[NSNull null]]; // the image requested is not in the cache.
+        }
+        
+        if (condition) {
             // Fetch image path from container controller, read the file from disk and add to the cache
             UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:index]];
             [imagesCache replaceObjectAtIndex:index withObject:currentImage];
@@ -84,13 +107,10 @@
     }
 }
 
-- (void)refreshCacheAtIndex:(NSInteger)index {
-    if (imagesCache.count >= index + 1 && ![[imagesCache objectAtIndex:index] isEqual:[NSNull null]]) {
-        // the entry exists in the cache
-        // Fetch image path from container controller, read the file from disk and add to the cache
-        UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:index]];
-        [imagesCache replaceObjectAtIndex:index withObject:currentImage];
-    }
+- (void)refreshCurrentPreview {
+    NSLog(@"refreshing index %d", self.currentIndex);
+    [self fetchEntryIntoCache:self.currentIndex overwriteExistingEntry:YES];
+    [self showPreviewAtIndex:self.currentIndex forceRefetchImageFromCache:YES];
 }
 
 @end

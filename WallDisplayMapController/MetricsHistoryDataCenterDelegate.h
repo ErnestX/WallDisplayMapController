@@ -14,7 +14,7 @@
 @protocol MetricsHistoryDataCenterDelegate <NSObject>
 
 @required
-- (void)appendNewEntry;
+- (void)newEntryAppendedInDataCenter;
 
 @end
 
