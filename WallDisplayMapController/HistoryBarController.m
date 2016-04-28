@@ -23,7 +23,7 @@
 @implementation HistoryBarController
 {
     HistoryContainerViewController* containerController;
-    NSMutableArray* savesArray;
+    NSInteger totalNumberOfCells;
 }
 static NSString* const reuseIdentifier = @"Cell";
 
@@ -33,7 +33,8 @@ static NSString* const reuseIdentifier = @"Cell";
     NSAssert(self, @"init failed");
     
     containerController = hcvc;
-    savesArray = [[NSMutableArray alloc]init];
+
+    totalNumberOfCells = 0;
     
     return self;
 }
@@ -65,7 +66,7 @@ static NSString* const reuseIdentifier = @"Cell";
         // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < [containerController getTotalNumberOfData]; i++) {
-            [savesArray insertObject:[containerController getMetricsDisplayPositionsAtTimeIndex:i] atIndex:i];
+            totalNumberOfCells++;
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         
@@ -83,12 +84,12 @@ static NSString* const reuseIdentifier = @"Cell";
 }
 
 - (void)appendNewEntryIfAvailable {
-    if([containerController getTotalNumberOfData] > savesArray.count) {
-        NSInteger newIndex = savesArray.count;
+    if([containerController getTotalNumberOfData] > totalNumberOfCells) {
+        NSInteger newIndex = totalNumberOfCells;
         
         [self.collectionView performBatchUpdates:^{
             NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-            [savesArray addObject:[containerController getMetricsDisplayPositionsAtTimeIndex:newIndex]];
+            totalNumberOfCells++;
             [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
             [self.collectionView insertItemsAtIndexPaths:indexPaths];
         } completion:^(BOOL b){
@@ -107,7 +108,7 @@ static NSString* const reuseIdentifier = @"Cell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return savesArray.count;
+    return totalNumberOfCells;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,38 +117,38 @@ static NSString* const reuseIdentifier = @"Cell";
     // Configure the cell
     NSInteger thisIndex = indexPath.item;
     
-    if (thisIndex > 0 && thisIndex < savesArray.count-1) {
+    if (thisIndex > 0 && thisIndex < totalNumberOfCells-1) {
         // have both prev cell and next cell
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
-            prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
+            thisMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex]
+            prevMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
-            nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
+            nextMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex + 1]
               nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
-            prevMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex - 1]
+            thisMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex]
+            prevMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
-    } else if (thisIndex < savesArray.count-1) {
+        } else if (thisIndex < totalNumberOfCells-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]
-            nextMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex + 1]
+            thisMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex]
+            nextMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex + 1]
               nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[savesArray objectAtIndex:thisIndex]];
+            thisMetricNamePositionPairs:[containerController getMetricsDisplayPositionsAtTimeIndex:thisIndex]];
     }
     
     return cell;
