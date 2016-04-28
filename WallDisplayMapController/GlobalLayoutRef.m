@@ -25,11 +25,11 @@
 }
 
 - (CGFloat)getHistoryBarOriginalHeight {
-    return 160.0;
+    return 140.0;
 }
 
 - (CGFloat)getHistoryBarExpandedHeight {
-    return (160 - 40) * 3 + 40;
+    return (140 - 20) * 3 + 20; // 140 = the original height, 20 = tag view height + time lable font size
 }
 
 - (CGFloat)getCellDefaultWidth {

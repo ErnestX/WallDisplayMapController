@@ -42,7 +42,7 @@
 
 - (void)showImage:(nonnull UIImage *)image {
     NSAssert(![image isEqual:[NSNull null]], @"argument is NSNull");
-    scrollView.contentSize = imageView.frame.size;
+
     if (imageView.image == nil) {
         // if this is the first image displayed, set frame and center the image
         imageView.frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
@@ -52,10 +52,12 @@
         // else, change bound instead of frame, since bound is not affected with transfrom (zoom in this case)
         imageView.bounds = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
     }
-    scrollView.minimumZoomScale = MIN(self.bounds.size.width / imageView.bounds.size.width,
-                                      self.bounds.size.height / imageView.bounds.size.height); // make sure the image fit the window at min scale
     
     imageView.image = image;
+    
+    scrollView.contentSize = imageView.frame.size;
+    scrollView.minimumZoomScale = MIN(self.bounds.size.width / imageView.bounds.size.width,
+                                      self.bounds.size.height / imageView.bounds.size.height); // make sure the image fit the window at min scale
 }
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {

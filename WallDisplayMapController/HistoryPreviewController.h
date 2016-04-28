@@ -20,6 +20,7 @@
  When an entry is cleared, it is set to NSNull instead of being removed from the array.
  */
 @interface HistoryPreviewController : UIViewController
+
 @property (readonly) NSInteger currentIndex;
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc;

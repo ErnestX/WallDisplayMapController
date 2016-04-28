@@ -68,7 +68,6 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     // finished auto layout: update graphics in this view!
-    NSLog(@"layouted subview");
     if (!CGSizeEqualToSize(self.frame.size, oldFrame.size)) {
         [self updateDataPointAccoridngToFrameSize:self.frame.size];
         [self updateExistingLinesAccordingToFrameHeight:self.frame.size.height];
