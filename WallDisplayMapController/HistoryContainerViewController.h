@@ -13,7 +13,10 @@
 
 - (NSInteger)getTotalNumberOfData;
 
-- (NSDictionary*)getMetricsValueAtTimeIndex:(NSInteger)index;
+/*
+ the values in the dictionary all range from 0 to 1
+ */
+- (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index;
 - (NSString*)getPreviewImagePathForIndex:(NSInteger)index;
 
 - (void)showPreviewForIndex:(NSInteger)index;

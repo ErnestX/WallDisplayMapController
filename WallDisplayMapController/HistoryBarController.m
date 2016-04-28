@@ -65,7 +65,7 @@ static NSString* const reuseIdentifier = @"Cell";
         // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < [containerController getTotalNumberOfData]; i++) {
-            [savesArray insertObject:[containerController getMetricsValueAtTimeIndex:i] atIndex:i];
+            [savesArray insertObject:[containerController getMetricsDisplayPositionsAtTimeIndex:i] atIndex:i];
             [indexPaths insertObject:[NSIndexPath indexPathForItem:i inSection:0] atIndex:i];
         }
         
@@ -88,7 +88,7 @@ static NSString* const reuseIdentifier = @"Cell";
         
         [self.collectionView performBatchUpdates:^{
             NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
-            [savesArray addObject:[containerController getMetricsValueAtTimeIndex:newIndex]];
+            [savesArray addObject:[containerController getMetricsDisplayPositionsAtTimeIndex:newIndex]];
             [indexPaths addObject:[NSIndexPath indexPathForItem:newIndex inSection:0]];
             [self.collectionView insertItemsAtIndexPaths:indexPaths];
         } completion:^(BOOL b){

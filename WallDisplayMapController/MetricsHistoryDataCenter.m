@@ -9,7 +9,12 @@
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsConfigs.h"
 #import "MetricsDataEntry.h"
+
 #import "GlobalManager.h"
+#import "DensityModel.h"
+#import "EnergyModel.h"
+#import "BuildingsModel.h"
+#import "DistrictEnergyModel.h"
 
 @interface MetricsHistoryDataCenter()
 @property (readwrite) NSArray<MetricsDataEntry*>* metricsData;
@@ -85,6 +90,9 @@
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+//                         [GlobalManager sharedInstance].modelBuildings.people, [NSNumber numberWithInteger:building_people],
+//                         [GlobalManager sharedInstance].modelDistrictEnergy.energyHouseholdIncome, [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
+//                         [GlobalManager sharedInstance].modelDensity.modelActiveTripsPercent, [NSNumber numberWithInteger:density_modelActiveTripsPercent], nil];
                          [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:building_people],
                          [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
                          [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:density_modelActiveTripsPercent], nil];

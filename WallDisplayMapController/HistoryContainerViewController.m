@@ -12,6 +12,7 @@
 #import "HistoryPreviewController.h"
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsDataEntry.h"
+#import "MetricsConfigs.h"
 
 @interface HistoryContainerViewController ()
 
@@ -21,12 +22,18 @@
 {
     HistoryBarController* historyBarController;
     HistoryPreviewController* historyPreviewController;
+    NSArray<NSNumber*>* metricsDisplayedInOrder; // stores the configuration that which metrics should be displayed and in what order
 }
 
 - (id)init {
     self = [super init];
     if (self) {
         [[MetricsHistoryDataCenter instance] setDelegate:self];
+        
+        metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:density_modelActiveTripsPercent],
+                                                            [NSNumber numberWithInteger:building_people],
+                                                            [NSNumber numberWithInteger:building_detachedPercent],
+                                                            [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome], nil];
     }
     return self;
 }
@@ -61,7 +68,9 @@
     return [[MetricsHistoryDataCenter instance] getTotalNumberOfData];
 }
 
-- (NSDictionary*)getMetricsValueAtTimeIndex:(NSInteger)index {
+- (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index {
+    // TODO
+    
     return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
 }
 

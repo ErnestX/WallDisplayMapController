@@ -135,9 +135,9 @@
         case building_civicPercent: name = @"civic"; break;
         case building_indPercent: name = @"industrial"; break;
             
-            //        case building_far:
+//        case building_far:
             
-            //        case  districtEnergy_far:
+//        case  districtEnergy_far:
             
 //        case districtEnergy_heatingPercent:
 //        case districtEnergy_lightsPercent:

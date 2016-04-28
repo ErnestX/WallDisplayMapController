@@ -10,6 +10,9 @@
 
 @interface MetricsDataEntry : NSObject <NSCopying>
 
+/*
+ this is the raw values for the metrics
+ */
 @property (readonly, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
 @property (readonly, nonnull) NSString* previewImagePath;
 
