@@ -82,6 +82,7 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 };
 
 @interface MetricsConfigs : NSObject
+@property (readonly) NSArray<NSNumber*>* metricsDisplayedInOrder; // stores the configuration that which metrics should be displayed and in what order
 
 /**
  this is a singleton class

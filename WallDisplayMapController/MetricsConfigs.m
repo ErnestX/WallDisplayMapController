@@ -8,6 +8,10 @@
 
 #import "MetricsConfigs.h"
 
+@interface MetricsConfigs ()
+@property (readwrite) NSArray<NSNumber*>* metricsDisplayedInOrder; // stores the configuration that which metrics should be displayed and in what order
+@end
+
 @implementation MetricsConfigs
 
 + (MetricsConfigs*)instance {
@@ -15,7 +19,13 @@
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
         instance = [[self alloc] init];
-        //init self if needed in the future
+        //init instance
+        
+        // stub
+        instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:density_modelActiveTripsPercent],
+                                            [NSNumber numberWithInteger:building_people],
+                                            [NSNumber numberWithInteger:building_detachedPercent],
+                                            [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome], nil];
     });
     
     return instance;

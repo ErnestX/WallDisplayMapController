@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MetricsHistoryDataCenterDelegate.h"
+#import "MetricsConfigs.h"
 
 @class MetricsDataEntry;
 
@@ -25,6 +26,7 @@
 
 - (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)d;
 - (NSInteger)getTotalNumberOfData;
+
 - (nullable MetricsDataEntry*)getMetricsDataAtTimeIndex:(NSInteger)index;
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss;
