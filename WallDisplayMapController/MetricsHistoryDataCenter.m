@@ -9,6 +9,7 @@
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsConfigs.h"
 #import "MetricsDataEntry.h"
+#import "GlobalManager.h"
 
 @interface MetricsHistoryDataCenter()
 @property (readwrite) NSArray<MetricsDataEntry*>* metricsData;
@@ -84,9 +85,9 @@
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:people],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:dwelling],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:building_people],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:density_modelActiveTripsPercent], nil];
     
     // save image to disk as png file
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -101,9 +102,9 @@
 
 - (void)addNewDummyEntry {
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:people],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:dwelling],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:building_people],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
+                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:density_modelActiveTripsPercent], nil];
     
     NSString* filePath;
     NSBundle *mainBundle = [NSBundle mainBundle];

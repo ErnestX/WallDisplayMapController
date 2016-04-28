@@ -27,28 +27,68 @@
 }
 
 - (UIColor*)getColorForMetric:(MetricName)m {
-    
-    //    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    //    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    //    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    //    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-    
-    //TODO: hard-coded for debug purpose. Maybe randomly assign in the future
     UIColor* color;
     
     switch (m) {
-        case people:
-            color = [UIColor blueColor];
+        case density_densityMetric:
+        case density_modelVKT:
+        case density_CEEIKVT:
+        case density_modelActiveTripsPercent:
+        case density_modelTransitTripsPercent:
+        case density_modelVehicleTripsPercent:
+            color = [UIColor cyanColor];
             break;
-        case dwelling:
+            
+//        case energy_mobilityPercent:
+//        case energy_heatingAndHotWaterPercent:
+//        case energy_lightsAndAppliancesPercent:
+//
+//        case energy_propaneIn:
+//        case energy_heatingoilIn:
+//        case energy_woodIn:
+//        case energy_electricityIn:
+//        case energy_dieselIn:
+//        case energy_gasolineIn:
+//            
+//        case energy_propaneOut:
+//        case energy_heatingoilOut:
+//        case energy_woodOut:
+//        case energy_electricityOut:
+//        case energy_dieselOut:
+//        case energy_gasolineOut:
+            
+        case building_people:
+        case building_dwellings:
             color = [UIColor redColor];
             break;
-        case active:
+            
+        case building_detachedPercent:
+        case building_attachedPercent:
+        case building_stackedPercent:
             color = [UIColor greenColor];
             break;
-        case populationDensity:
-            color = [UIColor orangeColor];
+            
+        case building_rezPercent:
+        case building_commPercent:
+        case building_civicPercent:
+        case building_indPercent:
+            color = [UIColor redColor];
             break;
+            
+//        case building_far:
+            
+//        case  districtEnergy_far:
+            
+        case districtEnergy_heatingPercent:
+        case districtEnergy_lightsPercent:
+        case districtEnergy_mobilityPercent:
+        case districtEnergy_emissionsPerCapita:
+        case districtEnergy_energyHouseholdIncome:
+            color = [UIColor purpleColor];
+            break;
+
+        default:
+            color = [UIColor darkGrayColor];
     }
     
     return color;

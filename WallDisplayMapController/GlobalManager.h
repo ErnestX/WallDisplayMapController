@@ -8,9 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class DensityModel;
+@class BuildingsModel;
+@class EnergyModel;
+@class DistrictEnergyModel;
+
 @interface GlobalManager : NSObject
 
 @property UIViewController *targetVC;
+
+@property (readonly, nonatomic, strong) DensityModel *modelDensity;
+@property (readonly, nonatomic, strong) BuildingsModel *modelBuildings;
+@property (readonly, nonatomic, strong) EnergyModel *modelEnergy;
+@property (readonly, nonatomic, strong) DistrictEnergyModel *modelDistrictEnergy;
 
 + (GlobalManager *)sharedInstance;
 - (void)beginConsumingMetricsData;

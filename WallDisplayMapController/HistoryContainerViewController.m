@@ -75,7 +75,6 @@
 
 - (void)newEntryAppendedInDataCenter {
     [historyBarController appendNewEntryIfAvailable];
-    NSLog(@"current index: %d", historyPreviewController.currentIndex);
     if (historyPreviewController.currentIndex == [[MetricsHistoryDataCenter instance]getTotalNumberOfData] - 1) {
         // the entry added is exactly the one currenly displaying. Refresh preview.
         [historyPreviewController refreshCurrentPreview];
