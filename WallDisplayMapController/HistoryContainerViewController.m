@@ -87,18 +87,15 @@
 }
 
 - (nonnull NSDate*)getTimeStampForIndex:(NSInteger)index {
-    // stub
-    return [NSDate date];
+    return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].timeStamp;
 }
 
 - (nonnull NSString*)getTagForIndex:(NSInteger)index {
-    // stub
-    return @"stub tag";
+    return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].tag;
 }
 
 - (BOOL)getFlagForIndex:(NSInteger)index {
-    // stub
-    return NO;
+    return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].flag;
 }
 
 - (nonnull NSString*)getPreviewImagePathForIndex:(NSInteger)index {
