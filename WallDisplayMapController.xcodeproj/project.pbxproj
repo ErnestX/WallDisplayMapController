@@ -83,6 +83,7 @@
 		CA4E04921C9B5A3A00E2B60D /* MetricView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4E04911C9B5A3A00E2B60D /* MetricView.m */; };
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
+		CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */; };
 		CAC8A4C41CCAA46300B9EC27 /* MetricsConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */; };
 		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
 		CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */; };
@@ -307,6 +308,8 @@
 		CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerViewController.m; sourceTree = "<group>"; };
 		CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryContainerView.h; sourceTree = "<group>"; };
 		CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerView.m; sourceTree = "<group>"; };
+		CAC7C7CB1CD3E27000425DB8 /* HistoryFilePathConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryFilePathConfigs.h; sourceTree = "<group>"; };
+		CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryFilePathConfigs.m; sourceTree = "<group>"; };
 		CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsConfigs.h; sourceTree = "<group>"; };
 		CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsConfigs.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
@@ -603,6 +606,8 @@
 		CAD0C8091CAC69A80022B67B /* History */ = {
 			isa = PBXGroup;
 			children = (
+				CAC7C7CB1CD3E27000425DB8 /* HistoryFilePathConfigs.h */,
+				CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */,
 				CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */,
 				CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */,
 				CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */,
@@ -883,6 +888,7 @@
 				AE2C30BF1B585E49006A955E /* MaskContentView.m in Sources */,
 				CAD0C8221CAEF63F0022B67B /* HistoryPreviewView.m in Sources */,
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,
+				CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
 				CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */,

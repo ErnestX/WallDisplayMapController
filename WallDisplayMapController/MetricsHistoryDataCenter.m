@@ -15,6 +15,8 @@
 #import "BuildingsModel.h"
 #import "DistrictEnergyModel.h"
 
+#import "HistoryFilePathConfigs.h"
+
 @interface MetricsHistoryDataCenter()
 @property (readwrite, nonnull) NSArray<MetricsDataEntry*>* metricsData;
 @property (readwrite, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* maxValueDic;
@@ -35,12 +37,17 @@
             
             instance.maxValueDic = [NSMutableDictionary dictionary];
             instance.minValueDic = [NSMutableDictionary dictionary];
-            
-//            NSMutableArray* tempArray = [NSMutableArray array];
             instance.metricsData = [NSArray array];
             
+            // create screenshots folder if it doesn't exist
+            NSString* absFolderPath = [HistoryFilePathConfigs getAbsFilePathToScreenshotFolder];
+            NSError *error = nil;
+            if (![[NSFileManager defaultManager] fileExistsAtPath:absFolderPath])
+                [[NSFileManager defaultManager] createDirectoryAtPath:absFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
+            NSAssert(!error, @"error creating screenshots folder");
+            
             // retrive backup data if exists
-            NSString* filePath = [instance getPathToMetricsDataCoded];
+            NSString* filePath = [instance getAbsPathToMetricsDataCoded];
             NSArray<NSData*>* metricsDataCoded = [NSArray arrayWithContentsOfFile:filePath];
             if (metricsDataCoded) {
                 // retrieve success; decode array
@@ -51,8 +58,6 @@
                     }
                 }
             }
-            
-//            instance.metricsData = [tempArray copy];
         }
     });
     return instance;
@@ -122,7 +127,7 @@
     }
     
     // step2: write the array of NSData to disk
-    NSString* filePath = [self getPathToMetricsDataCoded];
+    NSString* filePath = [self getAbsPathToMetricsDataCoded];
     BOOL succ = [metricsDataCoded writeToFile:filePath atomically:YES];
     if (!succ) {
         NSLog(@"Data Center: backup metricsData failed");
@@ -133,13 +138,13 @@
     NSDictionary<NSNumber*, NSNumber*>* dic = [self getCurrentMetricsValues];
     if (dic) {
         // save image to disk as png file
-        NSString* filePath = [self getPathToScreenshotForIndex:self.metricsData.count];
-        BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
+        NSString *absFilePath = [HistoryFilePathConfigs getAbsFilePathToScreenshotGivenIndex:self.metricsData.count];
+        BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:absFilePath atomically:YES];
         NSAssert(succ, @"Data Center: unable to write screenshot to disk");
         
         // add new entry
         MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
-                                                                   previewImagePath:filePath
+                                                                   previewImagePath:absFilePath
                                                                           timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.
                                                                                 tag:@"stub tag"
                                                                                flag:NO];
@@ -170,26 +175,9 @@
     }
 }
 
-- (nonnull NSString*)getPathToScreenshotForIndex:(NSInteger)index {
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* fileName = [NSString stringWithFormat:@"%d.png", index];
-    NSString* folderPath = [[paths objectAtIndex:0] stringByAppendingString:@"/screenshots"];
-    
-    // create screenshots folder if it doesn't exist
-    NSError *error = nil;
-    if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
-        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error];
-    NSAssert(!error, @"error creating screenshots folder");
-    
-    NSString* filePath = [folderPath stringByAppendingPathComponent:fileName];
-
-    return filePath;
-}
-
-- (nonnull NSString*)getPathToMetricsDataCoded {
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+- (nonnull NSString*)getAbsPathToMetricsDataCoded {
     NSString* fileName = @"/metricsDataCoded.dat";
-    NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    NSString* filePath = [HistoryFilePathConfigs getAbsFilePathGivenPathRelativeToDocFolder:fileName];
     
     return filePath;
 }
@@ -465,12 +453,12 @@
     UIImage* screenshot = [UIImage imageWithContentsOfFile:path];
     NSAssert(screenshot, @"cannot create dummy screenshot UIImage");
     
-    NSString* filePath = [self getPathToScreenshotForIndex:self.metricsData.count];
-    BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:filePath atomically:YES];
+    NSString* absFilePath = [HistoryFilePathConfigs getAbsFilePathToScreenshotGivenIndex:self.metricsData.count];
+    BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:absFilePath atomically:YES];
     NSAssert(succ, @"Data Center: unable to write screenshot to disk");
     
     MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
-                                                               previewImagePath:filePath
+                                                               previewImagePath:absFilePath
                                                                       timeStamp:[NSDate date]
                                                                             tag:@"stub tag"
                                                                            flag:NO];
