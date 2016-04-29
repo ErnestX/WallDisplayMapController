@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MetricsConfigs.h"
 
 @interface GlobalLayoutRef : NSObject
 

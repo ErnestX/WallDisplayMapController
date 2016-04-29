@@ -7,6 +7,7 @@
 //
 
 #import "GlobalLayoutRef.h"
+#import "MetricsConfigs.h"
 
 @implementation GlobalLayoutRef {
     NSDictionary* metricsIconDic;
@@ -29,7 +30,7 @@
 }
 
 - (CGFloat)getHistoryBarExpandedHeight {
-    return (140 - 20) * 3 + 20; // 140 = the original height, 20 = tag view height + time lable font size
+    return ([self getHistoryBarOriginalHeight] - 20) * [MetricsConfigs instance].metricsDisplayedInOrder.count + 20; // 20 = tag view height + time lable font size
 }
 
 - (CGFloat)getCellDefaultWidth {

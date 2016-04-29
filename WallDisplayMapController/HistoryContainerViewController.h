@@ -14,8 +14,8 @@
 - (NSInteger)getTotalNumberOfData;
 
 /*
- contains only the metrics that is displayed according to MetricsConfigs
- the values in the dictionary all range from 0 to 1
+ this method currenly only returns data for the metrics that's displayed according to MetricsConfigs. This may not the right thing to do for architecture, but it definitely helps with the performance. 
+ the values in the dictionary all range from 0 to 1\
  */
 - (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index;
 - (NSString*)getPreviewImagePathForIndex:(NSInteger)index;
