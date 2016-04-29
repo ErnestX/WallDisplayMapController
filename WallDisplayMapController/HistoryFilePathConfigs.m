@@ -10,30 +10,37 @@
 
 @implementation HistoryFilePathConfigs
 
-+ (NSString*)getAbsFilePathToDocFolder {
++ (nonnull NSString*)getAbsPathToDocFolder {
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths objectAtIndex:0];
 }
 
-+ (NSString*)getAbsFilePathGivenPathRelativeToDocFolder:(NSString*)path {
-    NSString* pathToDocs = [HistoryFilePathConfigs getAbsFilePathToDocFolder];
++ (nonnull NSString*)getAbsPathGivenPathRelativeToDocFolder:(NSString*)path {
+    NSString* pathToDocs = [HistoryFilePathConfigs getAbsPathToDocFolder];
     return [pathToDocs stringByAppendingPathComponent:path];
 }
 
-+ (NSString*)getAbsFilePathToScreenshotFolder {
-    return [HistoryFilePathConfigs getAbsFilePathGivenPathRelativeToDocFolder:@"/screenshots"];
++ (nonnull NSString*)getAbsPathToScreenshotFolder {
+    return [HistoryFilePathConfigs getAbsPathGivenPathRelativeToDocFolder:@"/screenshots"];
 }
 
-+ (NSString*)getScreenshotFileNameGivenIndex:(NSInteger)index {
++ (nonnull NSString*)getScreenshotFileNameGivenIndex:(NSInteger)index {
     NSAssert(index >= 0, @"index is negative");
     return [NSString stringWithFormat:@"%d.png", index];
 }
 
-+ (NSString*)getAbsFilePathToScreenshotGivenIndex:(NSInteger)index {
++ (nonnull NSString*)getAbsPathToScreenshotFileGivenIndex:(NSInteger)index {
     NSAssert(index >= 0, @"index is negative");
     NSString* fileName = [HistoryFilePathConfigs getScreenshotFileNameGivenIndex:index];
-    return [[HistoryFilePathConfigs getAbsFilePathToScreenshotFolder]
+    return [[HistoryFilePathConfigs getAbsPathToScreenshotFolder]
             stringByAppendingPathComponent:fileName];
+}
+
++ (nonnull NSString*)getAbsPathToMetricsDataCodedFile {
+    NSString* fileName = @"/metricsDataCoded.dat";
+    NSString* filePath = [HistoryFilePathConfigs getAbsPathGivenPathRelativeToDocFolder:fileName];
+    
+    return filePath;
 }
 
 @end

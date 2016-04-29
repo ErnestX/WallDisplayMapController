@@ -40,14 +40,14 @@
             instance.metricsData = [NSArray array];
             
             // create screenshots folder if it doesn't exist
-            NSString* absFolderPath = [HistoryFilePathConfigs getAbsFilePathToScreenshotFolder];
+            NSString* absFolderPath = [HistoryFilePathConfigs getAbsPathToScreenshotFolder];
             NSError *error = nil;
             if (![[NSFileManager defaultManager] fileExistsAtPath:absFolderPath])
                 [[NSFileManager defaultManager] createDirectoryAtPath:absFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
             NSAssert(!error, @"error creating screenshots folder");
             
             // retrive backup data if exists
-            NSString* filePath = [instance getAbsPathToMetricsDataCoded];
+            NSString* filePath = [HistoryFilePathConfigs getAbsPathToMetricsDataCodedFile];
             NSArray<NSData*>* metricsDataCoded = [NSArray arrayWithContentsOfFile:filePath];
             if (metricsDataCoded) {
                 // retrieve success; decode array
@@ -127,7 +127,7 @@
     }
     
     // step2: write the array of NSData to disk
-    NSString* filePath = [self getAbsPathToMetricsDataCoded];
+    NSString* filePath = [HistoryFilePathConfigs getAbsPathToMetricsDataCodedFile];
     BOOL succ = [metricsDataCoded writeToFile:filePath atomically:YES];
     if (!succ) {
         NSLog(@"Data Center: backup metricsData failed");
@@ -138,7 +138,7 @@
     NSDictionary<NSNumber*, NSNumber*>* dic = [self getCurrentMetricsValues];
     if (dic) {
         // save image to disk as png file
-        NSString *absFilePath = [HistoryFilePathConfigs getAbsFilePathToScreenshotGivenIndex:self.metricsData.count];
+        NSString *absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:self.metricsData.count];
         BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:absFilePath atomically:YES];
         NSAssert(succ, @"Data Center: unable to write screenshot to disk");
         
@@ -173,13 +173,6 @@
             // it failed.
         }
     }
-}
-
-- (nonnull NSString*)getAbsPathToMetricsDataCoded {
-    NSString* fileName = @"/metricsDataCoded.dat";
-    NSString* filePath = [HistoryFilePathConfigs getAbsFilePathGivenPathRelativeToDocFolder:fileName];
-    
-    return filePath;
 }
 
 - (nullable NSDictionary<NSNumber*, NSNumber*>*) getCurrentMetricsValues {
@@ -453,7 +446,7 @@
     UIImage* screenshot = [UIImage imageWithContentsOfFile:path];
     NSAssert(screenshot, @"cannot create dummy screenshot UIImage");
     
-    NSString* absFilePath = [HistoryFilePathConfigs getAbsFilePathToScreenshotGivenIndex:self.metricsData.count];
+    NSString* absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:self.metricsData.count];
     BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:absFilePath atomically:YES];
     NSAssert(succ, @"Data Center: unable to write screenshot to disk");
     

@@ -10,10 +10,11 @@
 
 @interface HistoryFilePathConfigs : NSObject
 
-+ (NSString*)getAbsFilePathToDocFolder;
-+ (NSString*)getAbsFilePathGivenPathRelativeToDocFolder:(NSString*)path;
-+ (NSString*)getAbsFilePathToScreenshotFolder;
-+ (NSString*)getScreenshotFileNameGivenIndex:(NSInteger)index;
-+ (NSString*)getAbsFilePathToScreenshotGivenIndex:(NSInteger)index;
++ (nonnull NSString*)getAbsPathToDocFolder;
++ (nonnull NSString*)getAbsPathGivenPathRelativeToDocFolder:(nonnull NSString*)path;
++ (nonnull NSString*)getAbsPathToScreenshotFolder;
++ (nonnull NSString*)getScreenshotFileNameGivenIndex:(NSInteger)index;
++ (nonnull NSString*)getAbsPathToScreenshotFileGivenIndex:(NSInteger)index;
++ (nonnull NSString*)getAbsPathToMetricsDataCodedFile;
 
 @end
