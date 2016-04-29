@@ -143,11 +143,12 @@
         NSAssert(succ, @"Data Center: unable to write screenshot to disk");
         
         // add new entry
-        MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
-                                                                   previewImagePath:absFilePath
-                                                                          timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.
-                                                                                tag:@"stub tag"
-                                                                               flag:NO];
+        MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]
+                                      initWithMetricsValues:dic
+                                      previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:self.metricsData.count]
+                                      timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.
+                                      tag:@"stub tag"
+                                      flag:NO];
         [self addNewEntry:newEntry];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"I can't add a new entry because I don't know the values of metrics yet. Add or remove some cases from the table and try saving again"
@@ -450,11 +451,12 @@
     BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:absFilePath atomically:YES];
     NSAssert(succ, @"Data Center: unable to write screenshot to disk");
     
-    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
-                                                               previewImagePath:absFilePath
-                                                                      timeStamp:[NSDate date]
-                                                                            tag:@"stub tag"
-                                                                           flag:NO];
+    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]
+                                  initWithMetricsValues:dic
+                                  previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:self.metricsData.count]
+                                  timeStamp:[NSDate date]
+                                  tag:@"stub tag"
+                                  flag:NO];
     [self addNewEntry:newEntry];
 }
 

@@ -10,7 +10,7 @@
 
 @interface MetricsDataEntry()
 @property (readwrite, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
-@property (readwrite, nonnull) NSString* previewImagePath;
+@property (readwrite, nonnull) NSString* previewImageFileName;
 @property (readwrite, nonnull) NSDate* timeStamp;
 @property (readwrite, nonnull) NSString* tag;
 @property (readwrite) BOOL flag;
@@ -21,7 +21,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
         self.metricsValues = [aDecoder decodeObjectForKey:@"metricsValues"];
-        self.previewImagePath = [aDecoder decodeObjectForKey:@"previewImagePath"];
+        self.previewImageFileName = [aDecoder decodeObjectForKey:@"previewImagePath"];
         self.timeStamp = [aDecoder decodeObjectForKey:@"timeStamp"];
         self.tag = [aDecoder decodeObjectForKey:@"tag"];
         self.flag = [aDecoder decodeBoolForKey:@"flag"];
@@ -31,21 +31,21 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.metricsValues forKey:@"metricsValues"];
-    [aCoder encodeObject:self.previewImagePath forKey:@"previewImagePath"];
+    [aCoder encodeObject:self.previewImageFileName forKey:@"previewImagePath"];
     [aCoder encodeObject:self.timeStamp forKey:@"timeStamp"];
     [aCoder encodeObject:self.tag forKey:@"tag"];
     [aCoder encodeBool:self.flag forKey:@"flag"];
 }
 
 - (nullable instancetype)initWithMetricsValues:(nonnull NSDictionary<NSNumber *,NSNumber *> *)dic
-                              previewImagePath:(nonnull NSString *)path
+                          previewImageFileName:(nonnull NSString *)path
                                      timeStamp:(nonnull NSDate*)ts
                                            tag:(nonnull NSString*)tg
                                           flag:(BOOL)f {
     self = [super init];
     if (self) {
         self.metricsValues = dic;
-        self.previewImagePath = path;
+        self.previewImageFileName = path;
         self.timeStamp = ts;
         self.tag = tg;
         self.flag = f;
@@ -56,7 +56,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:self.metricsValues
-                                                               previewImagePath:self.previewImagePath
+                                                           previewImageFileName:self.previewImageFileName
                                                                       timeStamp:self.timeStamp
                                                                             tag:self.tag
                                                                            flag:self.flag];

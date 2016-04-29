@@ -13,6 +13,7 @@
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsDataEntry.h"
 #import "MetricsConfigs.h"
+#import "HistoryFilePathConfigs.h"
 
 @interface HistoryContainerViewController ()
 
@@ -99,7 +100,9 @@
 }
 
 - (nonnull NSString*)getPreviewImagePathForIndex:(NSInteger)index {
-    return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].previewImagePath;
+    return [[HistoryFilePathConfigs getAbsPathToScreenshotFolder]
+            stringByAppendingPathComponent:[[MetricsHistoryDataCenter instance]
+                                            getMetricsDataAtTimeIndex:index].previewImageFileName];
 }
 
 - (void)showPreviewForIndex:(NSInteger)index {

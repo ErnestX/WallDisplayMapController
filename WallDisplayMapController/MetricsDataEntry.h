@@ -14,13 +14,13 @@
  this is the raw values for the metrics
  */
 @property (readonly, nonnull) NSDictionary<NSNumber*, NSNumber*>* metricsValues;
-@property (readonly, nonnull) NSString* previewImagePath;
+@property (readonly, nonnull) NSString* previewImageFileName;
 @property (readonly, nonnull) NSDate* timeStamp;
 @property (readonly, nonnull) NSString* tag;
 @property (readonly) BOOL flag;
 
 - (nullable instancetype)initWithMetricsValues:(nonnull NSDictionary<NSNumber *,NSNumber *> *)dic
-                              previewImagePath:(nonnull NSString *)path
+                          previewImageFileName:(nonnull NSString *)path
                                      timeStamp:(nonnull NSDate*)ts
                                            tag:(nonnull NSString*)tg
                                           flag:(BOOL)f;

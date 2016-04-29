@@ -13,7 +13,7 @@
 
 #import "MetricsHistoryDataCenter.h" // this is for test button 2 only!
 
-#define TAB_BAR_HEIGHT 49
+#define TAB_BAR_HEIGHT 49 // this is simply the default tab height for iOS
 
 @implementation HistoryContainerView
 {
