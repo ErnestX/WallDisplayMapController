@@ -138,14 +138,15 @@
     NSDictionary<NSNumber*, NSNumber*>* dic = [self getCurrentMetricsValues];
     if (dic) {
         // save image to disk as png file
-        NSString *absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:self.metricsData.count];
+        NSInteger newIndex = self.metricsData.count;
+        NSString *absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:newIndex];
         BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:absFilePath atomically:YES];
         NSAssert(succ, @"Data Center: unable to write screenshot to disk");
         
         // add new entry
         MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]
                                       initWithMetricsValues:dic
-                                      previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:self.metricsData.count]
+                                      previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:newIndex]
                                       timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.
                                       tag:@"stub tag"
                                       flag:NO];
@@ -174,6 +175,10 @@
             // it failed.
         }
     }
+}
+
+- (nonnull NSString*)getAbsPathToScreenshotFolder {
+    return [HistoryFilePathConfigs getAbsPathToScreenshotFolder];
 }
 
 - (nullable NSDictionary<NSNumber*, NSNumber*>*) getCurrentMetricsValues {
@@ -447,13 +452,15 @@
     UIImage* screenshot = [UIImage imageWithContentsOfFile:path];
     NSAssert(screenshot, @"cannot create dummy screenshot UIImage");
     
-    NSString* absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:self.metricsData.count];
+    NSInteger newIndex = self.metricsData.count;
+    
+    NSString* absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:newIndex];
     BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:absFilePath atomically:YES];
     NSAssert(succ, @"Data Center: unable to write screenshot to disk");
     
     MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]
                                   initWithMetricsValues:dic
-                                  previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:self.metricsData.count]
+                                  previewImageFileName:[HistoryFilePathConfigs getScreenshotFileNameGivenIndex:newIndex]
                                   timeStamp:[NSDate date]
                                   tag:@"stub tag"
                                   flag:NO];

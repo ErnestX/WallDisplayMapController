@@ -38,4 +38,6 @@
 
 - (void)addNewDummyEntry;
 
+- (nonnull NSString*)getAbsPathToScreenshotFolder;
+
 @end
