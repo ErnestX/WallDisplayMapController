@@ -16,6 +16,7 @@
 
 /*
  this property is readonly and immutable
+ notice that thresholds are not recorded
  */
 @property (readonly, nonnull) NSArray<MetricsDataEntry*>* metricsData;
 @property (readonly, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* maxValueDic;
