@@ -248,15 +248,15 @@
     }
     
     // add the metric views, one for each metric, overlapping on top of each other
-    int i = 0;
-    for (NSNumber* key in thisMetricData) {
+    for (int i=0; i<[MetricsConfigs instance].metricsDisplayedInOrder.count; i++) {
         
-        MetricName metricName = [key integerValue];
-        id value = [thisMetricData objectForKey:key];
+        NSNumber* metricNameInNSNum = [[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:i];
+        MetricName metricName = [metricNameInNSNum integerValue];
+        NSNumber* displayPos = [thisMetricData objectForKey:metricNameInNSNum];
 
         // validate value
-        NSAssert([value isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
-        CGFloat floatV = [(NSNumber*)value floatValue];
+        NSAssert([displayPos isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
+        CGFloat floatV = [(NSNumber*)displayPos floatValue];
         NSAssert(floatV >= 0.0 && floatV <= 1.0, @"value smaller than 0 or greater than 1");
         
         MetricView* mv;
@@ -341,24 +341,22 @@
         
         // set up lines of applies
         if (pe && ne) {
-            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:metricNameInNSNum]floatValue]
                               absHorizontalDistance:pd];
-            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:metricNameInNSNum]floatValue]
                                absHorizontalDistance:nd];
         } else if (pe) {
-            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:key]floatValue]
+            [mv addLeftLineWithPrevDataPointHeight:[[prevMetricData objectForKey:metricNameInNSNum]floatValue]
                               absHorizontalDistance:pd];
             [mv removeRightLine];
         } else if (ne) {
-            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:key]floatValue]
+            [mv addRightLineWithNextDataPointHeight:[[nextMetricData objectForKey:metricNameInNSNum]floatValue]
                                absHorizontalDistance:nd];
             [mv removeLeftLine];
         } else {
             [mv removeLeftLine];
             [mv removeRightLine];
         }
-        
-        i++;
     }
 }
 
