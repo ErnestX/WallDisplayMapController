@@ -32,4 +32,11 @@
  */
 - (void)refreshCurrentPreview;
 
+/**
+ set all entries to NSNull
+ */
+- (void)resetCache;
+
+- (void)removeCurrentPreview;
+
 @end

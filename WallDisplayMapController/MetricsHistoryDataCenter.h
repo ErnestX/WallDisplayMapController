@@ -34,10 +34,10 @@
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss;
 
-//- (void)wipeAllDataFromDisk;
-
 - (void)addNewDummyEntry;
 
 - (nonnull NSString*)getAbsPathToScreenshotFolder;
+
+//- (void)confirmAndWipeAllDataFromDisk;
 
 @end

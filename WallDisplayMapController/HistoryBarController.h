@@ -19,4 +19,6 @@
 
 - (void)appendNewEntryIfAvailable;
 
+- (void)removeAllEntries;
+
 @end

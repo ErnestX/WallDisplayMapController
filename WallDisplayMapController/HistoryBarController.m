@@ -98,6 +98,18 @@ static NSString* const reuseIdentifier = @"Cell";
     }
 }
 
+- (void)removeAllEntries {
+    NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
+    for (int i=0; i<totalNumberOfCells; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+    }
+    
+    [self.collectionView performBatchUpdates:^{
+        [self.collectionView deleteItemsAtIndexPaths:indexPaths];
+        totalNumberOfCells = 0;
+    } completion:nil];
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

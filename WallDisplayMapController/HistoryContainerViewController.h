@@ -26,4 +26,6 @@
 
 - (void)showPreviewForIndex:(NSInteger)index;
 
+- (void)removeAllEntries;
+
 @end

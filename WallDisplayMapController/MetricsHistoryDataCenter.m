@@ -34,17 +34,11 @@
         instance = [[self alloc] init];
         if (instance) {
             // init properties
-            
             instance.maxValueDic = [NSMutableDictionary dictionary];
             instance.minValueDic = [NSMutableDictionary dictionary];
             instance.metricsData = [NSArray array];
             
-            // create screenshots folder if it doesn't exist
-            NSString* absFolderPath = [HistoryFilePathConfigs getAbsPathToScreenshotFolder];
-            NSError *error = nil;
-            if (![[NSFileManager defaultManager] fileExistsAtPath:absFolderPath])
-                [[NSFileManager defaultManager] createDirectoryAtPath:absFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
-            NSAssert(!error, @"error creating screenshots folder");
+            [instance createScreenshotFolderIfItDoNotExist];
             
             // retrive backup data if exists
             NSString* filePath = [HistoryFilePathConfigs getAbsPathToMetricsDataCodedFile];
@@ -58,9 +52,23 @@
                     }
                 }
             }
+            
+            // listen for wipe data notification
+            [[NSNotificationCenter defaultCenter] addObserver:instance
+                                                     selector:@selector(confirmAndWipeAllDataFromDisk)
+                                                         name:@"WIPE ALL HISTORY DATA FROM DISK"
+                                                       object:nil];
         }
     });
     return instance;
+}
+
+- (void)createScreenshotFolderIfItDoNotExist {
+    NSString* absFolderPath = [HistoryFilePathConfigs getAbsPathToScreenshotFolder];
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:absFolderPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:absFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
+    NSAssert(!error, @"error creating screenshots folder");
 }
 
 - (void)setDelegate:(nonnull id<MetricsHistoryDataCenterDelegate>)d {
@@ -139,6 +147,7 @@
     if (dic) {
         // save image to disk as png file
         NSInteger newIndex = self.metricsData.count;
+        [self createScreenshotFolderIfItDoNotExist];
         NSString *absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:newIndex];
         BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:absFilePath atomically:YES];
         NSAssert(succ, @"Data Center: unable to write screenshot to disk");
@@ -163,17 +172,48 @@
     }
 }
 
-// TODO: not tested yet!
+
+- (void)confirmAndWipeAllDataFromDisk {
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Are you sure you want to wipe all the history data stored on this iPad? There's no coming back."
+                                          message:nil
+                                          preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *deleteAction = [UIAlertAction
+                                   actionWithTitle:@"Delete Data"
+                                   style:UIAlertActionStyleDestructive
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       [self wipeAllDataFromDisk];
+                                   }];
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:@"Cancel"
+                                   style:UIAlertActionStyleCancel
+                                   handler:nil];
+    
+    [alertController addAction:deleteAction];
+    [alertController addAction:cancelAction];
+    [myDelegate presentViewController:alertController animated:YES completion:nil];
+}
+
+
 - (void)wipeAllDataFromDisk {
+    NSLog(@"attempting to wipe documents folder");
+    
+    // reset model in memory
+    self.metricsData = [NSArray array];
+    self.maxValueDic = [NSMutableDictionary dictionary];
+    self.minValueDic = [NSMutableDictionary dictionary];
+    // reset views
+    [myDelegate removeAllEntries];
+    // delete files from disk
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = paths.firstObject;
+    NSString *documentsPath = [HistoryFilePathConfigs getAbsPathToDocFolder];
     NSError *error = nil;
-    for (NSString *file in [fm contentsOfDirectoryAtPath:basePath error:&error]) {
-        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@%@", basePath, file] error:&error];
-        if (!success || error) {
-            // it failed.
-        }
+    for (NSString *file in [fm contentsOfDirectoryAtPath:documentsPath error:&error]) {
+        BOOL success = [fm removeItemAtPath:[documentsPath stringByAppendingPathComponent:file] error:&error];
+        NSLog(@"deleting %@", [documentsPath stringByAppendingPathComponent:file]);
+        NSAssert(success, @"Data Center: failed to delete file");
     }
 }
 
@@ -317,6 +357,8 @@
 
 // this method is for testing only
 - (void)addNewDummyEntry {
+    srand48(arc4random()); // set random seed
+    
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
                          
                          /* =========== building ===========*/
@@ -442,7 +484,7 @@
     
     NSString* path;
     NSBundle *mainBundle = [NSBundle mainBundle];
-    int i = rand();
+    int i = arc4random_uniform(100);;
     if (i%2) {
         path = [mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"];
     } else {
@@ -454,6 +496,7 @@
     
     NSInteger newIndex = self.metricsData.count;
     
+    [self createScreenshotFolderIfItDoNotExist];
     NSString* absFilePath = [HistoryFilePathConfigs getAbsPathToScreenshotFileGivenIndex:newIndex];
     BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:absFilePath atomically:YES];
     NSAssert(succ, @"Data Center: unable to write screenshot to disk");

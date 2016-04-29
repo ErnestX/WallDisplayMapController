@@ -30,8 +30,11 @@
     for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
         // read image file from disk
         UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
-        NSLog([containerController getPreviewImagePathForIndex:i]);
-        [imagesCache addObject:currentImage];
+        if (currentImage) {
+            [imagesCache addObject:currentImage];
+        } else {
+            NSLog(@"Preview Controller: preloading, unable to read image");
+        }
     }
     
     self.currentIndex = 0;
@@ -118,6 +121,16 @@
     NSLog(@"refreshing index %d", self.currentIndex);
     [self fetchEntryIntoCache:self.currentIndex overwriteExistingEntry:YES];
     [self showPreviewAtIndex:self.currentIndex forceRefetchImageFromCache:YES];
+}
+
+- (void)resetCache {
+    for (int i=0; i<imagesCache.count; i++) {
+        [imagesCache replaceObjectAtIndex:i withObject:[NSNull null]];
+    }
+}
+
+- (void)removeCurrentPreview {
+    [(HistoryPreviewView*)self.view removeImage];
 }
 
 @end

@@ -82,6 +82,16 @@
         make.top.equalTo(line.mas_bottom).with.offset(10.0f);
     }];
     
+    UIButton* wipeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [wipeButton setTitle:@"WipeHistoryData" forState:UIControlStateNormal];
+    [wipeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    wipeButton.frame = CGRectMake(10, 0, 150, 50);
+    [wipeButton addTarget:self action:@selector(wipeHistoryData) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:wipeButton];
+}
+
+- (void)wipeHistoryData {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"WIPE ALL HISTORY DATA FROM DISK" object:self];
 }
 
 - (void)submitButtonPressed:(UIButton *)sender {

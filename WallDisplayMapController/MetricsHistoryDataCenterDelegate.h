@@ -14,7 +14,15 @@
 @protocol MetricsHistoryDataCenterDelegate <NSObject>
 
 @required
+
 - (void)newEntryAppendedInDataCenter;
+
+/**
+ this is for alerts
+ */
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion;
+
+- (void)removeAllEntries;
 
 @end
 

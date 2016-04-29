@@ -12,4 +12,6 @@
 
 - (void)showImage:(nonnull UIImage*)image;
 
+- (void)removeImage;
+
 @end

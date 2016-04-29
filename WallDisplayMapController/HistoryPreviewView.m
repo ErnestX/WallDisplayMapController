@@ -61,4 +61,8 @@
     return imageView;
 }
 
+- (void)removeImage {
+    imageView.image = nil;
+}
+
 @end

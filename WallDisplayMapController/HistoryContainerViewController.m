@@ -116,4 +116,10 @@
     }
 }
 
+- (void)removeAllEntries {
+    [historyBarController removeAllEntries];
+    [historyPreviewController resetCache];
+    [historyPreviewController removeCurrentPreview];
+}
+
 @end
