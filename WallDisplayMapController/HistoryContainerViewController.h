@@ -17,8 +17,12 @@
  only returns data for the metrics that's displayed according to MetricsConfigs
  the values in the dictionary all range from 0 to 1\
  */
-- (NSDictionary*)getDataPointPosForDisplayedMetricsAtIndex:(NSInteger)index;
-- (NSString*)getPreviewImagePathForIndex:(NSInteger)index;
+- (nonnull NSDictionary*)getDataPointPosForDisplayedMetricsAtIndex:(NSInteger)index;
+- (nonnull NSDate*)getTimeStampForIndex:(NSInteger)index;
+- (nonnull NSString*)getTagForIndex:(NSInteger)index;
+- (BOOL)getFlagForIndex:(NSInteger)index;
+
+- (nonnull NSString*)getPreviewImagePathForIndex:(NSInteger)index;
 
 - (void)showPreviewForIndex:(NSInteger)index;
 

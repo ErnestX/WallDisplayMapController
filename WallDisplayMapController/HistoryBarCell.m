@@ -255,6 +255,7 @@
         NSNumber* displayPos = [thisMetricData objectForKey:metricNameInNSNum];
 
         // validate value
+        NSAssert(displayPos, @"displayPos for a metric needed to display is not present in the dictionary passed from the container controller");
         NSAssert([displayPos isKindOfClass:[NSNumber class]], @"value is not a NSNumber");
         CGFloat floatV = [(NSNumber*)displayPos floatValue];
         NSAssert(floatV >= 0.0 && floatV <= 1.0, @"value smaller than 0 or greater than 1");

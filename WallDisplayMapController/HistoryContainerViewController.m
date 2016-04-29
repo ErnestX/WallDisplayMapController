@@ -71,7 +71,7 @@
     }
 }
 
-- (NSDictionary*)getDataPointPosForDisplayedMetricsAtIndex:(NSInteger)index {
+- (nonnull NSDictionary*)getDataPointPosForDisplayedMetricsAtIndex:(NSInteger)index {
     NSMutableDictionary<NSNumber*,NSNumber*>* dic = [NSMutableDictionary dictionary];
     
     for (NSNumber* metricName in [MetricsConfigs instance].metricsDisplayedInOrder) {
@@ -86,7 +86,22 @@
     return dic;
 }
 
-- (NSString*)getPreviewImagePathForIndex:(NSInteger)index {
+- (nonnull NSDate*)getTimeStampForIndex:(NSInteger)index {
+    // stub
+    return [NSDate date];
+}
+
+- (nonnull NSString*)getTagForIndex:(NSInteger)index {
+    // stub
+    return @"stub tag";
+}
+
+- (BOOL)getFlagForIndex:(NSInteger)index {
+    // stub
+    return NO;
+}
+
+- (nonnull NSString*)getPreviewImagePathForIndex:(NSInteger)index {
     return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].previewImagePath;
 }
 
