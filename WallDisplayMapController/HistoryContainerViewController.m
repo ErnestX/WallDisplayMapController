@@ -71,7 +71,7 @@
     }
 }
 
-- (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index {
+- (NSDictionary*)getDataPointPosForDisplayedMetricsAtTimeIndex:(NSInteger)index {
     NSMutableDictionary<NSNumber*,NSNumber*>* dic = [NSMutableDictionary dictionary];
     
     for (NSNumber* metricName in [MetricsConfigs instance].metricsDisplayedInOrder) {
