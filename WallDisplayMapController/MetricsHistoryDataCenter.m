@@ -127,28 +127,34 @@
 }
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
-    NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [GlobalManager sharedInstance].modelBuildings.people,
-                         [NSNumber numberWithInteger:building_people],
-                         
-                         [GlobalManager sharedInstance].modelDistrictEnergy.energyHouseholdIncome,
-                         [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
-                         
-                         [GlobalManager sharedInstance].modelDensity.modelActiveTripsPercent,
-                         [NSNumber numberWithInteger:density_modelActiveTripsPercent],
-                         
-                         [GlobalManager sharedInstance].modelBuildings.detachedPercent,
-                         [NSNumber numberWithInteger:building_detachedPercent], nil];
-    
-    // save image to disk as png file
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* fileName = [NSString stringWithFormat:@"%lu.png", (unsigned long)self.metricsData.count];
-    NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
-    [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
-    
-    // add new entry
-    MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:filePath];
-    [self addNewEntry:newEntry];
+    if ([GlobalManager sharedInstance].modelBuildings &&
+        [GlobalManager sharedInstance].modelDistrictEnergy &&
+        [GlobalManager sharedInstance].modelDensity) {
+        NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [GlobalManager sharedInstance].modelBuildings.people,
+                             [NSNumber numberWithInteger:building_people],
+                             
+                             [GlobalManager sharedInstance].modelDistrictEnergy.energyHouseholdIncome,
+                             [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
+                             
+                             [GlobalManager sharedInstance].modelDensity.modelActiveTripsPercent,
+                             [NSNumber numberWithInteger:density_modelActiveTripsPercent],
+                             
+                             [GlobalManager sharedInstance].modelBuildings.detachedPercent,
+                             [NSNumber numberWithInteger:building_detachedPercent], nil];
+        
+        // save image to disk as png file
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString* fileName = [NSString stringWithFormat:@"%lu.png", (unsigned long)self.metricsData.count];
+        NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+        [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
+        
+        // add new entry
+        MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:filePath];
+        [self addNewEntry:newEntry];
+    } else {
+        NSLog(@"Data Center: Cannot add entry: metrics data not available");
+    }
 }
 
 - (void)addNewDummyEntry {

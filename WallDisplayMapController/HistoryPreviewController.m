@@ -53,6 +53,13 @@
     self.view = previewView;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"view did appear");
+    if ([containerController getTotalNumberOfData]>0) {
+        [self refreshCurrentPreview];
+    }
+}
+
 - (void)showPreviewAtIndex:(NSInteger)index {
     [self showPreviewAtIndex:index forceRefetchImageFromCache:NO];
 }

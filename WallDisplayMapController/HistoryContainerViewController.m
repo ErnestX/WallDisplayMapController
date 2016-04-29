@@ -83,8 +83,6 @@
                                   outputMax:1.0];
         [dic setObject:[NSNumber numberWithFloat:displayPos] forKey:metricName];
     }
-    
-//    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
     return dic;
 }
 

@@ -17,7 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         imageView = [UIImageView new]; // set the frame later in showImage()
-        imageView.backgroundColor = [UIColor blackColor];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         scrollView = [[UIScrollView alloc]initWithFrame:frame];
         scrollView.showsVerticalScrollIndicator = NO;
@@ -48,9 +48,6 @@
         imageView.frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
         scrollView.contentOffset = CGPointMake((imageView.bounds.size.width - scrollView.bounds.size.width)/2.0,
                                                (imageView.bounds.size.height - scrollView.bounds.size.height)/2.0);
-    } else {
-        // else, change bound instead of frame, since bound is not affected with transfrom (zoom in this case)
-        imageView.bounds = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
     }
     
     imageView.image = image;
