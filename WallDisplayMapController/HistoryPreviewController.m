@@ -30,6 +30,7 @@
     for (int i=0; i<[containerController getTotalNumberOfData]; i++) {
         // read image file from disk
         UIImage* currentImage = [UIImage imageWithContentsOfFile:[containerController getPreviewImagePathForIndex:i]];
+        NSLog([containerController getPreviewImagePathForIndex:i]);
         [imagesCache addObject:currentImage];
     }
     

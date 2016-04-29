@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MetricsDataEntry : NSObject <NSCopying>
+@interface MetricsDataEntry : NSObject <NSCopying, NSCoding>
 
 /*
  this is the raw values for the metrics

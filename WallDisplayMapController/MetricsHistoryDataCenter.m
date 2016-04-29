@@ -36,28 +36,23 @@
             instance.maxValueDic = [NSMutableDictionary dictionary];
             instance.minValueDic = [NSMutableDictionary dictionary];
             
-            NSMutableArray* tempArray = [NSMutableArray array];
+//            NSMutableArray* tempArray = [NSMutableArray array];
+            instance.metricsData = [NSArray array];
             
-            // stub for testing
-//            for (int i=0; i<50; i++) {
-//                srand48(arc4random()); // set random seed
-//                NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                     [NSNumber numberWithFloat:i/50.0], [NSNumber numberWithInteger:people],
-//                                     [NSNumber numberWithFloat:(50-i)/50.0], [NSNumber numberWithInteger:dwelling],
-//                                     [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:active], nil];
-//                NSString* path;
-//                NSBundle *mainBundle = [NSBundle mainBundle];
-//                // stub for testing
-//                if (i%2) {
-//                    path = [mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"];
-//                } else {
-//                    path = [mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"];
-//                }
-//                
-//                MetricsDataEntry* entry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:path];
-//                [tempArray addObject:entry];
-//            }
-            instance.metricsData = [tempArray copy];
+            // retrive backup data if exists
+            NSString* filePath = [instance getPathToMetricsDataCoded];
+            NSArray<NSData*>* metricsDataCoded = [NSArray arrayWithContentsOfFile:filePath];
+            if (metricsDataCoded) {
+                // retrieve success; decode array
+                for (int i=0; i<metricsDataCoded.count; i++) {
+                    MetricsDataEntry* decodedEntry =[NSKeyedUnarchiver unarchiveObjectWithData:[metricsDataCoded objectAtIndex:i]];
+                    if (decodedEntry) {
+                        [instance addNewEntry:decodedEntry];
+                    }
+                }
+            }
+            
+//            instance.metricsData = [tempArray copy];
         }
     });
     return instance;
@@ -75,18 +70,8 @@
     return [self.metricsData objectAtIndex:index];
 }
 
-// TODO: not tested yet!
-// TODO: need to update max and min
-//- (void)addNewEntries:(NSArray<MetricsDataEntry*>*)entries {
-//    NSMutableArray* tempArray = [self.metricsData mutableCopy];
-//    [tempArray addObjectsFromArray:entries];
-//    self.metricsData = [tempArray copy];
-//    for (int i=0; i<entries.count; i++) {
-//        [myDelegate newEntryAppendedInDataCenter];
-//    }
-//}
-
 - (void)addNewEntry:(MetricsDataEntry*)entry {
+    NSLog(@"DataCenter: adding new entry");
     // update max and min values
     for (NSNumber* metricNameInNSNumber in entry.metricsValues) {
         NSNumber* newValue = [entry.metricsValues objectForKey:metricNameInNSNumber];
@@ -123,22 +108,39 @@
     [tempArray addObject:entry];
     self.metricsData = [tempArray copy];
     [myDelegate newEntryAppendedInDataCenter];
-    NSLog(@"DataCenter: adding new entry");
+    
+    [self backupMetricsData];
+}
+
+- (void)backupMetricsData {
+    
+    // step1: code each MetricsDataEntry into NSData and save them into an array
+    NSMutableArray<NSData*>* metricsDataCoded = [NSMutableArray arrayWithCapacity:self.metricsData.count];
+    for (int i=0; i<self.metricsData.count; i++) {
+        NSData *codedEntry = [NSKeyedArchiver archivedDataWithRootObject:[self.metricsData objectAtIndex:i]];
+        [metricsDataCoded addObject:codedEntry];
+    }
+    
+    // step2: write the array of NSData to disk
+    NSString* filePath = [self getPathToMetricsDataCoded];
+    BOOL succ = [metricsDataCoded writeToFile:filePath atomically:YES];
+    if (!succ) {
+        NSLog(@"Data Center: backup metricsData failed");
+    }
 }
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
     NSDictionary<NSNumber*, NSNumber*>* dic = [self getCurrentMetricsValues];
     if (dic) {
         // save image to disk as png file
-        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString* fileName = [NSString stringWithFormat:@"%lu.png", (unsigned long)self.metricsData.count];
-        NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
-        [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
+        NSString* filePath = [self getPathToScreenshotForIndex:self.metricsData.count];
+        BOOL succ = [UIImagePNGRepresentation(ss) writeToFile:filePath atomically:YES];
+        NSAssert(succ, @"Data Center: unable to write screenshot to disk");
         
         // add new entry
         MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
                                                                    previewImagePath:filePath
-                                                                          timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.  
+                                                                          timeStamp:[NSDate date] // I'm cheating here by using the time the message is received. The correct approach is to let the table send the time itself, but I'm out of time... Though, as shown in real tests with the table, the difference should be within 3 seconds, at least for three iPads.
                                                                                 tag:@"stub tag"
                                                                                flag:NO];
         [self addNewEntry:newEntry];
@@ -166,6 +168,30 @@
             // it failed.
         }
     }
+}
+
+- (nonnull NSString*)getPathToScreenshotForIndex:(NSInteger)index {
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* fileName = [NSString stringWithFormat:@"%d.png", index];
+    NSString* folderPath = [[paths objectAtIndex:0] stringByAppendingString:@"/screenshots"];
+    
+    // create screenshots folder if it doesn't exist
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:NO attributes:nil error:&error];
+    NSAssert(!error, @"error creating screenshots folder");
+    
+    NSString* filePath = [folderPath stringByAppendingPathComponent:fileName];
+
+    return filePath;
+}
+
+- (nonnull NSString*)getPathToMetricsDataCoded {
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* fileName = @"/metricsDataCoded.dat";
+    NSString* filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    
+    return filePath;
 }
 
 - (nullable NSDictionary<NSNumber*, NSNumber*>*) getCurrentMetricsValues {
@@ -427,14 +453,21 @@
                          
                          nil];
     
-    NSString* filePath;
+    NSString* path;
     NSBundle *mainBundle = [NSBundle mainBundle];
     int i = rand();
     if (i%2) {
-        filePath = [mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"];
+        path = [mainBundle pathForResource:@"testScreenShot2" ofType:@".jpg"];
     } else {
-        filePath = [mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"];
+        path = [mainBundle pathForResource:@"testScreenShot1" ofType:@".jpg"];
     }
+    
+    UIImage* screenshot = [UIImage imageWithContentsOfFile:path];
+    NSAssert(screenshot, @"cannot create dummy screenshot UIImage");
+    
+    NSString* filePath = [self getPathToScreenshotForIndex:self.metricsData.count];
+    BOOL succ = [UIImagePNGRepresentation(screenshot) writeToFile:filePath atomically:YES];
+    NSAssert(succ, @"Data Center: unable to write screenshot to disk");
     
     MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic
                                                                previewImagePath:filePath

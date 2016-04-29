@@ -18,6 +18,25 @@
 
 @implementation MetricsDataEntry
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.metricsValues = [aDecoder decodeObjectForKey:@"metricsValues"];
+        self.previewImagePath = [aDecoder decodeObjectForKey:@"previewImagePath"];
+        self.timeStamp = [aDecoder decodeObjectForKey:@"timeStamp"];
+        self.tag = [aDecoder decodeObjectForKey:@"tag"];
+        self.flag = [aDecoder decodeBoolForKey:@"flag"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.metricsValues forKey:@"metricsValues"];
+    [aCoder encodeObject:self.previewImagePath forKey:@"previewImagePath"];
+    [aCoder encodeObject:self.timeStamp forKey:@"timeStamp"];
+    [aCoder encodeObject:self.tag forKey:@"tag"];
+    [aCoder encodeBool:self.flag forKey:@"flag"];
+}
+
 - (nullable instancetype)initWithMetricsValues:(nonnull NSDictionary<NSNumber *,NSNumber *> *)dic
                               previewImagePath:(nonnull NSString *)path
                                      timeStamp:(nonnull NSDate*)ts
