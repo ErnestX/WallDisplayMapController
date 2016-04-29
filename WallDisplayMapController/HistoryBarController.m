@@ -120,33 +120,33 @@ static NSString* const reuseIdentifier = @"Cell";
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex]
-            prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex - 1]
+            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
+            prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
-            nextMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex + 1]
+            nextMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex + 1]
               nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else if (thisIndex > 0) {
         // prev cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex]
-            prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex - 1]
+            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
+            prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
         } else if (thisIndex < totalNumberOfCells-1) {
         // next cell only
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex]
-            nextMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex + 1]
+            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
+            nextMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex + 1]
               nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
     } else {
         // only one cell
         [cell initForReuseWithTimeStamp:[NSDate date]
                                     tag:@"test tag"
                               flagOrNot:NO // TODO not testing flag yet
-            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtTimeIndex:thisIndex]];
+            thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]];
     }
     
     return cell;

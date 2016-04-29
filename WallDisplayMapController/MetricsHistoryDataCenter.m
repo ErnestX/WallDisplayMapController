@@ -139,7 +139,7 @@
         MetricsDataEntry* newEntry = [[MetricsDataEntry alloc]initWithMetricsValues:dic previewImagePath:filePath];
         [self addNewEntry:newEntry];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"I don't know the values of metrics yet. Add or remove some cases from the table and try saving again"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"I can't add a new entry because I don't know the values of metrics yet. Add or remove some cases from the table and try saving again"
                                                             message:@"if the problem is not solved, contact Ernest for further support xiangspecial2012@gmail.com"
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
