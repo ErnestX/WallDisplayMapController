@@ -16,7 +16,9 @@
 #import "DistrictEnergyModel.h"
 
 @interface MetricsHistoryDataCenter()
-@property (readwrite) NSArray<MetricsDataEntry*>* metricsData;
+@property (readwrite, nonnull) NSArray<MetricsDataEntry*>* metricsData;
+@property (readwrite, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* maxValueDic;
+@property (readwrite, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* minValueDic;
 @end
 
 @implementation MetricsHistoryDataCenter {
@@ -30,6 +32,10 @@
         instance = [[self alloc] init];
         if (instance) {
             // init properties
+            
+            instance.maxValueDic = [NSMutableDictionary dictionary];
+            instance.minValueDic = [NSMutableDictionary dictionary];
+            
             NSMutableArray* tempArray = [NSMutableArray array];
             
             // stub for testing
@@ -70,21 +76,54 @@
 }
 
 // TODO: not tested yet!
-- (void)addNewEntries:(NSArray<MetricsDataEntry*>*)entries {
-    NSMutableArray* tempArray = [self.metricsData mutableCopy];
-    [tempArray addObjectsFromArray:entries];
-    self.metricsData = [tempArray copy];
-    for (int i=0; i<entries.count; i++) {
-        [myDelegate newEntryAppendedInDataCenter];
-    }
-}
+// TODO: need to update max and min
+//- (void)addNewEntries:(NSArray<MetricsDataEntry*>*)entries {
+//    NSMutableArray* tempArray = [self.metricsData mutableCopy];
+//    [tempArray addObjectsFromArray:entries];
+//    self.metricsData = [tempArray copy];
+//    for (int i=0; i<entries.count; i++) {
+//        [myDelegate newEntryAppendedInDataCenter];
+//    }
+//}
 
 - (void)addNewEntry:(MetricsDataEntry*)entry {
+    // update max and min values
+    for (NSNumber* metricNameInNSNumber in entry.metricsValues) {
+        NSNumber* newValue = [entry.metricsValues objectForKey:metricNameInNSNumber];
+        
+        // max
+        if ([self.maxValueDic objectForKey:metricNameInNSNumber]) {
+            // existing max value exist
+            NSNumber* oldValue = [self.maxValueDic objectForKey:metricNameInNSNumber];
+            if ([newValue doubleValue] > [oldValue doubleValue]) {
+                // new max found. overwrite
+                [self.maxValueDic setObject:newValue forKey:metricNameInNSNumber];
+            }
+        } else {
+            // create new pair in the dictionary and copy value
+            [self.maxValueDic setObject:newValue forKey:metricNameInNSNumber];
+        }
+        
+        // min
+        if ([self.minValueDic objectForKey:metricNameInNSNumber]) {
+            // existing min value exist
+            NSNumber* oldValue = [self.minValueDic objectForKey:metricNameInNSNumber];
+            if ([newValue doubleValue] < [oldValue doubleValue]) {
+                // new min found. overwrite
+                [self.minValueDic setObject:newValue forKey:metricNameInNSNumber];
+            }
+        } else {
+            // create new pair in the dictionary and copy value
+            [self.minValueDic setObject:newValue forKey:metricNameInNSNumber];
+        }
+    }
+    
+    // add entry to model
     NSMutableArray* tempArray = [self.metricsData mutableCopy];
     [tempArray addObject:entry];
     self.metricsData = [tempArray copy];
     [myDelegate newEntryAppendedInDataCenter];
-    NSLog(@"adding new entry");
+    NSLog(@"DataCenter: adding new entry");
 }
 
 - (void)addNewEntryWithScreenshot:(nonnull UIImage*)ss {
@@ -114,10 +153,10 @@
 
 - (void)addNewDummyEntry {
     NSDictionary* dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:building_people],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:density_modelActiveTripsPercent],
-                         [NSNumber numberWithFloat:drand48()], [NSNumber numberWithInteger:building_detachedPercent], nil];
+                         [NSNumber numberWithFloat:drand48()*1000.0], [NSNumber numberWithInteger:building_people],
+                         [NSNumber numberWithFloat:drand48()*1000.0], [NSNumber numberWithInteger:districtEnergy_energyHouseholdIncome],
+                         [NSNumber numberWithFloat:drand48()*1000.0], [NSNumber numberWithInteger:density_modelActiveTripsPercent],
+                         [NSNumber numberWithFloat:drand48()*1000.0], [NSNumber numberWithInteger:building_detachedPercent], nil];
     
     NSString* filePath;
     NSBundle *mainBundle = [NSBundle mainBundle];

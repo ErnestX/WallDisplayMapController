@@ -14,6 +14,7 @@
 - (NSInteger)getTotalNumberOfData;
 
 /*
+ contains only the metrics that is displayed according to MetricsConfigs
  the values in the dictionary all range from 0 to 1
  */
 - (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index;

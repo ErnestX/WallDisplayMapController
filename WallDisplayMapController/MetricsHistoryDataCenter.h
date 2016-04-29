@@ -18,6 +18,8 @@
  this property is readonly and immutable
  */
 @property (readonly, nonnull) NSArray<MetricsDataEntry*>* metricsData;
+@property (readonly, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* maxValueDic;
+@property (readonly, nonnull) NSMutableDictionary<NSNumber*,NSNumber*>* minValueDic;
 
 /**
  this is a singleton class

@@ -14,7 +14,7 @@
 #define MAX_RENDER_POSITION 0.9
 #define DATA_POINT_DIAMETER 10
 #define LINE_WIDTH 1
-#define LINE_LENGTH 50
+#define LINE_LENGTH 55
 
 @implementation MetricView
 {

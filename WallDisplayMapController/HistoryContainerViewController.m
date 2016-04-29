@@ -12,6 +12,7 @@
 #import "HistoryPreviewController.h"
 #import "MetricsHistoryDataCenter.h"
 #import "MetricsDataEntry.h"
+#import "MetricsConfigs.h"
 
 @interface HistoryContainerViewController ()
 
@@ -61,10 +62,30 @@
     return [[MetricsHistoryDataCenter instance] getTotalNumberOfData];
 }
 
+- (CGFloat)mapValue:(double)input inputMin:(double)input_start inputMax:(double)input_end outputMin:(double)output_start outputMax:(double)output_end {
+    if (input_start == input_end) {
+        return (output_start + output_end)/2.0;
+    } else {
+        double slope = 1.0 * (output_end - output_start) / (input_end - input_start);
+        return output_start + slope * (input - input_start);
+    }
+}
+
 - (NSDictionary*)getMetricsDisplayPositionsAtTimeIndex:(NSInteger)index {
-    //
+    NSMutableDictionary<NSNumber*,NSNumber*>* dic = [NSMutableDictionary dictionary];
     
-    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
+    for (NSNumber* metricName in [MetricsConfigs instance].metricsDisplayedInOrder) {
+        NSNumber* rawValue = [[[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues objectForKey:metricName];
+        CGFloat displayPos = [self mapValue:[rawValue doubleValue]
+                                   inputMin:[[[MetricsHistoryDataCenter instance].minValueDic objectForKey:metricName]doubleValue]
+                                   inputMax:[[[MetricsHistoryDataCenter instance].maxValueDic objectForKey:metricName]doubleValue]
+                                  outputMin:0.0
+                                  outputMax:1.0];
+        [dic setObject:[NSNumber numberWithFloat:displayPos] forKey:metricName];
+    }
+    
+//    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
+    return dic;
 }
 
 - (NSString*)getPreviewImagePathForIndex:(NSInteger)index {
