@@ -10,6 +10,8 @@
 #import "LegendView.h"
 #import "HistoryContainerViewController.h"
 #import "GlobalLayoutRef.h"
+#import "MetricsConfigs.h"
+#import "LegendViewCell.h"
 
 // these two have nothing to do with the actual dimensions displayed, since they will be reset by the HistoryContainerView. However, they should be large enough so that the initalization can succeed
 #define LEGEND_VIEW_INIT_WIDTH 100
@@ -18,6 +20,8 @@
 @implementation LegendViewController {
     HistoryContainerViewController* containerController;
 }
+
+static NSString* const reuseIdentifier = @"cell";
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc {
     self = [super init];
@@ -28,14 +32,44 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
     
     // create and init legend view
     LegendView* legendView = [[LegendView alloc]initWithFrame:CGRectMake(0.0, 0.0, LEGEND_VIEW_INIT_WIDTH, LEGEND_VIEW_INIT_HEIGHT)];
     
     legendView.delegate = self;
+    legendView.dataSource = self;
+    
     self.view = legendView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [(LegendView*)self.view registerClass:[LegendViewCell class] forCellReuseIdentifier:reuseIdentifier];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // re-use or create a cell
+    LegendViewCell* cell = [(LegendView*)self.view dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    // find the to-do item for this index
+    int index = [indexPath item];
+    MetricName m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
+    
+    // init for reuse
+    cell = [cell initForReuseWithMetricName:m];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return [MetricsConfigs instance].metricsDisplayedInOrder.count;
+    } else {
+        return 0;
+    }
 }
 
 @end

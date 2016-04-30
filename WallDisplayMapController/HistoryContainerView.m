@@ -81,7 +81,6 @@
 }
 
 - (void)setUpLegendView: (nonnull LegendView*) lv {
-    NSLog(@"setting up legend view");
     legendView = lv;
     [self addSubview:legendView];
     

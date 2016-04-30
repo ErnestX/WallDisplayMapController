@@ -63,7 +63,6 @@ static NSString* const reuseIdentifier = @"Cell";
     // add all existing plans into the history bar
     [self.collectionView performBatchUpdates:^{
         
-        // get save files and save them into saveArray
         NSMutableArray* indexPaths = [[NSMutableArray alloc]init];
         for (int i = 0; i < [containerController getTotalNumberOfData]; i++) {
             totalNumberOfCells++;

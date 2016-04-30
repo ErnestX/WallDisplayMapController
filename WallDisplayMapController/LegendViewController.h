@@ -10,7 +10,7 @@
 
 @class HistoryContainerViewController;
 
-@interface LegendViewController : UIViewController <UITableViewDelegate>
+@interface LegendViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc;
 
