@@ -175,7 +175,7 @@
 
 - (void)confirmAndWipeAllDataFromDisk {
     UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:@"Are you sure you want to wipe all the history data stored on this iPad? There's no coming back."
+                                          alertControllerWithTitle:@"Are you sure you want to delete all the history data stored on this iPad? There's no coming back."
                                           message:nil
                                           preferredStyle:UIAlertControllerStyleAlert];
 

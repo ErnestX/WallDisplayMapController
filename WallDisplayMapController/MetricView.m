@@ -38,6 +38,7 @@
     if (!dataPointView) {
         dataPointView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)];
         NSAssert(dataPointView, @"init failed");
+        dataPointView.layer.cornerRadius = DATA_POINT_DIAMETER/2.0;
         [self addSubview:dataPointView];
     }
     
