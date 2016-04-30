@@ -38,6 +38,7 @@
     }
     
     self.currentIndex = 0;
+    
     return self;
 }
 
@@ -58,7 +59,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"view did appear");
     if ([containerController getTotalNumberOfData]>0) {
         [self refreshCurrentPreview];
     }
@@ -125,7 +125,7 @@
 
 - (void)resetCache {
     for (int i=0; i<imagesCache.count; i++) {
-        [imagesCache replaceObjectAtIndex:i withObject:[NSNull null]];
+        [imagesCache replaceObjectAtIndex:i withObject:(UIImage*)[NSNull null]];
     }
 }
 

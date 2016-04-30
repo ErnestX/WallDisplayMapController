@@ -85,6 +85,8 @@
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */; };
 		CAC7C7D01CD4410D00425DB8 /* DataPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */; };
+		CAC7C7D61CD4602800425DB8 /* LegendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7D51CD4602800425DB8 /* LegendViewController.m */; };
+		CAC7C7D91CD4605B00425DB8 /* LegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7D81CD4605B00425DB8 /* LegendView.m */; };
 		CAC8A4C41CCAA46300B9EC27 /* MetricsConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */; };
 		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
 		CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */; };
@@ -313,6 +315,10 @@
 		CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryFilePathConfigs.m; sourceTree = "<group>"; };
 		CAC7C7CE1CD4410D00425DB8 /* DataPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPointView.h; sourceTree = "<group>"; };
 		CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPointView.m; sourceTree = "<group>"; };
+		CAC7C7D41CD4602800425DB8 /* LegendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendViewController.h; sourceTree = "<group>"; };
+		CAC7C7D51CD4602800425DB8 /* LegendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendViewController.m; sourceTree = "<group>"; };
+		CAC7C7D71CD4605B00425DB8 /* LegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendView.h; sourceTree = "<group>"; };
+		CAC7C7D81CD4605B00425DB8 /* LegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendView.m; sourceTree = "<group>"; };
 		CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsConfigs.h; sourceTree = "<group>"; };
 		CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsConfigs.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
@@ -587,6 +593,10 @@
 				CAD0C8181CAEF4610022B67B /* HistoryPreviewController.m */,
 				CAD0C8201CAEF63F0022B67B /* HistoryPreviewView.h */,
 				CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */,
+				CAC7C7D41CD4602800425DB8 /* LegendViewController.h */,
+				CAC7C7D51CD4602800425DB8 /* LegendViewController.m */,
+				CAC7C7D71CD4605B00425DB8 /* LegendView.h */,
+				CAC7C7D81CD4605B00425DB8 /* LegendView.m */,
 				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
 				CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */,
 				CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */,
@@ -875,12 +885,14 @@
 				AE78ADB11B729AC500780E26 /* HintView.m in Sources */,
 				AE64774E1B2BA347006E8925 /* BuildingsModel.m in Sources */,
 				AE2C30BF1B585E49006A955E /* MaskContentView.m in Sources */,
+				CAC7C7D61CD4602800425DB8 /* LegendViewController.m in Sources */,
 				CAD0C8221CAEF63F0022B67B /* HistoryPreviewView.m in Sources */,
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,
 				CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
 				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
 				CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */,
+				CAC7C7D91CD4605B00425DB8 /* LegendView.m in Sources */,
 				CA4E04921C9B5A3A00E2B60D /* MetricView.m in Sources */,
 				AE6477511B2BA43C006E8925 /* WidgetModel.m in Sources */,
 				CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */,
