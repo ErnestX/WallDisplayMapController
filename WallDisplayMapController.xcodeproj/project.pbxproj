@@ -396,7 +396,6 @@
 				AE6477501B2BA43C006E8925 /* WidgetModel.m */,
 				AE3F20F51B30B09200B653BE /* DistrictEnergyModel.h */,
 				AE3F20F61B30B09200B653BE /* DistrictEnergyModel.m */,
-				CAD0C8091CAC69A80022B67B /* History */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -414,7 +413,6 @@
 				AE20E3F11B3B1C950066BBFE /* ChooseElementViewController.m */,
 				AEB8A94D1B6152AB003C8A68 /* SettingsViewController.h */,
 				AEB8A94E1B6152AB003C8A68 /* SettingsViewController.m */,
-				CA4678F91C5BE83C00C4D7BB /* HistoryViewControllers */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -471,6 +469,7 @@
 				AEB81D921B43113300EA1450 /* WobbleAnimator.h */,
 				AEB81D931B43113300EA1450 /* WobbleAnimator.m */,
 				AE1203091B1E2A2D0058A43A /* Launch Screen.xib */,
+				CAD0C8091CAC69A80022B67B /* HistoryBar */,
 				AE6477441B2BA2A5006E8925 /* Model */,
 				AE6477451B2BA2AC006E8925 /* Controller */,
 				CA2D53F01B1C205600B975B6 /* View */,
@@ -527,7 +526,6 @@
 				AE9E40351B320AE00085000D /* UnavailableView.m */,
 				AE78ADAF1B729AC500780E26 /* HintView.h */,
 				AE78ADB01B729AC500780E26 /* HintView.m */,
-				CA4678FA1C5BE84900C4D7BB /* HistoryViews */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -569,29 +567,31 @@
 			name = resources;
 			sourceTree = "<group>";
 		};
-		CA4678F91C5BE83C00C4D7BB /* HistoryViewControllers */ = {
+		CAD0C8091CAC69A80022B67B /* HistoryBar */ = {
 			isa = PBXGroup;
 			children = (
+				CAC7C7CB1CD3E27000425DB8 /* HistoryFilePathConfigs.h */,
+				CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */,
+				CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */,
+				CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */,
+				CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */,
+				CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */,
+				CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */,
+				CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */,
+				CADCFE171CCF24210085BD94 /* MetricsHistoryDataCenterDelegate.h */,
 				CA74C3431C595A37004D3CCE /* HistoryContainerViewController.h */,
 				CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */,
+				CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */,
+				CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */,
+				CAD0C8171CAEF4610022B67B /* HistoryPreviewController.h */,
+				CAD0C8181CAEF4610022B67B /* HistoryPreviewController.m */,
+				CAD0C8201CAEF63F0022B67B /* HistoryPreviewView.h */,
+				CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */,
 				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
 				CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */,
 				CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */,
 				CA4A35931C75938C00656118 /* HistoryBarLayout.h */,
 				CA4A35941C75938C00656118 /* HistoryBarLayout.m */,
-				CAD0C8171CAEF4610022B67B /* HistoryPreviewController.h */,
-				CAD0C8181CAEF4610022B67B /* HistoryPreviewController.m */,
-			);
-			name = HistoryViewControllers;
-			sourceTree = "<group>";
-		};
-		CA4678FA1C5BE84900C4D7BB /* HistoryViews */ = {
-			isa = PBXGroup;
-			children = (
-				CA330F611CA22FAC001159D0 /* GlobalLayoutRef.h */,
-				CA330F621CA22FAC001159D0 /* GlobalLayoutRef.m */,
-				CA74C3461C595A6A004D3CCE /* HistoryContainerView.h */,
-				CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */,
 				CA4678FE1C5BEB7800C4D7BB /* HistoryBarView.h */,
 				CA4678FF1C5BEB7800C4D7BB /* HistoryBarView.m */,
 				CA4679011C62A4DB00C4D7BB /* HistoryBarCell.h */,
@@ -602,26 +602,10 @@
 				CAD0C8071CA9D0480022B67B /* GraphLineView.m */,
 				CAC7C7CE1CD4410D00425DB8 /* DataPointView.h */,
 				CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */,
-				CAD0C8201CAEF63F0022B67B /* HistoryPreviewView.h */,
-				CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */,
+				CA330F611CA22FAC001159D0 /* GlobalLayoutRef.h */,
+				CA330F621CA22FAC001159D0 /* GlobalLayoutRef.m */,
 			);
-			name = HistoryViews;
-			sourceTree = "<group>";
-		};
-		CAD0C8091CAC69A80022B67B /* History */ = {
-			isa = PBXGroup;
-			children = (
-				CAC7C7CB1CD3E27000425DB8 /* HistoryFilePathConfigs.h */,
-				CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */,
-				CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */,
-				CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */,
-				CAD0C80A1CAC6B7F0022B67B /* MetricsHistoryDataCenter.h */,
-				CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */,
-				CAE3F4741CCA9A7300D89F75 /* MetricsDataEntry.h */,
-				CAE3F4751CCA9A7300D89F75 /* MetricsDataEntry.m */,
-				CADCFE171CCF24210085BD94 /* MetricsHistoryDataCenterDelegate.h */,
-			);
-			name = History;
+			name = HistoryBar;
 			sourceTree = "<group>";
 		};
 		CAFC108D1C71A73800523617 /* Products */ = {
