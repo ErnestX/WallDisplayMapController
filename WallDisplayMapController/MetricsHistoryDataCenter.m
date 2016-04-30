@@ -191,8 +191,8 @@
                                    style:UIAlertActionStyleCancel
                                    handler:nil];
     
-    [alertController addAction:deleteAction];
     [alertController addAction:cancelAction];
+    [alertController addAction:deleteAction];
     [myDelegate presentViewController:alertController animated:YES completion:nil];
 }
 

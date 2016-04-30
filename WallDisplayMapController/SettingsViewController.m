@@ -84,7 +84,7 @@
     
     UIButton* wipeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [wipeButton setTitle:@"WipeHistoryData" forState:UIControlStateNormal];
-    [wipeButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [wipeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     wipeButton.frame = CGRectMake(10, 0, 150, 50);
     [wipeButton addTarget:self action:@selector(wipeHistoryData) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:wipeButton];

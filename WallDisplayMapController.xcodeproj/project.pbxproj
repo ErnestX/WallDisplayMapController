@@ -84,6 +84,7 @@
 		CA74C3451C595A37004D3CCE /* HistoryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3441C595A37004D3CCE /* HistoryContainerViewController.m */; };
 		CA74C3481C595A6A004D3CCE /* HistoryContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */; };
 		CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */; };
+		CAC7C7D01CD4410D00425DB8 /* DataPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */; };
 		CAC8A4C41CCAA46300B9EC27 /* MetricsConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */; };
 		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
 		CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */; };
@@ -310,6 +311,8 @@
 		CA74C3471C595A6A004D3CCE /* HistoryContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryContainerView.m; sourceTree = "<group>"; };
 		CAC7C7CB1CD3E27000425DB8 /* HistoryFilePathConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryFilePathConfigs.h; sourceTree = "<group>"; };
 		CAC7C7CC1CD3E27000425DB8 /* HistoryFilePathConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryFilePathConfigs.m; sourceTree = "<group>"; };
+		CAC7C7CE1CD4410D00425DB8 /* DataPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPointView.h; sourceTree = "<group>"; };
+		CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPointView.m; sourceTree = "<group>"; };
 		CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsConfigs.h; sourceTree = "<group>"; };
 		CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsConfigs.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
@@ -597,6 +600,8 @@
 				CA4E04911C9B5A3A00E2B60D /* MetricView.m */,
 				CAD0C8061CA9D0480022B67B /* GraphLineView.h */,
 				CAD0C8071CA9D0480022B67B /* GraphLineView.m */,
+				CAC7C7CE1CD4410D00425DB8 /* DataPointView.h */,
+				CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */,
 				CAD0C8201CAEF63F0022B67B /* HistoryPreviewView.h */,
 				CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */,
 			);
@@ -915,6 +920,7 @@
 				AE79D6AB1B7BEFDC00C4C3F5 /* InfoLabel.m in Sources */,
 				AEB8A96B1B62AE8A003C8A68 /* NSOperationQueue+Timeout.m in Sources */,
 				AE869D3C1B0EA9FA000900FF /* XMLDictionary.m in Sources */,
+				CAC7C7D01CD4410D00425DB8 /* DataPointView.m in Sources */,
 				AE0E80421B471E210047AD80 /* MetricCollectionViewCell.m in Sources */,
 				AE3F20F71B30B09200B653BE /* DistrictEnergyModel.m in Sources */,
 				CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */,

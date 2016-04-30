@@ -9,15 +9,17 @@
 #import "GraphLineView.h"
 
 @interface GraphLineView()
+@property (readwrite) MetricName metricName;
 @property (readwrite) CGFloat connectedToDataPointWithHeight;
 @property (readwrite) CGFloat absHorizontalDistance;
 @end
 
 @implementation GraphLineView
 
-- (id)initWithColor:(UIColor*)color connectedToDataPointWithHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d anchorPointOnRight:(BOOL)onRight{
+- (id)initWithMetricName:(MetricName)m connectedToDataPointWithHeight:(CGFloat)h absHorizontalDistance:(CGFloat)d anchorPointOnRight:(BOOL)onRight{
     self = [super init];
     if (self) {
+        self.metricName = m;
         self.connectedToDataPointWithHeight = h;
         self.absHorizontalDistance = d;
         
@@ -27,7 +29,7 @@
             self.layer.anchorPoint = CGPointMake(0.0, 0.5); // rotates relative to the center of the left edge
         }
         
-        self.backgroundColor = color; // TODO gradient
+        self.backgroundColor = [[MetricsConfigs instance]getColorForMetric:self.metricName]; // TODO gradient
         
         self.layer.allowsEdgeAntialiasing = YES;
     }

@@ -8,6 +8,7 @@
 
 #import "MetricView.h"
 #import "GraphLineView.h"
+#import "DataPointView.h"
 #import "GlobalLayoutRef.h"
 
 #define MIN_RENDER_POSITION 0.1
@@ -21,7 +22,7 @@
     MetricName metricName;
     CGRect oldFrame;
     CGFloat dataPointPosition;
-    UIView* dataPointView;
+    DataPointView* dataPointView;
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
@@ -36,13 +37,12 @@
     
     // draw the data point (each metric view contains only one data point)
     if (!dataPointView) {
-        dataPointView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)];
+        dataPointView = [[[DataPointView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)]initWithMetricName:metricName];
         NSAssert(dataPointView, @"init failed");
-        dataPointView.layer.cornerRadius = DATA_POINT_DIAMETER/2.0;
         [self addSubview:dataPointView];
+    } else {
+        dataPointView = [dataPointView initWithMetricName:metricName];
     }
-    
-    dataPointView.backgroundColor = [[MetricsConfigs instance] getColorForMetric:metricName];
     
 //    self.layer.borderColor = [UIColor grayColor].CGColor;
 //    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
@@ -103,7 +103,7 @@
     if (!leftLineView) {
         // alloc new
         leftLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                        initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
+                        initWithMetricName:metricName
                         connectedToDataPointWithHeight:prevH
                         absHorizontalDistance:prevD
                         anchorPointOnRight:YES];
@@ -111,7 +111,7 @@
         [self addSubview:leftLineView];
         [self sendSubviewToBack:leftLineView];
     } else {
-        leftLineView = [leftLineView initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
+        leftLineView = [leftLineView initWithMetricName:metricName
                     connectedToDataPointWithHeight:prevH
                              absHorizontalDistance:prevD
                                 anchorPointOnRight:YES];
@@ -124,7 +124,7 @@
     if (!rightLineView) {
         // alloc new
         rightLineView = [[[GraphLineView alloc]initWithFrame:CGRectMake(0, 0, LINE_LENGTH, LINE_WIDTH)]
-                         initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
+                         initWithMetricName:metricName
                          connectedToDataPointWithHeight:nextH
                          absHorizontalDistance:nextD
                          anchorPointOnRight:NO];
@@ -132,7 +132,7 @@
         [self addSubview:rightLineView];
         [self sendSubviewToBack:rightLineView];
     } else {
-        rightLineView = [rightLineView initWithColor:[[MetricsConfigs instance] getColorForMetric:metricName]
+        rightLineView = [rightLineView initWithMetricName:metricName
                       connectedToDataPointWithHeight:nextH
                                absHorizontalDistance:nextD
                                   anchorPointOnRight:NO];
@@ -142,7 +142,7 @@
 }
 
 - (void)showIcons {
-    
+    // TODO
 }
 
 @end
