@@ -14,8 +14,8 @@
 
 #import "MetricsHistoryDataCenter.h" // this is for test button 2 only!
 
-#define LEGEND_VIEW_WIDTH 200
-#define LEGEND_VIEW_HEIGHT 400
+#define LEGEND_VIEW_WIDTH 155
+#define LEGEND_VIEW_HEIGHT 220
 #define LEGEND_VIEW_TOP_MARGIN 2
 
 #define TAB_BAR_HEIGHT 49 // this is simply the default tab height for iOS

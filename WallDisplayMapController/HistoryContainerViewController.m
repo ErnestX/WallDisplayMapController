@@ -52,16 +52,6 @@
     [(HistoryContainerView*)self.view setUpPreivewView:(HistoryPreviewView*)historyPreviewController.view];
     
     /* ===================== */
-    // create and init legend controller
-    legendViewController = [[LegendViewController alloc]initWithContainerController:self];
-    NSAssert(legendViewController, @"init failed");
-    
-    [self addChildViewController:legendViewController];
-    
-    // give legendView to containerView to add it as subview and init the frame
-    [(HistoryContainerView*)self.view setUpLegendView:(LegendView*)legendViewController.view];
-    
-    /* ===================== */
     // create and init historyBarController
     historyBarController = [[HistoryBarController alloc]initWithContainerController:self];
     NSAssert(historyBarController, @"init failed");
@@ -70,6 +60,16 @@
     
     // give historyBarView to containerView to add it as subview and init the frame
     [(HistoryContainerView*)self.view setUpHistoryBar:(HistoryBarView*)historyBarController.collectionView];
+    
+    /* ===================== */
+    // create and init legend controller
+    legendViewController = [[LegendViewController alloc]initWithContainerController:self];
+    NSAssert(legendViewController, @"init failed");
+    
+    [self addChildViewController:legendViewController];
+    
+    // give legendView to containerView to add it as subview and init the frame
+    [(HistoryContainerView*)self.view setUpLegendView:(LegendView*)legendViewController.view];
 }
 
 - (NSInteger)getTotalNumberOfData {

@@ -23,7 +23,7 @@
 - (id)initForReuseWithMetricName:(MetricName)m {
     self.metricName = m;
     
-    self.textLabel.text = [[MetricsConfigs instance]getDisplayNameForMetric:self.metricName];
+    self.textLabel.text = [[MetricsConfigs instance] getDisplayNameForMetric:self.metricName];
     self.textLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
     
     return self;
