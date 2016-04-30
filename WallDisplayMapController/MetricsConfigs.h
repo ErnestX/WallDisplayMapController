@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, MetricName) {
     // People per hectare and mode thresholds
 //    density_activeDensityThreshold,
 //    density_transitDensityThreshold,
-    density_densityMetric,
+    density_densityMetric = 0,
     
     // Kilometers per person in a year
     density_modelVKT,
@@ -78,7 +78,9 @@ typedef NS_ENUM(NSUInteger, MetricName) {
     districtEnergy_mobilityPercent,
     
     districtEnergy_emissionsPerCapita,
-    districtEnergy_energyHouseholdIncome
+    districtEnergy_energyHouseholdIncome,
+    
+    notAMetric // this is also used as the counter of this enum type so make sure this is the last entry! 
 };
 
 @interface MetricsConfigs : NSObject
@@ -92,5 +94,6 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
 - (NSString*)getDisplayNameForMetric:(MetricName)m;
+- (NSInteger)getMaxNumberOfMetricsToDisplay;
 
 @end

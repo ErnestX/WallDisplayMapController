@@ -12,7 +12,9 @@
 @property (readwrite) MetricName metricName;
 @end
 
-@implementation LegendViewCell
+@implementation LegendViewCell {
+    void (^selectionHandler)(void);
+}
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -27,6 +29,13 @@
     self.textLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
     
     return self;
+}
+
+- (id)initAsAddButton {
+    self.metricName = notAMetric;
+    self.textLabel.text = @"new metric";
+    self.textLabel.textColor = [UIColor darkTextColor];
+    selectionHandler = ^{}
 }
 
 - (void)prepareForReuse {

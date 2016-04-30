@@ -54,19 +54,28 @@ static NSString* const reuseIdentifier = @"cell";
     // re-use or create a cell
     LegendViewCell* cell = [(LegendView*)self.view dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // find the to-do item for this index
     int index = [indexPath item];
-    MetricName m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
-    
-    // init for reuse
-    cell = [cell initForReuseWithMetricName:m];
+    if (index == [self tableView:(LegendView*)self.view numberOfRowsInSection:0]) {
+        // this is the add button
+        
+    } else {
+        // normal cell
+        // init for reuse
+        MetricName m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
+        cell = [cell initForReuseWithMetricName:m];
+    }
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return [MetricsConfigs instance].metricsDisplayedInOrder.count;
+        if ([MetricsConfigs instance].metricsDisplayedInOrder.count < [[MetricsConfigs instance]getMaxNumberOfMetricsToDisplay]) {
+            // display add button too
+            return [MetricsConfigs instance].metricsDisplayedInOrder.count + 1;
+        } else {
+            return [MetricsConfigs instance].metricsDisplayedInOrder.count;
+        }
     } else {
         return 0;
     }

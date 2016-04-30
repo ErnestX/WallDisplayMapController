@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.allowsSelection = NO;
+        self.allowsSelection = YES;
         self.scrollEnabled = NO;
         
         self.backgroundColor = [UIColor whiteColor];

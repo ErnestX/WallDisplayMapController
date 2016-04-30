@@ -109,29 +109,29 @@
     
     switch (m) {
         case density_densityMetric: name = @"population density"; break;
-//        case density_modelVKT:
-//        case density_CEEIKVT:
+        case density_modelVKT: name = @"model VKT"; break;
+        case density_CEEIKVT: name = @"CEEIKVT"; break;
         case density_modelActiveTripsPercent: name = @"active"; break;
         case density_modelTransitTripsPercent: name = @"transit"; break;
         case density_modelVehicleTripsPercent: name = @"vehicle"; break;
             
-//        case energy_mobilityPercent:
-//        case energy_heatingAndHotWaterPercent:
-//        case energy_lightsAndAppliancesPercent:
-//
-//        case energy_propaneIn:
-//        case energy_heatingoilIn:
-//        case energy_woodIn:
-//        case energy_electricityIn:
-//        case energy_dieselIn:
-//        case energy_gasolineIn:
-//
-//        case energy_propaneOut:
-//        case energy_heatingoilOut:
-//        case energy_woodOut:
-//        case energy_electricityOut:
-//        case energy_dieselOut:
-//        case energy_gasolineOut:
+        case energy_mobilityPercent: name = @"mobility%(energy)"; break;
+        case energy_heatingAndHotWaterPercent: name = @"heating & hot water %"; break;
+        case energy_lightsAndAppliancesPercent: name = @"lights & appliances %"; break;
+
+        case energy_propaneIn: name = @"propane in"; break;
+        case energy_heatingoilIn: name = @"heating oil in"; break;
+        case energy_woodIn: name = @"wood in"; break;
+        case energy_electricityIn: name = @"electric in"; break;
+        case energy_dieselIn: name = @"diesel in"; break;
+        case energy_gasolineIn: name = @"gasoline in"; break;
+
+        case energy_propaneOut: name = @"propane out"; break;
+        case energy_heatingoilOut: name = @"heating out"; break;
+        case energy_woodOut: name = @"wood out"; break;
+        case energy_electricityOut: name = @"electricity out"; break;
+        case energy_dieselOut: name = @"diesel out"; break;
+        case energy_gasolineOut: name = @"gasoline out"; break;
             
         case building_people: name = @"people"; break;
         case building_dwellings: name = @"dwellings"; break;
@@ -145,21 +145,27 @@
         case building_civicPercent: name = @"civic"; break;
         case building_indPercent: name = @"industrial"; break;
             
-//        case building_far:
+        case building_far: name = @"floor/area(building)"; break;
             
-//        case  districtEnergy_far:
+        case  districtEnergy_far: name = @"floor/area(disEnergy)"; break;
             
-//        case districtEnergy_heatingPercent:
-//        case districtEnergy_lightsPercent:
-//        case districtEnergy_mobilityPercent:
+        case districtEnergy_heatingPercent: name = @"heating%"; break;
+        case districtEnergy_lightsPercent: name = @"lighting%"; break;
+        case districtEnergy_mobilityPercent: name = @"mobility%"; break;
         case districtEnergy_emissionsPerCapita: name = @"CO2 per capita"; break;
         case districtEnergy_energyHouseholdIncome: name = @"household annual energy cost"; break;
+            
+        case notAMetric: name = @"not a metric"; break;
             
         default:
             name = @"untitled";
     }
     
     return name;
+}
+
+- (NSInteger)getMaxNumberOfMetricsToDisplay {
+    return 5;
 }
 
 @end
