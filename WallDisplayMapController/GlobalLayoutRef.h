@@ -18,5 +18,7 @@
 - (CGFloat)getHistoryBarOriginalHeight;
 - (CGFloat)getHistoryBarExpandedHeight;
 - (CGFloat)getCellDefaultWidth;
+- (CGFloat)getTagViewHeight;
+- (CGFloat)getTimeStampFontSize;
 
 @end

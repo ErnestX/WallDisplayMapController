@@ -11,10 +11,8 @@
 #import "MetricsConfigs.h"
 #import "GlobalLayoutRef.h"
 
-#define TIME_LABEL_FONT_SIZE 10
 #define TIME_LABEL_BUTTON_MARGIN 2
 #define GREY_LINE_THICKNESS 2
-#define TAG_VIEW_HEIGHT 10
 #define TAG_VIEW_WIDTH 63
 
 @implementation HistoryBarCell
@@ -115,7 +113,7 @@
                                                                   toItem:nil
                                                                attribute:NSLayoutAttributeNotAnAttribute
                                                               multiplier:1.0
-                                                                constant:TAG_VIEW_HEIGHT]];
+                                                                constant:[[GlobalLayoutRef instance]getTagViewHeight]]];
     [tagViewConstraints addObject:[NSLayoutConstraint constraintWithItem:tagView
                                                                attribute:NSLayoutAttributeCenterX
                                                                relatedBy:NSLayoutRelationEqual
@@ -233,7 +231,7 @@
     
     NSAssert(timeStampLabel,@"timeStampLabel is nil");
     timeStampLabel.text = [formatter stringFromDate:time];
-    timeStampLabel.font = [timeStampLabel.font fontWithSize:TIME_LABEL_FONT_SIZE];
+    timeStampLabel.font = [timeStampLabel.font fontWithSize:[[GlobalLayoutRef instance]getTimeStampFontSize]];
     [timeStampLabel sizeToFit];
     
     
@@ -301,7 +299,7 @@
                                                                           attribute:NSLayoutAttributeBottom
                                                                          multiplier:(1.0/thisMetricData.count) * (i+1)
                                                                            constant:-1 * (timeStampLabel.frame.size.height
-                                                                                          + TAG_VIEW_HEIGHT
+                                                                                          + [[GlobalLayoutRef instance]getTagViewHeight]
                                                                                           + TIME_LABEL_BUTTON_MARGIN)
                                               * (1.0/thisMetricData.count) * (i+1)]];
             [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
@@ -332,7 +330,7 @@
                                                                          multiplier:1.0
                                                                            constant:[[GlobalLayoutRef instance] getHistoryBarOriginalHeight]
                                               - 1 * (timeStampLabel.frame.size.height
-                                                     + TAG_VIEW_HEIGHT
+                                                     + [[GlobalLayoutRef instance]getTagViewHeight]
                                                      + TIME_LABEL_BUTTON_MARGIN)]];
             [NSLayoutConstraint activateConstraints:metricViewConstraints];
             

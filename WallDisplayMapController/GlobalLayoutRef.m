@@ -30,11 +30,20 @@
 }
 
 - (CGFloat)getHistoryBarExpandedHeight {
-    return ([self getHistoryBarOriginalHeight] - 20) * [MetricsConfigs instance].metricsDisplayedInOrder.count + 20; // 20 = tag view height + time lable font size
+    CGFloat temp = [self getTagViewHeight] + [self getTimeStampFontSize];
+    return ([self getHistoryBarOriginalHeight] - temp) * [MetricsConfigs instance].metricsDisplayedInOrder.count + temp;
 }
 
 - (CGFloat)getCellDefaultWidth {
     return 65.0;
+}
+
+- (CGFloat)getTagViewHeight {
+    return 7.0;
+}
+
+- (CGFloat)getTimeStampFontSize {
+    return 10.0;
 }
 
 @end
