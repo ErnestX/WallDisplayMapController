@@ -11,9 +11,9 @@
 #import "HistoryContainerViewController.h"
 #import "GlobalLayoutRef.h"
 
-#define LEGEND_VIEW_WIDTH 200
-#define LEGEND_VIEW_HEIGHT 500
-#define LEGEND_VIEW_TOP_MARGIN 3
+// these two have nothing to do with the actual dimensions displayed, since they will be reset by the HistoryContainerView. However, they should be large enough so that the initalization can succeed
+#define LEGEND_VIEW_INIT_WIDTH 100
+#define LEGEND_VIEW_INIT_HEIGHT 200
 
 @implementation LegendViewController {
     HistoryContainerViewController* containerController;
@@ -32,11 +32,8 @@
     [super viewDidLoad];
     
     // create and init legend view
-    LegendView* legendView = [[LegendView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width,
-                                                                         [[GlobalLayoutRef instance]getHistoryBarOriginalHeight],
-                                                                         LEGEND_VIEW_WIDTH,
-                                                                         LEGEND_VIEW_HEIGHT)];
-    legendView.layer.anchorPoint = CGPointMake(1.0, 0.0); // set anchor point to top right
+    LegendView* legendView = [[LegendView alloc]initWithFrame:CGRectMake(0.0, 0.0, LEGEND_VIEW_INIT_WIDTH, LEGEND_VIEW_INIT_HEIGHT)];
+    
     legendView.delegate = self;
     self.view = legendView;
 }

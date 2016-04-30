@@ -10,8 +10,13 @@
 #import "GlobalLayoutRef.h"
 #import "HistoryBarView.h"
 #import "HistoryPreviewView.h"
+#import "LegendView.h"
 
 #import "MetricsHistoryDataCenter.h" // this is for test button 2 only!
+
+#define LEGEND_VIEW_WIDTH 200
+#define LEGEND_VIEW_HEIGHT 400
+#define LEGEND_VIEW_TOP_MARGIN 2
 
 #define TAB_BAR_HEIGHT 49 // this is simply the default tab height for iOS
 
@@ -19,6 +24,8 @@
 {
     HistoryBarView* historyBarView;
     HistoryPreviewView* historyPreviewView;
+    LegendView* legendView;
+    
     UIView* pointerView;
 }
 
@@ -71,6 +78,17 @@
         [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarOriginalHeight]];
         pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarOriginalHeight]);
     }];
+}
+
+- (void)setUpLegendView: (nonnull LegendView*) lv {
+    NSLog(@"setting up legend view");
+    legendView = lv;
+    [self addSubview:legendView];
+    
+    legendView.layer.anchorPoint = CGPointMake(1.0, 0.0); // set anchor point to top right
+    legendView.frame = CGRectMake(0.0, 0.0, LEGEND_VIEW_WIDTH, LEGEND_VIEW_HEIGHT);
+    legendView.center = CGPointMake([UIScreen mainScreen].bounds.size.width,
+                                    [[GlobalLayoutRef instance]getHistoryBarOriginalHeight] + LEGEND_VIEW_TOP_MARGIN);
 }
 
 - (void) setUpHistoryBar:(nonnull HistoryBarView *) hbv {

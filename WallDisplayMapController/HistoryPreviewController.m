@@ -10,6 +10,10 @@
 #import "HistoryPreviewView.h"
 #import "HistoryContainerViewController.h"
 
+// these two have nothing to do with the actual dimensions displayed, since they will be reset by the HistoryContainerView. However, they should be large enough so that the initalization can succeed
+#define PREVIEW_VIEW_INIT_WIDTH 100
+#define PREVIEW_VIEW_INIT_HEIGHT 100
+
 @interface HistoryPreviewController()
 @property (readwrite) NSInteger currentIndex;
 @end
@@ -54,7 +58,7 @@
     [super viewDidLoad];
     
     // create and init preview view
-    HistoryPreviewView* previewView = [[HistoryPreviewView alloc]initWithFrame:CGRectMake(0.0, 0.0, 100, 100)];
+    HistoryPreviewView* previewView = [[HistoryPreviewView alloc]initWithFrame:CGRectMake(0.0, 0.0, PREVIEW_VIEW_INIT_WIDTH, PREVIEW_VIEW_INIT_HEIGHT)];
     self.view = previewView;
 }
 

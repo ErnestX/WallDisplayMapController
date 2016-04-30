@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h> 
 @class HistoryBarView;
 @class HistoryPreviewView;
+@class LegendView;
 
 @interface HistoryContainerView : UIView
 
@@ -16,8 +17,8 @@
   given the historyBarView from the historyBarContainer, initialize the size of it and add it as a subview
  */
 - (void)setUpHistoryBar: (nonnull HistoryBarView*) hbv;
-
 - (void)setUpPreivewView: (nonnull HistoryPreviewView*) hpv;
+- (void)setUpLegendView: (nonnull LegendView*) lv;
 
 - (void)expandGraph;
 
