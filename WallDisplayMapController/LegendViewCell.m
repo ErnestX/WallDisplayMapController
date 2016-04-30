@@ -13,7 +13,6 @@
 @end
 
 @implementation LegendViewCell {
-    void (^selectionHandler)(void);
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -33,14 +32,16 @@
 
 - (id)initAsAddButton {
     self.metricName = notAMetric;
-    self.textLabel.text = @"new metric";
+    self.textLabel.text = @"add new metric";
     self.textLabel.textColor = [UIColor darkTextColor];
-    selectionHandler = ^{}
+    return self;
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.textLabel.text = @"";
 }
+
+
 
 @end

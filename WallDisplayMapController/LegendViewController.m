@@ -55,9 +55,9 @@ static NSString* const reuseIdentifier = @"cell";
     LegendViewCell* cell = [(LegendView*)self.view dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     int index = [indexPath item];
-    if (index == [self tableView:(LegendView*)self.view numberOfRowsInSection:0]) {
-        // this is the add button
-        
+    if (index == [self tableView:(LegendView*)self.view numberOfRowsInSection:0]-1) {
+        // this is the last index (the add button)
+        cell = [cell initAsAddButton];
     } else {
         // normal cell
         // init for reuse

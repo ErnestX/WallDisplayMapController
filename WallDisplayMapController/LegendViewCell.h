@@ -13,5 +13,6 @@
 @property (readonly) MetricName metricName;
 
 - (id)initForReuseWithMetricName:(MetricName)m;
+- (id)initAsAddButton;
 
 @end

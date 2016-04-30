@@ -156,9 +156,6 @@
         case districtEnergy_energyHouseholdIncome: name = @"household annual energy cost"; break;
             
         case notAMetric: name = @"not a metric"; break;
-            
-        default:
-            name = @"untitled";
     }
     
     return name;
