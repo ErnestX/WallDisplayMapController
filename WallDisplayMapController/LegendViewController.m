@@ -90,6 +90,7 @@ static NSString* const reuseIdentifier = @"cell";
     NSIndexPath* indexPath = [(LegendView*)self.view indexPathForCell:cell];
     NSAssert(indexPath, @"cannot find cell");
     
+    BOOL needToRemoveCell = NO;
     NSInteger index = indexPath.row;
     NSMutableArray<NSNumber*>* tempArr = [NSMutableArray arrayWithArray:[MetricsConfigs instance].metricsDisplayedInOrder];
     if (m != notAMetric) {
@@ -104,11 +105,18 @@ static NSString* const reuseIdentifier = @"cell";
         if (index < tempArr.count) {
             // within range: remove entry
             [tempArr removeObjectAtIndex:index];
+            
+            needToRemoveCell = YES;
         }
     }
     
     BOOL succ = [[MetricsConfigs instance]setMetricsDisplayedInOrderWithArray:tempArr];
     NSAssert(succ, @"reset MetricsConfigs array fail");
+    if (needToRemoveCell) {
+        NSMutableArray<NSIndexPath*>* indexPaths = [NSMutableArray array];
+        [indexPaths addObject:indexPath];
+        [(LegendView*)self.view deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+    }
 }
 
 @end
