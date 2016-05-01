@@ -86,7 +86,7 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 @interface MetricsConfigs : NSObject
 /**
  stores the configuration that which metrics should be displayed and in what order.
- it is guaranteed that notAMetric won't be in this array. 
+ it is guaranteed that notAMetric won't be in this array.
  */
 @property (readonly) NSArray<NSNumber*>* metricsDisplayedInOrder;
 
@@ -98,6 +98,11 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
 - (NSString*)getDisplayNameForMetric:(MetricName)m;
-//- (NSInteger)getMaxNumberOfMetricsToDisplay;
+
+/**
+ arr mustn't contain notAMetric
+ returns true if successful
+ */
+- (BOOL)setMetricsDisplayedInOrderWithArray:(NSArray<NSNumber*>*)arr;
 
 @end

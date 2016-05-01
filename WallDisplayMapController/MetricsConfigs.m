@@ -25,7 +25,8 @@
         instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:density_modelActiveTripsPercent],
                                             [NSNumber numberWithInteger:building_people],
                                             [NSNumber numberWithInteger:building_detachedPercent],
-                                            [NSNumber numberWithInteger:districtEnergy_emissionsPerCapita], nil];
+//                                            [NSNumber numberWithInteger:districtEnergy_emissionsPerCapita],
+                                            nil];
     });
     
     return instance;
@@ -161,8 +162,15 @@
     return name;
 }
 
-//- (NSInteger)getMaxNumberOfMetricsToDisplay {
-//    return 5;
-//}
+- (BOOL)setMetricsDisplayedInOrderWithArray:(NSArray<NSNumber*>*)arr {
+    for (int i=0; i<arr.count; i++) {
+        MetricName m = [[arr objectAtIndex:i] integerValue];
+        if (m >= notAMetric) {
+            return NO;
+        }
+    }
+    self.metricsDisplayedInOrder = arr;
+    return YES;
+}
 
 @end

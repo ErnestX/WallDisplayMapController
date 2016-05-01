@@ -16,7 +16,7 @@
 // these two have nothing to do with the actual dimensions displayed, since they will be reset by the HistoryContainerView. However, they should be large enough so that the initalization can succeed
 #define LEGEND_VIEW_INIT_WIDTH 100
 #define LEGEND_VIEW_INIT_HEIGHT 200
-#define NUMBER_OF_METRICS 5
+#define MAX_NUMBER_OF_METRICS 5 // if number of metrics equals or exceeds this, no new metrics can be added, but the existing ones are still displayed technically (though the frame size would need to change to fit)
 
 @implementation LegendViewController {
     HistoryContainerViewController* containerController;
@@ -71,7 +71,11 @@ static NSString* const reuseIdentifier = @"cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return NUMBER_OF_METRICS;
+        if ([MetricsConfigs instance].metricsDisplayedInOrder.count < MAX_NUMBER_OF_METRICS) {
+            return [MetricsConfigs instance].metricsDisplayedInOrder.count + 1; // inclue "add new metric" cell
+        } else {
+            return [MetricsConfigs instance].metricsDisplayedInOrder.count;
+        }
     } else {
         return 0;
     }

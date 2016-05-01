@@ -96,7 +96,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
-        return notAMetric+1; // this is the last of the enum, thus used as the counter.
+        return notAMetric+1; // notAMetric is the last of the enum, thus used as the counter here.
     } else {
         return 0;
     }
