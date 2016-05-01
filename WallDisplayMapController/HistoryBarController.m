@@ -131,6 +131,7 @@ static NSString* const reuseIdentifier = @"Cell";
         [cell initForReuseWithTimeStamp:[containerController getTimeStampForIndex:thisIndex]
                                     tag:[containerController getTagForIndex:thisIndex]
                               flagOrNot:[containerController getFlagForIndex:thisIndex]
+               thisMetricNameValuePairs:[containerController getRawDataForDisplayedMetricsAtIndex:thisIndex]
             thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
             prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth] // assume no selection by default for now. same for the two cases below
@@ -141,6 +142,7 @@ static NSString* const reuseIdentifier = @"Cell";
         [cell initForReuseWithTimeStamp:[containerController getTimeStampForIndex:thisIndex]
                                     tag:[containerController getTagForIndex:thisIndex]
                               flagOrNot:[containerController getFlagForIndex:thisIndex]
+               thisMetricNameValuePairs:[containerController getRawDataForDisplayedMetricsAtIndex:thisIndex]
             thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
             prevMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex - 1]
               prevAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
@@ -149,6 +151,7 @@ static NSString* const reuseIdentifier = @"Cell";
         [cell initForReuseWithTimeStamp:[containerController getTimeStampForIndex:thisIndex]
                                     tag:[containerController getTagForIndex:thisIndex]
                               flagOrNot:[containerController getFlagForIndex:thisIndex]
+               thisMetricNameValuePairs:[containerController getRawDataForDisplayedMetricsAtIndex:thisIndex]
             thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]
             nextMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex + 1]
               nextAbsHorizontalDistance:[[GlobalLayoutRef instance] getCellDefaultWidth]];
@@ -157,6 +160,7 @@ static NSString* const reuseIdentifier = @"Cell";
         [cell initForReuseWithTimeStamp:[containerController getTimeStampForIndex:thisIndex]
                                     tag:[containerController getTagForIndex:thisIndex]
                               flagOrNot:[containerController getFlagForIndex:thisIndex]
+               thisMetricNameValuePairs:[containerController getRawDataForDisplayedMetricsAtIndex:thisIndex]
             thisMetricNamePositionPairs:[containerController getDataPointPosForDisplayedMetricsAtIndex:thisIndex]];
     }
     

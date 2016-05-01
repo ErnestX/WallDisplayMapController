@@ -136,6 +136,7 @@
 - (void)initForReuseWithTimeStamp:(NSDate *)time
                               tag:(NSString *)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
       prevMetricNamePositionPairs:(nonnull NSDictionary *)prevMetricData
         prevAbsHorizontalDistance:(CGFloat)pd
@@ -145,6 +146,7 @@
     [self initForReuseWithTimeStamp:time
                                 tag:tag
                           flagOrNot:flag
+           thisMetricNameValuePairs:thisMetricRawData
         thisMetricNamePositionPairs:thisMetricData
                       prevCellExist:YES
         prevMetricNamePositionPairs:prevMetricData
@@ -158,6 +160,7 @@
 - (void)initForReuseWithTimeStamp:(NSDate *)time
                               tag:(NSString *)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
       prevMetricNamePositionPairs:(nonnull NSDictionary *)prevMetricData
         prevAbsHorizontalDistance:(CGFloat)pd {
@@ -165,6 +168,7 @@
     [self initForReuseWithTimeStamp:time
                                 tag:tag
                           flagOrNot:flag
+           thisMetricNameValuePairs:thisMetricRawData
         thisMetricNamePositionPairs:thisMetricData
                       prevCellExist:YES
         prevMetricNamePositionPairs:prevMetricData
@@ -178,6 +182,7 @@
 - (void)initForReuseWithTimeStamp:(NSDate *)time
                               tag:(NSString *)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(NSDictionary *)thisMetricData
       nextMetricNamePositionPairs:(NSDictionary *)nextMetricData
         nextAbsHorizontalDistance:(CGFloat)nd {
@@ -185,6 +190,7 @@
     [self initForReuseWithTimeStamp:time
                                 tag:tag
                           flagOrNot:flag
+           thisMetricNameValuePairs:thisMetricRawData
         thisMetricNamePositionPairs:thisMetricData
                       prevCellExist:NO
         prevMetricNamePositionPairs:nil
@@ -198,11 +204,13 @@
 - (void)initForReuseWithTimeStamp:(NSDate *)time
                               tag:(NSString *)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(NSDictionary *)thisMetricData {
     
     [self initForReuseWithTimeStamp:time
                                 tag:tag
                           flagOrNot:flag
+           thisMetricNameValuePairs:thisMetricRawData
         thisMetricNamePositionPairs:thisMetricData
                       prevCellExist:NO
         prevMetricNamePositionPairs:nil
@@ -283,6 +291,7 @@
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
                     prevCellExist:(BOOL)pe
       prevMetricNamePositionPairs:(nullable NSDictionary*)prevMetricData

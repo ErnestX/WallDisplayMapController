@@ -19,6 +19,7 @@
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
       prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
             prevAbsHorizontalDistance:(CGFloat)pd
@@ -33,6 +34,7 @@
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
       prevMetricNamePositionPairs:(nonnull NSDictionary*)prevMetricData
         prevAbsHorizontalDistance:(CGFloat)pd;
@@ -45,6 +47,7 @@
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData
       nextMetricNamePositionPairs:(nonnull NSDictionary*)nextMetricData
         nextAbsHorizontalDistance:(CGFloat)nd;
@@ -56,6 +59,7 @@
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
+         thisMetricNameValuePairs:(nonnull NSDictionary*)thisMetricRawData
       thisMetricNamePositionPairs:(nonnull NSDictionary*)thisMetricData;
 
 @end
