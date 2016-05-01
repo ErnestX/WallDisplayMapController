@@ -21,4 +21,7 @@
 - (CGFloat)getTagViewHeight;
 - (CGFloat)getTimeStampFontSize;
 
+- (NSString*)getNotificationMessageForExpandingHistoryBar;
+- (NSString*)getNotificationMessageForContractingHistoryBar;
+
 @end

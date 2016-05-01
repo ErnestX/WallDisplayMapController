@@ -46,4 +46,12 @@
     return 10.0;
 }
 
+- (NSString*)getNotificationMessageForExpandingHistoryBar {
+    return @"history bar expanding";
+}
+
+- (NSString*)getNotificationMessageForContractingHistoryBar {
+    return @"history bar contracting";
+}
+
 @end

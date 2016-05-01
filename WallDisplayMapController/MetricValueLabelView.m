@@ -19,8 +19,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor lightGrayColor];
-        
+        self.backgroundColor = [UIColor whiteColor];
         if (!metricValueLabel) {
             metricValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height)];
             metricValueLabel.adjustsFontSizeToFitWidth = YES;
@@ -35,7 +34,7 @@
     self.metricName = m;
     
     metricValueLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
-    metricValueLabel.text = [NSString stringWithFormat:@"%.02f", v];
+    metricValueLabel.text = [NSString stringWithFormat:@"%.01f", v];
     
     return self;
 }

@@ -67,6 +67,9 @@
 }
 
 - (void)expandGraph {
+    [[NSNotificationCenter defaultCenter]postNotificationName:
+     [[GlobalLayoutRef instance]getNotificationMessageForExpandingHistoryBar] object:self];
+     
     [UIView animateWithDuration:0.35 animations:^(void){
         [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarExpandedHeight]];
         pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarExpandedHeight]);
@@ -74,6 +77,9 @@
 }
 
 - (void)collapseGraph {
+    [[NSNotificationCenter defaultCenter]postNotificationName:
+     [[GlobalLayoutRef instance]getNotificationMessageForContractingHistoryBar] object:self];
+    
     [UIView animateWithDuration:0.35 animations:^(void){
         [historyBarView setHeight:[[GlobalLayoutRef instance]getHistoryBarOriginalHeight]];
         pointerView.center = CGPointMake(historyBarView.frame.size.width / 2, [[GlobalLayoutRef instance]getHistoryBarOriginalHeight]);

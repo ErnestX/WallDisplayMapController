@@ -21,6 +21,4 @@
 
 - (void)removeAllEntries;
 
-- (void)showMetricValueLabels;
-
 @end

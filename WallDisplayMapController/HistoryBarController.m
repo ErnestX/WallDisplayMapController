@@ -167,10 +167,6 @@ static NSString* const reuseIdentifier = @"Cell";
     return cell;
 }
 
-- (void)showMetricValueLabels {
-    
-}
-
 #pragma mark <UICollectionViewDelegate>
 
 /*

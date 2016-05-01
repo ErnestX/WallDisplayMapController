@@ -133,6 +133,16 @@
                                                                 constant:0.0]];
     [NSLayoutConstraint activateConstraints:tagViewConstraints];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(showMetricValueLabels)
+                                                name:[[GlobalLayoutRef instance]getNotificationMessageForExpandingHistoryBar]
+                                              object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(hideMetricValueLabels)
+                                                name:[[GlobalLayoutRef instance]getNotificationMessageForContractingHistoryBar]
+                                              object:nil];
+    
     return self;
 }
 
@@ -452,15 +462,30 @@
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:20.0]];
+                                                                       constant:10.0]];
         [NSLayoutConstraint activateConstraints:valueLabelConstraints];
         
         [valueLabels addObject:mvlv];
+        
+        // hide by default
+        mvlv.alpha = 0.0;
     }
 }
 
 - (void)showMetricValueLabels {
-    
+    [UIView animateWithDuration:0.2 animations:^{
+        for (int i=0; i<valueLabels.count; i++) {
+            [valueLabels objectAtIndex:i].alpha = 1.0;
+        }
+    }];
+}
+
+- (void)hideMetricValueLabels {
+    [UIView animateWithDuration:0.2 animations:^{
+        for (int i=0; i<valueLabels.count; i++) {
+            [valueLabels objectAtIndex:i].alpha = 0.0;
+        }
+    }];
 }
 
 @end
