@@ -22,9 +22,9 @@
         //init instance
         
         // stub
-        instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:density_modelActiveTripsPercent],
-                                            [NSNumber numberWithInteger:building_people],
-                                            [NSNumber numberWithInteger:building_detachedPercent],
+        instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:building_people],
+//                                            [NSNumber numberWithInteger:density_modelActiveTripsPercent],
+//                                            [NSNumber numberWithInteger:building_detachedPercent],
 //                                            [NSNumber numberWithInteger:districtEnergy_emissionsPerCapita],
                                             nil];
     });

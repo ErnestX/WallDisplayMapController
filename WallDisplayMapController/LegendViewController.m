@@ -115,8 +115,16 @@ static NSString* const reuseIdentifier = @"cell";
     if (needToRemoveCell) {
         NSMutableArray<NSIndexPath*>* indexPaths = [NSMutableArray array];
         [indexPaths addObject:indexPath];
-        [(LegendView*)self.view deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+        if ([self tableView:(LegendView*)self.view numberOfRowsInSection:0] == MAX_NUMBER_OF_METRICS) {
+            // need to move the cell to last to avoid conflict
+            [(LegendView*)self.view moveRowAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:[self tableView:(LegendView*)self.view numberOfRowsInSection:0]-1 inSection:0]];
+        } else {
+            // simply delete
+            [(LegendView*)self.view deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationMiddle];
+        }
     }
+    
+    [(LegendView*)self.view reloadData];
 }
 
 @end
