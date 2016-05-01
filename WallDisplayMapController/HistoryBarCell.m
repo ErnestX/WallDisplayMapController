@@ -215,7 +215,6 @@
 
 - (void)setUpAutoLayoutForMetricView:(MetricView*)mv atIndex:(NSInteger)index givenTotalMetricViewCount:(NSInteger)count {
     // remove all existing constains first
-//    [mv removeConstraints:mv.constraints];
     if (mv.metricViewConstraints) {
         [NSLayoutConstraint deactivateConstraints:mv.metricViewConstraints];
     }
@@ -314,7 +313,6 @@
     
     // first make sure the number of metric views is correct
     if (metricViews.count != [MetricsConfigs instance].metricsDisplayedInOrder.count) {
-//        NSLog(@"start: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
         // Step1: get the count correct
         if (metricViews.count > [MetricsConfigs instance].metricsDisplayedInOrder.count) {
             // remove excessive metric views
@@ -327,18 +325,15 @@
             // add more metric views
             NSInteger iterations = [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count;
             for (int i = 0; i < iterations; i++) {
-//                NSLog(@"%d", [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count);
                 MetricView* newMetricView = [MetricView new];
                 [self addSubview:newMetricView];
                 [metricViews addObject:newMetricView];
             }
         }
-//        NSLog(@"end: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
+        
         NSAssert(metricViews.count == [MetricsConfigs instance].metricsDisplayedInOrder.count, @"the num of metric views is still incorrect!");
         
         // Step2: reset auto layout for all metric views
-        NSLog(@"%d", metricViews.count);
-//        [self removeConstraints:self.constraints];
         for (int i = 0; i < metricViews.count; i++) {
             MetricView* mv = [metricViews objectAtIndex:i];
             [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:metricViews.count];
@@ -361,23 +356,9 @@
         
         MetricView* mv;
         
-        // alloc metric view if needed
-//        if (i < metricViews.count) {
-            // have enough metricViews so far
-            mv = [metricViews objectAtIndex:i];
-            NSAssert(mv, @"mv is nil");
-            mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
-//        } else {
-//            NSLog(@"not enough metric view. alloc new metric view");
-            // alloc new
-//            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
-//            [self addSubview:mv];
-        
-//            [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:[MetricsConfigs instance].metricsDisplayedInOrder.count];
-        
-            // add the MetricView to the array
-//            [metricViews addObject:mv];
-//        }
+        mv = [metricViews objectAtIndex:i];
+        NSAssert(mv, @"mv is nil");
+        mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
         
         // set up lines of applies
         if (pe && ne) {
