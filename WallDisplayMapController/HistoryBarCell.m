@@ -213,6 +213,71 @@
     
 }
 
+- (void)setUpAutoLayoutForMetricView:(MetricView*)mv atIndex:(NSInteger)index givenTotalMetricViewCount:(NSInteger)count {
+    // set auto layout
+    mv.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
+    
+    // set auto layout: align center X
+    [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeCenterX
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+    
+    /* set auto layout: evenly distribute the bottoms of metric views along height of the cell:
+     the height of the cell is divided into the same number of chunks evenly.
+     Then, the second to the last dividing points are assigned as the bottom of the metric views.
+     This creates the problem that the tops of all the metric views except the last one goes above the cell,
+     while the top of the last metric view aligns perfectly with that of the cell.
+     This problem is solved by using the next constraint on top of this one.
+     */
+    [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:(1.0/count) * (index+1)
+                                                                   constant:-1 * (timeStampLabel.frame.size.height
+                                                                                  + [[GlobalLayoutRef instance]getTagViewHeight]
+                                                                                  + TIME_LABEL_BUTTON_MARGIN)
+                                      * (1.0/count) * (index+1)]];
+    [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
+    
+    // set auto layout: the top cannot be above that of the cell. This constraint acts on top of the previous one (of higher priority)
+    [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                  attribute:NSLayoutAttributeTop
+                                                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeTop
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+    
+    // set auto layout: width equal to that of the cell
+    [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+    // set auto layout: height equal to that of the cell
+    [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:[[GlobalLayoutRef instance] getHistoryBarOriginalHeight]
+                                      - 1 * (timeStampLabel.frame.size.height
+                                             + [[GlobalLayoutRef instance]getTagViewHeight]
+                                             + TIME_LABEL_BUTTON_MARGIN)]];
+    [NSLayoutConstraint activateConstraints:metricViewConstraints];
+}
+
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
                               tag:(nonnull NSString*)tag
                         flagOrNot:(BOOL)flag
@@ -237,15 +302,41 @@
     
     // TODO set the tag
     
-    // remove excessive metric views
-    if (metricViews.count > [MetricsConfigs instance].metricsDisplayedInOrder.count) {
-        for (int i = 0; i < metricViews.count - [MetricsConfigs instance].metricsDisplayedInOrder.count; i++) {
-            [[metricViews lastObject]removeFromSuperview];
-            [metricViews removeLastObject];
+    // add the metric views, one for each metric, overlapping on top of each other
+    
+    // first make sure the number of metric views is correct
+    if (metricViews.count != [MetricsConfigs instance].metricsDisplayedInOrder.count) {
+        NSLog(@"start: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
+        // Step1: get the count correct
+        if (metricViews.count > [MetricsConfigs instance].metricsDisplayedInOrder.count) {
+            // remove excessive metric views
+            NSInteger iterations = metricViews.count - [MetricsConfigs instance].metricsDisplayedInOrder.count;
+            for (int i = 0; i < iterations; i++) {
+                [[metricViews lastObject]removeFromSuperview];
+                [metricViews removeLastObject];
+            }
+        } else if (metricViews.count < [MetricsConfigs instance].metricsDisplayedInOrder.count) {
+            // add more metric views
+            NSInteger iterations = [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count;
+            for (int i = 0; i < iterations; i++) {
+                NSLog(@"%d", [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count);
+                MetricView* newMetricView = [MetricView new];
+                [self addSubview:newMetricView];
+                [metricViews addObject:newMetricView];
+            }
         }
+        NSLog(@"end: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
+        NSAssert(metricViews.count == [MetricsConfigs instance].metricsDisplayedInOrder.count, @"the num of metric views is still incorrect!");
+        
+        // Step2: reset auto layout for all metric views
+        for (int i = 0; i < metricViews.count; i++) {
+            MetricView* mv = [metricViews objectAtIndex:i];
+            [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:metricViews.count];
+        }
+        
     }
     
-    // add the metric views, one for each metric, overlapping on top of each other
+    // now that the metric views are setup, init them with the right data
     for (int i=0; i<[MetricsConfigs instance].metricsDisplayedInOrder.count; i++) {
         
         NSNumber* metricNameInNSNum = [[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:i];
@@ -261,82 +352,22 @@
         MetricView* mv;
         
         // alloc metric view if needed
-        if (i < metricViews.count) {
+//        if (i < metricViews.count) {
             // have enough metricViews so far
             mv = [metricViews objectAtIndex:i];
             NSAssert(mv, @"mv is nil");
             mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
-        } else {
-            NSLog(@"not enough metric view. alloc new metric view");
+//        } else {
+//            NSLog(@"not enough metric view. alloc new metric view");
             // alloc new
-            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
-            [self addSubview:mv];
-            
-            // set auto layout
-            mv.translatesAutoresizingMaskIntoConstraints = NO;
-            NSMutableArray <NSLayoutConstraint*>* metricViewConstraints = [[NSMutableArray alloc]init];
-            
-            // set auto layout: align center X
-            [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                          attribute:NSLayoutAttributeCenterX
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeCenterX
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-            
-            /* set auto layout: evenly distribute the bottoms of metric views along height of the cell:
-             the height of the cell is divided into the same number of chunks evenly.
-             Then, the second to the last dividing points are assigned as the bottom of the metric views.
-             This creates the problem that the tops of all the metric views except the last one goes above the cell,
-             while the top of the last metric view aligns perfectly with that of the cell.
-             This problem is solved by using the next constraint on top of this one.
-             */
-            [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                         multiplier:(1.0/[MetricsConfigs instance].metricsDisplayedInOrder.count) * (i+1)
-                                                                           constant:-1 * (timeStampLabel.frame.size.height
-                                                                                          + [[GlobalLayoutRef instance]getTagViewHeight]
-                                                                                          + TIME_LABEL_BUTTON_MARGIN)
-                                              * (1.0/[MetricsConfigs instance].metricsDisplayedInOrder.count) * (i+1)]];
-            [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
-            
-            // set auto layout: the top cannot be above that of the cell. This constraint acts on top of the previous one (of higher priority)
-            [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                          attribute:NSLayoutAttributeTop
-                                                                          relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeTop
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-            
-            // set auto layout: width equal to that of the cell
-            [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                         multiplier:1.0
-                                                                           constant:0.0]];
-            // set auto layout: height equal to that of the cell
-            [metricViewConstraints addObject:[NSLayoutConstraint constraintWithItem:mv
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:nil
-                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1.0
-                                                                           constant:[[GlobalLayoutRef instance] getHistoryBarOriginalHeight]
-                                              - 1 * (timeStampLabel.frame.size.height
-                                                     + [[GlobalLayoutRef instance]getTagViewHeight]
-                                                     + TIME_LABEL_BUTTON_MARGIN)]];
-            [NSLayoutConstraint activateConstraints:metricViewConstraints];
-            
+//            mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
+//            [self addSubview:mv];
+        
+//            [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:[MetricsConfigs instance].metricsDisplayedInOrder.count];
+        
             // add the MetricView to the array
-            [metricViews addObject:mv];
-        }
+//            [metricViews addObject:mv];
+//        }
         
         // set up lines of applies
         if (pe && ne) {
