@@ -267,7 +267,7 @@
             NSAssert(mv, @"mv is nil");
             mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
         } else {
-//            NSLog(@"alloc new metric view");
+            NSLog(@"not enough metric view. alloc new metric view");
             // alloc new
             mv = [[MetricView new]initWithMetricName:(MetricName)metricName position:floatV];
             [self addSubview:mv];
@@ -297,11 +297,11 @@
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:self
                                                                           attribute:NSLayoutAttributeBottom
-                                                                         multiplier:(1.0/thisMetricData.count) * (i+1)
+                                                                         multiplier:(1.0/[MetricsConfigs instance].metricsDisplayedInOrder.count) * (i+1)
                                                                            constant:-1 * (timeStampLabel.frame.size.height
                                                                                           + [[GlobalLayoutRef instance]getTagViewHeight]
                                                                                           + TIME_LABEL_BUTTON_MARGIN)
-                                              * (1.0/thisMetricData.count) * (i+1)]];
+                                              * (1.0/[MetricsConfigs instance].metricsDisplayedInOrder.count) * (i+1)]];
             [metricViewConstraints lastObject].priority = UILayoutPriorityDefaultHigh; // make this constraint of lower priority than default so that it doesn't get in the way of the next constraint
             
             // set auto layout: the top cannot be above that of the cell. This constraint acts on top of the previous one (of higher priority)
