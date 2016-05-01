@@ -48,23 +48,25 @@
             color = [UIColor cyanColor];
             break;
             
-//        case energy_mobilityPercent:
-//        case energy_heatingAndHotWaterPercent:
-//        case energy_lightsAndAppliancesPercent:
-//
-//        case energy_propaneIn:
-//        case energy_heatingoilIn:
-//        case energy_woodIn:
-//        case energy_electricityIn:
-//        case energy_dieselIn:
-//        case energy_gasolineIn:
-//            
-//        case energy_propaneOut:
-//        case energy_heatingoilOut:
-//        case energy_woodOut:
-//        case energy_electricityOut:
-//        case energy_dieselOut:
-//        case energy_gasolineOut:
+        case energy_mobilityPercent:
+        case energy_heatingAndHotWaterPercent:
+        case energy_lightsAndAppliancesPercent:
+
+        case energy_propaneIn:
+        case energy_heatingoilIn:
+        case energy_woodIn:
+        case energy_electricityIn:
+        case energy_dieselIn:
+        case energy_gasolineIn:
+            
+        case energy_propaneOut:
+        case energy_heatingoilOut:
+        case energy_woodOut:
+        case energy_electricityOut:
+        case energy_dieselOut:
+        case energy_gasolineOut:
+            color = [UIColor orangeColor];
+            break;
             
         case building_people:
         case building_dwellings:
@@ -81,13 +83,11 @@
         case building_commPercent:
         case building_civicPercent:
         case building_indPercent:
+        case building_far:
             color = [UIColor redColor];
             break;
             
-//        case building_far:
-            
-//        case  districtEnergy_far:
-            
+        case  districtEnergy_far:
         case districtEnergy_heatingPercent:
         case districtEnergy_lightsPercent:
         case districtEnergy_mobilityPercent:

@@ -16,6 +16,7 @@
         self.allowsSelection = YES;
         self.scrollEnabled = NO;
         
+        self.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.layer.borderWidth = 2.0; // the border is within the bound (inset)
