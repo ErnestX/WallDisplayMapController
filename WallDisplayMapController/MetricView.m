@@ -26,6 +26,8 @@
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
+    
+    NSArray<NSLayoutConstraint*>* metricViewConstraints;
 }
 
 - (id)initWithMetricName:(MetricName)m position:(CGFloat)p {
@@ -143,6 +145,19 @@
 
 - (void)showIcons {
     // TODO
+}
+
+- (void)deactivateOldConstraintsAndActivateNewOnes:(NSArray<NSLayoutConstraint*>*) mvc {
+    // deactivate old ones
+    if (mvc) {
+        [NSLayoutConstraint deactivateConstraints:metricViewConstraints];
+    }
+    
+    // activate new ones
+    [NSLayoutConstraint activateConstraints:mvc];
+    
+    // store new constraints
+    metricViewConstraints = mvc;
 }
 
 @end

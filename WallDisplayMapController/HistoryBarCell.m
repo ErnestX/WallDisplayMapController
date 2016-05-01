@@ -214,10 +214,6 @@
 }
 
 - (void)setUpAutoLayoutForMetricView:(MetricView*)mv atIndex:(NSInteger)index givenTotalMetricViewCount:(NSInteger)count {
-    // remove all existing constains first
-    if (mv.metricViewConstraints) {
-        [NSLayoutConstraint deactivateConstraints:mv.metricViewConstraints];
-    }
     
     // set auto layout
     mv.translatesAutoresizingMaskIntoConstraints = NO;
@@ -281,8 +277,7 @@
                                              + [[GlobalLayoutRef instance]getTagViewHeight]
                                              + TIME_LABEL_BUTTON_MARGIN)]];
     
-    [NSLayoutConstraint activateConstraints:metricViewConstraints];
-    mv.metricViewConstraints = metricViewConstraints; // store the constrains so that we can deactivate them later!
+    [mv deactivateOldConstraintsAndActivateNewOnes:metricViewConstraints];
 }
 
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time

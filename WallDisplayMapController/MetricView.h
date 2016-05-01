@@ -10,7 +10,6 @@
 #import "MetricsConfigs.h"
 
 @interface MetricView : UIView
-@property NSArray<NSLayoutConstraint*>* metricViewConstraints;
 
 /**
  @brief init with neither of the left or right line. Can be called multiple times to rewirte previous settings
@@ -30,5 +29,7 @@
 
 // use notification center to send the message to show icons system wise in order to avoid complex passing mechanism
 - (void) showIcons;
+
+- (void)deactivateOldConstraintsAndActivateNewOnes:(NSArray<NSLayoutConstraint*>*) mvc;
 
 @end
