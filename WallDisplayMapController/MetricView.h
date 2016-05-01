@@ -10,6 +10,7 @@
 #import "MetricsConfigs.h"
 
 @interface MetricView : UIView
+@property NSArray<NSLayoutConstraint*>* metricViewConstraints;
 
 /**
  @brief init with neither of the left or right line. Can be called multiple times to rewirte previous settings

@@ -214,6 +214,12 @@
 }
 
 - (void)setUpAutoLayoutForMetricView:(MetricView*)mv atIndex:(NSInteger)index givenTotalMetricViewCount:(NSInteger)count {
+    // remove all existing constains first
+//    [mv removeConstraints:mv.constraints];
+    if (mv.metricViewConstraints) {
+        [NSLayoutConstraint deactivateConstraints:mv.metricViewConstraints];
+    }
+    
     // set auto layout
     mv.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -275,7 +281,9 @@
                                       - 1 * (timeStampLabel.frame.size.height
                                              + [[GlobalLayoutRef instance]getTagViewHeight]
                                              + TIME_LABEL_BUTTON_MARGIN)]];
+    
     [NSLayoutConstraint activateConstraints:metricViewConstraints];
+    mv.metricViewConstraints = metricViewConstraints; // store the constrains so that we can deactivate them later!
 }
 
 - (void)initForReuseWithTimeStamp:(nonnull NSDate*)time
@@ -306,7 +314,7 @@
     
     // first make sure the number of metric views is correct
     if (metricViews.count != [MetricsConfigs instance].metricsDisplayedInOrder.count) {
-        NSLog(@"start: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
+//        NSLog(@"start: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
         // Step1: get the count correct
         if (metricViews.count > [MetricsConfigs instance].metricsDisplayedInOrder.count) {
             // remove excessive metric views
@@ -319,16 +327,18 @@
             // add more metric views
             NSInteger iterations = [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count;
             for (int i = 0; i < iterations; i++) {
-                NSLog(@"%d", [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count);
+//                NSLog(@"%d", [MetricsConfigs instance].metricsDisplayedInOrder.count - metricViews.count);
                 MetricView* newMetricView = [MetricView new];
                 [self addSubview:newMetricView];
                 [metricViews addObject:newMetricView];
             }
         }
-        NSLog(@"end: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
+//        NSLog(@"end: %d, %d", metricViews.count, [MetricsConfigs instance].metricsDisplayedInOrder.count);
         NSAssert(metricViews.count == [MetricsConfigs instance].metricsDisplayedInOrder.count, @"the num of metric views is still incorrect!");
         
         // Step2: reset auto layout for all metric views
+        NSLog(@"%d", metricViews.count);
+//        [self removeConstraints:self.constraints];
         for (int i = 0; i < metricViews.count; i++) {
             MetricView* mv = [metricViews objectAtIndex:i];
             [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:metricViews.count];
