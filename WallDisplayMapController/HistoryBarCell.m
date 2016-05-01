@@ -9,6 +9,7 @@
 #import "HistoryBarCell.h"
 #import "MetricView.h"
 #import "MetricsConfigs.h"
+#import "MetricValueLabelView.h"
 #import "GlobalLayoutRef.h"
 
 #define TIME_LABEL_BUTTON_MARGIN 2
@@ -21,6 +22,7 @@
     UIView* greyLineView;
     UIView* tagView;
     NSMutableArray <MetricView*>* metricViews;
+    NSMutableArray <MetricValueLabelView*>* valueLabels;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -28,6 +30,7 @@
     NSAssert(self, @"init failed");
     
     metricViews = [[NSMutableArray alloc]init];
+    valueLabels = [[NSMutableArray alloc]init];
     
     self.backgroundColor = [UIColor whiteColor];
     
@@ -313,6 +316,9 @@
     
     // TODO set the tag
     
+    
+    BOOL needToResetValueLabels = NO;
+    
     // add the metric views, one for each metric, overlapping on top of each other
     
     // first make sure the number of metric views is correct
@@ -347,6 +353,9 @@
         for (int i = metricViews.count-1; i >= 0; i--) {
             [self bringSubviewToFront:[metricViews objectAtIndex:i]];
         }
+        
+        // Step4: set need to re-set up value labels
+        needToResetValueLabels = YES;
     }
     
     // now that the metric views are setup, init them with the right data
@@ -389,16 +398,64 @@
             [mv removeRightLine];
         }
     }
+    
+    // finally reset value labels if necessary
+    if (needToResetValueLabels) {
+        [self resetMetricValueLabels];
+    }
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
 }
 
-- (void)setUpMetricValueLabels {
+- (void)resetMetricValueLabels { // call this whenever the metric view changes
+    for (int i=0; i<valueLabels.count; i++) {
+        [[valueLabels objectAtIndex:i]removeFromSuperview];
+    }
+    
+    valueLabels = [[NSMutableArray alloc]init];
+    
     for (int i=0; i<metricViews.count; i++) {
         MetricView* mv = [metricViews objectAtIndex:i];
+        NSAssert(mv.metricValueLabelView, @"metric value label view is nil");
+        MetricValueLabelView* mvlv = mv.metricValueLabelView; // need to make sure mv is already initialized
+        [self addSubview:mvlv];
         
+        // set auto layout
+        mvlv.translatesAutoresizingMaskIntoConstraints = NO;
+        NSMutableArray <NSLayoutConstraint*>* valueLabelConstraints = [[NSMutableArray alloc]init];
+        [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:mv.dataPointView
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                     multiplier:1.0
+                                                                       constant:10.0]];
+        [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:mv.dataPointView
+                                                                      attribute:NSLayoutAttributeCenterY
+                                                                     multiplier:1.0
+                                                                       constant:0.0]];
+        [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0
+                                                                       constant:20.0]];
+        [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0
+                                                                       constant:20.0]];
+        [NSLayoutConstraint activateConstraints:valueLabelConstraints];
+        
+        [valueLabels addObject:mvlv];
     }
 }
 

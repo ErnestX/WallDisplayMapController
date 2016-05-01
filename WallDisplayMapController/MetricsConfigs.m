@@ -164,6 +164,11 @@
     return name;
 }
 
+- (NSInteger)getDataTypeForMetric:(MetricName)m {
+    // TODO stub. use enum instead of NSInteger
+    return -1;
+}
+
 - (BOOL)setMetricsDisplayedInOrderWithArray:(NSArray<NSNumber*>*)arr {
     for (int i=0; i<arr.count; i++) {
         MetricName m = [[arr objectAtIndex:i] integerValue];

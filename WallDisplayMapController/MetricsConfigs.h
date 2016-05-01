@@ -98,6 +98,7 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
 - (NSString*)getDisplayNameForMetric:(MetricName)m;
+- (NSInteger)getDataTypeForMetric:(MetricName)m;
 
 /**
  arr mustn't contain notAMetric

@@ -9,6 +9,7 @@
 #import "MetricView.h"
 #import "GraphLineView.h"
 #import "DataPointView.h"
+#import "MetricValueLabelView.h"
 #import "GlobalLayoutRef.h"
 
 #define MIN_RENDER_POSITION 0.1
@@ -57,7 +58,11 @@
     
     [self updateDataPointAccoridngToFrameSize:self.frame.size];
     
-    
+    if (!self.metricValueLabelView) {
+        self.metricValueLabelView = [[[MetricValueLabelView alloc]init]initWithMetricName:metricName value:rawValue];
+    } else {
+        self.metricValueLabelView = [self.metricValueLabelView initWithMetricName:metricName value:rawValue];
+    }
     
     return self;
 }
