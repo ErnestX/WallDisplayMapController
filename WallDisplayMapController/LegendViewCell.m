@@ -32,13 +32,6 @@
     return self;
 }
 
-- (id)initAsAddButton {
-    self.metricName = notAMetric;
-    self.textLabel.text = @"add new metric";
-    self.textLabel.textColor = [UIColor darkTextColor];
-    return self;
-}
-
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.metricName = notAMetric;
@@ -69,7 +62,7 @@
         self.selected = NO;
         
     } else if (oldSelected && !selected) {
-        NSLog(@"unselected %@", [[MetricsConfigs instance]getDisplayNameForMetric:self.metricName]);
+//        NSLog(@"unselected %@", [[MetricsConfigs instance]getDisplayNameForMetric:self.metricName]);
     }
 }
 
@@ -87,7 +80,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
-        return notAMetric; // this is the last of the enum, thus used as the counter. Include notAMetric here so that we can select it to remove the cell
+        return notAMetric; // this is the last of the enum, thus used as the counter.
     } else {
         return 0;
     }

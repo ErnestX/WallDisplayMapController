@@ -161,8 +161,8 @@
     return name;
 }
 
-- (NSInteger)getMaxNumberOfMetricsToDisplay {
-    return 5;
-}
+//- (NSInteger)getMaxNumberOfMetricsToDisplay {
+//    return 5;
+//}
 
 @end

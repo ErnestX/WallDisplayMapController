@@ -16,6 +16,7 @@
 // these two have nothing to do with the actual dimensions displayed, since they will be reset by the HistoryContainerView. However, they should be large enough so that the initalization can succeed
 #define LEGEND_VIEW_INIT_WIDTH 100
 #define LEGEND_VIEW_INIT_HEIGHT 200
+#define NUMBER_OF_METRICS 5
 
 @implementation LegendViewController {
     HistoryContainerViewController* containerController;
@@ -55,27 +56,22 @@ static NSString* const reuseIdentifier = @"cell";
     LegendViewCell* cell = [(LegendView*)self.view dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     int index = [indexPath item];
-    if (index == [self tableView:(LegendView*)self.view numberOfRowsInSection:0]-1) {
-        // this is the last index (the add button)
-        cell = [cell initAsAddButton];
+
+    MetricName m;
+    if (index >= [MetricsConfigs instance].metricsDisplayedInOrder.count) {
+        // default to the first metric
+        m = 0;
     } else {
-        // normal cell
-        // init for reuse
-        MetricName m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
-        cell = [cell initForReuseWithMetricName:m myDelegate:self];
+        m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
     }
+    cell = [cell initForReuseWithMetricName:m myDelegate:self];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if ([MetricsConfigs instance].metricsDisplayedInOrder.count < [[MetricsConfigs instance]getMaxNumberOfMetricsToDisplay]) {
-            // display add button too
-            return [MetricsConfigs instance].metricsDisplayedInOrder.count + 1;
-        } else {
-            return [MetricsConfigs instance].metricsDisplayedInOrder.count;
-        }
+        return NUMBER_OF_METRICS;
     } else {
         return 0;
     }

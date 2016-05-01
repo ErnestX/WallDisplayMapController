@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, MetricName) {
     districtEnergy_emissionsPerCapita,
     districtEnergy_energyHouseholdIncome,
     
-    notAMetric // this is also used as the counter of this enum type so make sure this is the last entry! 
+    notAMetric // this is also used as the counter of this enum type so make sure this is the last entry!
 };
 
 @interface MetricsConfigs : NSObject
@@ -94,6 +94,6 @@ typedef NS_ENUM(NSUInteger, MetricName) {
 - (UIImage*)getIconForMetric:(MetricName)m;
 - (UIColor*)getColorForMetric:(MetricName)m;
 - (NSString*)getDisplayNameForMetric:(MetricName)m;
-- (NSInteger)getMaxNumberOfMetricsToDisplay;
+//- (NSInteger)getMaxNumberOfMetricsToDisplay;
 
 @end

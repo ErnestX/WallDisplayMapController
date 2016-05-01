@@ -14,6 +14,5 @@
 @property (readonly) MetricName metricName;
 
 - (id)initForReuseWithMetricName:(MetricName)m myDelegate:(id<MetricPickerDelegate>)md;
-- (id)initAsAddButton;
 
 @end
