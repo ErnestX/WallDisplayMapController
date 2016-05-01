@@ -51,6 +51,8 @@
         case energy_mobilityPercent:
         case energy_heatingAndHotWaterPercent:
         case energy_lightsAndAppliancesPercent:
+            color = [UIColor magentaColor];
+            break;
 
         case energy_propaneIn:
         case energy_heatingoilIn:

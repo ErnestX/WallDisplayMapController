@@ -384,4 +384,15 @@
     [super prepareForReuse];
 }
 
+- (void)setUpMetricValueLabels {
+    for (int i=0; i<metricViews.count; i++) {
+        MetricView* mv = [metricViews objectAtIndex:i];
+        
+    }
+}
+
+- (void)showMetricValueLabels {
+    
+}
+
 @end

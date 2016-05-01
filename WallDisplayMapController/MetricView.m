@@ -17,12 +17,16 @@
 #define LINE_WIDTH 1
 #define LINE_LENGTH 60
 
+@interface MetricView ()
+@property (readwrite)DataPointView* dataPointView;
+@end
+
 @implementation MetricView
 {
     MetricName metricName;
     CGRect oldFrame;
     CGFloat dataPointPosition;
-    DataPointView* dataPointView;
+//    DataPointView* dataPointView;
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
@@ -38,18 +42,20 @@
     dataPointPosition = p;
     
     // draw the data point (each metric view contains only one data point)
-    if (!dataPointView) {
-        dataPointView = [[[DataPointView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)]initWithMetricName:metricName];
-        NSAssert(dataPointView, @"init failed");
-        [self addSubview:dataPointView];
+    if (!self.dataPointView) {
+        self.dataPointView = [[[DataPointView alloc]initWithFrame:CGRectMake(0, 0, DATA_POINT_DIAMETER, DATA_POINT_DIAMETER)]initWithMetricName:metricName];
+        NSAssert(self.dataPointView, @"init failed");
+        [self addSubview:self.dataPointView];
     } else {
-        dataPointView = [dataPointView initWithMetricName:metricName];
+        self.dataPointView = [self.dataPointView initWithMetricName:metricName];
     }
     
 //    self.layer.borderColor = [UIColor grayColor].CGColor;
 //    self.layer.borderWidth = 1.0; // the border is within the bound (inset)
     
     [self updateDataPointAccoridngToFrameSize:self.frame.size];
+    
+    
     
     return self;
 }
@@ -81,19 +87,19 @@
 - (void)updateDataPointAccoridngToFrameSize:(CGSize)size {
     // map the position to a different range for rendering
     CGFloat renderPos = dataPointPosition * (MAX_RENDER_POSITION - MIN_RENDER_POSITION) + MIN_RENDER_POSITION; // map p from 0-1 to rendering range
-    dataPointView.center = CGPointMake(size.width/2.0, size.height * renderPos);
+    self.dataPointView.center = CGPointMake(size.width/2.0, size.height * renderPos);
 }
 
 - (void)updateExistingLinesAccordingToFrameHeight:(CGFloat)h {
     if (leftLineView) {
-        leftLineView.center = dataPointView.center;
+        leftLineView.center = self.dataPointView.center;
         CGFloat angle = atan((dataPointPosition-leftLineView.connectedToDataPointWithHeight)
                              * h*(MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / leftLineView.absHorizontalDistance);
         leftLineView.layer.transform = CATransform3DMakeRotation(angle, 0, 0, 1); // use layer transfrom to avoid trouble with auto layout
     }
     if (rightLineView) {
-        rightLineView.center = dataPointView.center;
+        rightLineView.center = self.dataPointView.center;
         CGFloat angle = atan((rightLineView.connectedToDataPointWithHeight - dataPointPosition)
                              * h*(MAX_RENDER_POSITION - MIN_RENDER_POSITION)
                              / rightLineView.absHorizontalDistance);

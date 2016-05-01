@@ -88,6 +88,7 @@
 		CAC7C7D61CD4602800425DB8 /* LegendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7D51CD4602800425DB8 /* LegendViewController.m */; };
 		CAC7C7D91CD4605B00425DB8 /* LegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7D81CD4605B00425DB8 /* LegendView.m */; };
 		CAC7C7DC1CD5303F00425DB8 /* LegendViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7DB1CD5303F00425DB8 /* LegendViewCell.m */; };
+		CAC7C7E31CD6085700425DB8 /* MetricValueLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7C7E21CD6085700425DB8 /* MetricValueLabelView.m */; };
 		CAC8A4C41CCAA46300B9EC27 /* MetricsConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */; };
 		CAD0C8081CA9D0480022B67B /* GraphLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C8071CA9D0480022B67B /* GraphLineView.m */; };
 		CAD0C80C1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C80B1CAC6B7F0022B67B /* MetricsHistoryDataCenter.m */; };
@@ -323,6 +324,8 @@
 		CAC7C7DA1CD5303F00425DB8 /* LegendViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendViewCell.h; sourceTree = "<group>"; };
 		CAC7C7DB1CD5303F00425DB8 /* LegendViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendViewCell.m; sourceTree = "<group>"; };
 		CAC7C7E01CD585BF00425DB8 /* MetricPickerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricPickerDelegate.h; sourceTree = "<group>"; };
+		CAC7C7E11CD6085700425DB8 /* MetricValueLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricValueLabelView.h; sourceTree = "<group>"; };
+		CAC7C7E21CD6085700425DB8 /* MetricValueLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricValueLabelView.m; sourceTree = "<group>"; };
 		CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsConfigs.h; sourceTree = "<group>"; };
 		CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsConfigs.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
@@ -619,6 +622,8 @@
 				CAD0C8071CA9D0480022B67B /* GraphLineView.m */,
 				CAC7C7CE1CD4410D00425DB8 /* DataPointView.h */,
 				CAC7C7CF1CD4410D00425DB8 /* DataPointView.m */,
+				CAC7C7E11CD6085700425DB8 /* MetricValueLabelView.h */,
+				CAC7C7E21CD6085700425DB8 /* MetricValueLabelView.m */,
 				CA330F611CA22FAC001159D0 /* GlobalLayoutRef.h */,
 				CA330F621CA22FAC001159D0 /* GlobalLayoutRef.m */,
 			);
@@ -897,6 +902,7 @@
 				AED3B7FF1B558D0D008292C4 /* DroppableNumberView.m in Sources */,
 				CAC7C7CD1CD3E27000425DB8 /* HistoryFilePathConfigs.m in Sources */,
 				CA2D53EF1B1C1F9F00B975B6 /* TutorialView.m in Sources */,
+				CAC7C7E31CD6085700425DB8 /* MetricValueLabelView.m in Sources */,
 				AE26BB531B66A96400110615 /* ThresholdChangeRequest.m in Sources */,
 				CA4679001C5BEB7800C4D7BB /* HistoryBarView.m in Sources */,
 				CAC7C7D91CD4605B00425DB8 /* LegendView.m in Sources */,
