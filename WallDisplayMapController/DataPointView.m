@@ -8,7 +8,9 @@
 
 #import "DataPointView.h"
 
-#define LABEL_LEFT_MARGIN 1.3
+#define LABEL_LEFT_MARGIN 3
+#define LABEL_TOP_MARGIN 0.5
+static CGFloat const FONT_SIZE_CONST = -3.0;
 
 @interface DataPointView ()
 @property (readwrite) MetricName metricName;
@@ -22,10 +24,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         if (!metricNameLabel) {
-            metricNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(LABEL_LEFT_MARGIN, 0.0, self.bounds.size.width, self.bounds.size.height)];
+            metricNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(LABEL_LEFT_MARGIN, LABEL_TOP_MARGIN, self.bounds.size.width, self.bounds.size.height)];
             metricNameLabel.textColor = [UIColor whiteColor];
-            metricNameLabel.adjustsFontSizeToFitWidth = YES;
-            metricNameLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height];
+            metricNameLabel.adjustsFontSizeToFitWidth = NO;
+            metricNameLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height + FONT_SIZE_CONST];
             [self addSubview:metricNameLabel];
         }
     }
@@ -47,10 +49,11 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
     self.layer.cornerRadius = self.bounds.size.width/2.0;
-    metricNameLabel.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height);
+    metricNameLabel.frame = CGRectMake(LABEL_LEFT_MARGIN, LABEL_TOP_MARGIN, self.bounds.size.width, self.bounds.size.height);
+    metricNameLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height + FONT_SIZE_CONST];
 }
 
 @end

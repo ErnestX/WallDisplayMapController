@@ -40,6 +40,9 @@
     self.layer.shouldRasterize = YES; // When a view is rasterized, it's rasterized image is cached instead of rerending it every time. The downside is that if the view need to change, the cache needs to be updated
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
+    self.backgroundColor = [UIColor clearColor];
+    self.clipsToBounds = YES;
+    
     metricName = m;
     rawValue = rv;
     dataPointPosition = p;

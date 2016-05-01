@@ -8,6 +8,10 @@
 
 #import "MetricValueLabelView.h"
 
+#define LABEL_LEFT_MARGIN 2
+
+static CGFloat const FONT_SIZE_CONST = -4.0;
+
 @interface MetricValueLabelView ()
 @property (readwrite)MetricName metricName;
 @end
@@ -19,11 +23,11 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
         if (!metricValueLabel) {
-            metricValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height)];
-            metricValueLabel.adjustsFontSizeToFitWidth = YES;
-            metricValueLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height];
+            metricValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(LABEL_LEFT_MARGIN, 0.0, self.bounds.size.width, self.bounds.size.height)];
+            metricValueLabel.adjustsFontSizeToFitWidth = NO;
+            metricValueLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height + FONT_SIZE_CONST];
+            metricValueLabel.textColor = [UIColor whiteColor];
             [self addSubview:metricValueLabel];
         }
     }
@@ -33,7 +37,8 @@
 - (id)initWithMetricName:(MetricName)m value:(CGFloat)v {
     self.metricName = m;
     
-    metricValueLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
+    self.backgroundColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
+    
     metricValueLabel.text = [NSString stringWithFormat:@"%.01f", v];
     
     return self;
@@ -41,8 +46,8 @@
 
 - (void)setBounds:(CGRect)bounds {
     [super setBounds:bounds];
-    metricValueLabel.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height);
-    metricValueLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height];
+    metricValueLabel.frame = CGRectMake(LABEL_LEFT_MARGIN, 0.0, self.bounds.size.width, self.bounds.size.height);
+    metricValueLabel.font = [UIFont fontWithName:@"Helvetica" size:self.bounds.size.height + FONT_SIZE_CONST];
 }
 
 @end

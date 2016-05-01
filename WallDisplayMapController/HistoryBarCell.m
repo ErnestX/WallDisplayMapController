@@ -32,7 +32,8 @@
     metricViews = [[NSMutableArray alloc]init];
     valueLabels = [[NSMutableArray alloc]init];
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.clipsToBounds = NO;
     
     // add the time stamp label
     timeStampLabel = [UILabel new];
@@ -441,28 +442,28 @@
                                                                          toItem:mv.dataPointView
                                                                       attribute:NSLayoutAttributeCenterX
                                                                      multiplier:1.0
-                                                                       constant:10.0]];
+                                                                       constant:8.0]];
         [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
                                                                       attribute:NSLayoutAttributeBottom
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:mv.dataPointView
                                                                       attribute:NSLayoutAttributeCenterY
                                                                      multiplier:1.0
-                                                                       constant:0.0]];
+                                                                       constant:-7.0]];
         [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
                                                                       attribute:NSLayoutAttributeWidth
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:20.0]];
+                                                                       constant:25.0]];
         [valueLabelConstraints addObject:[NSLayoutConstraint constraintWithItem:mvlv
                                                                       attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
-                                                                       constant:10.0]];
+                                                                       constant:12.0]];
         [NSLayoutConstraint activateConstraints:valueLabelConstraints];
         
         [valueLabels addObject:mvlv];

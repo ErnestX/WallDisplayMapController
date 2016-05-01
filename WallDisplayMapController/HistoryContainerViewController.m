@@ -80,7 +80,7 @@
     return [[MetricsHistoryDataCenter instance] getTotalNumberOfData];
 }
 
-- (CGFloat)mapValue:(double)input inputMin:(double)input_start inputMax:(double)input_end outputMin:(double)output_start outputMax:(double)output_end {
+- (CGFloat)mapValue:(double)input inputStart:(double)input_start inputEnd:(double)input_end outputStart:(double)output_start outputEnd:(double)output_end {
     if (input_start == input_end) {
         return (output_start + output_end)/2.0;
     } else {
@@ -95,10 +95,10 @@
     for (NSNumber* metricName in [MetricsConfigs instance].metricsDisplayedInOrder) {
         NSNumber* rawValue = [[[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues objectForKey:metricName];
         CGFloat displayPos = [self mapValue:[rawValue doubleValue]
-                                   inputMin:[[[MetricsHistoryDataCenter instance].minValueDic objectForKey:metricName]doubleValue]
-                                   inputMax:[[[MetricsHistoryDataCenter instance].maxValueDic objectForKey:metricName]doubleValue]
-                                  outputMin:0.0
-                                  outputMax:1.0];
+                                   inputStart:[[[MetricsHistoryDataCenter instance].minValueDic objectForKey:metricName]doubleValue]
+                                   inputEnd:[[[MetricsHistoryDataCenter instance].maxValueDic objectForKey:metricName]doubleValue]
+                                  outputStart:1.0
+                                  outputEnd:0.0];
         [dic setObject:[NSNumber numberWithFloat:displayPos] forKey:metricName];
     }
     return dic;
