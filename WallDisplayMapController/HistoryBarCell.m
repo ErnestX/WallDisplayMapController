@@ -366,7 +366,9 @@
         
         mv = [metricViews objectAtIndex:i];
         NSAssert(mv, @"mv is nil");
-        mv = [mv initWithMetricName:(MetricName)metricName position:floatV];
+        mv = [mv initWithMetricName:(MetricName)metricName
+                           rawValue:[[thisMetricRawData objectForKey:metricNameInNSNum]floatValue]
+                           position:floatV];
         
         // set up lines of applies
         if (pe && ne) {

@@ -26,7 +26,7 @@
  @param p position must range from 0 to 1
  @warning does not call designated initializer
  */
-- (id)initWithMetricName:(MetricName)m position:(CGFloat)p;
+- (id)initWithMetricName:(MetricName)m rawValue:(CGFloat)rv position:(CGFloat)p;
 
 - (void)removeLeftLine;
 

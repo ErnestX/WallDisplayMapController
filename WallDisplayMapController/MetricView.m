@@ -27,6 +27,7 @@
     CGRect oldFrame;
     CGFloat dataPointPosition;
 //    DataPointView* dataPointView;
+    CGFloat rawValue;
     NSLayoutConstraint* dataPointCenterYConstraint;
     GraphLineView* leftLineView;
     GraphLineView* rightLineView;
@@ -34,11 +35,12 @@
     NSArray<NSLayoutConstraint*>* metricViewConstraints;
 }
 
-- (id)initWithMetricName:(MetricName)m position:(CGFloat)p {
+- (id)initWithMetricName:(MetricName)m rawValue:(CGFloat)rv position:(CGFloat)p {
     self.layer.shouldRasterize = YES; // When a view is rasterized, it's rasterized image is cached instead of rerending it every time. The downside is that if the view need to change, the cache needs to be updated
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     metricName = m;
+    rawValue = rv;
     dataPointPosition = p;
     
     // draw the data point (each metric view contains only one data point)
