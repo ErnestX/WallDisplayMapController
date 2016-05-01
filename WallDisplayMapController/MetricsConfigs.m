@@ -170,6 +170,10 @@
         }
     }
     self.metricsDisplayedInOrder = arr;
+    
+    // tell everyone that the config changed
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"metricsDisplayedInOrder modified" object:self];
+    
     return YES;
 }
 

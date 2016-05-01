@@ -30,6 +30,10 @@
     self = [super init];
     if (self) {
         [[MetricsHistoryDataCenter instance] setDelegate:self];
+        [[NSNotificationCenter defaultCenter]addObserver:self
+                                                selector:@selector(metricsDisplayedInOrderModified)
+                                                    name:@"metricsDisplayedInOrder modified"
+                                                  object:nil];
     }
     return self;
 }
@@ -134,6 +138,11 @@
     [historyBarController removeAllEntries];
     [historyPreviewController resetCache];
     [historyPreviewController removeCurrentPreview];
+}
+
+- (void)metricsDisplayedInOrderModified {
+    NSLog(@"reloading data");
+    [historyBarController.collectionView reloadData];
 }
 
 @end

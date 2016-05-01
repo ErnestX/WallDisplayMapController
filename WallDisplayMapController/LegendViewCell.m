@@ -104,7 +104,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"picked %@", [[MetricsConfigs instance]getDisplayNameForMetric:row]);
-    // TODO
+    [self initForReuseWithMetricName:row myDelegate:myDelegate];
+//    [myDelegate refreshMetricsDisplayedAndSetMetricsConfig];
+    [myDelegate setMetricsConfigArrayByReplacingMetricAtIndexOfCell:self withMetric:row];
 }
 
 @end

@@ -85,6 +85,30 @@ static NSString* const reuseIdentifier = @"cell";
     [self presentViewController:pvc animated:YES completion:nil];
 }
 
-
+- (void)setMetricsConfigArrayByReplacingMetricAtIndexOfCell:(UITableViewCell*)cell withMetric:(MetricName)m {
+//    NSInteger numOfCells = [self tableView:(LegendView*)self.view numberOfRowsInSection:0];
+    NSIndexPath* indexPath = [(LegendView*)self.view indexPathForCell:cell];
+    NSAssert(indexPath, @"cannot find cell");
+    
+    NSInteger index = indexPath.row;
+    NSMutableArray<NSNumber*>* tempArr = [NSMutableArray arrayWithArray:[MetricsConfigs instance].metricsDisplayedInOrder];
+    if (m != notAMetric) {
+        if (index < tempArr.count) {
+            // within range
+            [tempArr replaceObjectAtIndex:index withObject:[NSNumber numberWithInteger:m]];
+        } else {
+            [tempArr addObject:[NSNumber numberWithInteger:m]];
+        }
+    } else {
+        // not a metric
+        if (index < tempArr.count) {
+            // within range: remove entry
+            [tempArr removeObjectAtIndex:index];
+        }
+    }
+    
+    BOOL succ = [[MetricsConfigs instance]setMetricsDisplayedInOrderWithArray:tempArr];
+    NSAssert(succ, @"reset MetricsConfigs array fail");
+}
 
 @end
