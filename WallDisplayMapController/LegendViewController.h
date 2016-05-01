@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MetricPickerDelegate.h"
 
 @class HistoryContainerViewController;
 
-@interface LegendViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LegendViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MetricPickerDelegate>
 
 - (instancetype)initWithContainerController:(HistoryContainerViewController*)hcvc;
 

@@ -322,6 +322,7 @@
 		CAC7C7D81CD4605B00425DB8 /* LegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendView.m; sourceTree = "<group>"; };
 		CAC7C7DA1CD5303F00425DB8 /* LegendViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendViewCell.h; sourceTree = "<group>"; };
 		CAC7C7DB1CD5303F00425DB8 /* LegendViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendViewCell.m; sourceTree = "<group>"; };
+		CAC7C7E01CD585BF00425DB8 /* MetricPickerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricPickerDelegate.h; sourceTree = "<group>"; };
 		CAC8A4C21CCAA46300B9EC27 /* MetricsConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetricsConfigs.h; sourceTree = "<group>"; };
 		CAC8A4C31CCAA46300B9EC27 /* MetricsConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetricsConfigs.m; sourceTree = "<group>"; };
 		CAD0C8061CA9D0480022B67B /* GraphLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphLineView.h; sourceTree = "<group>"; };
@@ -596,13 +597,14 @@
 				CAD0C8181CAEF4610022B67B /* HistoryPreviewController.m */,
 				CAD0C8201CAEF63F0022B67B /* HistoryPreviewView.h */,
 				CAD0C8211CAEF63F0022B67B /* HistoryPreviewView.m */,
+				CAC7C7E01CD585BF00425DB8 /* MetricPickerDelegate.h */,
 				CAC7C7D41CD4602800425DB8 /* LegendViewController.h */,
 				CAC7C7D51CD4602800425DB8 /* LegendViewController.m */,
 				CAC7C7D71CD4605B00425DB8 /* LegendView.h */,
 				CAC7C7D81CD4605B00425DB8 /* LegendView.m */,
-				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
 				CAC7C7DA1CD5303F00425DB8 /* LegendViewCell.h */,
 				CAC7C7DB1CD5303F00425DB8 /* LegendViewCell.m */,
+				CA4678FB1C5BEB5D00C4D7BB /* HistoryBarController.h */,
 				CA4678FC1C5BEB5D00C4D7BB /* HistoryBarController.m */,
 				CA4A35891C72D3E100656118 /* HistoryBarViewMyDelegate.h */,
 				CA4A35931C75938C00656118 /* HistoryBarLayout.h */,

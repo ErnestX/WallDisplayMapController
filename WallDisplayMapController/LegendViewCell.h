@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MetricsConfigs.h"
+#import "MetricPickerDelegate.h"
 
-@interface LegendViewCell : UITableViewCell
+@interface LegendViewCell : UITableViewCell <UIPickerViewDelegate, UIPickerViewDataSource>
 @property (readonly) MetricName metricName;
 
-- (id)initForReuseWithMetricName:(MetricName)m;
+- (id)initForReuseWithMetricName:(MetricName)m myDelegate:(id<MetricPickerDelegate>)md;
 - (id)initAsAddButton;
 
 @end

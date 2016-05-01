@@ -62,7 +62,7 @@ static NSString* const reuseIdentifier = @"cell";
         // normal cell
         // init for reuse
         MetricName m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
-        cell = [cell initForReuseWithMetricName:m];
+        cell = [cell initForReuseWithMetricName:m myDelegate:self];
     }
     
     return cell;
@@ -79,6 +79,19 @@ static NSString* const reuseIdentifier = @"cell";
     } else {
         return 0;
     }
+}
+
+- (void)showPickerViewController:(UIViewController *)pvc fromView:(UIView *)v{
+    // configure the Popover presentation controller
+    UIPopoverPresentationController *popController = [pvc popoverPresentationController];
+    popController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+//    popController.delegate = pvc;
+    
+    // in case we don't have a bar button as reference
+    popController.sourceView = v;
+    popController.sourceRect = CGRectMake(30, 50, 10, 10);
+    
+    [self presentViewController:pvc animated:YES completion:nil];
 }
 
 @end
