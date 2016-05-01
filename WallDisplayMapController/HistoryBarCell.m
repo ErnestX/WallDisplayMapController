@@ -238,8 +238,8 @@
     // TODO set the tag
     
     // remove excessive metric views
-    if (metricViews.count > thisMetricData.count) {
-        for (int i = 0; i < metricViews.count - thisMetricData.count; i++) {
+    if (metricViews.count > [MetricsConfigs instance].metricsDisplayedInOrder.count) {
+        for (int i = 0; i < metricViews.count - [MetricsConfigs instance].metricsDisplayedInOrder.count; i++) {
             [[metricViews lastObject]removeFromSuperview];
             [metricViews removeLastObject];
         }
