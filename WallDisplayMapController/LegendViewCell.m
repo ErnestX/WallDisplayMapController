@@ -61,6 +61,14 @@
         pickerController.modalPresentationStyle = UIModalPresentationPopover;
         pickerController.preferredContentSize = pickerView.bounds.size;
         
+        // configure the Popover presentation controller
+        UIPopoverPresentationController *popController = [pickerController popoverPresentationController];
+        popController.permittedArrowDirections = UIPopoverArrowDirectionRight;
+        
+        // in case we don't have a bar button as reference
+        popController.sourceView = self;
+        popController.sourceRect = CGRectMake(-5, 20, 0, 0); // magic number to make the pointer look right
+        
         [myDelegate showPickerViewController:pickerController fromView:self];
         
         self.selected = NO;

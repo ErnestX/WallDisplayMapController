@@ -78,14 +78,6 @@ static NSString* const reuseIdentifier = @"cell";
 }
 
 - (void)showPickerViewController:(UIViewController *)pvc fromView:(UIView *)v{
-    // configure the Popover presentation controller
-    UIPopoverPresentationController *popController = [pvc popoverPresentationController];
-    popController.permittedArrowDirections = UIPopoverArrowDirectionRight;
-    
-    // in case we don't have a bar button as reference
-    popController.sourceView = v;
-    popController.sourceRect = CGRectMake(-5, 20, 0, 0); // magic number to make the pointer look right
-    
     [self presentViewController:pvc animated:YES completion:nil];
 }
 
