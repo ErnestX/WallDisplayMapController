@@ -20,13 +20,11 @@
     dispatch_once(&oncePredicate, ^{ // ensures that the block we pass it is executed once for the lifetime of the application
         instance = [[self alloc] init];
         //init instance
-        
-        // stub
-        instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:building_people],
-//                                            [NSNumber numberWithInteger:density_modelActiveTripsPercent],
-//                                            [NSNumber numberWithInteger:building_detachedPercent],
-//                                            [NSNumber numberWithInteger:districtEnergy_emissionsPerCapita],
-                                            nil];
+        instance.metricsDisplayedInOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"MetricsConfigsArr"];
+        if (!instance.metricsDisplayedInOrder) {
+            // can't find stored data
+            instance.metricsDisplayedInOrder = [NSArray arrayWithObjects:[NSNumber numberWithInteger:building_people], nil];
+        }
     });
     
     return instance;
@@ -173,6 +171,9 @@
     
     // tell everyone that the config changed
     [[NSNotificationCenter defaultCenter]postNotificationName:@"metricsDisplayedInOrder modified" object:self];
+    
+    // save data to defaults
+    [[NSUserDefaults standardUserDefaults] setObject:self.metricsDisplayedInOrder forKey:@"MetricsConfigsArr"];
     
     return YES;
 }

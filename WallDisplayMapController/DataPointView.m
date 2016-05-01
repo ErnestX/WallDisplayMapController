@@ -8,7 +8,7 @@
 
 #import "DataPointView.h"
 
-#define LABEL_LEFT_MARGIN 2.5
+#define LABEL_LEFT_MARGIN 1.3
 
 @interface DataPointView ()
 @property (readwrite) MetricName metricName;
