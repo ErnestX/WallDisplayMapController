@@ -59,8 +59,8 @@ static NSString* const reuseIdentifier = @"cell";
 
     MetricName m;
     if (index >= [MetricsConfigs instance].metricsDisplayedInOrder.count) {
-        // default to the first metric
-        m = 0;
+        // default to notAMetric
+        m = notAMetric;
     } else {
         m = [[[MetricsConfigs instance].metricsDisplayedInOrder objectAtIndex:index] integerValue];
     }

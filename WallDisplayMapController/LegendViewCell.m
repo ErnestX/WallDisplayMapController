@@ -26,7 +26,11 @@
     self.metricName = m;
     myDelegate = md;
     
-    self.textLabel.text = [[MetricsConfigs instance] getDisplayNameForMetric:self.metricName];
+    if (m == notAMetric) {
+        self.textLabel.text = @"add new metric";
+    } else {
+        self.textLabel.text = [[MetricsConfigs instance] getDisplayNameForMetric:self.metricName];
+    }
     self.textLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
     
     return self;
@@ -68,7 +72,11 @@
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (component == 0) {
-        return [[MetricsConfigs instance]getDisplayNameForMetric:row]; // this is based on the assumption that num of row is exactly the same as num of enum
+        if (row == notAMetric) {
+            return @"no metric";
+        } else {
+            return [[MetricsConfigs instance]getDisplayNameForMetric:row]; // this is based on the assumption that num of row is exactly the same as num of enum
+        }
     } else {
         return nil;
     }
@@ -80,7 +88,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
-        return notAMetric; // this is the last of the enum, thus used as the counter.
+        return notAMetric+1; // this is the last of the enum, thus used as the counter.
     } else {
         return 0;
     }
