@@ -56,21 +56,20 @@
         UIPickerView *pickerView = [[UIPickerView alloc] init];
         pickerView.delegate = self;
         pickerView.dataSource = self;
-//        UIView* pickerContainerView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 400, 100)];
-//        pickerView.frame = CGRectMake(0.0, 0.0, 100, 100);
-//        pickerView.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2.0, [UIScreen mainScreen].bounds.size.height/2.0);
-//        [pickerContainerView addSubview:pickerView];
+        
+        [pickerView selectRow:self.metricName inComponent:0 animated:NO]; // select the current one
+        
         UIViewController* pickerController = [[UIViewController alloc]init];
         pickerController.view = pickerView;
         pickerController.modalPresentationStyle = UIModalPresentationPopover;
         pickerController.preferredContentSize = pickerView.bounds.size;
         
-        
         [myDelegate showPickerViewController:pickerController fromView:self];
+        
+        self.selected = NO;
         
     } else if (oldSelected && !selected) {
         NSLog(@"unselected %@", [[MetricsConfigs instance]getDisplayNameForMetric:self.metricName]);
-        // TODO
     }
 }
 
@@ -96,7 +95,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"picked %@", [[MetricsConfigs instance]getDisplayNameForMetric:row]);
-    // stub
+    // TODO
 }
 
 @end
