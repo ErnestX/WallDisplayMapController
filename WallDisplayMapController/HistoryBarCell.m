@@ -13,7 +13,7 @@
 #import "GlobalLayoutRef.h"
 
 #define TIME_LABEL_BUTTON_MARGIN 2
-#define GREY_LINE_THICKNESS 2
+#define GREY_LINE_THICKNESS 1
 #define TAG_VIEW_WIDTH 63
 
 @implementation HistoryBarCell

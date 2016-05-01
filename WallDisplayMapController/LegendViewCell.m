@@ -17,6 +17,8 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
+    // this may not be called at all!
+    
     self = [super initWithFrame:frame];
     NSAssert(self, @"init failed");
     return self;
@@ -25,6 +27,8 @@
 - (id)initForReuseWithMetricName:(MetricName)m myDelegate:(id<MetricPickerDelegate>)md {
     self.metricName = m;
     myDelegate = md;
+    
+    self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:18.0];
     
     if (m == notAMetric) {
         self.textLabel.text = @"add new metric";

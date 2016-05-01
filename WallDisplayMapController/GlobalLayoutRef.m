@@ -39,7 +39,7 @@
 }
 
 - (CGFloat)getTagViewHeight {
-    return 7.0;
+    return 6.0;
 }
 
 - (CGFloat)getTimeStampFontSize {
