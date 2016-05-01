@@ -28,10 +28,11 @@
     
     if (m == notAMetric) {
         self.textLabel.text = @"add new metric";
+        self.textLabel.textColor = [UIColor lightGrayColor];
     } else {
         self.textLabel.text = [[MetricsConfigs instance] getDisplayNameForMetric:self.metricName];
+        self.textLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
     }
-    self.textLabel.textColor = [[MetricsConfigs instance]getColorForMetric:self.metricName];
     
     return self;
 }

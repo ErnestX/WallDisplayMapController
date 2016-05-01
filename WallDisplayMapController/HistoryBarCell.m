@@ -334,6 +334,10 @@
             [self setUpAutoLayoutForMetricView:mv atIndex:i givenTotalMetricViewCount:metricViews.count];
         }
         
+        // Step3: reverse z position order. the first added metric is usually the more important ones, so put them over the latter ones
+        for (int i = metricViews.count-1; i >= 0; i--) {
+            [self bringSubviewToFront:[metricViews objectAtIndex:i]];
+        }
     }
     
     // now that the metric views are setup, init them with the right data
