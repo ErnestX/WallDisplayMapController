@@ -7,6 +7,7 @@
 //
 
 #import "MetricValueLabelView.h"
+#import "MetricsHistoryDataCenter.h" // I'm not sure if this dependency is a good idea... but otherwise it would be such a long pass from the container controller all the way to metric view for a purpose this trival...  
 
 @interface MetricValueLabelView ()
 @property (readwrite)MetricName metricName;

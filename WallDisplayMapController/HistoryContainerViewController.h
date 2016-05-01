@@ -18,6 +18,7 @@
  the values in the dictionary all range from 0 to 1\
  */
 - (nonnull NSDictionary*)getDataPointPosForDisplayedMetricsAtIndex:(NSInteger)index;
+- (nonnull NSDictionary*)getRawDataForDisplayedMetricsAtIndex:(NSInteger)index;
 - (nonnull NSDate*)getTimeStampForIndex:(NSInteger)index;
 - (nonnull NSString*)getTagForIndex:(NSInteger)index;
 - (BOOL)getFlagForIndex:(NSInteger)index;

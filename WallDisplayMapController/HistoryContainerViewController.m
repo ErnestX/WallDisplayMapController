@@ -104,6 +104,10 @@
     return dic;
 }
 
+- (nonnull NSDictionary*)getRawDataForDisplayedMetricsAtIndex:(NSInteger)index {
+    return [[MetricsHistoryDataCenter instance] getMetricsDataAtTimeIndex:index].metricsValues;
+}
+
 - (nonnull NSDate*)getTimeStampForIndex:(NSInteger)index {
     return [[MetricsHistoryDataCenter instance]getMetricsDataAtTimeIndex:index].timeStamp;
 }
