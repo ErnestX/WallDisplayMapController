@@ -58,6 +58,8 @@
         case energy_electricityIn:
         case energy_dieselIn:
         case energy_gasolineIn:
+            color = [UIColor orangeColor];
+            break;
             
         case energy_propaneOut:
         case energy_heatingoilOut:
@@ -65,7 +67,7 @@
         case energy_electricityOut:
         case energy_dieselOut:
         case energy_gasolineOut:
-            color = [UIColor orangeColor];
+            color = [UIColor brownColor];
             break;
             
         case building_people:
