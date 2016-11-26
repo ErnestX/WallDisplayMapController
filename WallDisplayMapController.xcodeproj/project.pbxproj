@@ -500,9 +500,11 @@
 					CA1639401B0E4FBC00E4FC81 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 3JN39R4EL8;
+						LastSwiftMigration = 0810;
 					};
 					CA1639591B0E4FBC00E4FC81 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = CA1639401B0E4FBC00E4FC81;
 					};
 				};
@@ -784,6 +786,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -803,6 +806,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WallDisplayMapController/WallDisplayMapController-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -822,6 +826,7 @@
 				INFOPLIST_FILE = WallDisplayMapControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallDisplayMapController.app/WallDisplayMapController";
 			};
 			name = Debug;
@@ -837,6 +842,7 @@
 				INFOPLIST_FILE = WallDisplayMapControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WallDisplayMapController.app/WallDisplayMapController";
 			};
 			name = Release;
