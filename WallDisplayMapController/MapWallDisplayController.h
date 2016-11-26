@@ -17,5 +17,6 @@
 @interface MapWallDisplayController : NSObject <MapWallDisplayProtocal>
 
 + (MapWallDisplayController *)sharedInstance;
+- (void)switchToControllMode:(NSInteger)modeNumber;
 
 @end

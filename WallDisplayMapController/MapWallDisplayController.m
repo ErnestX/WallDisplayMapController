@@ -30,10 +30,11 @@
 
 @end
 
-@implementation MapWallDisplayController
+@implementation MapWallDisplayController {
+    NSInteger controlNumber;
+}
 
-+(MapWallDisplayController *)sharedInstance
-{
++ (MapWallDisplayController *)sharedInstance {
     static MapWallDisplayController *instance;
     static dispatch_once_t done;
     dispatch_once(&done,^{
@@ -45,6 +46,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        // default control number
+        controlNumber = 0;
+        
         // init caller
         self.intervalCaller = [[MethodIntervalCaller alloc] initWithInterval:0.08];
         
@@ -72,6 +76,7 @@
         [request addKey:@"heading" withValue:[NSString stringWithFormat:@"%f", self.facingDirectionIncrement/(2*M_PI)*360]];
         
         [request addKey:@"method" withValue:@"xx"];
+        [request addKey:@"control_num" withValue:[NSString stringWithFormat:@"%li", controlNumber]];
         
         
         #ifdef TEST_HEADING
@@ -144,6 +149,10 @@
             self.zoomFactorIncrement != 1 ||
             self.latIncrement != 0 ||
             self.lonIncrement != 0);
+}
+
+- (void)switchToControllMode:(NSInteger)modeNumber {
+    controlNumber = modeNumber;
 }
 
 @end

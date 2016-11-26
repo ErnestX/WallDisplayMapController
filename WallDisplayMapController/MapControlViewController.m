@@ -12,12 +12,20 @@
 #import "TutorialView.h"
 #import "Masonry.h"
 
+#define NUMBER_OF_CONTROL_BUTTONS 4
+#define CONTROL_BUTTON_HEIGHT 60.0
+#define CONTROL_BUTTON_GAP 30.0
+
 @interface MapControlViewController ()
 
 @end
 
 @implementation MapControlViewController {
-    TutorialView* tutorialView;
+    TutorialView *tutorialView;
+    MapControlView *vMapControl;
+    
+    NSInteger selectedButtonTag;
+    NSMutableArray *arrControlButtons;
 }
 
 - (instancetype)init {
@@ -37,6 +45,9 @@
                                                  selector:@selector(hideConnectingMessage)
                                                      name:@"rmq_open_connection_fail"
                                                    object:nil];
+        
+        selectedButtonTag = 0;
+        arrControlButtons = [NSMutableArray array];
     }
     return self;
 }
@@ -44,10 +55,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // connect the UI with network component and init the UI
-    MapControlView *vMapControl = [[MapControlView alloc] initWithFrame:self.view.bounds];
+    vMapControl = [[MapControlView alloc] initWithFrame:self.view.bounds];
     self.view = vMapControl;
-    [(MapControlView*)self.view setTarget:[MapWallDisplayController sharedInstance]];
+    [(MapControlView *)self.view setTarget:[MapWallDisplayController sharedInstance]];
     
+    DEFINE_WEAK_SELF
+
+    // Add four buttons to control the displays
+    for (int i=0; i<NUMBER_OF_CONTROL_BUTTONS; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:[NSString stringWithFormat:@"Display %i", i] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+        btn.backgroundColor = [UIColor whiteColor];
+        btn.layer.cornerRadius = 5.0;
+        btn.layer.masksToBounds = YES;
+        btn.tag = i;
+        [btn addTarget:self action:@selector(controlButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (i == selectedButtonTag) {
+            btn.backgroundColor = [UIColor lightGrayColor];
+            btn.enabled = NO;
+        }
+        
+        [vMapControl addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(weakSelf.view).with.offset(-40.0f);
+            make.top.equalTo(weakSelf.view).with.offset(40.0 + i * CONTROL_BUTTON_HEIGHT + i * CONTROL_BUTTON_GAP);
+            make.height.equalTo(@(CONTROL_BUTTON_HEIGHT));
+            make.width.equalTo(@120);
+        }];
+        
+        [arrControlButtons addObject:btn];
+    }
+
     // Add Help Button
     UIButton *btnHelp = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnHelp setTitle:@"How To Use" forState:UIControlStateNormal];
@@ -57,7 +98,7 @@
     [btnHelp addTarget:self action:@selector(helpButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [vMapControl addSubview:btnHelp];
-    DEFINE_WEAK_SELF
+
     [btnHelp mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(weakSelf.view).with.offset(38.0f);
         make.bottom.equalTo(weakSelf.view).with.offset(-14.0f);
@@ -66,6 +107,25 @@
     }];
     
     [self showTutorial];
+}
+
+- (void)controlButtonPressed:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *btnSelected = (UIButton *)sender;
+        NSInteger btnID = btnSelected.tag;
+
+        // Reset previously selected button states
+        UIButton *btnPrevSelected = arrControlButtons[selectedButtonTag];
+        btnPrevSelected.enabled = YES;
+        btnPrevSelected.backgroundColor = [UIColor whiteColor];
+        
+        // Newly selected
+        btnSelected.enabled = NO;
+        btnSelected.backgroundColor = [UIColor lightGrayColor];
+        selectedButtonTag = btnID;
+        
+        [[MapWallDisplayController sharedInstance] switchToControllMode:btnID];
+    }
 }
 
 - (IBAction)helpButtonPressed:(id)sender {
